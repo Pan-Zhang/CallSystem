@@ -31,17 +31,17 @@
 			this.callAreatabControl = new System.Windows.Forms.TabControl();
 			this.callAreatabPage = new System.Windows.Forms.TabPage();
 			this.callAreadataGridView = new System.Windows.Forms.DataGridView();
-			this.callArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callNumtabPage = new System.Windows.Forms.TabPage();
 			this.callNumdataGridView = new System.Windows.Forms.DataGridView();
-			this.callNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callAreaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callAreaclearDatabtn = new System.Windows.Forms.Button();
 			this.callAreaOKbtn = new System.Windows.Forms.Button();
 			this.callAreaDeletebtn = new System.Windows.Forms.Button();
 			this.callAreaUpdatebtn = new System.Windows.Forms.Button();
 			this.callAreaAddbtn = new System.Windows.Forms.Button();
+			this.callArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callAreaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callAreatabControl.SuspendLayout();
 			this.callAreatabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.callAreadataGridView)).BeginInit();
@@ -81,11 +81,6 @@
 			this.callAreadataGridView.Size = new System.Drawing.Size(345, 554);
 			this.callAreadataGridView.TabIndex = 13;
 			// 
-			// callArea
-			// 
-			this.callArea.HeaderText = "呼叫区域";
-			this.callArea.Name = "callArea";
-			// 
 			// callNumtabPage
 			// 
 			this.callNumtabPage.Controls.Add(this.callNumdataGridView);
@@ -109,21 +104,6 @@
 			this.callNumdataGridView.RowTemplate.Height = 23;
 			this.callNumdataGridView.Size = new System.Drawing.Size(349, 554);
 			this.callNumdataGridView.TabIndex = 14;
-			// 
-			// callNum
-			// 
-			this.callNum.HeaderText = "呼叫器编号";
-			this.callNum.Name = "callNum";
-			// 
-			// callAreaf
-			// 
-			this.callAreaf.HeaderText = "呼叫区域";
-			this.callAreaf.Name = "callAreaf";
-			// 
-			// user
-			// 
-			this.user.HeaderText = "服务员";
-			this.user.Name = "user";
 			// 
 			// callAreaclearDatabtn
 			// 
@@ -170,6 +150,30 @@
 			this.callAreaAddbtn.Text = "添加";
 			this.callAreaAddbtn.UseVisualStyleBackColor = true;
 			// 
+			// callArea
+			// 
+			this.callArea.DataPropertyName = "name";
+			this.callArea.HeaderText = "呼叫区域";
+			this.callArea.Name = "callArea";
+			// 
+			// callNum
+			// 
+			this.callNum.DataPropertyName = "callerNum";
+			this.callNum.HeaderText = "呼叫器编号";
+			this.callNum.Name = "callNum";
+			// 
+			// callAreaf
+			// 
+			this.callAreaf.DataPropertyName = "callerZoneName";
+			this.callAreaf.HeaderText = "呼叫区域";
+			this.callAreaf.Name = "callAreaf";
+			// 
+			// user
+			// 
+			this.user.DataPropertyName = "waiterNum";
+			this.user.HeaderText = "服务员";
+			this.user.Name = "user";
+			// 
 			// settingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -184,6 +188,7 @@
 			this.Name = "settingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "呼叫器设置";
+			this.Load += new System.EventHandler(this.settingsForm_Load);
 			this.callAreatabControl.ResumeLayout(false);
 			this.callAreatabPage.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.callAreadataGridView)).EndInit();
@@ -200,14 +205,14 @@
 		private System.Windows.Forms.DataGridView callAreadataGridView;
 		private System.Windows.Forms.TabPage callNumtabPage;
 		private System.Windows.Forms.DataGridView callNumdataGridView;
-		private System.Windows.Forms.DataGridViewTextBoxColumn callNum;
-		private System.Windows.Forms.DataGridViewTextBoxColumn callAreaf;
-		private System.Windows.Forms.DataGridViewTextBoxColumn user;
 		private System.Windows.Forms.Button callAreaAddbtn;
 		private System.Windows.Forms.Button callAreaUpdatebtn;
 		private System.Windows.Forms.Button callAreaDeletebtn;
 		private System.Windows.Forms.Button callAreaOKbtn;
 		private System.Windows.Forms.Button callAreaclearDatabtn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn callArea;
+		private System.Windows.Forms.DataGridViewTextBoxColumn callNum;
+		private System.Windows.Forms.DataGridViewTextBoxColumn callAreaf;
+		private System.Windows.Forms.DataGridViewTextBoxColumn user;
 	}
 }

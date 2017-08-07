@@ -29,16 +29,16 @@
 		private void InitializeComponent()
 		{
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.addemployee = new System.Windows.Forms.Button();
 			this.updateemployee = new System.Windows.Forms.Button();
 			this.deleteemployee = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.clearemployee = new System.Windows.Forms.Button();
+			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -56,31 +56,6 @@
 			this.dataGridView1.RowTemplate.Height = 23;
 			this.dataGridView1.Size = new System.Drawing.Size(545, 657);
 			this.dataGridView1.TabIndex = 0;
-			// 
-			// UserName
-			// 
-			this.UserName.HeaderText = "员工编号";
-			this.UserName.Name = "UserName";
-			// 
-			// name
-			// 
-			this.name.HeaderText = "姓名";
-			this.name.Name = "name";
-			// 
-			// mobile
-			// 
-			this.mobile.HeaderText = "电话";
-			this.mobile.Name = "mobile";
-			// 
-			// remark
-			// 
-			this.remark.HeaderText = "备注";
-			this.remark.Name = "remark";
-			// 
-			// sex
-			// 
-			this.sex.HeaderText = "性别";
-			this.sex.Name = "sex";
 			// 
 			// addemployee
 			// 
@@ -127,6 +102,36 @@
 			this.clearemployee.Text = "清除数据";
 			this.clearemployee.UseVisualStyleBackColor = true;
 			// 
+			// UserName
+			// 
+			this.UserName.DataPropertyName = "num";
+			this.UserName.HeaderText = "员工编号";
+			this.UserName.Name = "UserName";
+			// 
+			// name
+			// 
+			this.name.DataPropertyName = "name";
+			this.name.HeaderText = "姓名";
+			this.name.Name = "name";
+			// 
+			// mobile
+			// 
+			this.mobile.DataPropertyName = "phonenum";
+			this.mobile.HeaderText = "电话";
+			this.mobile.Name = "mobile";
+			// 
+			// remark
+			// 
+			this.remark.DataPropertyName = "remarks";
+			this.remark.HeaderText = "备注";
+			this.remark.Name = "remark";
+			// 
+			// sex
+			// 
+			this.sex.DataPropertyName = "sex";
+			this.sex.HeaderText = "性别";
+			this.sex.Name = "sex";
+			// 
 			// employeeSettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -141,6 +146,7 @@
 			this.Name = "employeeSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "员工信息设置";
+			this.Load += new System.EventHandler(this.employeeSettingsForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 
@@ -149,15 +155,15 @@
 		#endregion
 
 		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn name;
-		private System.Windows.Forms.DataGridViewTextBoxColumn mobile;
-		private System.Windows.Forms.DataGridViewTextBoxColumn remark;
-		private System.Windows.Forms.DataGridViewTextBoxColumn sex;
 		private System.Windows.Forms.Button addemployee;
 		private System.Windows.Forms.Button updateemployee;
 		private System.Windows.Forms.Button deleteemployee;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button clearemployee;
+		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn name;
+		private System.Windows.Forms.DataGridViewTextBoxColumn mobile;
+		private System.Windows.Forms.DataGridViewTextBoxColumn remark;
+		private System.Windows.Forms.DataGridViewTextBoxColumn sex;
 	}
 }

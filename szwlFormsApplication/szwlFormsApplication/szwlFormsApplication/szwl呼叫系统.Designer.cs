@@ -48,13 +48,6 @@
 			this.waiting5 = new System.Windows.Forms.Panel();
 			this.label5 = new System.Windows.Forms.Label();
 			this.allDataGridView = new System.Windows.Forms.DataGridView();
-			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.workerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.type2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.status2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRFID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuimageList = new System.Windows.Forms.ImageList(this.components);
 			this.menutoolBar = new System.Windows.Forms.ToolBar();
 			this.logonbtn = new System.Windows.Forms.ToolBarButton();
@@ -66,6 +59,13 @@
 			this.datamaintainbtn = new System.Windows.Forms.ToolBarButton();
 			this.searchbtn = new System.Windows.Forms.ToolBarButton();
 			this.aboutbtn = new System.Windows.Forms.ToolBarButton();
+			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.workerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.type2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.status2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.isRFID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.waitingDataGridView)).BeginInit();
 			this.waiting1.SuspendLayout();
 			this.waiting2.SuspendLayout();
@@ -255,56 +255,6 @@
 			this.allDataGridView.TabIndex = 10;
 			this.allDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allDataGridView_CellContentClick);
 			// 
-			// Id2
-			// 
-			this.Id2.DataPropertyName = "Id";
-			this.Id2.HeaderText = "Id";
-			this.Id2.Name = "Id2";
-			this.Id2.ReadOnly = true;
-			this.Id2.Width = 60;
-			// 
-			// time2
-			// 
-			this.time2.DataPropertyName = "time";
-			this.time2.HeaderText = "时间";
-			this.time2.Name = "time2";
-			this.time2.ReadOnly = true;
-			// 
-			// callerNum2
-			// 
-			this.callerNum2.DataPropertyName = "callerNum";
-			this.callerNum2.HeaderText = "呼叫器编号";
-			this.callerNum2.Name = "callerNum2";
-			this.callerNum2.ReadOnly = true;
-			// 
-			// workerNum2
-			// 
-			this.workerNum2.DataPropertyName = "workerNum";
-			this.workerNum2.HeaderText = "服务员编号";
-			this.workerNum2.Name = "workerNum2";
-			this.workerNum2.ReadOnly = true;
-			// 
-			// type2
-			// 
-			this.type2.DataPropertyName = "type";
-			this.type2.HeaderText = "订单类型";
-			this.type2.Name = "type2";
-			this.type2.ReadOnly = true;
-			// 
-			// status2
-			// 
-			this.status2.DataPropertyName = "status";
-			this.status2.HeaderText = "状态 ";
-			this.status2.Name = "status2";
-			this.status2.ReadOnly = true;
-			// 
-			// isRFID2
-			// 
-			this.isRFID2.HeaderText = "isRFID";
-			this.isRFID2.Name = "isRFID2";
-			this.isRFID2.ReadOnly = true;
-			this.isRFID2.Width = 60;
-			// 
 			// menuimageList
 			// 
 			this.menuimageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("menuimageList.ImageStream")));
@@ -402,6 +352,57 @@
 			this.aboutbtn.Name = "aboutbtn";
 			this.aboutbtn.Text = "关于";
 			this.aboutbtn.ToolTipText = "关于";
+			// 
+			// Id2
+			// 
+			this.Id2.DataPropertyName = "Id";
+			this.Id2.HeaderText = "Id";
+			this.Id2.Name = "Id2";
+			this.Id2.ReadOnly = true;
+			this.Id2.Width = 60;
+			// 
+			// time2
+			// 
+			this.time2.DataPropertyName = "time";
+			this.time2.HeaderText = "时间";
+			this.time2.Name = "time2";
+			this.time2.ReadOnly = true;
+			// 
+			// callerNum2
+			// 
+			this.callerNum2.DataPropertyName = "callerNum";
+			this.callerNum2.HeaderText = "呼叫器编号";
+			this.callerNum2.Name = "callerNum2";
+			this.callerNum2.ReadOnly = true;
+			// 
+			// workerNum2
+			// 
+			this.workerNum2.DataPropertyName = "workerNum";
+			this.workerNum2.HeaderText = "服务员编号";
+			this.workerNum2.Name = "workerNum2";
+			this.workerNum2.ReadOnly = true;
+			// 
+			// type2
+			// 
+			this.type2.DataPropertyName = "type";
+			this.type2.HeaderText = "订单类型";
+			this.type2.Name = "type2";
+			this.type2.ReadOnly = true;
+			// 
+			// status2
+			// 
+			this.status2.DataPropertyName = "status";
+			this.status2.HeaderText = "状态 ";
+			this.status2.Name = "status2";
+			this.status2.ReadOnly = true;
+			// 
+			// isRFID2
+			// 
+			this.isRFID2.DataPropertyName = "isRFID";
+			this.isRFID2.HeaderText = "isRFID";
+			this.isRFID2.Name = "isRFID2";
+			this.isRFID2.ReadOnly = true;
+			this.isRFID2.Width = 60;
 			// 
 			// szwlForm
 			// 

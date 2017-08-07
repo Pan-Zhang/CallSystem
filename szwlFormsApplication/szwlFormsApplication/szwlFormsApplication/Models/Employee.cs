@@ -8,12 +8,12 @@ namespace szwlFormsApplication.Models
 {
 	class Employee
 	{
-		public int Id;
-		public int num;
-		public string name;
-		public string phonenum;
-		public string remarks;
-		public Sex sex;
+		public int Id { get; set; }
+		public int num { get; set; }
+		public string name { get; set; }
+		public string phonenum { get; set; }
+		public string remarks { get; set; }
+		public Sex sex { get; set; }
 	}
 
 	public enum Sex

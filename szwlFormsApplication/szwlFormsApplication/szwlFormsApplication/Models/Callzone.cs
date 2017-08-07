@@ -8,9 +8,7 @@ namespace szwlFormsApplication.Models
 {
 	class Callzone
 	{
-		public int Id;
-		public string name;
-		public string callerNum;
-		public string waiter;
+		public int Id { get; set; }
+		public string name { get; set; }
 	}
 }

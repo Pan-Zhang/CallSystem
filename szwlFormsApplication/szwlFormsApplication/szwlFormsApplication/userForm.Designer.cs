@@ -29,14 +29,14 @@
 		private void InitializeComponent()
 		{
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.userAddbtn = new System.Windows.Forms.Button();
 			this.userUpdatebtn = new System.Windows.Forms.Button();
 			this.userDeletebtn = new System.Windows.Forms.Button();
 			this.userAuhtoritybtn = new System.Windows.Forms.Button();
 			this.userUpdatePwbtn = new System.Windows.Forms.Button();
 			this.userclearDatabtn = new System.Windows.Forms.Button();
+			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -51,16 +51,6 @@
 			this.dataGridView1.RowTemplate.Height = 23;
 			this.dataGridView1.Size = new System.Drawing.Size(244, 519);
 			this.dataGridView1.TabIndex = 0;
-			// 
-			// UserName
-			// 
-			this.UserName.HeaderText = "用户名";
-			this.UserName.Name = "UserName";
-			// 
-			// password
-			// 
-			this.password.HeaderText = "密码";
-			this.password.Name = "password";
 			// 
 			// userAddbtn
 			// 
@@ -116,6 +106,18 @@
 			this.userclearDatabtn.Text = "清除数据";
 			this.userclearDatabtn.UseVisualStyleBackColor = true;
 			// 
+			// UserName
+			// 
+			this.UserName.DataPropertyName = "name";
+			this.UserName.HeaderText = "用户名";
+			this.UserName.Name = "UserName";
+			// 
+			// password
+			// 
+			this.password.DataPropertyName = "pass";
+			this.password.HeaderText = "密码";
+			this.password.Name = "password";
+			// 
 			// userForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -131,6 +133,7 @@
 			this.Name = "userForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "用户管理";
+			this.Load += new System.EventHandler(this.userForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 
@@ -139,13 +142,13 @@
 		#endregion
 
 		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn password;
 		private System.Windows.Forms.Button userAddbtn;
 		private System.Windows.Forms.Button userUpdatebtn;
 		private System.Windows.Forms.Button userDeletebtn;
 		private System.Windows.Forms.Button userAuhtoritybtn;
 		private System.Windows.Forms.Button userUpdatePwbtn;
 		private System.Windows.Forms.Button userclearDatabtn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn password;
 	}
 }

@@ -52,9 +52,29 @@ namespace szwlFormsApplication.CommonFunc
 
 				createZone(catalog);
 
+				createCaller(catalog);
+
 				createMess(catalog);
 
 				connection.Close();
+
+				Admin admin = new Admin();
+				admin.name = "admin";
+				admin.pass = "123456";
+				insertUser(admin);
+
+				for(int i=1; i<51; i++)
+				{
+					Callzone zone = new Callzone();
+					zone.name = "桌位" + i;
+					insertZone(zone);
+
+					Caller caller = new Caller();
+					caller.callerNum = i;
+					caller.callZone = i;
+					caller.waiterNum = 0;
+					insertCaller(caller);
+				}
 			}
 		}
 
@@ -184,7 +204,7 @@ namespace szwlFormsApplication.CommonFunc
 
 		public DataTable select(string sql)
 		{
-			DataTable dataTable;
+			DataTable dataTable = null;;
 			lock (obj)
 			{
 				connection.Open();
@@ -192,12 +212,18 @@ namespace szwlFormsApplication.CommonFunc
 				//string sql = "select * from 表名 order by 字段1";
 				//查询
 				//string sql = "select * from 表名 where 字段2=...";
+				try
+				{
+					OleDbDataAdapter da = new OleDbDataAdapter(sql, connection); //创建适配对象
 
-				OleDbDataAdapter da = new OleDbDataAdapter(sql, connection); //创建适配对象
-
-				DataSet dataSetSelect = new DataSet();
-				da.Fill(dataSetSelect, "sel");
-				dataTable = dataSetSelect.Tables["sel"];
+					DataSet dataSetSelect = new DataSet();
+					da.Fill(dataSetSelect, "sel");
+					dataTable = dataSetSelect.Tables["sel"];
+				}catch(Exception e)
+				{
+					
+				}
+				
 				connection.Close();
 			}
 			return dataTable;
@@ -426,15 +452,13 @@ namespace szwlFormsApplication.CommonFunc
 		//获取区域信息
 		public List<Callzone> selectZone()
 		{
-			DataTable dataTable = select("select * from " + TABLE_EMPLOYEE);
+			DataTable dataTable = select("select * from " + TABLE_ZONE);
 			List<Callzone> list = new List<Callzone>();
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
 				Callzone zone = new Callzone();
 				int id = (int)dataTable.Rows[i][0];
 				string name = dataTable.Rows[i][1].ToString();
-				string callerNum = dataTable.Rows[i][2].ToString();
-				string waiter = dataTable.Rows[i][3].ToString();
 				zone.Id = id;
 				zone.name = name;
 				list.Add(zone);
@@ -445,7 +469,7 @@ namespace szwlFormsApplication.CommonFunc
 		//插入区域信息
 		public bool insertZone(Callzone zone)
 		{
-			return operateData("insert into " + TABLE_ZONE + "('name') values('" + zone.name + "')");
+			return operateData("insert into " + TABLE_ZONE + "(name) values('" + zone.name + "')");
 		}
 
 		//修改区域信息
@@ -466,11 +490,31 @@ namespace szwlFormsApplication.CommonFunc
 		 * 呼叫器信息操作-----------------------------------------------------------------------------------------start
 		 * */
 
+		public List<Caller> selectCaller()
+		{
+			DataTable dataTable = select("select * from " + TABLE_CALLER);
+			List<Caller> list = new List<Caller>();
+			for (int i = 0; i < dataTable.Rows.Count; i++)
+			{
+				Caller caller = new Caller();
+				int id = (int)dataTable.Rows[i][0];
+				int callerNum = (int)dataTable.Rows[i][1];
+				int callerZone = (int)dataTable.Rows[i][2];
+				int waiternum = (int)dataTable.Rows[i][3];
+				caller.ID = id;
+				caller.callerNum = callerNum;
+				caller.callZone = callerZone;
+				caller.waiterNum = waiternum;
+				list.Add(caller);
+			}
+			return list;
+		}
+
 
 		//插入呼叫器
 		public bool insertCaller(Caller caller)
 		{
-			return operateData("insert into " + TABLE_CALLER + "('callerNum, callZone, waiterNum') values('" + caller.callerNum.ToString() + "', '" + caller.callZone.ToString() + "', '" + caller.waiterNum.ToString() + "')");
+			return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values(" + caller.callerNum + ", " + caller.callZone + ", " + caller.waiterNum + ")");
 		}
 
 		//修改呼叫器信息

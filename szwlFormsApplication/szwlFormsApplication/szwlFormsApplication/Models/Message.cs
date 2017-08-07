@@ -12,7 +12,7 @@ namespace szwlFormsApplication.Models
 		public DateTime time { get; set; }
 		public int callerNum { get; set; }
 		public int workerNum { get; set; }
-		public Type type;
+		public Type type { get; set; }
 		public STATUS status { get; set; }
 		public bool isRFID { get; set; }
 	}
