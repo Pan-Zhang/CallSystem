@@ -246,7 +246,6 @@ namespace szwlFormsApplication.CommonFunc
 				message.callerNum = table;
 				message.workerNum = number;
 				message.isRFID = true;
-				DateTime dateTime = new DateTime();
 				message.time = DateTime.Now;
 				message.status = STATUS.FINISH;
 				dm.updateMess(message);
@@ -283,6 +282,11 @@ namespace szwlFormsApplication.CommonFunc
 		public List<DataMessage> selectMess()
 		{
 			return dm.selectMess();
+		}
+
+		public bool updateMessTimeOut(DataMessage mess)
+		{
+			return dm.updateMessTimeOut(mess);
 		}
 	}
 }

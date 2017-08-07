@@ -493,7 +493,7 @@ namespace szwlFormsApplication.CommonFunc
 		//获取呼叫信息
 		public List<DataMessage> selectMess()
 		{
-			DataTable dataTable = select("select * from " + TABLE_MESS);
+			DataTable dataTable = select("select * from " + TABLE_MESS + " order by Id desc");
 			List<DataMessage> list = new List<DataMessage>();
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
@@ -694,7 +694,7 @@ namespace szwlFormsApplication.CommonFunc
 			return operateData("delete from " + TABLE_MESS + " where Id ='" + message.Id + "'");
 		}
 
-		//更改呼叫信息，主要用于完成服务或者服务超时的修改
+		//更改呼叫信息，主要用于完成服务的修改
 		public bool updateMess(DataMessage message)
 		{
 			int status = 0;
@@ -719,6 +719,33 @@ namespace szwlFormsApplication.CommonFunc
 			}
 
 			return operateData("update " + TABLE_MESS + " set [time]=#" + message.time + "#, [waiterNum]=" + message.workerNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]=" + message.callerNum + " and [status]=0");
+		}
+
+		//更改呼叫信息，主要用于服务超时的修改
+		public bool updateMessTimeOut(DataMessage message)
+		{
+			int status = 0;
+			switch (message.status)
+			{
+				case STATUS.WAITING:
+					status = 0;
+					break;
+
+				case STATUS.FINISH:
+					status = 1;
+					break;
+
+				case STATUS.OVERTIME:
+					status = 2;
+					break;
+			}
+			int isRFID = 0;
+			if (message.isRFID)
+			{
+				isRFID = 1;
+			}
+
+			return operateData("update " + TABLE_MESS + " set [status]=" + status + " where [callerNum]=" + message.callerNum + " and [time] =#" + message.time + "#");
 		}
 	}
 }

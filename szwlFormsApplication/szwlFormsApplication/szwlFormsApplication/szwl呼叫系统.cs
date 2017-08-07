@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
@@ -18,7 +19,10 @@ namespace szwlFormsApplication
 	{
 		public static szwlForm mainForm = null;//创建一个自身的静态对象
 		Server _server;
-		List<DataMessage> messages;
+		List<DataMessage> messages, newmsg;
+		public bool isStop;
+		private static object obj = new object();//锁
+
 		public szwlForm()
 		{
 			InitializeComponent();
@@ -35,35 +39,69 @@ namespace szwlFormsApplication
 			_server.open();
 
 			messages = _server.selectMess();
-			if (messages == null)
-				messages = new List<DataMessage>();
-			var newmsg = messages.Where(m => m.status == STATUS.WAITING);
-			if (newmsg.Count() > 5)
+			newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+			isStop = false;
+			new Thread(CheckTimeOut).Start();
+
+			refresh();
+			//if (messages == null)
+			//	messages = new List<DataMessage>();
+			//var newmsg = messages.Where(m => m.status == STATUS.WAITING);
+			//if (newmsg.Count() > 5)
+			//{
+			//	this.waitingDataGridView.AutoGenerateColumns = false;
+			//	this.waitingDataGridView.DataSource = newmsg.Skip(5).ToList();
+			//	this.waitingDataGridView.Refresh();
+			//}
+			//this.label1.Text = "无请求";
+			//this.label2.Text = "无请求";
+			//this.label3.Text = "无请求";
+			//this.label4.Text = "无请求";
+			//this.label5.Text = "无请求";
+
+			//if (newmsg.Count() >= 1)
+			//	this.label1.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(0).callerNum, messages[0].type);
+			//if (newmsg.Count() >= 2)
+			//	this.label2.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(1).callerNum, messages[1].type);
+			//if (newmsg.Count() >= 3)
+			//	this.label3.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(2).callerNum, messages[2].type);
+			//if (newmsg.Count() >= 4)
+			//	this.label4.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(3).callerNum, messages[3].type);
+			//if (newmsg.Count() >= 5)
+			//	this.label5.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(4).callerNum, messages[4].type);
+
+			//this.allDataGridView.AutoGenerateColumns = false;
+			//this.allDataGridView.DataSource = messages;
+			//this.allDataGridView.Refresh();
+		}
+
+		private void CheckTimeOut()
+		{
+			while (!isStop)
 			{
-				this.waitingDataGridView.AutoGenerateColumns = false;
-				this.waitingDataGridView.DataSource = newmsg.Skip(5).ToList();
-				this.waitingDataGridView.Refresh();
+				lock (obj)
+				{
+					bool needRefresh = false;
+					foreach (DataMessage message in newmsg)
+					{
+						if (DateTime.Compare(message.time.AddMinutes(5), DateTime.Now)<0)
+						{
+							message.status = STATUS.OVERTIME;
+							_server.updateMessTimeOut(message);
+							needRefresh = true;
+						}
+					}
+					if (needRefresh)
+					{
+						newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+						this.Invoke((EventHandler)(delegate
+						{
+							refresh();
+						}));
+					}
+				}
+				Thread.Sleep(10000);
 			}
-			this.label1.Text = "无请求";
-			this.label2.Text = "无请求";
-			this.label3.Text = "无请求";
-			this.label4.Text = "无请求";
-			this.label5.Text = "无请求";
-
-			if (newmsg.Count() >= 1)
-				this.label1.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(0).callerNum, messages[0].type);
-			if (newmsg.Count() >= 2)
-				this.label2.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(1).callerNum, messages[1].type);
-			if (newmsg.Count() >= 3)
-				this.label3.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(2).callerNum, messages[2].type);
-			if (newmsg.Count() >= 4)
-				this.label4.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(3).callerNum, messages[3].type);
-			if (newmsg.Count() >= 5)
-				this.label5.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(4).callerNum, messages[4].type);
-
-			this.allDataGridView.AutoGenerateColumns = false;
-			this.allDataGridView.DataSource = messages;
-			this.allDataGridView.Refresh();
 		}
 
 		public const int WM_DEVICE_CHANGE = 0x219;
@@ -217,41 +255,45 @@ namespace szwlFormsApplication
 		//这里是回调哦，你要更新UI就在这里做哈，我的建议是在这里维护你的list，这样就不用每次都查询数据库啦
 		void RefreshInterface.refresh(DataMessage mess, bool canRefresh)
 		{
-			if (canRefresh)
+			lock (obj)
 			{
-				//更新组件
-				this.Invoke((EventHandler)(delegate
+				if (canRefresh)
 				{
-					refresh();
-				}));
-			}
-			else
-			{
-				int num = mess.callerNum;
-				if (mess.status == STATUS.FINISH)
-				{
-					Debug.WriteLine(num.ToString() + "号桌完成服务");
+					newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+					//更新组件
+					this.Invoke((EventHandler)(delegate
+					{
+						refresh();
+					}));
 				}
 				else
 				{
-					Debug.WriteLine(num.ToString() + "号桌呼叫服务");
-				}
-				if (mess.type == Models.Type.CANCEL)
-				{
-					foreach (DataMessage message in messages)
+					int num = mess.callerNum;
+					if (mess.status == STATUS.FINISH)
 					{
-						if (message.callerNum == mess.callerNum && message.status == STATUS.WAITING)
+						Debug.WriteLine(num.ToString() + "号桌完成服务");
+					}
+					else
+					{
+						Debug.WriteLine(num.ToString() + "号桌呼叫服务");
+					}
+					if (mess.type == Models.Type.CANCEL)
+					{
+						foreach (DataMessage message in messages)
 						{
-							message.workerNum = mess.workerNum;
-							message.status = STATUS.FINISH;
-							message.time = mess.time;
-							message.isRFID = mess.isRFID;
+							if (message.callerNum == mess.callerNum && message.status == STATUS.WAITING)
+							{
+								message.workerNum = mess.workerNum;
+								message.status = STATUS.FINISH;
+								message.time = mess.time;
+								message.isRFID = mess.isRFID;
+							}
 						}
 					}
-				}
-				else
-				{
-					messages.Insert(0, mess);
+					else
+					{
+						messages.Insert(0, mess);
+					}
 				}
 			}
 		}
@@ -260,7 +302,7 @@ namespace szwlFormsApplication
 		{
 			if (messages == null)
 				messages = new List<DataMessage>();
-			var newmsg = messages.Where(m => m.status == STATUS.WAITING);
+			//var newmsg = messages.Where(m => m.status == STATUS.WAITING);
 			int num = newmsg.Count();
 			if (newmsg.Count() > 5)
 			{
@@ -271,7 +313,7 @@ namespace szwlFormsApplication
 			else
 			{
 				this.waitingDataGridView.AutoGenerateColumns = false;
-				this.waitingDataGridView.DataSource = newmsg;
+				this.waitingDataGridView.DataSource = newmsg.Skip(5).ToList();
 				this.waitingDataGridView.Refresh();
 			}
 			this.label1.Text = "无请求";
