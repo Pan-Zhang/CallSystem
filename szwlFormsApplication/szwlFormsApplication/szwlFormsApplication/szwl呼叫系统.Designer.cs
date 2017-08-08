@@ -47,7 +47,6 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.waiting5 = new System.Windows.Forms.Panel();
 			this.label5 = new System.Windows.Forms.Label();
-			this.allDataGridView = new System.Windows.Forms.DataGridView();
 			this.menuimageList = new System.Windows.Forms.ImageList(this.components);
 			this.menutoolBar = new System.Windows.Forms.ToolBar();
 			this.logonbtn = new System.Windows.Forms.ToolBarButton();
@@ -59,13 +58,14 @@
 			this.datamaintainbtn = new System.Windows.Forms.ToolBarButton();
 			this.searchbtn = new System.Windows.Forms.ToolBarButton();
 			this.aboutbtn = new System.Windows.Forms.ToolBarButton();
-			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.workerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.type2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.status2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRFID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.allDataGridView = new System.Windows.Forms.DataGridView();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.waitingDataGridView)).BeginInit();
 			this.waiting1.SuspendLayout();
 			this.waiting2.SuspendLayout();
@@ -237,37 +237,19 @@
 			this.label5.TabIndex = 1;
 			this.label5.Text = "label5";
 			// 
-			// allDataGridView
-			// 
-			this.allDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.allDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id2,
-            this.time2,
-            this.callerNum2,
-            this.workerNum2,
-            this.type2,
-            this.status2,
-            this.isRFID2});
-			this.allDataGridView.Location = new System.Drawing.Point(526, 317);
-			this.allDataGridView.Name = "allDataGridView";
-			this.allDataGridView.RowTemplate.Height = 23;
-			this.allDataGridView.Size = new System.Drawing.Size(665, 394);
-			this.allDataGridView.TabIndex = 10;
-			this.allDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allDataGridView_CellContentClick);
-			// 
 			// menuimageList
 			// 
 			this.menuimageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("menuimageList.ImageStream")));
 			this.menuimageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.menuimageList.Images.SetKeyName(0, "zj5.png");
-			this.menuimageList.Images.SetKeyName(1, "zj6.png");
-			this.menuimageList.Images.SetKeyName(2, "zj7.png");
-			this.menuimageList.Images.SetKeyName(3, "zj8.png");
-			this.menuimageList.Images.SetKeyName(4, "1.png");
-			this.menuimageList.Images.SetKeyName(5, "4.png");
-			this.menuimageList.Images.SetKeyName(6, "ib.png");
-			this.menuimageList.Images.SetKeyName(7, "usercenter.png");
-			this.menuimageList.Images.SetKeyName(8, "DrawMoneyResult1.png");
+			this.menuimageList.Images.SetKeyName(0, "login.png");
+			this.menuimageList.Images.SetKeyName(1, "system.png");
+			this.menuimageList.Images.SetKeyName(2, "user.png");
+			this.menuimageList.Images.SetKeyName(3, "caller.png");
+			this.menuimageList.Images.SetKeyName(4, "worker.png");
+			this.menuimageList.Images.SetKeyName(5, "head.png");
+			this.menuimageList.Images.SetKeyName(6, "manage_data.png");
+			this.menuimageList.Images.SetKeyName(7, "search.png");
+			this.menuimageList.Images.SetKeyName(8, "about.png");
 			// 
 			// menutoolBar
 			// 
@@ -294,7 +276,7 @@
 			// 
 			this.logonbtn.ImageIndex = 0;
 			this.logonbtn.Name = "logonbtn";
-			this.logonbtn.Text = "登录";
+			this.logonbtn.Text = "重新登录";
 			this.logonbtn.ToolTipText = "登录";
 			// 
 			// systemsettingsbtn
@@ -315,14 +297,14 @@
 			// 
 			this.settingsbtn.ImageIndex = 3;
 			this.settingsbtn.Name = "settingsbtn";
-			this.settingsbtn.Text = "设置";
+			this.settingsbtn.Text = "呼叫器设置";
 			this.settingsbtn.ToolTipText = "设置";
 			// 
 			// employeesettingsbtn
 			// 
 			this.employeesettingsbtn.ImageIndex = 4;
 			this.employeesettingsbtn.Name = "employeesettingsbtn";
-			this.employeesettingsbtn.Text = "服务员设置";
+			this.employeesettingsbtn.Text = "员工设置";
 			this.employeesettingsbtn.ToolTipText = "服务员设置";
 			// 
 			// tablesettingsbtn
@@ -343,7 +325,7 @@
 			// 
 			this.searchbtn.ImageIndex = 7;
 			this.searchbtn.Name = "searchbtn";
-			this.searchbtn.Text = "历史记录查询";
+			this.searchbtn.Text = "查询";
 			this.searchbtn.ToolTipText = "历史记录查询";
 			// 
 			// aboutbtn
@@ -353,65 +335,75 @@
 			this.aboutbtn.Text = "关于";
 			this.aboutbtn.ToolTipText = "关于";
 			// 
-			// Id2
+			// allDataGridView
 			// 
-			this.Id2.DataPropertyName = "Id";
-			this.Id2.HeaderText = "Id";
-			this.Id2.Name = "Id2";
-			this.Id2.ReadOnly = true;
-			this.Id2.Width = 60;
+			this.allDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.allDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7});
+			this.allDataGridView.Location = new System.Drawing.Point(531, 317);
+			this.allDataGridView.Name = "allDataGridView";
+			this.allDataGridView.RowTemplate.Height = 23;
+			this.allDataGridView.Size = new System.Drawing.Size(659, 394);
+			this.allDataGridView.TabIndex = 12;
 			// 
-			// time2
+			// Column1
 			// 
-			this.time2.DataPropertyName = "time";
-			this.time2.HeaderText = "时间";
-			this.time2.Name = "time2";
-			this.time2.ReadOnly = true;
+			this.Column1.DataPropertyName = "Id";
+			this.Column1.HeaderText = "Id";
+			this.Column1.Name = "Column1";
+			this.Column1.Width = 65;
 			// 
-			// callerNum2
+			// Column2
 			// 
-			this.callerNum2.DataPropertyName = "callerNum";
-			this.callerNum2.HeaderText = "呼叫器编号";
-			this.callerNum2.Name = "callerNum2";
-			this.callerNum2.ReadOnly = true;
+			this.Column2.DataPropertyName = "time";
+			this.Column2.HeaderText = "时间";
+			this.Column2.Name = "Column2";
 			// 
-			// workerNum2
+			// Column3
 			// 
-			this.workerNum2.DataPropertyName = "workerNum";
-			this.workerNum2.HeaderText = "服务员编号";
-			this.workerNum2.Name = "workerNum2";
-			this.workerNum2.ReadOnly = true;
+			this.Column3.DataPropertyName = "callerNum";
+			this.Column3.HeaderText = "呼叫号";
+			this.Column3.Name = "Column3";
 			// 
-			// type2
+			// Column4
 			// 
-			this.type2.DataPropertyName = "type";
-			this.type2.HeaderText = "订单类型";
-			this.type2.Name = "type2";
-			this.type2.ReadOnly = true;
+			this.Column4.DataPropertyName = "workerNum";
+			this.Column4.HeaderText = "服务号";
+			this.Column4.Name = "Column4";
 			// 
-			// status2
+			// Column5
 			// 
-			this.status2.DataPropertyName = "status";
-			this.status2.HeaderText = "状态 ";
-			this.status2.Name = "status2";
-			this.status2.ReadOnly = true;
+			this.Column5.DataPropertyName = "type";
+			this.Column5.HeaderText = "类型";
+			this.Column5.Name = "Column5";
 			// 
-			// isRFID2
+			// Column6
 			// 
-			this.isRFID2.DataPropertyName = "isRFID";
-			this.isRFID2.HeaderText = "isRFID";
-			this.isRFID2.Name = "isRFID2";
-			this.isRFID2.ReadOnly = true;
-			this.isRFID2.Width = 60;
+			this.Column6.DataPropertyName = "status";
+			this.Column6.HeaderText = "状态";
+			this.Column6.Name = "Column6";
+			// 
+			// Column7
+			// 
+			this.Column7.DataPropertyName = "isRFID";
+			this.Column7.HeaderText = "isRFID";
+			this.Column7.Name = "Column7";
+			this.Column7.Width = 50;
 			// 
 			// szwlForm
 			// 
 			this.ClientSize = new System.Drawing.Size(1191, 715);
+			this.Controls.Add(this.allDataGridView);
 			this.Controls.Add(this.waiting4);
 			this.Controls.Add(this.waiting5);
 			this.Controls.Add(this.waitingDataGridView);
 			this.Controls.Add(this.menutoolBar);
-			this.Controls.Add(this.allDataGridView);
 			this.Controls.Add(this.waiting3);
 			this.Controls.Add(this.waiting2);
 			this.Controls.Add(this.waiting1);
@@ -455,7 +447,6 @@
 		private System.Windows.Forms.Panel waiting3;
 		private System.Windows.Forms.Panel waiting4;
 		private System.Windows.Forms.Panel waiting5;
-		private System.Windows.Forms.DataGridView allDataGridView;
 		private System.Windows.Forms.ImageList menuimageList;
 		private System.Windows.Forms.ToolBarButton systemsettingsbtn;
 		private System.Windows.Forms.ToolBarButton userbtn;
@@ -478,13 +469,14 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Id2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn time2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn workerNum2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn type2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn status2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID2;
+		private System.Windows.Forms.DataGridView allDataGridView;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
 	}
 }
 

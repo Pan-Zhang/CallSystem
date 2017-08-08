@@ -34,12 +34,10 @@
 			this.companyNametextBox = new System.Windows.Forms.TextBox();
 			this.companyNamelabel = new System.Windows.Forms.Label();
 			this.COMSetting = new System.Windows.Forms.TabPage();
-			this.comboBox4 = new System.Windows.Forms.ComboBox();
 			this.stopComboBox = new System.Windows.Forms.ComboBox();
 			this.bundRateComboBox = new System.Windows.Forms.ComboBox();
 			this.dataComboBox = new System.Windows.Forms.ComboBox();
 			this.COMcomboBox = new System.Windows.Forms.ComboBox();
-			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +57,9 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.callRecordSetting = new System.Windows.Forms.TabPage();
 			this.callInfoColorgroupBox = new System.Windows.Forms.GroupBox();
+			this.finish_btn = new System.Windows.Forms.Button();
+			this.timeout_btn = new System.Windows.Forms.Button();
+			this.wait_btn = new System.Windows.Forms.Button();
 			this.completeBtn = new System.Windows.Forms.Button();
 			this.timeOutBtn = new System.Windows.Forms.Button();
 			this.undoBtn = new System.Windows.Forms.Button();
@@ -69,8 +70,10 @@
 			this.DESradioButton = new System.Windows.Forms.RadioButton();
 			this.ASCradioButton = new System.Windows.Forms.RadioButton();
 			this.useableTime = new System.Windows.Forms.TabPage();
+			this.unit_box = new System.Windows.Forms.ComboBox();
+			this.number = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
 			this.trackBar3 = new System.Windows.Forms.TrackBar();
-			this.trackBar1 = new System.Windows.Forms.TrackBar();
 			this.UndocolorDialog = new System.Windows.Forms.ColorDialog();
 			this.timeOutcolorDialog = new System.Windows.Forms.ColorDialog();
 			this.completeColorDialog = new System.Windows.Forms.ColorDialog();
@@ -83,7 +86,6 @@
 			this.callOrderBygroupBox.SuspendLayout();
 			this.useableTime.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ssOkBtn
@@ -140,12 +142,10 @@
 			// 
 			// COMSetting
 			// 
-			this.COMSetting.Controls.Add(this.comboBox4);
 			this.COMSetting.Controls.Add(this.stopComboBox);
 			this.COMSetting.Controls.Add(this.bundRateComboBox);
 			this.COMSetting.Controls.Add(this.dataComboBox);
 			this.COMSetting.Controls.Add(this.COMcomboBox);
-			this.COMSetting.Controls.Add(this.label5);
 			this.COMSetting.Controls.Add(this.label4);
 			this.COMSetting.Controls.Add(this.label3);
 			this.COMSetting.Controls.Add(this.label2);
@@ -158,37 +158,47 @@
 			this.COMSetting.Text = "串口设置";
 			this.COMSetting.UseVisualStyleBackColor = true;
 			// 
-			// comboBox4
-			// 
-			this.comboBox4.FormattingEnabled = true;
-			this.comboBox4.Location = new System.Drawing.Point(216, 290);
-			this.comboBox4.Name = "comboBox4";
-			this.comboBox4.Size = new System.Drawing.Size(176, 20);
-			this.comboBox4.TabIndex = 9;
-			// 
 			// stopComboBox
 			// 
 			this.stopComboBox.FormattingEnabled = true;
+			this.stopComboBox.Items.AddRange(new object[] {
+            "1",
+            "1.5",
+            "2"});
 			this.stopComboBox.Location = new System.Drawing.Point(216, 238);
 			this.stopComboBox.Name = "stopComboBox";
 			this.stopComboBox.Size = new System.Drawing.Size(176, 20);
 			this.stopComboBox.TabIndex = 8;
+			this.stopComboBox.Text = "1";
 			// 
 			// bundRateComboBox
 			// 
 			this.bundRateComboBox.FormattingEnabled = true;
+			this.bundRateComboBox.Items.AddRange(new object[] {
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400"});
 			this.bundRateComboBox.Location = new System.Drawing.Point(216, 185);
 			this.bundRateComboBox.Name = "bundRateComboBox";
 			this.bundRateComboBox.Size = new System.Drawing.Size(176, 20);
 			this.bundRateComboBox.TabIndex = 7;
+			this.bundRateComboBox.Text = "19200";
 			// 
 			// dataComboBox
 			// 
 			this.dataComboBox.FormattingEnabled = true;
+			this.dataComboBox.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8"});
 			this.dataComboBox.Location = new System.Drawing.Point(216, 144);
 			this.dataComboBox.Name = "dataComboBox";
 			this.dataComboBox.Size = new System.Drawing.Size(176, 20);
 			this.dataComboBox.TabIndex = 6;
+			this.dataComboBox.Text = "8";
 			// 
 			// COMcomboBox
 			// 
@@ -198,15 +208,6 @@
 			this.COMcomboBox.Size = new System.Drawing.Size(176, 20);
 			this.COMcomboBox.TabIndex = 5;
 			this.COMcomboBox.SelectedIndexChanged += new System.EventHandler(this.COMcomboBox_SelectedIndexChanged);
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(73, 298);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(101, 12);
-			this.label5.TabIndex = 4;
-			this.label5.Text = "相同的键呼叫间隔";
 			// 
 			// label4
 			// 
@@ -271,6 +272,7 @@
 			this.FtextBox.Name = "FtextBox";
 			this.FtextBox.Size = new System.Drawing.Size(236, 21);
 			this.FtextBox.TabIndex = 21;
+			this.FtextBox.Text = "不满意";
 			// 
 			// label11
 			// 
@@ -287,6 +289,7 @@
 			this.EtextBox.Name = "EtextBox";
 			this.EtextBox.Size = new System.Drawing.Size(236, 21);
 			this.EtextBox.TabIndex = 19;
+			this.EtextBox.Text = "满意";
 			// 
 			// BtextBox
 			// 
@@ -294,6 +297,7 @@
 			this.BtextBox.Name = "BtextBox";
 			this.BtextBox.Size = new System.Drawing.Size(236, 21);
 			this.BtextBox.TabIndex = 18;
+			this.BtextBox.Text = "结账";
 			// 
 			// CtextBox
 			// 
@@ -301,6 +305,7 @@
 			this.CtextBox.Name = "CtextBox";
 			this.CtextBox.Size = new System.Drawing.Size(236, 21);
 			this.CtextBox.TabIndex = 17;
+			this.CtextBox.Text = "取消";
 			// 
 			// DtextBox
 			// 
@@ -308,6 +313,7 @@
 			this.DtextBox.Name = "DtextBox";
 			this.DtextBox.Size = new System.Drawing.Size(236, 21);
 			this.DtextBox.TabIndex = 16;
+			this.DtextBox.Text = "呼叫";
 			// 
 			// AtextBox
 			// 
@@ -315,6 +321,7 @@
 			this.AtextBox.Name = "AtextBox";
 			this.AtextBox.Size = new System.Drawing.Size(236, 21);
 			this.AtextBox.TabIndex = 15;
+			this.AtextBox.Text = "下单";
 			// 
 			// label6
 			// 
@@ -374,6 +381,9 @@
 			// 
 			// callInfoColorgroupBox
 			// 
+			this.callInfoColorgroupBox.Controls.Add(this.finish_btn);
+			this.callInfoColorgroupBox.Controls.Add(this.timeout_btn);
+			this.callInfoColorgroupBox.Controls.Add(this.wait_btn);
 			this.callInfoColorgroupBox.Controls.Add(this.completeBtn);
 			this.callInfoColorgroupBox.Controls.Add(this.timeOutBtn);
 			this.callInfoColorgroupBox.Controls.Add(this.undoBtn);
@@ -387,32 +397,68 @@
 			this.callInfoColorgroupBox.TabStop = false;
 			this.callInfoColorgroupBox.Text = "呼叫信息颜色";
 			// 
+			// finish_btn
+			// 
+			this.finish_btn.BackColor = System.Drawing.Color.Silver;
+			this.finish_btn.FlatAppearance.BorderSize = 0;
+			this.finish_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.finish_btn.Location = new System.Drawing.Point(179, 154);
+			this.finish_btn.Name = "finish_btn";
+			this.finish_btn.Size = new System.Drawing.Size(221, 23);
+			this.finish_btn.TabIndex = 8;
+			this.finish_btn.UseVisualStyleBackColor = false;
+			// 
+			// timeout_btn
+			// 
+			this.timeout_btn.BackColor = System.Drawing.Color.Yellow;
+			this.timeout_btn.FlatAppearance.BorderSize = 0;
+			this.timeout_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.timeout_btn.Location = new System.Drawing.Point(179, 107);
+			this.timeout_btn.Name = "timeout_btn";
+			this.timeout_btn.Size = new System.Drawing.Size(221, 23);
+			this.timeout_btn.TabIndex = 7;
+			this.timeout_btn.UseVisualStyleBackColor = false;
+			// 
+			// wait_btn
+			// 
+			this.wait_btn.BackColor = System.Drawing.Color.Red;
+			this.wait_btn.FlatAppearance.BorderSize = 0;
+			this.wait_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.wait_btn.Location = new System.Drawing.Point(179, 58);
+			this.wait_btn.Name = "wait_btn";
+			this.wait_btn.Size = new System.Drawing.Size(221, 23);
+			this.wait_btn.TabIndex = 6;
+			this.wait_btn.UseVisualStyleBackColor = false;
+			// 
 			// completeBtn
 			// 
-			this.completeBtn.Location = new System.Drawing.Point(464, 148);
+			this.completeBtn.Location = new System.Drawing.Point(490, 154);
 			this.completeBtn.Name = "completeBtn";
 			this.completeBtn.Size = new System.Drawing.Size(75, 23);
 			this.completeBtn.TabIndex = 5;
 			this.completeBtn.Text = "设置";
 			this.completeBtn.UseVisualStyleBackColor = true;
+			this.completeBtn.Click += new System.EventHandler(this.completeBtn_Click);
 			// 
 			// timeOutBtn
 			// 
-			this.timeOutBtn.Location = new System.Drawing.Point(464, 101);
+			this.timeOutBtn.Location = new System.Drawing.Point(490, 107);
 			this.timeOutBtn.Name = "timeOutBtn";
 			this.timeOutBtn.Size = new System.Drawing.Size(75, 23);
 			this.timeOutBtn.TabIndex = 4;
 			this.timeOutBtn.Text = "设置";
 			this.timeOutBtn.UseVisualStyleBackColor = true;
+			this.timeOutBtn.Click += new System.EventHandler(this.timeOutBtn_Click);
 			// 
 			// undoBtn
 			// 
-			this.undoBtn.Location = new System.Drawing.Point(464, 52);
+			this.undoBtn.Location = new System.Drawing.Point(490, 58);
 			this.undoBtn.Name = "undoBtn";
 			this.undoBtn.Size = new System.Drawing.Size(75, 23);
 			this.undoBtn.TabIndex = 3;
 			this.undoBtn.Text = "设置";
 			this.undoBtn.UseVisualStyleBackColor = true;
+			this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
 			// 
 			// timeOutlabel
 			// 
@@ -426,20 +472,20 @@
 			// completelabel
 			// 
 			this.completelabel.AutoSize = true;
-			this.completelabel.Location = new System.Drawing.Point(68, 159);
+			this.completelabel.Location = new System.Drawing.Point(80, 159);
 			this.completelabel.Name = "completelabel";
-			this.completelabel.Size = new System.Drawing.Size(65, 12);
+			this.completelabel.Size = new System.Drawing.Size(29, 12);
 			this.completelabel.TabIndex = 1;
-			this.completelabel.Text = "取消或完成";
+			this.completelabel.Text = "完成";
 			// 
 			// undolabel
 			// 
 			this.undolabel.AutoSize = true;
-			this.undolabel.Location = new System.Drawing.Point(68, 63);
+			this.undolabel.Location = new System.Drawing.Point(80, 63);
 			this.undolabel.Name = "undolabel";
-			this.undolabel.Size = new System.Drawing.Size(41, 12);
+			this.undolabel.Size = new System.Drawing.Size(29, 12);
 			this.undolabel.TabIndex = 0;
-			this.undolabel.Text = "未完成";
+			this.undolabel.Text = "等待";
 			// 
 			// callOrderBygroupBox
 			// 
@@ -476,8 +522,10 @@
 			// 
 			// useableTime
 			// 
+			this.useableTime.Controls.Add(this.unit_box);
+			this.useableTime.Controls.Add(this.number);
+			this.useableTime.Controls.Add(this.label5);
 			this.useableTime.Controls.Add(this.trackBar3);
-			this.useableTime.Controls.Add(this.trackBar1);
 			this.useableTime.Location = new System.Drawing.Point(4, 22);
 			this.useableTime.Name = "useableTime";
 			this.useableTime.Size = new System.Drawing.Size(910, 531);
@@ -485,19 +533,48 @@
 			this.useableTime.Text = "有效服务时间";
 			this.useableTime.UseVisualStyleBackColor = true;
 			// 
+			// unit_box
+			// 
+			this.unit_box.FormattingEnabled = true;
+			this.unit_box.Items.AddRange(new object[] {
+            "秒",
+            "分钟",
+            "小时"});
+			this.unit_box.Location = new System.Drawing.Point(785, 169);
+			this.unit_box.Name = "unit_box";
+			this.unit_box.Size = new System.Drawing.Size(72, 20);
+			this.unit_box.TabIndex = 5;
+			this.unit_box.Text = "分钟";
+			this.unit_box.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			// 
+			// number
+			// 
+			this.number.AutoSize = true;
+			this.number.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.number.Location = new System.Drawing.Point(763, 168);
+			this.number.Name = "number";
+			this.number.Size = new System.Drawing.Size(17, 16);
+			this.number.TabIndex = 4;
+			this.number.Text = "5";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(41, 172);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(83, 12);
+			this.label5.TabIndex = 3;
+			this.label5.Text = "设置超时时间:";
+			// 
 			// trackBar3
 			// 
-			this.trackBar3.Location = new System.Drawing.Point(211, 195);
+			this.trackBar3.Location = new System.Drawing.Point(155, 157);
+			this.trackBar3.Maximum = 59;
 			this.trackBar3.Name = "trackBar3";
-			this.trackBar3.Size = new System.Drawing.Size(416, 45);
+			this.trackBar3.Size = new System.Drawing.Size(556, 45);
 			this.trackBar3.TabIndex = 2;
-			// 
-			// trackBar1
-			// 
-			this.trackBar1.Location = new System.Drawing.Point(211, 101);
-			this.trackBar1.Name = "trackBar1";
-			this.trackBar1.Size = new System.Drawing.Size(416, 45);
-			this.trackBar1.TabIndex = 0;
+			this.trackBar3.Value = 5;
+			this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
 			// 
 			// systemSettingForm
 			// 
@@ -524,7 +601,6 @@
 			this.useableTime.ResumeLayout(false);
 			this.useableTime.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -539,12 +615,10 @@
 		private System.Windows.Forms.TabPage useableTime;
 		private System.Windows.Forms.TextBox companyNametextBox;
 		private System.Windows.Forms.Label companyNamelabel;
-		private System.Windows.Forms.ComboBox comboBox4;
 		private System.Windows.Forms.ComboBox stopComboBox;
 		private System.Windows.Forms.ComboBox bundRateComboBox;
 		private System.Windows.Forms.ComboBox dataComboBox;
 		private System.Windows.Forms.ComboBox COMcomboBox;
-		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
@@ -572,9 +646,14 @@
 		private System.Windows.Forms.RadioButton DESradioButton;
 		private System.Windows.Forms.RadioButton ASCradioButton;
 		private System.Windows.Forms.TrackBar trackBar3;
-		private System.Windows.Forms.TrackBar trackBar1;
 		private System.Windows.Forms.ColorDialog UndocolorDialog;
 		private System.Windows.Forms.ColorDialog timeOutcolorDialog;
 		private System.Windows.Forms.ColorDialog completeColorDialog;
+		private System.Windows.Forms.Button finish_btn;
+		private System.Windows.Forms.Button timeout_btn;
+		private System.Windows.Forms.Button wait_btn;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label number;
+		private System.Windows.Forms.ComboBox unit_box;
 	}
 }

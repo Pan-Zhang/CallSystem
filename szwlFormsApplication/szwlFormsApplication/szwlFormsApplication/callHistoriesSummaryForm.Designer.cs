@@ -28,40 +28,47 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.historyRecordsgroupBox = new System.Windows.Forms.GroupBox();
-			this.historySummarygroupBox = new System.Windows.Forms.GroupBox();
-			this.historyOptiongroupBox = new System.Windows.Forms.GroupBox();
 			this.historyRecordsdataGridView = new System.Windows.Forms.DataGridView();
-			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+			this.historySummarygroupBox = new System.Windows.Forms.GroupBox();
 			this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
-			this.comboBox3 = new System.Windows.Forms.ComboBox();
-			this.comboBox4 = new System.Windows.Forms.ComboBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+			this.historyOptiongroupBox = new System.Windows.Forms.GroupBox();
 			this.button4 = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
+			this.statusBox = new System.Windows.Forms.ComboBox();
+			this.typeBox = new System.Windows.Forms.ComboBox();
+			this.worker = new System.Windows.Forms.ComboBox();
+			this.callArea = new System.Windows.Forms.ComboBox();
+			this.date_end = new System.Windows.Forms.DateTimePicker();
+			this.date_start = new System.Windows.Forms.DateTimePicker();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.historyRecordsgroupBox.SuspendLayout();
-			this.historySummarygroupBox.SuspendLayout();
-			this.historyOptiongroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.historyRecordsdataGridView)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+			this.historySummarygroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+			this.historyOptiongroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// historyRecordsgroupBox
@@ -74,6 +81,23 @@
 			this.historyRecordsgroupBox.TabStop = false;
 			this.historyRecordsgroupBox.Text = "查询结果";
 			// 
+			// historyRecordsdataGridView
+			// 
+			this.historyRecordsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.historyRecordsdataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.Column2,
+            this.Column1,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+			this.historyRecordsdataGridView.Location = new System.Drawing.Point(7, 21);
+			this.historyRecordsdataGridView.Name = "historyRecordsdataGridView";
+			this.historyRecordsdataGridView.RowTemplate.Height = 23;
+			this.historyRecordsdataGridView.Size = new System.Drawing.Size(782, 232);
+			this.historyRecordsdataGridView.TabIndex = 0;
+			// 
 			// historySummarygroupBox
 			// 
 			this.historySummarygroupBox.Controls.Add(this.chart2);
@@ -85,18 +109,50 @@
 			this.historySummarygroupBox.TabStop = false;
 			this.historySummarygroupBox.Text = "统计结果";
 			// 
+			// chart2
+			// 
+			chartArea5.Name = "ChartArea1";
+			this.chart2.ChartAreas.Add(chartArea5);
+			legend5.Name = "Legend1";
+			this.chart2.Legends.Add(legend5);
+			this.chart2.Location = new System.Drawing.Point(352, 134);
+			this.chart2.Name = "chart2";
+			series5.ChartArea = "ChartArea1";
+			series5.Legend = "Legend1";
+			series5.Name = "Series1";
+			this.chart2.Series.Add(series5);
+			this.chart2.Size = new System.Drawing.Size(300, 300);
+			this.chart2.TabIndex = 1;
+			this.chart2.Text = "chart2";
+			// 
+			// chart1
+			// 
+			chartArea6.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea6);
+			legend6.Name = "Legend1";
+			this.chart1.Legends.Add(legend6);
+			this.chart1.Location = new System.Drawing.Point(19, 134);
+			this.chart1.Name = "chart1";
+			series6.ChartArea = "ChartArea1";
+			series6.Legend = "Legend1";
+			series6.Name = "Series1";
+			this.chart1.Series.Add(series6);
+			this.chart1.Size = new System.Drawing.Size(300, 300);
+			this.chart1.TabIndex = 0;
+			this.chart1.Text = "chart1";
+			// 
 			// historyOptiongroupBox
 			// 
 			this.historyOptiongroupBox.Controls.Add(this.button4);
 			this.historyOptiongroupBox.Controls.Add(this.button3);
 			this.historyOptiongroupBox.Controls.Add(this.button2);
 			this.historyOptiongroupBox.Controls.Add(this.button1);
-			this.historyOptiongroupBox.Controls.Add(this.comboBox4);
-			this.historyOptiongroupBox.Controls.Add(this.comboBox3);
-			this.historyOptiongroupBox.Controls.Add(this.comboBox2);
-			this.historyOptiongroupBox.Controls.Add(this.comboBox1);
-			this.historyOptiongroupBox.Controls.Add(this.dateTimePicker2);
-			this.historyOptiongroupBox.Controls.Add(this.dateTimePicker1);
+			this.historyOptiongroupBox.Controls.Add(this.statusBox);
+			this.historyOptiongroupBox.Controls.Add(this.typeBox);
+			this.historyOptiongroupBox.Controls.Add(this.worker);
+			this.historyOptiongroupBox.Controls.Add(this.callArea);
+			this.historyOptiongroupBox.Controls.Add(this.date_end);
+			this.historyOptiongroupBox.Controls.Add(this.date_start);
 			this.historyOptiongroupBox.Controls.Add(this.label6);
 			this.historyOptiongroupBox.Controls.Add(this.label5);
 			this.historyOptiongroupBox.Controls.Add(this.label4);
@@ -110,164 +166,14 @@
 			this.historyOptiongroupBox.TabStop = false;
 			this.historyOptiongroupBox.Text = "查询选项";
 			// 
-			// historyRecordsdataGridView
+			// button4
 			// 
-			this.historyRecordsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.historyRecordsdataGridView.Location = new System.Drawing.Point(7, 21);
-			this.historyRecordsdataGridView.Name = "historyRecordsdataGridView";
-			this.historyRecordsdataGridView.RowTemplate.Height = 23;
-			this.historyRecordsdataGridView.Size = new System.Drawing.Size(782, 232);
-			this.historyRecordsdataGridView.TabIndex = 0;
-			// 
-			// chart1
-			// 
-			chartArea3.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea3);
-			legend3.Name = "Legend1";
-			this.chart1.Legends.Add(legend3);
-			this.chart1.Location = new System.Drawing.Point(19, 134);
-			this.chart1.Name = "chart1";
-			series3.ChartArea = "ChartArea1";
-			series3.Legend = "Legend1";
-			series3.Name = "Series1";
-			this.chart1.Series.Add(series3);
-			this.chart1.Size = new System.Drawing.Size(300, 300);
-			this.chart1.TabIndex = 0;
-			this.chart1.Text = "chart1";
-			// 
-			// chart2
-			// 
-			chartArea4.Name = "ChartArea1";
-			this.chart2.ChartAreas.Add(chartArea4);
-			legend4.Name = "Legend1";
-			this.chart2.Legends.Add(legend4);
-			this.chart2.Location = new System.Drawing.Point(352, 134);
-			this.chart2.Name = "chart2";
-			series4.ChartArea = "ChartArea1";
-			series4.Legend = "Legend1";
-			series4.Name = "Series1";
-			this.chart2.Series.Add(series4);
-			this.chart2.Size = new System.Drawing.Size(300, 300);
-			this.chart2.TabIndex = 1;
-			this.chart2.Text = "chart2";
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(41, 51);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(53, 12);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "开始时间";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(41, 109);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(53, 12);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "结束时间";
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(41, 174);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(53, 12);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "呼叫区域";
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(41, 232);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(29, 12);
-			this.label4.TabIndex = 3;
-			this.label4.Text = "员工";
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(41, 293);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(53, 12);
-			this.label5.TabIndex = 4;
-			this.label5.Text = "服务类型";
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(41, 358);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(53, 12);
-			this.label6.TabIndex = 5;
-			this.label6.Text = "服务状态";
-			// 
-			// dateTimePicker1
-			// 
-			this.dateTimePicker1.Location = new System.Drawing.Point(133, 45);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
-			this.dateTimePicker1.TabIndex = 6;
-			// 
-			// dateTimePicker2
-			// 
-			this.dateTimePicker2.Location = new System.Drawing.Point(133, 100);
-			this.dateTimePicker2.Name = "dateTimePicker2";
-			this.dateTimePicker2.Size = new System.Drawing.Size(200, 21);
-			this.dateTimePicker2.TabIndex = 7;
-			// 
-			// comboBox1
-			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(133, 165);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(200, 20);
-			this.comboBox1.TabIndex = 8;
-			// 
-			// comboBox2
-			// 
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Location = new System.Drawing.Point(133, 229);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(200, 20);
-			this.comboBox2.TabIndex = 9;
-			// 
-			// comboBox3
-			// 
-			this.comboBox3.FormattingEnabled = true;
-			this.comboBox3.Location = new System.Drawing.Point(133, 285);
-			this.comboBox3.Name = "comboBox3";
-			this.comboBox3.Size = new System.Drawing.Size(200, 20);
-			this.comboBox3.TabIndex = 10;
-			// 
-			// comboBox4
-			// 
-			this.comboBox4.FormattingEnabled = true;
-			this.comboBox4.Location = new System.Drawing.Point(133, 350);
-			this.comboBox4.Name = "comboBox4";
-			this.comboBox4.Size = new System.Drawing.Size(200, 20);
-			this.comboBox4.TabIndex = 11;
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(173, 420);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 12;
-			this.button1.Text = "确定";
-			this.button1.UseVisualStyleBackColor = true;
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(173, 472);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 13;
-			this.button2.Text = "导出";
-			this.button2.UseVisualStyleBackColor = true;
+			this.button4.Location = new System.Drawing.Point(173, 579);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(75, 23);
+			this.button4.TabIndex = 15;
+			this.button4.Text = "打印";
+			this.button4.UseVisualStyleBackColor = true;
 			// 
 			// button3
 			// 
@@ -278,14 +184,200 @@
 			this.button3.Text = "清除数据";
 			this.button3.UseVisualStyleBackColor = true;
 			// 
-			// button4
+			// button2
 			// 
-			this.button4.Location = new System.Drawing.Point(173, 579);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(75, 23);
-			this.button4.TabIndex = 15;
-			this.button4.Text = "打印";
-			this.button4.UseVisualStyleBackColor = true;
+			this.button2.Location = new System.Drawing.Point(173, 472);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 23);
+			this.button2.TabIndex = 13;
+			this.button2.Text = "导出";
+			this.button2.UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(173, 420);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 12;
+			this.button1.Text = "确定";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// statusBox
+			// 
+			this.statusBox.FormattingEnabled = true;
+			this.statusBox.Items.AddRange(new object[] {
+            "等待",
+            "完成",
+            "超时"});
+			this.statusBox.Location = new System.Drawing.Point(133, 350);
+			this.statusBox.Name = "statusBox";
+			this.statusBox.Size = new System.Drawing.Size(200, 20);
+			this.statusBox.TabIndex = 11;
+			// 
+			// typeBox
+			// 
+			this.typeBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Cannel",
+            "Order",
+            "Call",
+            "CheckOut",
+            "ChangeMedication",
+            "Emergency Call",
+            "PulingNeedle",
+            "Need Service",
+            "Want to pay",
+            "Need Nurses",
+            "Satisfied",
+            "Dissatisfied",
+            "Low Power",
+            "Tamper"});
+			this.typeBox.FormattingEnabled = true;
+			this.typeBox.Items.AddRange(new object[] {
+            "Cannel",
+            "Order",
+            "Call",
+            "CheckOut",
+            "ChangeMedication",
+            "Emergency Call",
+            "PulingNeedle",
+            "Need Service",
+            "Want to pay",
+            "Need Nurses",
+            "Satisfied",
+            "Dissatisfied",
+            "Low Power",
+            "Tamper"});
+			this.typeBox.Location = new System.Drawing.Point(133, 285);
+			this.typeBox.Name = "typeBox";
+			this.typeBox.Size = new System.Drawing.Size(200, 20);
+			this.typeBox.TabIndex = 10;
+			// 
+			// worker
+			// 
+			this.worker.FormattingEnabled = true;
+			this.worker.Location = new System.Drawing.Point(133, 229);
+			this.worker.Name = "worker";
+			this.worker.Size = new System.Drawing.Size(200, 20);
+			this.worker.TabIndex = 9;
+			// 
+			// callArea
+			// 
+			this.callArea.FormattingEnabled = true;
+			this.callArea.Location = new System.Drawing.Point(133, 165);
+			this.callArea.Name = "callArea";
+			this.callArea.Size = new System.Drawing.Size(200, 20);
+			this.callArea.TabIndex = 8;
+			// 
+			// date_end
+			// 
+			this.date_end.Location = new System.Drawing.Point(133, 100);
+			this.date_end.Name = "date_end";
+			this.date_end.Size = new System.Drawing.Size(200, 21);
+			this.date_end.TabIndex = 7;
+			// 
+			// date_start
+			// 
+			this.date_start.Location = new System.Drawing.Point(133, 45);
+			this.date_start.Name = "date_start";
+			this.date_start.Size = new System.Drawing.Size(200, 21);
+			this.date_start.TabIndex = 6;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(41, 358);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(53, 12);
+			this.label6.TabIndex = 5;
+			this.label6.Text = "服务状态";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(41, 293);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(53, 12);
+			this.label5.TabIndex = 4;
+			this.label5.Text = "服务类型";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(41, 232);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(29, 12);
+			this.label4.TabIndex = 3;
+			this.label4.Text = "员工";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(41, 174);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(53, 12);
+			this.label3.TabIndex = 2;
+			this.label3.Text = "呼叫区域";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(41, 109);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(53, 12);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "结束时间";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(41, 51);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(53, 12);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "开始时间";
+			// 
+			// id
+			// 
+			this.id.DataPropertyName = "Id";
+			this.id.HeaderText = "id";
+			this.id.Name = "id";
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "time";
+			this.Column2.HeaderText = "时间";
+			this.Column2.Name = "Column2";
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "callerNum";
+			this.Column1.HeaderText = "呼叫号码";
+			this.Column1.Name = "Column1";
+			// 
+			// Column3
+			// 
+			this.Column3.DataPropertyName = "workerNum";
+			this.Column3.HeaderText = "服务号码";
+			this.Column3.Name = "Column3";
+			// 
+			// Column4
+			// 
+			this.Column4.DataPropertyName = "type";
+			this.Column4.HeaderText = "类型";
+			this.Column4.Name = "Column4";
+			// 
+			// Column5
+			// 
+			this.Column5.DataPropertyName = "status";
+			this.Column5.HeaderText = "状态";
+			this.Column5.Name = "Column5";
+			// 
+			// Column6
+			// 
+			this.Column6.DataPropertyName = "isRFID";
+			this.Column6.HeaderText = "isRFID";
+			this.Column6.Name = "Column6";
 			// 
 			// callHistoriesSummaryForm
 			// 
@@ -298,13 +390,14 @@
 			this.Name = "callHistoriesSummaryForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "查询呼叫历史记录";
+			this.Load += new System.EventHandler(this.callHistoriesSummaryForm_Load);
 			this.historyRecordsgroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.historyRecordsdataGridView)).EndInit();
 			this.historySummarygroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
 			this.historyOptiongroupBox.ResumeLayout(false);
 			this.historyOptiongroupBox.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.historyRecordsdataGridView)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -318,12 +411,12 @@
 		private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
 		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.ComboBox comboBox4;
-		private System.Windows.Forms.ComboBox comboBox3;
-		private System.Windows.Forms.ComboBox comboBox2;
-		private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.DateTimePicker dateTimePicker2;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private System.Windows.Forms.ComboBox statusBox;
+		private System.Windows.Forms.ComboBox typeBox;
+		private System.Windows.Forms.ComboBox worker;
+		private System.Windows.Forms.ComboBox callArea;
+		private System.Windows.Forms.DateTimePicker date_end;
+		private System.Windows.Forms.DateTimePicker date_start;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label4;
@@ -333,5 +426,12 @@
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn id;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
 	}
 }

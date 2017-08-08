@@ -10,6 +10,9 @@ namespace szwlFormsApplication.CommonFunc
 {
 	class Common
 	{
+
+		public static bool isRFID = true;
+
 		//获取所有端口号，获取串口可能比较经常用的是SerialPort.GetPortNames()这个方法，或者是读取注册表的方式，但是这两种方式都是有问题，尤其是在多次插拔串口后，会有重复串口出现，采用以下方式解决该问题
 		public static string[] MulGetHardwareInfo(HardwareEnum hardType, string propKey)
 		{

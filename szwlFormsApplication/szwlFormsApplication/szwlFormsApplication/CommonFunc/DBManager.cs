@@ -63,7 +63,7 @@ namespace szwlFormsApplication.CommonFunc
 				admin.pass = "123456";
 				insertUser(admin);
 
-				for(int i=1; i<51; i++)
+				for(int i=1; i<101; i++)
 				{
 					Callzone zone = new Callzone();
 					zone.name = "桌位" + i;
@@ -92,7 +92,7 @@ namespace szwlFormsApplication.CommonFunc
 			table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
 
 			table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("pass", DataTypeEnum.adInteger, 9);
+			table.Columns.Append("pass", DataTypeEnum.adVarWChar, 50);
 			catalog.Tables.Append(table);
 		}
 
@@ -280,9 +280,10 @@ namespace szwlFormsApplication.CommonFunc
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
 				Admin admin = new Admin();
-				//string col = dataTable.Columns[i % 3].ColumnName;
+				int id = (int)dataTable.Rows[i][0];
 				string name = dataTable.Rows[i][1].ToString();
 				string pass = dataTable.Rows[i][2].ToString();
+				admin.id = id;
 				admin.name = name;
 				admin.pass = pass;
 				list.Add(admin);
@@ -311,6 +312,11 @@ namespace szwlFormsApplication.CommonFunc
 		public bool deleteUser(Admin admin)
 		{
 			return operateData("delete from " + TABLE_ADMIN + " where name='" + admin.name + "' and pass='" + admin.pass + "'");
+		}
+
+		public bool updateUser(Admin admin)
+		{
+			return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "' where Id=" + admin.id);
 		}
 
 		/**

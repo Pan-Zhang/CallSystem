@@ -29,14 +29,14 @@
 		private void InitializeComponent()
 		{
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.userAddbtn = new System.Windows.Forms.Button();
 			this.userUpdatebtn = new System.Windows.Forms.Button();
 			this.userDeletebtn = new System.Windows.Forms.Button();
 			this.userAuhtoritybtn = new System.Windows.Forms.Button();
 			this.userUpdatePwbtn = new System.Windows.Forms.Button();
 			this.userclearDatabtn = new System.Windows.Forms.Button();
-			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -52,60 +52,6 @@
 			this.dataGridView1.Size = new System.Drawing.Size(244, 519);
 			this.dataGridView1.TabIndex = 0;
 			// 
-			// userAddbtn
-			// 
-			this.userAddbtn.Location = new System.Drawing.Point(325, 63);
-			this.userAddbtn.Name = "userAddbtn";
-			this.userAddbtn.Size = new System.Drawing.Size(75, 23);
-			this.userAddbtn.TabIndex = 1;
-			this.userAddbtn.Text = "添加用户";
-			this.userAddbtn.UseVisualStyleBackColor = true;
-			// 
-			// userUpdatebtn
-			// 
-			this.userUpdatebtn.Location = new System.Drawing.Point(325, 120);
-			this.userUpdatebtn.Name = "userUpdatebtn";
-			this.userUpdatebtn.Size = new System.Drawing.Size(75, 23);
-			this.userUpdatebtn.TabIndex = 2;
-			this.userUpdatebtn.Text = "修改用户";
-			this.userUpdatebtn.UseVisualStyleBackColor = true;
-			// 
-			// userDeletebtn
-			// 
-			this.userDeletebtn.Location = new System.Drawing.Point(325, 181);
-			this.userDeletebtn.Name = "userDeletebtn";
-			this.userDeletebtn.Size = new System.Drawing.Size(75, 23);
-			this.userDeletebtn.TabIndex = 3;
-			this.userDeletebtn.Text = "删除用户";
-			this.userDeletebtn.UseVisualStyleBackColor = true;
-			// 
-			// userAuhtoritybtn
-			// 
-			this.userAuhtoritybtn.Location = new System.Drawing.Point(325, 248);
-			this.userAuhtoritybtn.Name = "userAuhtoritybtn";
-			this.userAuhtoritybtn.Size = new System.Drawing.Size(75, 23);
-			this.userAuhtoritybtn.TabIndex = 4;
-			this.userAuhtoritybtn.Text = "权限";
-			this.userAuhtoritybtn.UseVisualStyleBackColor = true;
-			// 
-			// userUpdatePwbtn
-			// 
-			this.userUpdatePwbtn.Location = new System.Drawing.Point(325, 322);
-			this.userUpdatePwbtn.Name = "userUpdatePwbtn";
-			this.userUpdatePwbtn.Size = new System.Drawing.Size(75, 23);
-			this.userUpdatePwbtn.TabIndex = 5;
-			this.userUpdatePwbtn.Text = "修改密码";
-			this.userUpdatePwbtn.UseVisualStyleBackColor = true;
-			// 
-			// userclearDatabtn
-			// 
-			this.userclearDatabtn.Location = new System.Drawing.Point(325, 399);
-			this.userclearDatabtn.Name = "userclearDatabtn";
-			this.userclearDatabtn.Size = new System.Drawing.Size(75, 23);
-			this.userclearDatabtn.TabIndex = 6;
-			this.userclearDatabtn.Text = "清除数据";
-			this.userclearDatabtn.UseVisualStyleBackColor = true;
-			// 
 			// UserName
 			// 
 			this.UserName.DataPropertyName = "name";
@@ -117,6 +63,66 @@
 			this.password.DataPropertyName = "pass";
 			this.password.HeaderText = "密码";
 			this.password.Name = "password";
+			// 
+			// userAddbtn
+			// 
+			this.userAddbtn.Location = new System.Drawing.Point(325, 63);
+			this.userAddbtn.Name = "userAddbtn";
+			this.userAddbtn.Size = new System.Drawing.Size(75, 23);
+			this.userAddbtn.TabIndex = 1;
+			this.userAddbtn.Text = "添加用户";
+			this.userAddbtn.UseVisualStyleBackColor = true;
+			this.userAddbtn.Click += new System.EventHandler(this.userAddbtn_Click);
+			// 
+			// userUpdatebtn
+			// 
+			this.userUpdatebtn.Location = new System.Drawing.Point(325, 117);
+			this.userUpdatebtn.Name = "userUpdatebtn";
+			this.userUpdatebtn.Size = new System.Drawing.Size(75, 23);
+			this.userUpdatebtn.TabIndex = 2;
+			this.userUpdatebtn.Text = "修改用户";
+			this.userUpdatebtn.UseVisualStyleBackColor = true;
+			this.userUpdatebtn.Click += new System.EventHandler(this.userUpdatebtn_Click);
+			// 
+			// userDeletebtn
+			// 
+			this.userDeletebtn.Location = new System.Drawing.Point(325, 174);
+			this.userDeletebtn.Name = "userDeletebtn";
+			this.userDeletebtn.Size = new System.Drawing.Size(75, 23);
+			this.userDeletebtn.TabIndex = 3;
+			this.userDeletebtn.Text = "删除用户";
+			this.userDeletebtn.UseVisualStyleBackColor = true;
+			this.userDeletebtn.Click += new System.EventHandler(this.userDeletebtn_Click);
+			// 
+			// userAuhtoritybtn
+			// 
+			this.userAuhtoritybtn.Location = new System.Drawing.Point(325, 234);
+			this.userAuhtoritybtn.Name = "userAuhtoritybtn";
+			this.userAuhtoritybtn.Size = new System.Drawing.Size(75, 23);
+			this.userAuhtoritybtn.TabIndex = 4;
+			this.userAuhtoritybtn.Text = "权限";
+			this.userAuhtoritybtn.UseVisualStyleBackColor = true;
+			this.userAuhtoritybtn.Click += new System.EventHandler(this.userAuhtoritybtn_Click);
+			// 
+			// userUpdatePwbtn
+			// 
+			this.userUpdatePwbtn.Location = new System.Drawing.Point(325, 293);
+			this.userUpdatePwbtn.Name = "userUpdatePwbtn";
+			this.userUpdatePwbtn.Size = new System.Drawing.Size(75, 23);
+			this.userUpdatePwbtn.TabIndex = 5;
+			this.userUpdatePwbtn.Text = "修改密码";
+			this.userUpdatePwbtn.UseVisualStyleBackColor = true;
+			this.userUpdatePwbtn.Click += new System.EventHandler(this.userUpdatePwbtn_Click);
+			// 
+			// userclearDatabtn
+			// 
+			this.userclearDatabtn.Location = new System.Drawing.Point(325, 354);
+			this.userclearDatabtn.Name = "userclearDatabtn";
+			this.userclearDatabtn.Size = new System.Drawing.Size(75, 23);
+			this.userclearDatabtn.TabIndex = 6;
+			this.userclearDatabtn.Text = "清除数据";
+			this.userclearDatabtn.UseVisualStyleBackColor = true;
+			this.userclearDatabtn.Click += new System.EventHandler(this.userclearDatabtn_Click);
 			// 
 			// userForm
 			// 

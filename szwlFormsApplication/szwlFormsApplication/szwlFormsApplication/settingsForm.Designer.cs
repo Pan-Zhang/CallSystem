@@ -31,17 +31,19 @@
 			this.callAreatabControl = new System.Windows.Forms.TabControl();
 			this.callAreatabPage = new System.Windows.Forms.TabPage();
 			this.callAreadataGridView = new System.Windows.Forms.DataGridView();
+			this.callArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callNumtabPage = new System.Windows.Forms.TabPage();
 			this.callNumdataGridView = new System.Windows.Forms.DataGridView();
+			this.callNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callAreaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callAreaclearDatabtn = new System.Windows.Forms.Button();
 			this.callAreaOKbtn = new System.Windows.Forms.Button();
 			this.callAreaDeletebtn = new System.Windows.Forms.Button();
 			this.callAreaUpdatebtn = new System.Windows.Forms.Button();
 			this.callAreaAddbtn = new System.Windows.Forms.Button();
-			this.callArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callAreaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callAreaBatchUpdatebtn = new System.Windows.Forms.Button();
+			this.callAreaBatchDelbtn = new System.Windows.Forms.Button();
 			this.callAreatabControl.SuspendLayout();
 			this.callAreatabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.callAreadataGridView)).BeginInit();
@@ -81,6 +83,12 @@
 			this.callAreadataGridView.Size = new System.Drawing.Size(345, 554);
 			this.callAreadataGridView.TabIndex = 13;
 			// 
+			// callArea
+			// 
+			this.callArea.DataPropertyName = "name";
+			this.callArea.HeaderText = "呼叫区域";
+			this.callArea.Name = "callArea";
+			// 
 			// callNumtabPage
 			// 
 			this.callNumtabPage.Controls.Add(this.callNumdataGridView);
@@ -105,57 +113,6 @@
 			this.callNumdataGridView.Size = new System.Drawing.Size(349, 554);
 			this.callNumdataGridView.TabIndex = 14;
 			// 
-			// callAreaclearDatabtn
-			// 
-			this.callAreaclearDatabtn.Location = new System.Drawing.Point(415, 354);
-			this.callAreaclearDatabtn.Name = "callAreaclearDatabtn";
-			this.callAreaclearDatabtn.Size = new System.Drawing.Size(75, 23);
-			this.callAreaclearDatabtn.TabIndex = 23;
-			this.callAreaclearDatabtn.Text = "清除数据";
-			this.callAreaclearDatabtn.UseVisualStyleBackColor = true;
-			// 
-			// callAreaOKbtn
-			// 
-			this.callAreaOKbtn.Location = new System.Drawing.Point(415, 281);
-			this.callAreaOKbtn.Name = "callAreaOKbtn";
-			this.callAreaOKbtn.Size = new System.Drawing.Size(75, 23);
-			this.callAreaOKbtn.TabIndex = 22;
-			this.callAreaOKbtn.Text = "确定";
-			this.callAreaOKbtn.UseVisualStyleBackColor = true;
-			// 
-			// callAreaDeletebtn
-			// 
-			this.callAreaDeletebtn.Location = new System.Drawing.Point(415, 214);
-			this.callAreaDeletebtn.Name = "callAreaDeletebtn";
-			this.callAreaDeletebtn.Size = new System.Drawing.Size(75, 23);
-			this.callAreaDeletebtn.TabIndex = 21;
-			this.callAreaDeletebtn.Text = "删除";
-			this.callAreaDeletebtn.UseVisualStyleBackColor = true;
-			// 
-			// callAreaUpdatebtn
-			// 
-			this.callAreaUpdatebtn.Location = new System.Drawing.Point(415, 153);
-			this.callAreaUpdatebtn.Name = "callAreaUpdatebtn";
-			this.callAreaUpdatebtn.Size = new System.Drawing.Size(75, 23);
-			this.callAreaUpdatebtn.TabIndex = 20;
-			this.callAreaUpdatebtn.Text = "修改";
-			this.callAreaUpdatebtn.UseVisualStyleBackColor = true;
-			// 
-			// callAreaAddbtn
-			// 
-			this.callAreaAddbtn.Location = new System.Drawing.Point(415, 96);
-			this.callAreaAddbtn.Name = "callAreaAddbtn";
-			this.callAreaAddbtn.Size = new System.Drawing.Size(75, 23);
-			this.callAreaAddbtn.TabIndex = 19;
-			this.callAreaAddbtn.Text = "添加";
-			this.callAreaAddbtn.UseVisualStyleBackColor = true;
-			// 
-			// callArea
-			// 
-			this.callArea.DataPropertyName = "name";
-			this.callArea.HeaderText = "呼叫区域";
-			this.callArea.Name = "callArea";
-			// 
 			// callNum
 			// 
 			this.callNum.DataPropertyName = "callerNum";
@@ -174,11 +131,83 @@
 			this.user.HeaderText = "服务员";
 			this.user.Name = "user";
 			// 
+			// callAreaclearDatabtn
+			// 
+			this.callAreaclearDatabtn.Location = new System.Drawing.Point(415, 530);
+			this.callAreaclearDatabtn.Name = "callAreaclearDatabtn";
+			this.callAreaclearDatabtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaclearDatabtn.TabIndex = 23;
+			this.callAreaclearDatabtn.Text = "清除数据";
+			this.callAreaclearDatabtn.UseVisualStyleBackColor = true;
+			this.callAreaclearDatabtn.Click += new System.EventHandler(this.callAreaclearDatabtn_Click);
+			// 
+			// callAreaOKbtn
+			// 
+			this.callAreaOKbtn.Location = new System.Drawing.Point(415, 273);
+			this.callAreaOKbtn.Name = "callAreaOKbtn";
+			this.callAreaOKbtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaOKbtn.TabIndex = 22;
+			this.callAreaOKbtn.Text = "确定";
+			this.callAreaOKbtn.UseVisualStyleBackColor = true;
+			this.callAreaOKbtn.Click += new System.EventHandler(this.callAreaOKbtn_Click);
+			// 
+			// callAreaDeletebtn
+			// 
+			this.callAreaDeletebtn.Location = new System.Drawing.Point(415, 214);
+			this.callAreaDeletebtn.Name = "callAreaDeletebtn";
+			this.callAreaDeletebtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaDeletebtn.TabIndex = 21;
+			this.callAreaDeletebtn.Text = "删除";
+			this.callAreaDeletebtn.UseVisualStyleBackColor = true;
+			this.callAreaDeletebtn.Click += new System.EventHandler(this.callAreaDeletebtn_Click);
+			// 
+			// callAreaUpdatebtn
+			// 
+			this.callAreaUpdatebtn.Location = new System.Drawing.Point(415, 153);
+			this.callAreaUpdatebtn.Name = "callAreaUpdatebtn";
+			this.callAreaUpdatebtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaUpdatebtn.TabIndex = 20;
+			this.callAreaUpdatebtn.Text = "修改";
+			this.callAreaUpdatebtn.UseVisualStyleBackColor = true;
+			this.callAreaUpdatebtn.Click += new System.EventHandler(this.callAreaUpdatebtn_Click);
+			// 
+			// callAreaAddbtn
+			// 
+			this.callAreaAddbtn.Location = new System.Drawing.Point(415, 96);
+			this.callAreaAddbtn.Name = "callAreaAddbtn";
+			this.callAreaAddbtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaAddbtn.TabIndex = 19;
+			this.callAreaAddbtn.Text = "添加";
+			this.callAreaAddbtn.UseVisualStyleBackColor = true;
+			this.callAreaAddbtn.Click += new System.EventHandler(this.callAreaAddbtn_Click);
+			// 
+			// callAreaBatchUpdatebtn
+			// 
+			this.callAreaBatchUpdatebtn.Location = new System.Drawing.Point(415, 330);
+			this.callAreaBatchUpdatebtn.Name = "callAreaBatchUpdatebtn";
+			this.callAreaBatchUpdatebtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaBatchUpdatebtn.TabIndex = 24;
+			this.callAreaBatchUpdatebtn.Text = "批量修改";
+			this.callAreaBatchUpdatebtn.UseVisualStyleBackColor = true;
+			this.callAreaBatchUpdatebtn.Click += new System.EventHandler(this.callAreaBatchUpdatebtn_Click);
+			// 
+			// callAreaBatchDelbtn
+			// 
+			this.callAreaBatchDelbtn.Location = new System.Drawing.Point(415, 400);
+			this.callAreaBatchDelbtn.Name = "callAreaBatchDelbtn";
+			this.callAreaBatchDelbtn.Size = new System.Drawing.Size(75, 23);
+			this.callAreaBatchDelbtn.TabIndex = 25;
+			this.callAreaBatchDelbtn.Text = "批量删除";
+			this.callAreaBatchDelbtn.UseVisualStyleBackColor = true;
+			this.callAreaBatchDelbtn.Click += new System.EventHandler(this.callAreaBatchDelbtn_Click);
+			// 
 			// settingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(540, 592);
+			this.Controls.Add(this.callAreaBatchDelbtn);
+			this.Controls.Add(this.callAreaBatchUpdatebtn);
 			this.Controls.Add(this.callAreaclearDatabtn);
 			this.Controls.Add(this.callAreaOKbtn);
 			this.Controls.Add(this.callAreaDeletebtn);
@@ -214,5 +243,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn callNum;
 		private System.Windows.Forms.DataGridViewTextBoxColumn callAreaf;
 		private System.Windows.Forms.DataGridViewTextBoxColumn user;
+		private System.Windows.Forms.Button callAreaBatchUpdatebtn;
+		private System.Windows.Forms.Button callAreaBatchDelbtn;
 	}
 }
