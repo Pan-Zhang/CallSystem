@@ -29,6 +29,7 @@ namespace szwlFormsApplication
 			mainForm = this;
 			_server = new Server();
 			_server.refreshInterface = this;
+			Common.isRFID = int.Parse(AppConfig.GetValue("isRFID"))==1?true:false;
 		}
 
 		private void szwl呼叫系统_Load(object sender, EventArgs e)
@@ -167,6 +168,14 @@ namespace szwlFormsApplication
 		{
 			if (e.Button.Name == "logonbtn")
 			{
+				DialogResult dr = MessageBox.Show("您确定要重新登陆吗？", "提示", MessageBoxButtons.OKCancel);
+				if (dr == DialogResult.OK)
+				{
+					closeCom();
+					LoginForm form = new LoginForm();
+					form.Show();
+					this.Hide();
+				}
 			}
 			else if (e.Button.Name == "systemsettingsbtn")
 			{
@@ -333,9 +342,9 @@ namespace szwlFormsApplication
 			if (newmsg.Count() >= 5)
 				this.label5.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(4).callerNum, messages[4].type);
 
-			this.allDataGridView.AutoGenerateColumns = false;
-			this.allDataGridView.DataSource = messages;
-			this.allDataGridView.Refresh();
+			this.MessDataGridView.AutoGenerateColumns = false;
+			this.MessDataGridView.DataSource = messages;
+			this.MessDataGridView.Refresh();
 		}
 	}
 }

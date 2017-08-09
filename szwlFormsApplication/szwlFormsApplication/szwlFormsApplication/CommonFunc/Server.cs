@@ -10,7 +10,6 @@ namespace szwlFormsApplication.CommonFunc
 	{
 		public SerialPort com;
 
-		public Boolean RFID = true;
 		public Boolean Listening;
 		public Boolean Closing;
 		private byte[] binary_data_1 = new byte[10];//53 5A 57 4C 01 03 03 E6 60 9D 
@@ -130,7 +129,7 @@ namespace szwlFormsApplication.CommonFunc
 
 		public void Analytic(byte[] bytes)
 		{
-			if (!RFID && bytes[4] == 0x01)
+			if (!Common.isRFID && bytes[4] == 0x01)
 			{
 				return;
 			}
@@ -250,6 +249,7 @@ namespace szwlFormsApplication.CommonFunc
 				message.status = STATUS.FINISH;
 				dm.updateMess(message);
 				bool exist = false;
+				employee_list = dm.selectEmployeeRFID();
 				foreach (Employee employee in employee_list)
 				{
 					if (employee.num == message.workerNum)

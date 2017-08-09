@@ -72,7 +72,7 @@ namespace szwlFormsApplication.CommonFunc
 					Caller caller = new Caller();
 					caller.callerNum = i;
 					caller.callZone = i;
-					caller.waiterNum = 0;
+					caller.waiterNum = -1;
 					insertCaller(caller);
 				}
 			}
@@ -376,13 +376,29 @@ namespace szwlFormsApplication.CommonFunc
 		//修改员工信息
 		public bool updateEmployee(Employee employee)
 		{
-			return operateData("update " + TABLE_EMPLOYEE + " set name='" + employee.name + "', num=" + employee.num + ", phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + employee.sex + "' where Id='" + employee.Id + "'");
+			int sex = 0;
+			switch (employee.sex)
+			{
+				case Sex.MALE:
+					sex = 0;
+					break;
+
+				case Sex.FEMALE:
+					sex = 1;
+					break;
+			}
+			return operateData("update " + TABLE_EMPLOYEE + " set num=" + employee.num + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
 		}
 
 		//删除某个员工
 		public bool deleteEmployee(Employee employee)
 		{
 			return operateData("delete from " + TABLE_EMPLOYEE + " where Id=" + employee.Id);
+		}
+
+		public bool deleteAllEmployee()
+		{
+			return operateData("delete from " + TABLE_EMPLOYEE);
 		}
 
 		/**
@@ -437,10 +453,26 @@ namespace szwlFormsApplication.CommonFunc
 			return operateData(sql);
 		}
 
+		//table.Columns.Append("num", DataTypeEnum.adInteger, 2);
+		//	table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
+		//	table.Columns.Append("phoneNum", DataTypeEnum.adVarWChar, 50);
+		//	table.Columns.Append("remarks", DataTypeEnum.adVarWChar, 50);
+		//	table.Columns.Append("sex", DataTypeEnum.adInteger, 1);
 		//修改员工信息
 		public bool updateEmployeeRFID(Employee employee)
 		{
-			return operateData("update " + TABLE_EMPLOYEE_RFID + " set name='" + employee.name + ", phoneNum='" + employee.phonenum + ", remarks='" + employee.remarks + ", sex='" + employee.sex + " where Id=" + employee.Id);
+			int sex = 0;
+			switch (employee.sex)
+			{
+				case Sex.MALE:
+					sex = 0;
+					break;
+
+				case Sex.FEMALE:
+					sex = 1;
+					break;
+			}
+			return operateData("update " + TABLE_EMPLOYEE_RFID + " set num=" + employee.num + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
 		}
 
 		//删除某个员工
@@ -449,6 +481,10 @@ namespace szwlFormsApplication.CommonFunc
 			return operateData("delete from " + TABLE_EMPLOYEE_RFID + " where Id=" + employee.Id);
 		}
 
+		public bool deleteAllEmployeeRFID()
+		{
+			return operateData("delete from " + TABLE_EMPLOYEE_RFID);
+		}
 
 		/**
 		 * 

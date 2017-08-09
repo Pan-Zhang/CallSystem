@@ -29,6 +29,13 @@ namespace szwlFormsApplication
 			list_caller = dm.selectCaller();
 			initZone();
 			initWorker();
+			if (Common.isRFID)
+			{
+				label4.Hide();
+				label9.Hide();
+				label14.Hide();
+				label13.Hide();
+			}
 		}
 
 		private void initZone()
@@ -96,21 +103,175 @@ namespace szwlFormsApplication
 			int worknum = worker.SelectedIndex;
 			worknum = list_employee[worknum].num;
 			int type = typeBox.SelectedIndex;
+			Models.Type tp = Models.Type.CANCEL; ;
+			switch(type){
+				case 0:
+					tp = Models.Type.CANCEL;
+					break;
+
+				case 1:
+					tp = Models.Type.ORDER;
+					break;
+
+				case 2:
+					tp = Models.Type.CALL;
+					break;
+
+				case 3:
+					tp = Models.Type.CHECK_OUT;
+					break;
+
+				case 4:
+					tp = Models.Type.CHANGE_MEDICATION;
+					break;
+
+				case 5:
+					tp = Models.Type.EMERGENCY_CALL;
+					break;
+
+				case 6:
+					tp = Models.Type.PULING_NEEDLE;
+					break;
+
+				case 7:
+					tp = Models.Type.NEED_SERVICE;
+					break;
+
+				case 8:
+					tp = Models.Type.NEED_WATER;
+					break;
+
+				case 9:
+					tp = Models.Type.WANT_TO_PAY;
+					break;
+
+				case 10:
+					tp = Models.Type.NEED_NURSES;
+					break;
+
+				case 11:
+					tp = Models.Type.SATISFIED;
+					break;
+
+				case 12:
+					tp = Models.Type.DISSATISFIED;
+					break;
+
+				case 13:
+					tp = Models.Type.LOW_POWER;
+					break;
+
+				case 14:
+					tp = Models.Type.TAMPER;
+					break;
+			}
 
 			int status = statusBox.SelectedIndex;
+			STATUS st = STATUS.FINISH;
+			switch (status)
+			{
+				case 0:
+					st = STATUS.WAITING;
+					break;
+
+				case 1:
+					st = STATUS.FINISH;
+					break;
+
+				case 2:
+					st = STATUS.OVERTIME;
+					break;
+			}
 
 			List<DataMessage> list = dm.selectMess();
 			List<DataMessage> tem_list = new List<DataMessage>();
 			foreach(DataMessage mess in list)
 			{
-				if(mess.time<end && mess.time>start && mess.callerNum==callerNum && mess.workerNum==worknum && mess.type==Models.Type.CALL && mess.status == STATUS.FINISH)
+				if (!Common.isRFID)
 				{
-					tem_list.Add(mess);
+					if (mess.time < end && mess.time > start && mess.callerNum == callerNum && mess.workerNum == worknum && mess.type == tp && mess.status == st)
+					{
+						tem_list.Add(mess);
+					}
 				}
+				else
+				{
+
+				}	
 			}
 			this.historyRecordsdataGridView.AutoGenerateColumns = false;
 			this.historyRecordsdataGridView.DataSource = tem_list;
 			this.historyRecordsdataGridView.Refresh();
+		}
+
+		private void callArea_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			int index = callArea.SelectedIndex;
+			Callzone zone = list_zone[index];
+			label13.Text = "无";
+			foreach (Caller caller in list_caller)
+			{
+				if (caller.callZone == zone.Id)
+				{
+					if(caller.waiterNum == -1)
+					{
+						label13.Text = "无";
+						break;
+					}
+					Employee tem_emp = null;
+					if (list_employee != null)
+					{
+						foreach (Employee emp in list_employee)
+						{
+							if (emp.num == caller.waiterNum)
+							{
+								tem_emp = emp;
+								break;
+							}
+						}
+					}
+					if (tem_emp == null)
+					{
+						label13.Text = caller.waiterNum + "号";
+					}
+					else
+					{
+						label13.Text = caller.waiterNum + "号  姓名：" + tem_emp.name;
+					}
+					break;
+				}
+			}
+		}
+
+		private void worker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			int index = worker.SelectedIndex;
+			Employee emp = list_employee[index];
+
+			foreach(Caller caller in list_caller)
+			{
+				if(caller.waiterNum == emp.num)
+				{
+					Callzone tem_zone = null;
+					foreach(Callzone zone in list_zone)
+					{
+						if(zone.Id == caller.callZone)
+						{
+							tem_zone = zone;
+							break;
+						}
+					}
+					if (tem_zone == null)
+					{
+						label9.Text = "无";
+					}
+					else
+					{
+						label9.Text = tem_zone.name;
+					}
+					break;
+				}
+			}
 		}
 	}
 }

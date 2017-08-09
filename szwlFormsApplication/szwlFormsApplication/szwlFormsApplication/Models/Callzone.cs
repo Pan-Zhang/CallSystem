@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace szwlFormsApplication.Models
 {
-	class Callzone
+	public class Callzone
 	{
 		public int Id { get; set; }
 		public string name { get; set; }

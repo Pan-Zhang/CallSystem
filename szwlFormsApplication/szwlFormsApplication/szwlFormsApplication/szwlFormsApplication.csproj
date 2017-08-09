@@ -61,6 +61,7 @@
     <Compile Include="callHistoriesSummaryForm.Designer.cs">
       <DependentUpon>callHistoriesSummaryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonFunc\AppConfig.cs" />
     <Compile Include="CommonFunc\Common.cs" />
     <Compile Include="CommonFunc\DBManager.cs" />
     <Compile Include="CommonFunc\RefreshInterface.cs" />
@@ -83,6 +84,12 @@
     <Compile Include="dialog\AddCallerForm.Designer.cs">
       <DependentUpon>AddCallerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\AddEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\AddEmployeeForm.Designer.cs">
+      <DependentUpon>AddEmployeeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialog\AddUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,11 +102,35 @@
     <Compile Include="dialog\ChangeUser.Designer.cs">
       <DependentUpon>ChangeUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\EditAreaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\EditAreaForm.Designer.cs">
+      <DependentUpon>EditAreaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialog\EditCallerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\EditCallerForm.Designer.cs">
+      <DependentUpon>EditCallerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialog\EditEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\EditEmployeeForm.Designer.cs">
+      <DependentUpon>EditEmployeeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialog\UpdatePassForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dialog\UpdatePassForm.Designer.cs">
       <DependentUpon>UpdatePassForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Caller.cs" />
@@ -159,14 +190,29 @@
     <EmbeddedResource Include="dialog\AddCallerForm.resx">
       <DependentUpon>AddCallerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dialog\AddEmployeeForm.resx">
+      <DependentUpon>AddEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialog\AddUserForm.resx">
       <DependentUpon>AddUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dialog\ChangeUser.resx">
       <DependentUpon>ChangeUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dialog\EditAreaForm.resx">
+      <DependentUpon>EditAreaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\EditCallerForm.resx">
+      <DependentUpon>EditCallerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\EditEmployeeForm.resx">
+      <DependentUpon>EditEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialog\UpdatePassForm.resx">
       <DependentUpon>UpdatePassForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsForm.resx">
       <DependentUpon>settingsForm.cs</DependentUpon>

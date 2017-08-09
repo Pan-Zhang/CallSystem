@@ -58,7 +58,7 @@
 			this.datamaintainbtn = new System.Windows.Forms.ToolBarButton();
 			this.searchbtn = new System.Windows.Forms.ToolBarButton();
 			this.aboutbtn = new System.Windows.Forms.ToolBarButton();
-			this.allDataGridView = new System.Windows.Forms.DataGridView();
+			this.MessDataGridView = new System.Windows.Forms.DataGridView();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +72,7 @@
 			this.waiting3.SuspendLayout();
 			this.waiting4.SuspendLayout();
 			this.waiting5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.allDataGridView)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.MessDataGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// waitingDataGridView
@@ -335,10 +335,10 @@
 			this.aboutbtn.Text = "关于";
 			this.aboutbtn.ToolTipText = "关于";
 			// 
-			// allDataGridView
+			// MessDataGridView
 			// 
-			this.allDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.allDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.MessDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.MessDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
@@ -346,11 +346,11 @@
             this.Column5,
             this.Column6,
             this.Column7});
-			this.allDataGridView.Location = new System.Drawing.Point(531, 317);
-			this.allDataGridView.Name = "allDataGridView";
-			this.allDataGridView.RowTemplate.Height = 23;
-			this.allDataGridView.Size = new System.Drawing.Size(659, 394);
-			this.allDataGridView.TabIndex = 12;
+			this.MessDataGridView.Location = new System.Drawing.Point(531, 317);
+			this.MessDataGridView.Name = "MessDataGridView";
+			this.MessDataGridView.RowTemplate.Height = 23;
+			this.MessDataGridView.Size = new System.Drawing.Size(648, 333);
+			this.MessDataGridView.TabIndex = 12;
 			// 
 			// Column1
 			// 
@@ -399,7 +399,7 @@
 			// szwlForm
 			// 
 			this.ClientSize = new System.Drawing.Size(1191, 715);
-			this.Controls.Add(this.allDataGridView);
+			this.Controls.Add(this.MessDataGridView);
 			this.Controls.Add(this.waiting4);
 			this.Controls.Add(this.waiting5);
 			this.Controls.Add(this.waitingDataGridView);
@@ -422,7 +422,7 @@
 			this.waiting4.PerformLayout();
 			this.waiting5.ResumeLayout(false);
 			this.waiting5.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.allDataGridView)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.MessDataGridView)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -469,7 +469,7 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.DataGridView allDataGridView;
+		private System.Windows.Forms.DataGridView MessDataGridView;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

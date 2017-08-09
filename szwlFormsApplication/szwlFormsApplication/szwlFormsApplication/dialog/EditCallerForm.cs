@@ -12,24 +12,23 @@ using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
 {
-	public partial class AddCallerForm : Form
+	public partial class EditCallerForm : Form
 	{
-		DBManager dm;
 		List<Callzone> list_zone;
 		List<Employee> list_employee;
-		public AddCallerForm()
+		DBManager dm;
+		public Caller caller { get; set; }
+
+		public EditCallerForm()
 		{
 			InitializeComponent();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			caller.callerNum = int.Parse(textBox1.Text);
 			this.DialogResult = DialogResult.OK;
-			Caller caller = new Caller();
-			caller.callerNum = int.Parse(callerNum.Text);
-			caller.callZone = list_zone[callerArea.SelectedIndex].Id;
-			caller.waiterNum = list_employee[worker.SelectedIndex].num;
-			if (dm.insertCaller(caller))
+			if (dm.updateCaller(caller))
 			{
 				this.Hide();
 			}
@@ -37,32 +36,29 @@ namespace szwlFormsApplication.dialog
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.Cancel;
 			this.Hide();
 		}
 
-		private void AddCallerForm_Load(object sender, EventArgs e)
+		private void EditCallerForm_Load(object sender, EventArgs e)
 		{
 			dm = new DBManager();
-			list_zone = dm.selectZone();
-
+			textBox1.Text = caller.callerNum.ToString();
 			if (Common.isRFID)
 			{
-				//list_employee = dm.selectEmployeeRFID();
-				worker.Hide();
 				label3.Hide();
+				comboBox2.Hide();
 			}
-			else
+			initZone();
+			if (!Common.isRFID)
 			{
-				list_employee = dm.selectEmployee();
 				initWorker();
 			}
-			initArea();
-			
 		}
 
-		private void initArea()
+		private void initZone()
 		{
+			list_zone = dm.selectZone();
+			int index = 0;
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));
 			dt.Columns.Add("val", typeof(String));
@@ -71,16 +67,23 @@ namespace szwlFormsApplication.dialog
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
 				dr[1] = list_zone[i].name;
+				if (dr[1].Equals(caller.callerZoneName))
+				{
+					index = i;
+				}
 
 				dt.Rows.Add(dr);
 			}
-			callerArea.DataSource = dt;
-			callerArea.DisplayMember = "val";
-			callerArea.ValueMember = "id";
+			comboBox1.DataSource = dt;
+			comboBox1.DisplayMember = "val";
+			comboBox1.ValueMember = "id";
+			comboBox1.SelectedIndex = index;
 		}
 
 		private void initWorker()
 		{
+			list_employee = dm.selectEmployee();
+
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));
 			dt.Columns.Add("val", typeof(String));
@@ -92,9 +95,23 @@ namespace szwlFormsApplication.dialog
 
 				dt.Rows.Add(dr);
 			}
-			worker.DataSource = dt;
-			worker.DisplayMember = "val";
-			worker.ValueMember = "id";
+			comboBox2.DataSource = dt;
+			comboBox2.DisplayMember = "val";
+			comboBox2.ValueMember = "id";
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			int index = comboBox1.SelectedIndex;
+			Callzone zone = list_zone[index];
+			caller.callZone = zone.Id;
+		}
+
+		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			int index = comboBox2.SelectedIndex;
+			Employee emp = list_employee[index];
+			caller.waiterNum = emp.num;
 		}
 	}
 }

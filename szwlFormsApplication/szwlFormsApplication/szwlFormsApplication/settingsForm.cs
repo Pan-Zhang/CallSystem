@@ -83,11 +83,28 @@ namespace szwlFormsApplication
 		{
 			if (callAreatabControl.SelectedIndex == 0)
 			{
-
+				int index = callAreadataGridView.CurrentRow.Index;
+				Callzone zone = list_zone[index];
+				EditAreaForm form = new EditAreaForm();
+				form.zone = zone;
+				DialogResult dr = form.ShowDialog();
+				if(dr == DialogResult.OK)
+				{
+					refreshZone();
+					refreshCaller();
+				}
 			}
 			else
 			{
-
+				int index = callNumdataGridView.CurrentRow.Index;
+				Caller caller = list_caller[index];
+				EditCallerForm form = new EditCallerForm();
+				form.caller = caller;
+				DialogResult dr = form.ShowDialog();
+				if (dr == DialogResult.OK)
+				{
+					refreshCaller();
+				}
 			}
 		}
 
@@ -95,11 +112,30 @@ namespace szwlFormsApplication
 		{
 			if (callAreatabControl.SelectedIndex == 0)
 			{
-
+				int index = callAreadataGridView.CurrentRow.Index;
+				Callzone zone = list_zone[index];
+				DialogResult dr = MessageBox.Show("您确定想删除区域："+  zone.name + "吗？",
+								 " 提示",
+								MessageBoxButtons.YesNo);
+				if (dr == DialogResult.Yes)
+				{
+					dm.deleteZone(zone);
+					refreshZone();
+					refreshCaller();
+				}
 			}
 			else
 			{
-
+				int index = callNumdataGridView.CurrentRow.Index;
+				Caller caller = list_caller[index];
+				DialogResult dr = MessageBox.Show("您确定想删除呼叫器：" + caller.callerNum + "吗？",
+								 " 提示",
+								MessageBoxButtons.YesNo);
+				if (dr == DialogResult.Yes)
+				{
+					dm.deleteCaller(caller);
+					refreshCaller();
+				}
 			}
 		}
 
@@ -107,11 +143,11 @@ namespace szwlFormsApplication
 		{
 			if (callAreatabControl.SelectedIndex == 0)
 			{
-
+				this.Hide();
 			}
 			else
 			{
-
+				this.Hide();
 			}
 		}
 
