@@ -91,7 +91,7 @@ namespace szwlFormsApplication.dialog
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
-				dr[1] = list_employee[i].num + "号 " + list_employee[i].name;
+				dr[1] = list_employee[i].employeeNum + "号 " + list_employee[i].name;
 
 				dt.Rows.Add(dr);
 			}
@@ -111,7 +111,7 @@ namespace szwlFormsApplication.dialog
 		{
 			int index = comboBox2.SelectedIndex;
 			Employee emp = list_employee[index];
-			caller.waiterNum = emp.num;
+			caller.employeeNum = emp.employeeNum;
 		}
 	}
 }

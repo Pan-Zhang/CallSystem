@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LogHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\LogHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -61,9 +69,10 @@
     <Compile Include="callHistoriesSummaryForm.Designer.cs">
       <DependentUpon>callHistoriesSummaryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommonFunc\AppConfig.cs" />
+    <Compile Include="CommonFunc\ChangeAppConfig.cs" />
     <Compile Include="CommonFunc\Common.cs" />
     <Compile Include="CommonFunc\DBManager.cs" />
+    <Compile Include="CommonFunc\InitData.cs" />
     <Compile Include="CommonFunc\RefreshInterface.cs" />
     <Compile Include="CommonFunc\Server.cs" />
     <Compile Include="dataMaintainSettingForm.cs">
@@ -126,17 +135,21 @@
     <Compile Include="dialog\UpdatePassForm.Designer.cs">
       <DependentUpon>UpdatePassForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="LogOnForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <Compile Include="LogOnForm.Designer.cs">
+      <DependentUpon>LogOnForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Caller.cs" />
     <Compile Include="Models\Callzone.cs" />
+    <Compile Include="Models\COM.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="settingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,11 +162,11 @@
     <Compile Include="systemSettingForm.Designer.cs">
       <DependentUpon>systemSettingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="szwl呼叫系统.cs">
+    <Compile Include="szwlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="szwl呼叫系统.Designer.cs">
-      <DependentUpon>szwl呼叫系统.cs</DependentUpon>
+    <Compile Include="szwlForm.Designer.cs">
+      <DependentUpon>szwlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -162,6 +175,12 @@
     </Compile>
     <Compile Include="tableSettingsForm.Designer.cs">
       <DependentUpon>tableSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tempForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tempForm.Designer.cs">
+      <DependentUpon>tempForm.cs</DependentUpon>
     </Compile>
     <Compile Include="userForm.cs">
       <SubType>Form</SubType>
@@ -211,8 +230,8 @@
     <EmbeddedResource Include="dialog\UpdatePassForm.resx">
       <DependentUpon>UpdatePassForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="LogOnForm.resx">
+      <DependentUpon>LogOnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="settingsForm.resx">
       <DependentUpon>settingsForm.cs</DependentUpon>
@@ -220,8 +239,8 @@
     <EmbeddedResource Include="systemSettingForm.resx">
       <DependentUpon>systemSettingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="szwl呼叫系统.resx">
-      <DependentUpon>szwl呼叫系统.cs</DependentUpon>
+    <EmbeddedResource Include="szwlForm.resx">
+      <DependentUpon>szwlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -235,12 +254,18 @@
     <EmbeddedResource Include="tableSettingsForm.resx">
       <DependentUpon>tableSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="tempForm.resx">
+      <DependentUpon>tempForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="userForm.resx">
       <DependentUpon>userForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="employeeSettingsForm.resx">
       <DependentUpon>employeeSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\szwlFormsApplication.exe.Config" />
+    <None Include="bin\Debug\szwlFormsApplication.vshost.exe.config" />
+    <None Include="bin\Debug\szwlFormsApplication.vshost.exe.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -273,6 +298,14 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\szwlFormsApplication.exe" />
+    <Content Include="bin\Debug\szwlFormsApplication.pdb" />
+    <Content Include="bin\Debug\szwlFormsApplication.vshost.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

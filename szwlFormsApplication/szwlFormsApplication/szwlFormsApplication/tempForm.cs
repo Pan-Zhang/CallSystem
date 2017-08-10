@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace szwlFormsApplication
 {
-	public partial class LoginForm : Form
+	public partial class tempForm : Form
 	{
-		public LoginForm()
+		public tempForm()
 		{
 			InitializeComponent();
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			szwlForm form = new szwlForm();
-			form.Show();
-			this.Hide();
 		}
 	}
 }

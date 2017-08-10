@@ -58,12 +58,12 @@ namespace szwlFormsApplication.CommonFunc
 
 				connection.Close();
 
-				Admin admin = new Admin();
+				Models.User admin = new Models.User();
 				admin.name = "admin";
 				admin.pass = "123456";
 				insertUser(admin);
 
-				for(int i=1; i<101; i++)
+				for (int i = 1; i < 101; i++)
 				{
 					Callzone zone = new Callzone();
 					zone.name = "桌位" + i;
@@ -72,7 +72,7 @@ namespace szwlFormsApplication.CommonFunc
 					Caller caller = new Caller();
 					caller.callerNum = i;
 					caller.callZone = i;
-					caller.waiterNum = -1;
+					caller.employeeNum = -1;
 					insertCaller(caller);
 				}
 			}
@@ -93,6 +93,7 @@ namespace szwlFormsApplication.CommonFunc
 
 			table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
 			table.Columns.Append("pass", DataTypeEnum.adVarWChar, 50);
+			table.Columns.Append("userClass", DataTypeEnum.adVarWChar,10);
 			catalog.Tables.Append(table);
 		}
 
@@ -204,7 +205,7 @@ namespace szwlFormsApplication.CommonFunc
 
 		public DataTable select(string sql)
 		{
-			DataTable dataTable = null;;
+			DataTable dataTable = null;
 			lock (obj)
 			{
 				connection.Open();
@@ -219,11 +220,12 @@ namespace szwlFormsApplication.CommonFunc
 					DataSet dataSetSelect = new DataSet();
 					da.Fill(dataSetSelect, "sel");
 					dataTable = dataSetSelect.Tables["sel"];
-				}catch(Exception e)
-				{
-					
 				}
-				
+				catch (Exception e)
+				{
+
+				}
+
 				connection.Close();
 			}
 			return dataTable;
@@ -273,32 +275,36 @@ namespace szwlFormsApplication.CommonFunc
 		 * */
 
 		//查找所有管理员
-		public List<Admin> seletUser()
+		public List<Models.User> selectUser()
 		{
 			DataTable dataTable = select("select * from " + TABLE_ADMIN);
-			List<Admin> list = new List<Admin>();
+			List<Models.User> list = new List<Models.User>();
+			if (dataTable == null)
+				return list;
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
-				Admin admin = new Admin();
+				Models.User admin = new Models.User();
 				int id = (int)dataTable.Rows[i][0];
 				string name = dataTable.Rows[i][1].ToString();
 				string pass = dataTable.Rows[i][2].ToString();
+				Models.User.UserClass userclass = (Models.User.UserClass)dataTable.Rows[i][3];
 				admin.id = id;
 				admin.name = name;
 				admin.pass = pass;
+				admin.userClass = userclass;
 				list.Add(admin);
 			}
 			return list;
 		}
 
 		//添加新的管理员
-		public bool insertUser(Admin admin)
+		public bool insertUser(Models.User admin)
 		{
-			return operateData("insert into " + TABLE_ADMIN + "(name, pass) values('" + admin.name + "', '" + admin.pass + "')");
+			return operateData("insert into " + TABLE_ADMIN + "(name, pass, userClass) values('" + admin.name + "', '" + admin.pass + "', '" + admin.userClass.ToString() + "')");
 		}
 
 		//查找特定管理员（用于登录验证）
-		public bool selectUser(Admin admin)
+		public bool ValidUser(Models.User admin)
 		{
 			DataTable dataTable = select("select * from " + TABLE_ADMIN + " where name='" + admin.name + "' and pass='" + admin.pass + "'");
 			if (dataTable.Rows.Count > 0)
@@ -309,14 +315,14 @@ namespace szwlFormsApplication.CommonFunc
 		}
 
 		//删除某个管理员
-		public bool deleteUser(Admin admin)
+		public bool deleteUser(Models.User admin)
 		{
 			return operateData("delete from " + TABLE_ADMIN + " where name='" + admin.name + "' and pass='" + admin.pass + "'");
 		}
 
-		public bool updateUser(Admin admin)
+		public bool updateUser(Models.User admin)
 		{
-			return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "' where Id=" + admin.id);
+			return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "', userClass='" + admin.userClass + "' where Id=" + admin.id);
 		}
 
 		/**
@@ -329,6 +335,8 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			DataTable dataTable = select("select * from " + TABLE_EMPLOYEE);
 			List<Employee> list = new List<Employee>();
+			if (dataTable == null)
+				return list;
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
 				Employee employee = new Employee();
@@ -342,7 +350,7 @@ namespace szwlFormsApplication.CommonFunc
 				employee.name = name;
 				employee.phonenum = phoneNum;
 				employee.remarks = remarks;
-				employee.num = num;
+				employee.employeeNum = num;
 				if (sex == 0)
 				{
 					employee.sex = Sex.MALE;
@@ -363,11 +371,11 @@ namespace szwlFormsApplication.CommonFunc
 			switch (employee.sex)
 			{
 				case Sex.MALE:
-					sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.num.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
+					sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
 					break;
 
 				case Sex.FEMALE:
-					sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.num.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
+					sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
 					break;
 			}
 			return operateData(sql);
@@ -387,7 +395,7 @@ namespace szwlFormsApplication.CommonFunc
 					sex = 1;
 					break;
 			}
-			return operateData("update " + TABLE_EMPLOYEE + " set num=" + employee.num + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
+			return operateData("update " + TABLE_EMPLOYEE + " set num=" + employee.employeeNum + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
 		}
 
 		//删除某个员工
@@ -422,7 +430,7 @@ namespace szwlFormsApplication.CommonFunc
 				employee.name = name;
 				employee.phonenum = phoneNum;
 				employee.remarks = remarks;
-				employee.num = num;
+				employee.employeeNum = num;
 				if (sex == 0)
 				{
 					employee.sex = Sex.MALE;
@@ -443,11 +451,11 @@ namespace szwlFormsApplication.CommonFunc
 			switch (employee.sex)
 			{
 				case Sex.MALE:
-					sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.num.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
+					sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
 					break;
 
 				case Sex.FEMALE:
-					sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.num.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
+					sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
 					break;
 			}
 			return operateData(sql);
@@ -472,7 +480,7 @@ namespace szwlFormsApplication.CommonFunc
 					sex = 1;
 					break;
 			}
-			return operateData("update " + TABLE_EMPLOYEE_RFID + " set num=" + employee.num + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
+			return operateData("update " + TABLE_EMPLOYEE_RFID + " set num=" + employee.employeeNum + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
 		}
 
 		//删除某个员工
@@ -496,6 +504,8 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			DataTable dataTable = select("select * from " + TABLE_ZONE);
 			List<Callzone> list = new List<Callzone>();
+			if (dataTable == null)
+				return list;
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
 				Callzone zone = new Callzone();
@@ -536,6 +546,8 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			DataTable dataTable = select("select * from " + TABLE_CALLER);
 			List<Caller> list = new List<Caller>();
+			if (dataTable == null)
+				return list;
 			for (int i = 0; i < dataTable.Rows.Count; i++)
 			{
 				Caller caller = new Caller();
@@ -546,7 +558,7 @@ namespace szwlFormsApplication.CommonFunc
 				caller.ID = id;
 				caller.callerNum = callerNum;
 				caller.callZone = callerZone;
-				caller.waiterNum = waiternum;
+				caller.employeeNum = waiternum;
 				list.Add(caller);
 			}
 			return list;
@@ -556,13 +568,13 @@ namespace szwlFormsApplication.CommonFunc
 		//插入呼叫器
 		public bool insertCaller(Caller caller)
 		{
-			return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values(" + caller.callerNum + ", " + caller.callZone + ", " + caller.waiterNum + ")");
+			return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values(" + caller.callerNum + ", " + caller.callZone + ", " + caller.employeeNum + ")");
 		}
 
 		//修改呼叫器信息
 		public bool updateCaller(Caller caller)
 		{
-			return operateData("update " + TABLE_CALLER + " set callerNum=" + caller.callerNum + ", callZone=" + caller.callZone + ", waiterNum=" + caller.waiterNum + " where Id=" + caller.ID);
+			return operateData("update " + TABLE_CALLER + " set callerNum=" + caller.callerNum + ", callZone=" + caller.callZone + ", waiterNum=" + caller.employeeNum + " where Id=" + caller.ID);
 		}
 
 		//删除呼叫器
@@ -595,7 +607,7 @@ namespace szwlFormsApplication.CommonFunc
 				message.Id = id;
 				message.time = time;
 				message.callerNum = callerNum;
-				message.workerNum = waiterNum;
+				message.employeeNum = waiterNum;
 				switch (type)
 				{
 					case 0:
@@ -771,7 +783,7 @@ namespace szwlFormsApplication.CommonFunc
 			{
 				isRFID = 1;
 			}
-			return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID]) values (#" + message.time + "#, '" + message.callerNum.ToString() + "', '" + message.workerNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "')");
+			return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID]) values (#" + message.time + "#, '" + message.callerNum.ToString() + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "')");
 		}
 
 		//删除呼叫信息
@@ -804,7 +816,7 @@ namespace szwlFormsApplication.CommonFunc
 				isRFID = 1;
 			}
 
-			return operateData("update " + TABLE_MESS + " set [time]=#" + message.time + "#, [waiterNum]=" + message.workerNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]=" + message.callerNum + " and [status]=0");
+			return operateData("update " + TABLE_MESS + " set [time]=#" + message.time + "#, [waiterNum]=" + message.employeeNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]=" + message.callerNum + " and [status]=0");
 		}
 
 		//更改呼叫信息，主要用于服务超时的修改

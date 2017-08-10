@@ -19,6 +19,8 @@ namespace szwlFormsApplication.dialog
 		public AddUserForm()
 		{
 			InitializeComponent();
+			this.userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
+			this.userClassComboBox.Items.Add(User.UserClass.normal.ToString());
 		}
 
 		private void AddUserForm_Load(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace szwlFormsApplication.dialog
 
 		private void ensure_Click(object sender, EventArgs e)
 		{
-			Admin admin = new Admin();
+			User admin = new User();
 			admin.name = username.Text;
 			admin.pass = password.Text;
 			if (username.Text.Equals("admin"))

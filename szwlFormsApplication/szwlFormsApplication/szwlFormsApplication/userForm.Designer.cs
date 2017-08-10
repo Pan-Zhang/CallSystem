@@ -54,13 +54,11 @@
 			// 
 			// UserName
 			// 
-			this.UserName.DataPropertyName = "name";
 			this.UserName.HeaderText = "用户名";
 			this.UserName.Name = "UserName";
 			// 
 			// password
 			// 
-			this.password.DataPropertyName = "pass";
 			this.password.HeaderText = "密码";
 			this.password.Name = "password";
 			// 
@@ -76,7 +74,7 @@
 			// 
 			// userUpdatebtn
 			// 
-			this.userUpdatebtn.Location = new System.Drawing.Point(325, 117);
+			this.userUpdatebtn.Location = new System.Drawing.Point(325, 120);
 			this.userUpdatebtn.Name = "userUpdatebtn";
 			this.userUpdatebtn.Size = new System.Drawing.Size(75, 23);
 			this.userUpdatebtn.TabIndex = 2;
@@ -86,7 +84,7 @@
 			// 
 			// userDeletebtn
 			// 
-			this.userDeletebtn.Location = new System.Drawing.Point(325, 174);
+			this.userDeletebtn.Location = new System.Drawing.Point(325, 181);
 			this.userDeletebtn.Name = "userDeletebtn";
 			this.userDeletebtn.Size = new System.Drawing.Size(75, 23);
 			this.userDeletebtn.TabIndex = 3;
@@ -96,7 +94,7 @@
 			// 
 			// userAuhtoritybtn
 			// 
-			this.userAuhtoritybtn.Location = new System.Drawing.Point(325, 234);
+			this.userAuhtoritybtn.Location = new System.Drawing.Point(325, 248);
 			this.userAuhtoritybtn.Name = "userAuhtoritybtn";
 			this.userAuhtoritybtn.Size = new System.Drawing.Size(75, 23);
 			this.userAuhtoritybtn.TabIndex = 4;
@@ -106,7 +104,7 @@
 			// 
 			// userUpdatePwbtn
 			// 
-			this.userUpdatePwbtn.Location = new System.Drawing.Point(325, 293);
+			this.userUpdatePwbtn.Location = new System.Drawing.Point(325, 322);
 			this.userUpdatePwbtn.Name = "userUpdatePwbtn";
 			this.userUpdatePwbtn.Size = new System.Drawing.Size(75, 23);
 			this.userUpdatePwbtn.TabIndex = 5;
@@ -116,7 +114,7 @@
 			// 
 			// userclearDatabtn
 			// 
-			this.userclearDatabtn.Location = new System.Drawing.Point(325, 354);
+			this.userclearDatabtn.Location = new System.Drawing.Point(325, 399);
 			this.userclearDatabtn.Name = "userclearDatabtn";
 			this.userclearDatabtn.Size = new System.Drawing.Size(75, 23);
 			this.userclearDatabtn.TabIndex = 6;
@@ -136,10 +134,10 @@
 			this.Controls.Add(this.userUpdatebtn);
 			this.Controls.Add(this.userAddbtn);
 			this.Controls.Add(this.dataGridView1);
+			this.MaximizeBox = false;
 			this.Name = "userForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "用户管理";
-			this.Load += new System.EventHandler(this.userForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 
@@ -148,13 +146,13 @@
 		#endregion
 
 		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn password;
 		private System.Windows.Forms.Button userAddbtn;
 		private System.Windows.Forms.Button userUpdatebtn;
 		private System.Windows.Forms.Button userDeletebtn;
 		private System.Windows.Forms.Button userAuhtoritybtn;
 		private System.Windows.Forms.Button userUpdatePwbtn;
 		private System.Windows.Forms.Button userclearDatabtn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn password;
 	}
 }

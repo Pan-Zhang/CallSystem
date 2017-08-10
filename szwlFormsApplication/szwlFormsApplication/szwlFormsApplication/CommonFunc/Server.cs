@@ -63,8 +63,8 @@ namespace szwlFormsApplication.CommonFunc
 				int n = com.BytesToRead;//先记录下来，避免某种原因，人为的原因，操作几次之间时间长，缓存不一致  
 				byte[] buf = new byte[n];//声明一个临时数组存储当前来的串口数据    
 				com.Read(buf, 0, n);//读取缓冲数据  
-									  /////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-									  //<协议解析>  
+									/////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+									//<协议解析>  
 				bool data_1_catched = false;//缓存记录数据是否捕获到  
 											//1.缓存数据  
 				buffer.AddRange(buf);
@@ -151,7 +151,7 @@ namespace szwlFormsApplication.CommonFunc
 				message.time = DateTime.Now;
 				message.isRFID = false;
 				message.status = STATUS.WAITING;
-				message.workerNum = -1;
+				message.employeeNum = -1;
 				switch (type)
 				{
 					case 0:
@@ -243,7 +243,7 @@ namespace szwlFormsApplication.CommonFunc
 				int number = binary_data_1[5 + len];//对应服务员编号
 				DataMessage message = new DataMessage();
 				message.callerNum = table;
-				message.workerNum = number;
+				message.employeeNum = number;
 				message.isRFID = true;
 				message.time = DateTime.Now;
 				message.status = STATUS.FINISH;
@@ -252,7 +252,7 @@ namespace szwlFormsApplication.CommonFunc
 				employee_list = dm.selectEmployeeRFID();
 				foreach (Employee employee in employee_list)
 				{
-					if (employee.num == message.workerNum)
+					if (employee.employeeNum == message.employeeNum)
 					{
 						exist = true;
 						break;
@@ -261,7 +261,7 @@ namespace szwlFormsApplication.CommonFunc
 				if (!exist)
 				{
 					Employee employ = new Employee();
-					employ.num = message.workerNum;
+					employ.employeeNum = message.employeeNum;
 					dm.insertEmployeeRFID(employ);
 					employee_list = dm.selectEmployeeRFID();
 				}
@@ -270,7 +270,7 @@ namespace szwlFormsApplication.CommonFunc
 				{
 					refreshInterface.refresh(message, false);
 				}
-				
+
 			}
 		}
 

@@ -37,6 +37,20 @@ namespace szwlFormsApplication
 			this.callAreadataGridView.AutoGenerateColumns = false;
 			this.callAreadataGridView.DataSource = list_zone;
 			this.callAreadataGridView.Refresh();
+			//if (this.callAreadataGridView.SelectedRows != null && this.callAreadataGridView.SelectedRows.Count > 0)
+			//{
+			//	callAreaUpdatebtn.Enabled = true;
+			//	callAreaDeletebtn.Enabled = true;
+			//	callAreaBatchUpdatebtn.Enabled = true;
+			//	callAreaBatchDelbtn.Enabled = true;
+			//}
+			//else
+			//{
+			//	callAreaUpdatebtn.Enabled = false;
+			//	callAreaDeletebtn.Enabled = false;
+			//	callAreaBatchUpdatebtn.Enabled = false;
+			//	callAreaBatchDelbtn.Enabled = false;
+			//}
 		}
 
 		private void refreshCaller()
@@ -56,11 +70,26 @@ namespace szwlFormsApplication
 			this.callNumdataGridView.AutoGenerateColumns = false;
 			this.callNumdataGridView.DataSource = list_caller;
 			this.callNumdataGridView.Refresh();
+			//if (this.callNumdataGridView.SelectedRows != null && this.callNumdataGridView.SelectedRows.Count > 0)
+			//{
+			//	callAreaUpdatebtn.Enabled = true;
+			//	callAreaDeletebtn.Enabled = true;
+			//	callAreaBatchUpdatebtn.Enabled = true;
+			//	callAreaBatchDelbtn.Enabled = true;
+			//}
+			//else
+			//{
+			//	callAreaUpdatebtn.Enabled = false;
+			//	callAreaDeletebtn.Enabled = false;
+			//	callAreaBatchUpdatebtn.Enabled = false;
+			//	callAreaBatchDelbtn.Enabled = false;
+			//}
 		}
 
 		private void callAreaAddbtn_Click(object sender, EventArgs e)
 		{
-			if(callAreatabControl.SelectedIndex == 0){
+			if (callAreatabControl.SelectedIndex == 0)
+			{
 				AddAreaForm form = new AddAreaForm();
 				DialogResult dr = form.ShowDialog();
 				if (dr == DialogResult.OK)
@@ -88,7 +117,7 @@ namespace szwlFormsApplication
 				EditAreaForm form = new EditAreaForm();
 				form.zone = zone;
 				DialogResult dr = form.ShowDialog();
-				if(dr == DialogResult.OK)
+				if (dr == DialogResult.OK)
 				{
 					refreshZone();
 					refreshCaller();
@@ -103,6 +132,7 @@ namespace szwlFormsApplication
 				DialogResult dr = form.ShowDialog();
 				if (dr == DialogResult.OK)
 				{
+					refreshZone();
 					refreshCaller();
 				}
 			}
@@ -114,7 +144,7 @@ namespace szwlFormsApplication
 			{
 				int index = callAreadataGridView.CurrentRow.Index;
 				Callzone zone = list_zone[index];
-				DialogResult dr = MessageBox.Show("您确定想删除区域："+  zone.name + "吗？",
+				DialogResult dr = MessageBox.Show("您确定想删除区域：" + zone.name + "吗？",
 								 " 提示",
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)

@@ -27,8 +27,22 @@ namespace szwlFormsApplication.dialog
 			this.DialogResult = DialogResult.OK;
 			Caller caller = new Caller();
 			caller.callerNum = int.Parse(callerNum.Text);
-			caller.callZone = list_zone[callerArea.SelectedIndex].Id;
-			caller.waiterNum = list_employee[worker.SelectedIndex].num;
+			if(list_zone==null || list_zone.Count == 0)
+			{
+				caller.callZone = -1;
+			}
+			else
+			{
+				caller.callZone = list_zone[callerArea.SelectedIndex].Id;
+			}
+			if(list_employee==null || list_employee.Count == 0)
+			{
+				caller.employeeNum = -1;
+			}
+			else
+			{
+				caller.employeeNum = list_employee[worker.SelectedIndex].employeeNum;
+			}
 			if (dm.insertCaller(caller))
 			{
 				this.Hide();
@@ -88,7 +102,7 @@ namespace szwlFormsApplication.dialog
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
-				dr[1] = list_employee[i].num + "号 " + list_employee[i].name;
+				dr[1] = list_employee[i].employeeNum + "号 " + list_employee[i].name;
 
 				dt.Rows.Add(dr);
 			}

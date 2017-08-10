@@ -25,7 +25,7 @@ namespace szwlFormsApplication.dialog
 		{
 			dm = new DBManager();
 			employee.name = textBox5.Text;
-			employee.num = int.Parse(textBox1.Text);
+			employee.employeeNum = int.Parse(textBox1.Text);
 			employee.phonenum = textBox4.Text;
 			employee.remarks = textBox3.Text;
 			employee.sex = radioButton1.Checked ? Sex.MALE : Sex.FEMALE;
@@ -53,7 +53,7 @@ namespace szwlFormsApplication.dialog
 
 		private void EditEmployeeForm_Load(object sender, EventArgs e)
 		{
-			textBox1.Text = employee.num.ToString();
+			textBox1.Text = employee.employeeNum.ToString();
 			textBox5.Text = employee.name;
 			textBox4.Text = employee.phonenum;
 			switch (employee.sex)

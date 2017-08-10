@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.dataInitLabel = new System.Windows.Forms.Label();
-			this.chooseBox = new System.Windows.Forms.ComboBox();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.dataInitOK = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
@@ -37,31 +37,23 @@
 			// dataInitLabel
 			// 
 			this.dataInitLabel.AutoSize = true;
-			this.dataInitLabel.Location = new System.Drawing.Point(70, 60);
+			this.dataInitLabel.Location = new System.Drawing.Point(70, 34);
 			this.dataInitLabel.Name = "dataInitLabel";
 			this.dataInitLabel.Size = new System.Drawing.Size(65, 12);
 			this.dataInitLabel.TabIndex = 0;
 			this.dataInitLabel.Text = "数据初始化";
 			// 
-			// chooseBox
+			// comboBox1
 			// 
-			this.chooseBox.FormattingEnabled = true;
-			this.chooseBox.Items.AddRange(new object[] {
-            "所有信息",
-            "呼叫器信息",
-            "区域信息",
-            "员工信息",
-            "用户信息",
-            "呼叫记录信息",
-            "表头信息"});
-			this.chooseBox.Location = new System.Drawing.Point(172, 57);
-			this.chooseBox.Name = "chooseBox";
-			this.chooseBox.Size = new System.Drawing.Size(208, 20);
-			this.chooseBox.TabIndex = 1;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(179, 31);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(208, 20);
+			this.comboBox1.TabIndex = 1;
 			// 
 			// dataInitOK
 			// 
-			this.dataInitOK.Location = new System.Drawing.Point(427, 55);
+			this.dataInitOK.Location = new System.Drawing.Point(428, 28);
 			this.dataInitOK.Name = "dataInitOK";
 			this.dataInitOK.Size = new System.Drawing.Size(75, 23);
 			this.dataInitOK.TabIndex = 2;
@@ -72,21 +64,22 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.ForeColor = System.Drawing.Color.Red;
-			this.label1.Location = new System.Drawing.Point(170, 96);
+			this.label1.Location = new System.Drawing.Point(207, 73);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(137, 12);
-			this.label1.TabIndex = 3;
+			this.label1.TabIndex = 4;
 			this.label1.Text = "请谨慎使用该功能！！！";
 			// 
 			// dataMaintainSettingForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(632, 187);
+			this.ClientSize = new System.Drawing.Size(631, 120);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.dataInitOK);
-			this.Controls.Add(this.chooseBox);
+			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.dataInitLabel);
+			this.MaximizeBox = false;
 			this.Name = "dataMaintainSettingForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "数据维护";
@@ -98,7 +91,7 @@
 		#endregion
 
 		private System.Windows.Forms.Label dataInitLabel;
-		private System.Windows.Forms.ComboBox chooseBox;
+		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.Button dataInitOK;
 		private System.Windows.Forms.Label label1;
 	}

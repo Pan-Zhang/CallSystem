@@ -47,11 +47,11 @@
 			// 
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.UserName,
-            this.name,
-            this.mobile,
-            this.remark,
-            this.sex});
+			this.UserName,
+			this.name,
+			this.mobile,
+			this.remark,
+			this.sex});
 			this.dataGridView1.Location = new System.Drawing.Point(0, 1);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.RowTemplate.Height = 23;
@@ -142,8 +142,8 @@
 			// 
 			this.isRFIDBox.FormattingEnabled = true;
 			this.isRFIDBox.Items.AddRange(new object[] {
-            "按钮模式",
-            "RFID模式"});
+			"按钮模式",
+			"RFID模式"});
 			this.isRFIDBox.Location = new System.Drawing.Point(612, 59);
 			this.isRFIDBox.Name = "isRFIDBox";
 			this.isRFIDBox.Size = new System.Drawing.Size(121, 20);

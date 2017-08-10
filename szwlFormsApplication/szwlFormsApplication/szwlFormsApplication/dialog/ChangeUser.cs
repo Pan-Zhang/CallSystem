@@ -14,7 +14,7 @@ namespace szwlFormsApplication.dialog
 {
 	public partial class ChangeUser : Form
 	{
-		public Admin admin { get; set; }
+		public User admin { get; set; }
 		DBManager dm;
 
 		public ChangeUser()

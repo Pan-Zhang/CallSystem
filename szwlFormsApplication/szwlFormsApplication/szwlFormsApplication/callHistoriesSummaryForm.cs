@@ -18,6 +18,9 @@ namespace szwlFormsApplication
 		List<Callzone> list_zone;
 		List<Employee> list_employee;
 		List<Caller> list_caller;
+		List<DataMessage> list_allmess;
+		List<DataMessage> tem_list;
+		List<DataMessage> chart_list;
 		public callHistoriesSummaryForm()
 		{
 			InitializeComponent();
@@ -35,7 +38,13 @@ namespace szwlFormsApplication
 				label9.Hide();
 				label14.Hide();
 				label13.Hide();
+				label7.Hide();
+				comboBox1.Hide();
 			}
+			list_allmess = dm.selectMess();
+			typeBox.SelectedIndex = 0;
+			statusBox.SelectedIndex = 0;
+			comboBox1.SelectedIndex = 0;
 		}
 
 		private void initZone()
@@ -76,132 +85,13 @@ namespace szwlFormsApplication
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
-				dr[1] = list_employee[i].num;
+				dr[1] = list_employee[i].employeeNum + "号 " + list_employee[i].name;
 
 				dt.Rows.Add(dr);
 			}
 			worker.DataSource = dt;
 			worker.DisplayMember = "val";
 			worker.ValueMember = "id";
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			DateTime start = date_start.Value.Date;
-			DateTime end = date_end.Value.Date;
-			int area = callArea.SelectedIndex;
-			Callzone zone = list_zone[area];
-
-			int callerNum = 0;
-			foreach(Caller call in list_caller)
-			{
-				if(call.callZone == zone.Id)
-				{
-					callerNum = call.callerNum;
-				}
-			}
-			int worknum = worker.SelectedIndex;
-			worknum = list_employee[worknum].num;
-			int type = typeBox.SelectedIndex;
-			Models.Type tp = Models.Type.CANCEL; ;
-			switch(type){
-				case 0:
-					tp = Models.Type.CANCEL;
-					break;
-
-				case 1:
-					tp = Models.Type.ORDER;
-					break;
-
-				case 2:
-					tp = Models.Type.CALL;
-					break;
-
-				case 3:
-					tp = Models.Type.CHECK_OUT;
-					break;
-
-				case 4:
-					tp = Models.Type.CHANGE_MEDICATION;
-					break;
-
-				case 5:
-					tp = Models.Type.EMERGENCY_CALL;
-					break;
-
-				case 6:
-					tp = Models.Type.PULING_NEEDLE;
-					break;
-
-				case 7:
-					tp = Models.Type.NEED_SERVICE;
-					break;
-
-				case 8:
-					tp = Models.Type.NEED_WATER;
-					break;
-
-				case 9:
-					tp = Models.Type.WANT_TO_PAY;
-					break;
-
-				case 10:
-					tp = Models.Type.NEED_NURSES;
-					break;
-
-				case 11:
-					tp = Models.Type.SATISFIED;
-					break;
-
-				case 12:
-					tp = Models.Type.DISSATISFIED;
-					break;
-
-				case 13:
-					tp = Models.Type.LOW_POWER;
-					break;
-
-				case 14:
-					tp = Models.Type.TAMPER;
-					break;
-			}
-
-			int status = statusBox.SelectedIndex;
-			STATUS st = STATUS.FINISH;
-			switch (status)
-			{
-				case 0:
-					st = STATUS.WAITING;
-					break;
-
-				case 1:
-					st = STATUS.FINISH;
-					break;
-
-				case 2:
-					st = STATUS.OVERTIME;
-					break;
-			}
-
-			List<DataMessage> list = dm.selectMess();
-			List<DataMessage> tem_list = new List<DataMessage>();
-			foreach(DataMessage mess in list)
-			{
-				if (!Common.isRFID)
-				{
-					if (mess.time < end && mess.time > start && mess.callerNum == callerNum && mess.workerNum == worknum && mess.type == tp && mess.status == st)
-					{
-						tem_list.Add(mess);
-					}
-				}
-				else
-				{
-
-				}	
-			}
-			this.historyRecordsdataGridView.AutoGenerateColumns = false;
-			this.historyRecordsdataGridView.DataSource = tem_list;
-			this.historyRecordsdataGridView.Refresh();
 		}
 
 		private void callArea_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,7 +103,7 @@ namespace szwlFormsApplication
 			{
 				if (caller.callZone == zone.Id)
 				{
-					if(caller.waiterNum == -1)
+					if (caller.employeeNum == -1)
 					{
 						label13.Text = "无";
 						break;
@@ -223,7 +113,7 @@ namespace szwlFormsApplication
 					{
 						foreach (Employee emp in list_employee)
 						{
-							if (emp.num == caller.waiterNum)
+							if (emp.employeeNum == caller.employeeNum)
 							{
 								tem_emp = emp;
 								break;
@@ -232,11 +122,11 @@ namespace szwlFormsApplication
 					}
 					if (tem_emp == null)
 					{
-						label13.Text = caller.waiterNum + "号";
+						label13.Text = caller.employeeNum + "号";
 					}
 					else
 					{
-						label13.Text = caller.waiterNum + "号  姓名：" + tem_emp.name;
+						label13.Text = caller.employeeNum + "号  姓名：" + tem_emp.name;
 					}
 					break;
 				}
@@ -248,14 +138,14 @@ namespace szwlFormsApplication
 			int index = worker.SelectedIndex;
 			Employee emp = list_employee[index];
 
-			foreach(Caller caller in list_caller)
+			foreach (Caller caller in list_caller)
 			{
-				if(caller.waiterNum == emp.num)
+				if (caller.employeeNum == emp.employeeNum)
 				{
 					Callzone tem_zone = null;
-					foreach(Callzone zone in list_zone)
+					foreach (Callzone zone in list_zone)
 					{
-						if(zone.Id == caller.callZone)
+						if (zone.Id == caller.callZone)
 						{
 							tem_zone = zone;
 							break;
@@ -272,6 +162,341 @@ namespace szwlFormsApplication
 					break;
 				}
 			}
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			tem_list = new List<DataMessage>();
+			DateTime start = date_start.Value.Date;//开始时间
+			DateTime end = date_end.Value.Date;//结束时间
+
+			Callzone zone = list_zone[callArea.SelectedIndex];//区域
+															  //查找对应呼叫器编号
+			int callerNum = 0;
+			foreach (Caller caller in list_caller)
+			{
+				if (caller.callZone == zone.Id)
+				{
+					callerNum = caller.callerNum;
+					break;
+				}
+			}
+
+			int _type = typeBox.SelectedIndex;//服务类型
+
+			int _status = statusBox.SelectedIndex; //服务状态
+
+			if (_type == 0 && _status == 0)//某区域所有呼叫记录
+			{
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (mess.time>start && mess.time<end && mess.callerNum == callerNum)
+					{
+						tem_list.Add(mess);
+					}
+				}
+			}
+			else if (_type == 0 && _status != 0)//某区域特定状态的所有记录
+			{
+				foreach (DataMessage mess in list_allmess)
+				{
+					int status = 0;
+					switch (mess.status)
+					{
+						case STATUS.WAITING:
+							status = 1;
+							break;
+
+						case STATUS.FINISH:
+							status = 2;
+							break;
+
+						case STATUS.OVERTIME:
+							status = 3;
+							break;
+					}
+
+					if (mess.time > start && mess.time < end && mess.callerNum == callerNum && _status == status)
+					{
+						tem_list.Add(mess);
+					}
+				}
+			}
+			else if (_type != 0 && _status == 0)//某区域特定类型的所有记录
+			{
+				foreach (DataMessage message in list_allmess)
+				{
+					int type = 0;
+					switch (message.type)
+					{
+						case Models.Type.CANCEL:
+							type = 0;
+							break;
+
+						case Models.Type.ORDER:
+							type = 1;
+							break;
+
+						case Models.Type.CALL:
+							type = 2;
+							break;
+
+						case Models.Type.CHECK_OUT:
+							type = 3;
+							break;
+
+						case Models.Type.CHANGE_MEDICATION:
+							type = 4;
+							break;
+
+						case Models.Type.EMERGENCY_CALL:
+							type = 5;
+							break;
+
+						case Models.Type.PULING_NEEDLE:
+							type = 6;
+							break;
+
+						case Models.Type.NEED_SERVICE:
+							type = 7;
+							break;
+
+						case Models.Type.NEED_WATER:
+							type = 8;
+							break;
+
+						case Models.Type.WANT_TO_PAY:
+							type = 9;
+							break;
+
+						case Models.Type.NEED_NURSES:
+							type = 10;
+							break;
+
+						case Models.Type.SATISFIED:
+							type = 11;
+							break;
+
+						case Models.Type.DISSATISFIED:
+							type = 12;
+							break;
+
+						case Models.Type.LOW_POWER:
+							type = 13;
+							break;
+
+						case Models.Type.TAMPER:
+							type = 14;
+							break;
+					}
+					if (message.time > start && message.time < end && message.callerNum == callerNum && type == (_type - 1))
+					{
+						tem_list.Add(message);
+					}
+				}
+			}
+			else//某区域特定类型及特定状态的所有记录
+			{
+				foreach (DataMessage message in list_allmess)
+				{
+					int status = 0;
+					switch (message.status)
+					{
+						case STATUS.WAITING:
+							status = 1;
+							break;
+
+						case STATUS.FINISH:
+							status = 2;
+							break;
+
+						case STATUS.OVERTIME:
+							status = 3;
+							break;
+					}
+
+					int type = 0;
+					switch (message.type)
+					{
+						case Models.Type.CANCEL:
+							type = 0;
+							break;
+
+						case Models.Type.ORDER:
+							type = 1;
+							break;
+
+						case Models.Type.CALL:
+							type = 2;
+							break;
+
+						case Models.Type.CHECK_OUT:
+							type = 3;
+							break;
+
+						case Models.Type.CHANGE_MEDICATION:
+							type = 4;
+							break;
+
+						case Models.Type.EMERGENCY_CALL:
+							type = 5;
+							break;
+
+						case Models.Type.PULING_NEEDLE:
+							type = 6;
+							break;
+
+						case Models.Type.NEED_SERVICE:
+							type = 7;
+							break;
+
+						case Models.Type.NEED_WATER:
+							type = 8;
+							break;
+
+						case Models.Type.WANT_TO_PAY:
+							type = 9;
+							break;
+
+						case Models.Type.NEED_NURSES:
+							type = 10;
+							break;
+
+						case Models.Type.SATISFIED:
+							type = 11;
+							break;
+
+						case Models.Type.DISSATISFIED:
+							type = 12;
+							break;
+
+						case Models.Type.LOW_POWER:
+							type = 13;
+							break;
+
+						case Models.Type.TAMPER:
+							type = 14;
+							break;
+					}
+					if (message.time > start && message.time < end && message.callerNum == callerNum && type == (_type - 1) && status == _status)
+					{
+						tem_list.Add(message);
+					}
+				}
+			}
+			makeChart();
+			this.historyRecordsdataGridView.AutoGenerateColumns = false;
+			this.historyRecordsdataGridView.DataSource = tem_list;
+			this.historyRecordsdataGridView.Refresh();
+		}
+
+		private void button8_Click(object sender, EventArgs e)
+		{
+			tem_list = new List<DataMessage>();
+			DateTime start = dateTimePicker2.Value.Date;//开始时间
+			DateTime end = dateTimePicker1.Value.Date;//结束时间
+
+			Employee employ = list_employee[worker.SelectedIndex];
+
+			if (Common.isRFID)
+			{
+				foreach (DataMessage message in list_allmess)
+				{
+					if (message.time > start && message.time < end && message.employeeNum == employ.employeeNum)
+					{
+						tem_list.Add(message);
+					}
+				}
+			}
+			else
+			{
+				int callerNum = -2;
+				foreach (Caller caller in list_caller)
+				{
+					if (caller.employeeNum == employ.employeeNum)
+					{
+						callerNum = caller.callerNum;
+						break;
+					}
+				}
+
+				int _status = comboBox1.SelectedIndex;
+
+				if (_status == 0)
+				{
+					foreach (DataMessage message in list_allmess)
+					{
+						if (message.time > start && message.time < end && message.callerNum == callerNum)
+						{
+							tem_list.Add(message);
+						}
+					}
+				}
+				else
+				{
+					foreach (DataMessage message in list_allmess)
+					{
+						int status = 0;
+						switch (message.status)
+						{
+							case STATUS.WAITING:
+								status = 1;
+								break;
+
+							case STATUS.FINISH:
+								status = 2;
+								break;
+
+							case STATUS.OVERTIME:
+								status = 3;
+								break;
+						}
+						if (message.time > start && message.time < end && message.callerNum == callerNum && status == _status)
+						{
+							tem_list.Add(message);
+						}
+					}
+				}
+
+			}
+
+			makeChart();
+			this.historyRecordsdataGridView.AutoGenerateColumns = false;
+			this.historyRecordsdataGridView.DataSource = tem_list;
+			this.historyRecordsdataGridView.Refresh();
+		}
+
+		private void makeChart()
+		{
+			chart_list = new List<DataMessage>();
+			int finish = 0;
+			int timeover = 0;
+			int unsatisfy = 0;
+			int satisfy = 0;
+			foreach (DataMessage mess in tem_list)//生成图表
+			{
+				if (mess.status == STATUS.FINISH)
+				{
+					finish++;
+				}
+				if (mess.status == STATUS.OVERTIME)
+				{
+					timeover++;
+				}
+				if (mess.type == Models.Type.DISSATISFIED)
+				{
+					unsatisfy++;
+				}
+				if (mess.type == Models.Type.SATISFIED)
+				{
+					satisfy++;
+				}
+			}
+			List<int> yData = new List<int>() { finish, timeover, unsatisfy, satisfy };
+			List<string> xData = new List<string>() { "完成(" + finish + ")", "超时(" + timeover + ")", "不满意(" + unsatisfy + ")", "满意(" + satisfy + ")" };
+			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
+			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
+			chart2.Series[0].Points.DataBindXY(xData, yData);
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace szwlFormsApplication.dialog
 		{
 			DBManager dm = new DBManager();
 			Employee employee = new Employee();
-			employee.num = int.Parse(textBox1.Text.Trim());
+			employee.employeeNum = int.Parse(textBox1.Text.Trim());
 			employee.name = textBox4.Text;
 			employee.phonenum = textBox2.Text;
 			employee.remarks = textBox3.Text;

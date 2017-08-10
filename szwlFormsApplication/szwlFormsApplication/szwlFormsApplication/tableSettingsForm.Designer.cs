@@ -29,8 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.choosegroupBox = new System.Windows.Forms.GroupBox();
-			this.callInfotable = new System.Windows.Forms.Label();
 			this.employeeInfotable = new System.Windows.Forms.Label();
+			this.callInfotable = new System.Windows.Forms.Label();
 			this.columnSetgroupBox = new System.Windows.Forms.GroupBox();
 			this.choosegroupBox.SuspendLayout();
 			this.SuspendLayout();
@@ -46,15 +46,6 @@
 			this.choosegroupBox.TabStop = false;
 			this.choosegroupBox.Text = "选择表";
 			// 
-			// callInfotable
-			// 
-			this.callInfotable.AutoSize = true;
-			this.callInfotable.Location = new System.Drawing.Point(11, 28);
-			this.callInfotable.Name = "callInfotable";
-			this.callInfotable.Size = new System.Drawing.Size(65, 12);
-			this.callInfotable.TabIndex = 0;
-			this.callInfotable.Text = "呼叫信息表";
-			// 
 			// employeeInfotable
 			// 
 			this.employeeInfotable.AutoSize = true;
@@ -63,6 +54,15 @@
 			this.employeeInfotable.Size = new System.Drawing.Size(65, 12);
 			this.employeeInfotable.TabIndex = 1;
 			this.employeeInfotable.Text = "员工信息表";
+			// 
+			// callInfotable
+			// 
+			this.callInfotable.AutoSize = true;
+			this.callInfotable.Location = new System.Drawing.Point(11, 28);
+			this.callInfotable.Name = "callInfotable";
+			this.callInfotable.Size = new System.Drawing.Size(65, 12);
+			this.callInfotable.TabIndex = 0;
+			this.callInfotable.Text = "呼叫信息表";
 			// 
 			// columnSetgroupBox
 			// 
@@ -80,6 +80,7 @@
 			this.ClientSize = new System.Drawing.Size(767, 693);
 			this.Controls.Add(this.columnSetgroupBox);
 			this.Controls.Add(this.choosegroupBox);
+			this.MaximizeBox = false;
 			this.Name = "tableSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "表头设置";

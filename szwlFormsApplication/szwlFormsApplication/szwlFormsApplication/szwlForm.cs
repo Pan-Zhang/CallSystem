@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LogHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -17,22 +19,50 @@ namespace szwlFormsApplication
 {
 	public partial class szwlForm : Form, RefreshInterface
 	{
+		private string logDirectory = string.Empty;
+		private string LogDirectory
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(logDirectory))
+				{
+					string loglocation = ConfigurationManager.AppSettings["LogDirectory"];
+					StringBuilder fullpath = new StringBuilder();
+
+					if (string.IsNullOrEmpty(loglocation))
+					{
+						fullpath.Append(".");
+					}
+					else
+					{
+						loglocation.Replace("\\", "/");
+						fullpath.Append(loglocation);
+						if (string.Compare(loglocation.Substring(loglocation.Length - 1, 1), "/") == 0)
+						{
+							fullpath.Remove(loglocation.Length - 1, 1);
+						}
+					}
+					logDirectory = fullpath.ToString();
+				}
+
+				return logDirectory;
+			}
+		}
 		public static szwlForm mainForm = null;//创建一个自身的静态对象
 		Server _server;
 		List<DataMessage> messages, newmsg;
 		public bool isStop;
 		private static object obj = new object();//锁
-
 		public szwlForm()
 		{
+			LibraryLogger.Instance.Init(LogDirectory, "szwlFormsApplication", Encoding.Default, LibraryLogger.libLogLevel.Debug);
 			InitializeComponent();
 			mainForm = this;
 			_server = new Server();
 			_server.refreshInterface = this;
-			Common.isRFID = int.Parse(AppConfig.GetValue("isRFID"))==1?true:false;
 		}
 
-		private void szwl呼叫系统_Load(object sender, EventArgs e)
+		private void szwlForm_Load(object sender, EventArgs e)
 		{
 			openCom();
 
@@ -45,35 +75,13 @@ namespace szwlFormsApplication
 			new Thread(CheckTimeOut).Start();
 
 			refresh();
-			//if (messages == null)
-			//	messages = new List<DataMessage>();
-			//var newmsg = messages.Where(m => m.status == STATUS.WAITING);
-			//if (newmsg.Count() > 5)
-			//{
-			//	this.waitingDataGridView.AutoGenerateColumns = false;
-			//	this.waitingDataGridView.DataSource = newmsg.Skip(5).ToList();
-			//	this.waitingDataGridView.Refresh();
-			//}
-			//this.label1.Text = "无请求";
-			//this.label2.Text = "无请求";
-			//this.label3.Text = "无请求";
-			//this.label4.Text = "无请求";
-			//this.label5.Text = "无请求";
-
-			//if (newmsg.Count() >= 1)
-			//	this.label1.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(0).callerNum, messages[0].type);
-			//if (newmsg.Count() >= 2)
-			//	this.label2.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(1).callerNum, messages[1].type);
-			//if (newmsg.Count() >= 3)
-			//	this.label3.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(2).callerNum, messages[2].type);
-			//if (newmsg.Count() >= 4)
-			//	this.label4.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(3).callerNum, messages[3].type);
-			//if (newmsg.Count() >= 5)
-			//	this.label5.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(4).callerNum, messages[4].type);
-
-			//this.allDataGridView.AutoGenerateColumns = false;
-			//this.allDataGridView.DataSource = messages;
-			//this.allDataGridView.Refresh();
+			if (LogOnForm.currentUser == null)
+			{
+				mainForm.Hide();
+				mainForm.ShowInTaskbar = false;
+				LogOnForm.loginform.Show();
+				return;
+			}
 		}
 
 		private void CheckTimeOut()
@@ -85,7 +93,7 @@ namespace szwlFormsApplication
 					bool needRefresh = false;
 					foreach (DataMessage message in newmsg)
 					{
-						if (DateTime.Compare(message.time.AddMinutes(5), DateTime.Now)<0)
+						if (DateTime.Compare(message.time.AddMinutes(5), DateTime.Now) < 0)
 						{
 							message.status = STATUS.OVERTIME;
 							_server.updateMessTimeOut(message);
@@ -151,7 +159,6 @@ namespace szwlFormsApplication
 			}
 			base.WndProc(ref m);
 		}
-
 		private void settings_Click(object sender, EventArgs e)
 		{
 		}
@@ -163,19 +170,32 @@ namespace szwlFormsApplication
 		{
 
 		}
-
-		private void menutoolBar_ButtonClick_1(object sender, ToolBarButtonClickEventArgs e)
+		private void waitingDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
+
+		}
+
+		//潇潇同学，如果要退出应用（最小化不需要哈），请调用此处关闭方法，不然可能产生死锁的问题
+		private void buttonOpenClose_Click(object sender, EventArgs e)
+		{
+			//根据当前串口对象，来判断操作  
+			if (_server.com.IsOpen)
+			{
+				_server.Closing = true;
+				while (_server.Listening) Application.DoEvents();
+				//打开时点击，则关闭串口  
+				_server.com.Close();
+				_server.Closing = false;
+			}
+			Application.Exit();
+		}
+		private void menutoolBar_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
+		{
+
 			if (e.Button.Name == "logonbtn")
 			{
-				DialogResult dr = MessageBox.Show("您确定要重新登陆吗？", "提示", MessageBoxButtons.OKCancel);
-				if (dr == DialogResult.OK)
-				{
-					closeCom();
-					LoginForm form = new LoginForm();
-					form.Show();
-					this.Hide();
-				}
+				mainForm.Hide();
+				LogOnForm.loginform.Show();
 			}
 			else if (e.Button.Name == "systemsettingsbtn")
 			{
@@ -218,12 +238,6 @@ namespace szwlFormsApplication
 				aboutform.ShowDialog();
 			}
 		}
-
-		private void waitingDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
-		}
-
 		private void openCom()
 		{
 			int ComNum = Common.GetComNum();
@@ -292,7 +306,7 @@ namespace szwlFormsApplication
 						{
 							if (message.callerNum == mess.callerNum && message.status == STATUS.WAITING)
 							{
-								message.workerNum = mess.workerNum;
+								message.employeeNum = mess.employeeNum;
 								message.status = STATUS.FINISH;
 								message.time = mess.time;
 								message.isRFID = mess.isRFID;
@@ -307,7 +321,7 @@ namespace szwlFormsApplication
 			}
 		}
 
-		private void refresh()
+		public void refresh()
 		{
 			if (messages == null)
 				messages = new List<DataMessage>();
@@ -342,9 +356,10 @@ namespace szwlFormsApplication
 			if (newmsg.Count() >= 5)
 				this.label5.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(4).callerNum, messages[4].type);
 
-			this.MessDataGridView.AutoGenerateColumns = false;
-			this.MessDataGridView.DataSource = messages;
-			this.MessDataGridView.Refresh();
+			this.allDataGridView.AutoGenerateColumns = false;
+			this.allDataGridView.DataSource = messages;
+			this.allDataGridView.Refresh();
 		}
+
 	}
 }

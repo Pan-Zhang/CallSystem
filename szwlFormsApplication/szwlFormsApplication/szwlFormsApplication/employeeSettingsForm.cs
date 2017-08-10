@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -20,16 +21,19 @@ namespace szwlFormsApplication
 
 		public employeeSettingsForm()
 		{
+			dm = new DBManager();
 			InitializeComponent();
+			if (ConfigurationManager.AppSettings["isRFID"] == null)
+			{
+				ChangeAppConfig.ChangeConfig("isRFID", "0");
+			}
+			int index = int.Parse(ConfigurationManager.AppSettings["isRFID"]);
+			isRFIDBox.SelectedIndex = index;
+			refresh();
 		}
 
 		private void employeeSettingsForm_Load(object sender, EventArgs e)
 		{
-			dm = new DBManager();
-			refresh();
-
-			int index = int.Parse(AppConfig.GetValue("isRFID"));
-			isRFIDBox.SelectedIndex = index;
 		}
 
 		private void refresh()
@@ -46,6 +50,16 @@ namespace szwlFormsApplication
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.DataSource = list;
 			this.dataGridView1.Refresh();
+			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+			{
+				updateemployee.Enabled = true;
+				deleteemployee.Enabled = true;
+			}
+			else
+			{
+				updateemployee.Enabled = false;
+				deleteemployee.Enabled = false;
+			}
 		}
 
 		private void addemployee_Click(object sender, EventArgs e)
@@ -60,10 +74,12 @@ namespace szwlFormsApplication
 
 		private void updateemployee_Click(object sender, EventArgs e)
 		{
+			if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count == 0)
+				return;
 			EditEmployeeForm form = new EditEmployeeForm();
 			form.employee = list[dataGridView1.CurrentRow.Index];
 			DialogResult dr = form.ShowDialog();
-			if(dr == DialogResult.OK)
+			if (dr == DialogResult.OK)
 			{
 				refresh();
 			}
@@ -71,9 +87,11 @@ namespace szwlFormsApplication
 
 		private void deleteemployee_Click(object sender, EventArgs e)
 		{
+			if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count == 0)
+				return;
 			int index = dataGridView1.CurrentRow.Index;
 			Employee emp = list[index];
-			DialogResult dr = MessageBox.Show("您确定想删除区域：" + emp.num + "号员工吗？",
+			DialogResult dr = MessageBox.Show("您确定想删除区域：" + emp.employeeNum + "号员工吗？",
 								 " 提示",
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
@@ -88,7 +106,7 @@ namespace szwlFormsApplication
 				}
 				refresh();
 			}
-			
+
 		}
 
 		private void button3_Click(object sender, EventArgs e)
@@ -122,13 +140,13 @@ namespace szwlFormsApplication
 			{
 				case 0:
 					Common.isRFID = false;
-					AppConfig.SetValue("isRFID", "0");
+					ChangeAppConfig.ChangeConfig("isRFID", "0");
 					addemployee.Enabled = true;
 					break;
 
 				case 1:
 					Common.isRFID = true;
-					AppConfig.SetValue("isRFID", "1");
+					ChangeAppConfig.ChangeConfig("isRFID", "1");
 					addemployee.Enabled = false;
 					break;
 			}

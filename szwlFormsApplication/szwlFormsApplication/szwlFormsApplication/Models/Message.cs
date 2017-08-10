@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace szwlFormsApplication.Models
 {
-	class DataMessage
+	public class DataMessage
 	{
 		public int Id { get; set; }
 		public DateTime time { get; set; }
 		public int callerNum { get; set; }
-		public int workerNum { get; set; }
+		public int employeeNum { get; set; }
 		public Type type { get; set; }
 		public STATUS status { get; set; }
 		public bool isRFID { get; set; }

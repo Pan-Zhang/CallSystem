@@ -34,10 +34,12 @@
 			this.companyNametextBox = new System.Windows.Forms.TextBox();
 			this.companyNamelabel = new System.Windows.Forms.Label();
 			this.COMSetting = new System.Windows.Forms.TabPage();
+			this.TimeSpancomboBox = new System.Windows.Forms.ComboBox();
 			this.stopComboBox = new System.Windows.Forms.ComboBox();
 			this.bundRateComboBox = new System.Windows.Forms.ComboBox();
 			this.dataComboBox = new System.Windows.Forms.ComboBox();
 			this.COMcomboBox = new System.Windows.Forms.ComboBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -70,13 +72,13 @@
 			this.DESradioButton = new System.Windows.Forms.RadioButton();
 			this.ASCradioButton = new System.Windows.Forms.RadioButton();
 			this.useableTime = new System.Windows.Forms.TabPage();
-			this.unit_box = new System.Windows.Forms.ComboBox();
-			this.number = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.trackBar3 = new System.Windows.Forms.TrackBar();
 			this.UndocolorDialog = new System.Windows.Forms.ColorDialog();
 			this.timeOutcolorDialog = new System.Windows.Forms.ColorDialog();
 			this.completeColorDialog = new System.Windows.Forms.ColorDialog();
+			this.unit_box = new System.Windows.Forms.ComboBox();
+			this.number = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.trackBar3 = new System.Windows.Forms.TrackBar();
 			this.SSControl.SuspendLayout();
 			this.companyName.SuspendLayout();
 			this.COMSetting.SuspendLayout();
@@ -142,10 +144,12 @@
 			// 
 			// COMSetting
 			// 
+			this.COMSetting.Controls.Add(this.TimeSpancomboBox);
 			this.COMSetting.Controls.Add(this.stopComboBox);
 			this.COMSetting.Controls.Add(this.bundRateComboBox);
 			this.COMSetting.Controls.Add(this.dataComboBox);
 			this.COMSetting.Controls.Add(this.COMcomboBox);
+			this.COMSetting.Controls.Add(this.label5);
 			this.COMSetting.Controls.Add(this.label4);
 			this.COMSetting.Controls.Add(this.label3);
 			this.COMSetting.Controls.Add(this.label2);
@@ -158,47 +162,37 @@
 			this.COMSetting.Text = "串口设置";
 			this.COMSetting.UseVisualStyleBackColor = true;
 			// 
+			// TimeSpancomboBox
+			// 
+			this.TimeSpancomboBox.FormattingEnabled = true;
+			this.TimeSpancomboBox.Location = new System.Drawing.Point(216, 290);
+			this.TimeSpancomboBox.Name = "TimeSpancomboBox";
+			this.TimeSpancomboBox.Size = new System.Drawing.Size(176, 20);
+			this.TimeSpancomboBox.TabIndex = 9;
+			// 
 			// stopComboBox
 			// 
 			this.stopComboBox.FormattingEnabled = true;
-			this.stopComboBox.Items.AddRange(new object[] {
-            "1",
-            "1.5",
-            "2"});
 			this.stopComboBox.Location = new System.Drawing.Point(216, 238);
 			this.stopComboBox.Name = "stopComboBox";
 			this.stopComboBox.Size = new System.Drawing.Size(176, 20);
 			this.stopComboBox.TabIndex = 8;
-			this.stopComboBox.Text = "1";
 			// 
 			// bundRateComboBox
 			// 
 			this.bundRateComboBox.FormattingEnabled = true;
-			this.bundRateComboBox.Items.AddRange(new object[] {
-            "2400",
-            "4800",
-            "9600",
-            "19200",
-            "38400"});
 			this.bundRateComboBox.Location = new System.Drawing.Point(216, 185);
 			this.bundRateComboBox.Name = "bundRateComboBox";
 			this.bundRateComboBox.Size = new System.Drawing.Size(176, 20);
 			this.bundRateComboBox.TabIndex = 7;
-			this.bundRateComboBox.Text = "19200";
 			// 
 			// dataComboBox
 			// 
 			this.dataComboBox.FormattingEnabled = true;
-			this.dataComboBox.Items.AddRange(new object[] {
-            "5",
-            "6",
-            "7",
-            "8"});
 			this.dataComboBox.Location = new System.Drawing.Point(216, 144);
 			this.dataComboBox.Name = "dataComboBox";
 			this.dataComboBox.Size = new System.Drawing.Size(176, 20);
 			this.dataComboBox.TabIndex = 6;
-			this.dataComboBox.Text = "8";
 			// 
 			// COMcomboBox
 			// 
@@ -207,7 +201,15 @@
 			this.COMcomboBox.Name = "COMcomboBox";
 			this.COMcomboBox.Size = new System.Drawing.Size(176, 20);
 			this.COMcomboBox.TabIndex = 5;
-			this.COMcomboBox.SelectedIndexChanged += new System.EventHandler(this.COMcomboBox_SelectedIndexChanged);
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(73, 298);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(101, 12);
+			this.label5.TabIndex = 4;
+			this.label5.Text = "相同的键呼叫间隔";
 			// 
 			// label4
 			// 
@@ -272,7 +274,6 @@
 			this.FtextBox.Name = "FtextBox";
 			this.FtextBox.Size = new System.Drawing.Size(236, 21);
 			this.FtextBox.TabIndex = 21;
-			this.FtextBox.Text = "不满意";
 			// 
 			// label11
 			// 
@@ -289,7 +290,6 @@
 			this.EtextBox.Name = "EtextBox";
 			this.EtextBox.Size = new System.Drawing.Size(236, 21);
 			this.EtextBox.TabIndex = 19;
-			this.EtextBox.Text = "满意";
 			// 
 			// BtextBox
 			// 
@@ -297,7 +297,6 @@
 			this.BtextBox.Name = "BtextBox";
 			this.BtextBox.Size = new System.Drawing.Size(236, 21);
 			this.BtextBox.TabIndex = 18;
-			this.BtextBox.Text = "结账";
 			// 
 			// CtextBox
 			// 
@@ -305,7 +304,6 @@
 			this.CtextBox.Name = "CtextBox";
 			this.CtextBox.Size = new System.Drawing.Size(236, 21);
 			this.CtextBox.TabIndex = 17;
-			this.CtextBox.Text = "取消";
 			// 
 			// DtextBox
 			// 
@@ -313,7 +311,6 @@
 			this.DtextBox.Name = "DtextBox";
 			this.DtextBox.Size = new System.Drawing.Size(236, 21);
 			this.DtextBox.TabIndex = 16;
-			this.DtextBox.Text = "呼叫";
 			// 
 			// AtextBox
 			// 
@@ -321,7 +318,6 @@
 			this.AtextBox.Name = "AtextBox";
 			this.AtextBox.Size = new System.Drawing.Size(236, 21);
 			this.AtextBox.TabIndex = 15;
-			this.AtextBox.Text = "下单";
 			// 
 			// label6
 			// 
@@ -390,10 +386,10 @@
 			this.callInfoColorgroupBox.Controls.Add(this.timeOutlabel);
 			this.callInfoColorgroupBox.Controls.Add(this.completelabel);
 			this.callInfoColorgroupBox.Controls.Add(this.undolabel);
-			this.callInfoColorgroupBox.Location = new System.Drawing.Point(93, 189);
+			this.callInfoColorgroupBox.Location = new System.Drawing.Point(93, 214);
 			this.callInfoColorgroupBox.Name = "callInfoColorgroupBox";
 			this.callInfoColorgroupBox.Size = new System.Drawing.Size(655, 219);
-			this.callInfoColorgroupBox.TabIndex = 1;
+			this.callInfoColorgroupBox.TabIndex = 2;
 			this.callInfoColorgroupBox.TabStop = false;
 			this.callInfoColorgroupBox.Text = "呼叫信息颜色";
 			// 
@@ -438,7 +434,6 @@
 			this.completeBtn.TabIndex = 5;
 			this.completeBtn.Text = "设置";
 			this.completeBtn.UseVisualStyleBackColor = true;
-			this.completeBtn.Click += new System.EventHandler(this.completeBtn_Click);
 			// 
 			// timeOutBtn
 			// 
@@ -448,7 +443,6 @@
 			this.timeOutBtn.TabIndex = 4;
 			this.timeOutBtn.Text = "设置";
 			this.timeOutBtn.UseVisualStyleBackColor = true;
-			this.timeOutBtn.Click += new System.EventHandler(this.timeOutBtn_Click);
 			// 
 			// undoBtn
 			// 
@@ -458,7 +452,6 @@
 			this.undoBtn.TabIndex = 3;
 			this.undoBtn.Text = "设置";
 			this.undoBtn.UseVisualStyleBackColor = true;
-			this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
 			// 
 			// timeOutlabel
 			// 
@@ -524,7 +517,7 @@
 			// 
 			this.useableTime.Controls.Add(this.unit_box);
 			this.useableTime.Controls.Add(this.number);
-			this.useableTime.Controls.Add(this.label5);
+			this.useableTime.Controls.Add(this.label12);
 			this.useableTime.Controls.Add(this.trackBar3);
 			this.useableTime.Location = new System.Drawing.Point(4, 22);
 			this.useableTime.Name = "useableTime";
@@ -540,41 +533,39 @@
             "秒",
             "分钟",
             "小时"});
-			this.unit_box.Location = new System.Drawing.Point(785, 169);
+			this.unit_box.Location = new System.Drawing.Point(778, 214);
 			this.unit_box.Name = "unit_box";
 			this.unit_box.Size = new System.Drawing.Size(72, 20);
-			this.unit_box.TabIndex = 5;
+			this.unit_box.TabIndex = 9;
 			this.unit_box.Text = "分钟";
-			this.unit_box.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			// 
 			// number
 			// 
 			this.number.AutoSize = true;
 			this.number.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.number.Location = new System.Drawing.Point(763, 168);
+			this.number.Location = new System.Drawing.Point(756, 215);
 			this.number.Name = "number";
 			this.number.Size = new System.Drawing.Size(17, 16);
-			this.number.TabIndex = 4;
+			this.number.TabIndex = 8;
 			this.number.Text = "5";
 			// 
-			// label5
+			// label12
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(41, 172);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(83, 12);
-			this.label5.TabIndex = 3;
-			this.label5.Text = "设置超时时间:";
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(51, 222);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(83, 12);
+			this.label12.TabIndex = 7;
+			this.label12.Text = "设置超时时间:";
 			// 
 			// trackBar3
 			// 
-			this.trackBar3.Location = new System.Drawing.Point(155, 157);
+			this.trackBar3.Location = new System.Drawing.Point(165, 207);
 			this.trackBar3.Maximum = 59;
 			this.trackBar3.Name = "trackBar3";
 			this.trackBar3.Size = new System.Drawing.Size(556, 45);
-			this.trackBar3.TabIndex = 2;
+			this.trackBar3.TabIndex = 6;
 			this.trackBar3.Value = 5;
-			this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
 			// 
 			// systemSettingForm
 			// 
@@ -583,6 +574,7 @@
 			this.ClientSize = new System.Drawing.Size(990, 676);
 			this.Controls.Add(this.SSControl);
 			this.Controls.Add(this.ssOkBtn);
+			this.MaximizeBox = false;
 			this.Name = "systemSettingForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "系统设置";
@@ -615,10 +607,12 @@
 		private System.Windows.Forms.TabPage useableTime;
 		private System.Windows.Forms.TextBox companyNametextBox;
 		private System.Windows.Forms.Label companyNamelabel;
+		private System.Windows.Forms.ComboBox TimeSpancomboBox;
 		private System.Windows.Forms.ComboBox stopComboBox;
 		private System.Windows.Forms.ComboBox bundRateComboBox;
 		private System.Windows.Forms.ComboBox dataComboBox;
 		private System.Windows.Forms.ComboBox COMcomboBox;
+		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
@@ -635,25 +629,25 @@
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.GroupBox callInfoColorgroupBox;
-		private System.Windows.Forms.Button completeBtn;
-		private System.Windows.Forms.Button timeOutBtn;
-		private System.Windows.Forms.Button undoBtn;
-		private System.Windows.Forms.Label timeOutlabel;
-		private System.Windows.Forms.Label completelabel;
-		private System.Windows.Forms.Label undolabel;
 		private System.Windows.Forms.GroupBox callOrderBygroupBox;
 		private System.Windows.Forms.RadioButton DESradioButton;
 		private System.Windows.Forms.RadioButton ASCradioButton;
-		private System.Windows.Forms.TrackBar trackBar3;
 		private System.Windows.Forms.ColorDialog UndocolorDialog;
 		private System.Windows.Forms.ColorDialog timeOutcolorDialog;
 		private System.Windows.Forms.ColorDialog completeColorDialog;
 		private System.Windows.Forms.Button finish_btn;
 		private System.Windows.Forms.Button timeout_btn;
 		private System.Windows.Forms.Button wait_btn;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label number;
+		private System.Windows.Forms.Label undolabel;
+		private System.Windows.Forms.Label completelabel;
+		private System.Windows.Forms.Label timeOutlabel;
+		private System.Windows.Forms.Button undoBtn;
+		private System.Windows.Forms.Button timeOutBtn;
+		private System.Windows.Forms.Button completeBtn;
+		private System.Windows.Forms.GroupBox callInfoColorgroupBox;
 		private System.Windows.Forms.ComboBox unit_box;
+		private System.Windows.Forms.Label number;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.TrackBar trackBar3;
 	}
 }

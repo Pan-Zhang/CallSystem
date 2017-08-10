@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Models;
 using static szwlFormsApplication.CommonFunc.Common;
 
 namespace szwlFormsApplication
@@ -17,41 +19,59 @@ namespace szwlFormsApplication
 		public systemSettingForm()
 		{
 			InitializeComponent();
-
+			companyNametextBox.Text = ConfigurationManager.AppSettings["CompanyName"];
 			//string[] comNums = Common.MulGetHardwareInfo(HardwareEnum.Win32_SerialPort, "Name");
+			string[] comNums = System.IO.Ports.SerialPort.GetPortNames();
+			COMcomboBox.DataSource = comNums;
 
-			initCom();
+			List<int> databytes = new List<int>();
+			for (int i = 0; i < 10; i++)
+			{
+				databytes.Add(i);
+			}
+			dataComboBox.DataSource = databytes;
+			List<int> bundRates = new List<int>();
+			for (int i = 0; i < 10; i++)
+			{
+				bundRates.Add(i);
+			}
+			bundRateComboBox.DataSource = bundRates;
+			List<int> stopbytes = new List<int>();
+			for (int i = 0; i < 10; i++)
+			{
+				stopbytes.Add(i);
+			}
+			stopComboBox.DataSource = stopbytes;
+			List<int> duration = new List<int>() { 5, 10 };
+			TimeSpancomboBox.DataSource = duration;
 		}
 
-		private void COMcomboBox_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			
-		}
 
 		private void ssOkBtn_Click(object sender, EventArgs e)
 		{
-			this.Hide();
-		}
-
-		private void initCom()
-		{
-			string[] comNums = System.IO.Ports.SerialPort.GetPortNames();
-			DataTable dt = new DataTable();//创建一个数据集
-			dt.Columns.Add("id", typeof(String));
-			dt.Columns.Add("val", typeof(String));
-			for (int i = 0; i < comNums.Length; i++)
+			if (this.SSControl.SelectedIndex == 0)//公司名称设置
 			{
-				DataRow dr = dt.NewRow();
-				dr[0] = i;
-				dr[1] = comNums[i];
-
-				dt.Rows.Add(dr);
+				if (String.IsNullOrWhiteSpace(companyNametextBox.Text))
+				{
+					companyNametextBox.Text = ConfigurationManager.AppSettings["CompanyName"];
+				}
+				else
+				{
+					ChangeAppConfig.ChangeConfig("CompanyName", companyNametextBox.Text);
+				}
+				szwlForm.mainForm.Text = string.Format("{0}无线呼叫系统", companyNametextBox.Text);
+				MessageBox.Show("设置成功！");
 			}
-			COMcomboBox.DataSource = dt;
-			COMcomboBox.DisplayMember = "val";
-			COMcomboBox.ValueMember = "id";
+			else if (this.SSControl.SelectedIndex == 1)//串口设置
+			{
+				InitData.com.COMID = COMcomboBox.SelectedValue.ToString();
+				InitData.com.DataBytes = Convert.ToInt32(dataComboBox.SelectedValue.ToString());
+				InitData.com.BaudRate = Convert.ToInt32(bundRateComboBox.SelectedValue.ToString());
+				InitData.com.StopByte = Convert.ToInt32(stopComboBox.SelectedValue.ToString());
+				InitData.com.duration = Convert.ToInt32(TimeSpancomboBox.SelectedValue.ToString());
+				MessageBox.Show("设置成功！");
+			}
 		}
-
 		private void undoBtn_Click(object sender, EventArgs e)
 		{
 			UndocolorDialog.ShowDialog();
@@ -77,11 +97,6 @@ namespace szwlFormsApplication
 		{
 			string text = trackBar3.Value.ToString();
 			number.Text = text;
-		}
-
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
 		}
 	}
 }
