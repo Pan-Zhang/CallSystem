@@ -20,7 +20,6 @@ namespace szwlFormsApplication
 		List<Caller> list_caller;
 		List<DataMessage> list_allmess;
 		List<DataMessage> tem_list;
-		List<DataMessage> chart_list;
 		public callHistoriesSummaryForm()
 		{
 			InitializeComponent();
@@ -407,6 +406,7 @@ namespace szwlFormsApplication
 						tem_list.Add(message);
 					}
 				}
+				makeChartRFID();
 			}
 			else
 			{
@@ -457,10 +457,9 @@ namespace szwlFormsApplication
 						}
 					}
 				}
-
+				makeChart();
 			}
 
-			makeChart();
 			this.historyRecordsdataGridView.AutoGenerateColumns = false;
 			this.historyRecordsdataGridView.DataSource = tem_list;
 			this.historyRecordsdataGridView.Refresh();
@@ -468,14 +467,13 @@ namespace szwlFormsApplication
 
 		private void makeChart()
 		{
-			chart_list = new List<DataMessage>();
 			int finish = 0;
 			int timeover = 0;
 			int unsatisfy = 0;
 			int satisfy = 0;
 			foreach (DataMessage mess in tem_list)//生成图表
 			{
-				if (mess.status == STATUS.FINISH)
+				if (mess.status == STATUS.FINISH && mess.type!=Models.Type.SATISFIED && mess.type!=Models.Type.DISSATISFIED)
 				{
 					finish++;
 				}
@@ -492,11 +490,80 @@ namespace szwlFormsApplication
 					satisfy++;
 				}
 			}
-			List<int> yData = new List<int>() { finish, timeover, unsatisfy, satisfy };
-			List<string> xData = new List<string>() { "完成(" + finish + ")", "超时(" + timeover + ")", "不满意(" + unsatisfy + ")", "满意(" + satisfy + ")" };
+			
+			List<int> yData = new List<int>();
+			List<string> xData = new List<string>();
+			if (finish > 0)
+			{
+				yData.Add(finish);
+				xData.Add("完成(" + finish + ")");
+			}
+			if (timeover > 0)
+			{
+				yData.Add(timeover);
+				xData.Add("超时(" + timeover + ")");
+			}
+			if (unsatisfy > 0)
+			{
+				yData.Add(unsatisfy);
+				xData.Add("不满意(" + unsatisfy + ")");
+			}
+			if (satisfy > 0)
+			{
+				yData.Add(satisfy);
+				xData.Add("满意(" + satisfy + ")");
+			}
 			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
 			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
 			chart2.Series[0].Points.DataBindXY(xData, yData);
+
+			total.Text = tem_list.Count + "条记录";
+		}
+
+		private void makeChartRFID()
+		{
+			Dictionary<int, int> dic = new Dictionary<int, int>();
+
+			foreach (DataMessage mess in tem_list)
+			{
+				if (dic.ContainsKey(mess.callerNum))
+				{
+					int value = dic[mess.callerNum] + 1;
+					dic[mess.callerNum] = value;
+				}
+				else
+				{
+					dic.Add(mess.callerNum, 1);
+				}
+			}
+			List<int> yData = new List<int>();
+			List<string> xData = new List<string>();
+			foreach (KeyValuePair<int, int> kvp in dic)
+			{
+				yData.Add(kvp.Value);
+				string name = "";
+				foreach(Caller caller in list_caller)
+				{
+					if (caller.callerNum == kvp.Key)
+					{
+						foreach(Callzone zone in list_zone)
+						{
+							if(zone.Id== caller.callZone)
+							{
+								name = zone.name;
+								break;
+							}
+						}
+						break;
+					}
+				}
+				xData.Add(name+"("+kvp.Value+"次)");
+			}
+			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
+			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
+			chart2.Series[0].Points.DataBindXY(xData, yData);
+
+			total.Text = tem_list.Count + "条记录";
 		}
 	}
 }

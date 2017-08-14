@@ -69,6 +69,8 @@ namespace szwlFormsApplication
 			//测试代码，正式环境请注释掉
 			_server.open();
 
+			Common.isRFID = int.Parse(ConfigurationManager.AppSettings["isRFID"])==1?true:false;
+
 			messages = _server.selectMess();
 			newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
 			isStop = false;
@@ -103,6 +105,11 @@ namespace szwlFormsApplication
 					if (needRefresh)
 					{
 						newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+						if (this.components == null || IsDisposed || !IsHandleCreated)
+						{
+							isStop = true;
+							return;
+						}
 						this.Invoke((EventHandler)(delegate
 						{
 							refresh();
@@ -283,6 +290,11 @@ namespace szwlFormsApplication
 				if (canRefresh)
 				{
 					newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+					if (this.components == null || IsDisposed || !IsHandleCreated)
+					{
+						isStop = true;
+						return;
+					}
 					//更新组件
 					this.Invoke((EventHandler)(delegate
 					{
