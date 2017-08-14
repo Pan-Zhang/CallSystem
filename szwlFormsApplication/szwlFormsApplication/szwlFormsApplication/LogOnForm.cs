@@ -23,9 +23,9 @@ namespace szwlFormsApplication
 			}
 			if (ValidUser(username.Text, password.Text))
 			{
-				MessageBox.Show("欢迎登录本系统！","消息提示");
+				MessageBox.Show("欢迎登录本系统！", "消息提示");
 				this.Hide();
-				szwlForm.mainForm.refresh();
+				szwlForm.mainForm.Init();
 				szwlForm.mainForm.ShowInTaskbar = true;
 				szwlForm.mainForm.Show();
 			}

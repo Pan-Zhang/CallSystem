@@ -7,7 +7,7 @@ using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.CommonFunc
 {
-	interface RefreshInterface
+	public interface RefreshInterface
 	{
 		void refresh(DataMessage mess, bool canRefresh);
 	}

@@ -26,36 +26,35 @@ namespace szwlFormsApplication
 
 		private void settingsForm_Load(object sender, EventArgs e)
 		{
-			dm = new DBManager();
 			refreshZone();
 			refreshCaller();
 		}
 
 		private void refreshZone()
 		{
-			list_zone = dm.selectZone();
+			list_zone = szwlForm.mainForm.dm.selectZone();
 			this.callAreadataGridView.AutoGenerateColumns = false;
 			this.callAreadataGridView.DataSource = list_zone;
 			this.callAreadataGridView.Refresh();
-			//if (this.callAreadataGridView.SelectedRows != null && this.callAreadataGridView.SelectedRows.Count > 0)
-			//{
-			//	callAreaUpdatebtn.Enabled = true;
-			//	callAreaDeletebtn.Enabled = true;
-			//	callAreaBatchUpdatebtn.Enabled = true;
-			//	callAreaBatchDelbtn.Enabled = true;
-			//}
-			//else
-			//{
-			//	callAreaUpdatebtn.Enabled = false;
-			//	callAreaDeletebtn.Enabled = false;
-			//	callAreaBatchUpdatebtn.Enabled = false;
-			//	callAreaBatchDelbtn.Enabled = false;
-			//}
+			if (this.callAreadataGridView.SelectedRows != null && this.callAreadataGridView.SelectedRows.Count > 0)
+			{
+				callAreaUpdatebtn.Enabled = true;
+				callAreaDeletebtn.Enabled = true;
+				callAreaBatchUpdatebtn.Enabled = true;
+				callAreaBatchDelbtn.Enabled = true;
+			}
+			else
+			{
+				callAreaUpdatebtn.Enabled = false;
+				callAreaDeletebtn.Enabled = false;
+				callAreaBatchUpdatebtn.Enabled = false;
+				callAreaBatchDelbtn.Enabled = false;
+			}
 		}
 
 		private void refreshCaller()
 		{
-			list_caller = dm.selectCaller();
+			list_caller = szwlForm.mainForm.dm.selectCaller();
 			foreach (Caller caller in list_caller)
 			{
 				foreach (Callzone zone in list_zone)
@@ -70,20 +69,20 @@ namespace szwlFormsApplication
 			this.callNumdataGridView.AutoGenerateColumns = false;
 			this.callNumdataGridView.DataSource = list_caller;
 			this.callNumdataGridView.Refresh();
-			//if (this.callNumdataGridView.SelectedRows != null && this.callNumdataGridView.SelectedRows.Count > 0)
-			//{
-			//	callAreaUpdatebtn.Enabled = true;
-			//	callAreaDeletebtn.Enabled = true;
-			//	callAreaBatchUpdatebtn.Enabled = true;
-			//	callAreaBatchDelbtn.Enabled = true;
-			//}
-			//else
-			//{
-			//	callAreaUpdatebtn.Enabled = false;
-			//	callAreaDeletebtn.Enabled = false;
-			//	callAreaBatchUpdatebtn.Enabled = false;
-			//	callAreaBatchDelbtn.Enabled = false;
-			//}
+			if (this.callNumdataGridView.SelectedRows != null && this.callNumdataGridView.SelectedRows.Count > 0)
+			{
+				callAreaUpdatebtn.Enabled = true;
+				callAreaDeletebtn.Enabled = true;
+				callAreaBatchUpdatebtn.Enabled = true;
+				callAreaBatchDelbtn.Enabled = true;
+			}
+			else
+			{
+				callAreaUpdatebtn.Enabled = false;
+				callAreaDeletebtn.Enabled = false;
+				callAreaBatchUpdatebtn.Enabled = false;
+				callAreaBatchDelbtn.Enabled = false;
+			}
 		}
 
 		private void callAreaAddbtn_Click(object sender, EventArgs e)
@@ -132,7 +131,6 @@ namespace szwlFormsApplication
 				DialogResult dr = form.ShowDialog();
 				if (dr == DialogResult.OK)
 				{
-					refreshZone();
 					refreshCaller();
 				}
 			}
@@ -149,7 +147,7 @@ namespace szwlFormsApplication
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
-					dm.deleteZone(zone);
+					szwlForm.mainForm.dm.deleteZone(zone);
 					refreshZone();
 					refreshCaller();
 				}
@@ -163,7 +161,7 @@ namespace szwlFormsApplication
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
-					dm.deleteCaller(caller);
+					szwlForm.mainForm.dm.deleteCaller(caller);
 					refreshCaller();
 				}
 			}

@@ -11,7 +11,7 @@ namespace szwlFormsApplication.Models
 		string _ID;
 		int _dataBytes=1152000;
 		int _baudRate=9600;
-		int _stopByte=1;
+		double _stopByte =1;
 		int _duration=5;
 
 		//串口号
@@ -27,7 +27,7 @@ namespace szwlFormsApplication.Models
 			}
 		}
 		//数据位
-		public int DataBytes
+		public int DataBits
 		{
 			get
 			{
@@ -51,7 +51,7 @@ namespace szwlFormsApplication.Models
 			}
 		}
 		//停止位
-		public int StopByte
+		public double StopBit
 		{
 			get
 			{

@@ -23,7 +23,6 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			dm = new DBManager();
 			employee.name = textBox5.Text;
 			employee.employeeNum = int.Parse(textBox1.Text);
 			employee.phonenum = textBox4.Text;
@@ -32,14 +31,14 @@ namespace szwlFormsApplication.dialog
 			this.DialogResult = DialogResult.OK;
 			if (Common.isRFID)
 			{
-				if (dm.updateEmployeeRFID(employee))
+				if (szwlForm.mainForm.dm.updateEmployeeRFID(employee))
 				{
 					this.Hide();
 				}
 			}
 			else
 			{
-				if (dm.updateEmployee(employee))
+				if (szwlForm.mainForm.dm.updateEmployee(employee))
 				{
 					this.Hide();
 				}

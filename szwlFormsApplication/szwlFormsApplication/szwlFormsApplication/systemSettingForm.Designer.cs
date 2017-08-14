@@ -72,13 +72,13 @@
 			this.DESradioButton = new System.Windows.Forms.RadioButton();
 			this.ASCradioButton = new System.Windows.Forms.RadioButton();
 			this.useableTime = new System.Windows.Forms.TabPage();
-			this.UndocolorDialog = new System.Windows.Forms.ColorDialog();
-			this.timeOutcolorDialog = new System.Windows.Forms.ColorDialog();
-			this.completeColorDialog = new System.Windows.Forms.ColorDialog();
 			this.unit_box = new System.Windows.Forms.ComboBox();
 			this.number = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.trackBar3 = new System.Windows.Forms.TrackBar();
+			this.UndocolorDialog = new System.Windows.Forms.ColorDialog();
+			this.timeOutcolorDialog = new System.Windows.Forms.ColorDialog();
+			this.completeColorDialog = new System.Windows.Forms.ColorDialog();
 			this.SSControl.SuspendLayout();
 			this.companyName.SuspendLayout();
 			this.COMSetting.SuspendLayout();
@@ -434,6 +434,7 @@
 			this.completeBtn.TabIndex = 5;
 			this.completeBtn.Text = "设置";
 			this.completeBtn.UseVisualStyleBackColor = true;
+			this.completeBtn.Click += new System.EventHandler(this.completeBtn_Click);
 			// 
 			// timeOutBtn
 			// 
@@ -443,6 +444,7 @@
 			this.timeOutBtn.TabIndex = 4;
 			this.timeOutBtn.Text = "设置";
 			this.timeOutBtn.UseVisualStyleBackColor = true;
+			this.timeOutBtn.Click += new System.EventHandler(this.timeOutBtn_Click);
 			// 
 			// undoBtn
 			// 
@@ -452,6 +454,7 @@
 			this.undoBtn.TabIndex = 3;
 			this.undoBtn.Text = "设置";
 			this.undoBtn.UseVisualStyleBackColor = true;
+			this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
 			// 
 			// timeOutlabel
 			// 
@@ -566,6 +569,7 @@
 			this.trackBar3.Size = new System.Drawing.Size(556, 45);
 			this.trackBar3.TabIndex = 6;
 			this.trackBar3.Value = 5;
+			this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
 			// 
 			// systemSettingForm
 			// 
@@ -574,6 +578,7 @@
 			this.ClientSize = new System.Drawing.Size(990, 676);
 			this.Controls.Add(this.SSControl);
 			this.Controls.Add(this.ssOkBtn);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
 			this.Name = "systemSettingForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

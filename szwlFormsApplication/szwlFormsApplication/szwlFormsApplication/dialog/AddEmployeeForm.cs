@@ -21,7 +21,6 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			DBManager dm = new DBManager();
 			Employee employee = new Employee();
 			employee.employeeNum = int.Parse(textBox1.Text.Trim());
 			employee.name = textBox4.Text;
@@ -36,7 +35,7 @@ namespace szwlFormsApplication.dialog
 				employee.sex = Sex.FEMALE;
 			}
 			this.DialogResult = DialogResult.OK;
-			if (dm.insertEmployee(employee))
+			if (szwlForm.mainForm.dm.insertEmployee(employee))
 			{
 				this.Hide();
 			}

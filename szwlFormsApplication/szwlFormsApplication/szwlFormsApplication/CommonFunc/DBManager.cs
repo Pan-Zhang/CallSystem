@@ -12,7 +12,7 @@ using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.CommonFunc
 {
-	class DBManager
+	public class DBManager
 	{
 		string TABLE_ADMIN = "Admin_tb";
 		string TABLE_EMPLOYEE = "Employee_tb";
@@ -93,7 +93,7 @@ namespace szwlFormsApplication.CommonFunc
 
 			table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
 			table.Columns.Append("pass", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("userClass", DataTypeEnum.adVarWChar,10);
+			table.Columns.Append("userClass", DataTypeEnum.adInteger, 2);
 			catalog.Tables.Append(table);
 		}
 
@@ -287,11 +287,19 @@ namespace szwlFormsApplication.CommonFunc
 				int id = (int)dataTable.Rows[i][0];
 				string name = dataTable.Rows[i][1].ToString();
 				string pass = dataTable.Rows[i][2].ToString();
-				Models.User.UserClass userclass = (Models.User.UserClass)dataTable.Rows[i][3];
+				int type = (int)dataTable.Rows[i][3];
+				if (type == 0)
+				{
+					admin.userClass = Models.User.UserClass.Admin;
+				}
+				else
+				{
+					admin.userClass = Models.User.UserClass.normal;
+				}
 				admin.id = id;
 				admin.name = name;
 				admin.pass = pass;
-				admin.userClass = userclass;
+				
 				list.Add(admin);
 			}
 			return list;
@@ -300,7 +308,16 @@ namespace szwlFormsApplication.CommonFunc
 		//添加新的管理员
 		public bool insertUser(Models.User admin)
 		{
-			return operateData("insert into " + TABLE_ADMIN + "(name, pass, userClass) values('" + admin.name + "', '" + admin.pass + "', '" + admin.userClass.ToString() + "')");
+			int type = 0;
+			if (admin.userClass == Models.User.UserClass.Admin)
+			{
+				type = 0;
+			}
+			else
+			{
+				type = 1;
+			}
+			return operateData("insert into " + TABLE_ADMIN + "(name, pass, userClass) values('" + admin.name + "', '" + admin.pass + "', '" + type.ToString() + "')");
 		}
 
 		//查找特定管理员（用于登录验证）
@@ -322,7 +339,16 @@ namespace szwlFormsApplication.CommonFunc
 
 		public bool updateUser(Models.User admin)
 		{
-			return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "', userClass='" + admin.userClass + "' where Id=" + admin.id);
+			int type = 0;
+			if (admin.userClass == Models.User.UserClass.Admin)
+			{
+				type = 0;
+			}
+			else
+			{
+				type = 1;
+			}
+			return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "', userClass=" + type + " where Id=" + admin.id);
 		}
 
 		/**
@@ -845,5 +871,47 @@ namespace szwlFormsApplication.CommonFunc
 
 			return operateData("update " + TABLE_MESS + " set [status]=" + status + " where [callerNum]=" + message.callerNum + " and [time] =#" + message.time + "#");
 		}
+
+		public bool clearAll()
+		{
+			operateData("delete from " + TABLE_ADMIN + " where Id>0");
+			operateData("delete from " + TABLE_CALLER);
+			operateData("delete from " + TABLE_ZONE);
+			operateData("delete from " + TABLE_EMPLOYEE);
+			operateData("delete from " + TABLE_EMPLOYEE_RFID);
+			return operateData("delete from " + TABLE_MESS);
+		}
+
+		public bool clearCaller()
+		{
+			return operateData("delete from " + TABLE_CALLER);
+		}
+
+		public bool clearZone()
+		{
+			return operateData("delete from " + TABLE_ZONE);
+		}
+
+		public bool clearEmployee()
+		{
+			operateData("delete from " + TABLE_EMPLOYEE);
+			return operateData("delete from " + TABLE_EMPLOYEE_RFID);
+		}
+
+		public bool clearUser()
+		{
+			return operateData("delete from " + TABLE_ADMIN + " where userClass>0");
+		}
+
+		public bool clearRecodrd()
+		{
+			return operateData("delete from " + TABLE_MESS);
+		}
+
+		public bool clearTableHead()
+		{
+			return true;
+		}
+
 	}
 }

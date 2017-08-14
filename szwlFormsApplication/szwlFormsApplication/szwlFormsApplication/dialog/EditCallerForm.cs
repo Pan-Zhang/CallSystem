@@ -28,7 +28,7 @@ namespace szwlFormsApplication.dialog
 		{
 			caller.callerNum = int.Parse(textBox1.Text);
 			this.DialogResult = DialogResult.OK;
-			if (dm.updateCaller(caller))
+			if (szwlForm.mainForm.dm.updateCaller(caller))
 			{
 				this.Hide();
 			}
@@ -41,7 +41,6 @@ namespace szwlFormsApplication.dialog
 
 		private void EditCallerForm_Load(object sender, EventArgs e)
 		{
-			dm = new DBManager();
 			textBox1.Text = caller.callerNum.ToString();
 			if (Common.isRFID)
 			{
@@ -57,7 +56,7 @@ namespace szwlFormsApplication.dialog
 
 		private void initZone()
 		{
-			list_zone = dm.selectZone();
+			list_zone = szwlForm.mainForm.dm.selectZone();
 			int index = 0;
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));
@@ -82,7 +81,7 @@ namespace szwlFormsApplication.dialog
 
 		private void initWorker()
 		{
-			list_employee = dm.selectEmployee();
+			list_employee = szwlForm.mainForm.dm.selectEmployee();
 
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));

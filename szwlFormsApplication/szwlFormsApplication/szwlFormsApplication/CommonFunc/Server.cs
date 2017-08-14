@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace szwlFormsApplication.CommonFunc
 {
-	class Server
+	public class Server
 	{
 		public SerialPort com;
 
@@ -24,8 +24,7 @@ namespace szwlFormsApplication.CommonFunc
 
 		public Server()
 		{
-			dm = new DBManager();
-			employee_list = dm.selectEmployeeRFID();
+			employee_list = szwlForm.mainForm.dm.selectEmployeeRFID();
 		}
 
 		public void open()
@@ -39,15 +38,24 @@ namespace szwlFormsApplication.CommonFunc
 					   //Console.ReadKey();
 		}
 
-		public void open(int ComNum)
+		public Tuple<bool,string> open(COM Com)
 		{
-			com = new SerialPort();
-			com.BaudRate = 115200;
-			com.PortName = "COM" + ComNum.ToString();
-			com.DataBits = 8;
-			com.DataReceived += new SerialDataReceivedEventHandler(OnDataReceived);
-			com.Open();//打开串口
-			//Console.ReadKey();
+			try
+			{
+				com = new SerialPort();
+				com.BaudRate = Com.BaudRate;
+				com.PortName = Com.COMID;
+				com.DataBits =Com.DataBits;
+				com.DataReceived += new SerialDataReceivedEventHandler(OnDataReceived);
+				com.Open();//打开串口
+						   //Console.ReadKey();
+				return Tuple.Create(true,default(string));
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return Tuple.Create(false,ex.Message);
+			}
 		}
 
 		private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -157,7 +165,7 @@ namespace szwlFormsApplication.CommonFunc
 					case 0:
 						message.type = Models.Type.CANCEL;
 						message.status = STATUS.FINISH;//收到cancel请求，就认为完成服务
-						dm.updateMess(message);
+						szwlForm.mainForm.dm.updateMess(message);
 						//更新通知
 						if (refreshInterface != null)
 						{
@@ -223,7 +231,7 @@ namespace szwlFormsApplication.CommonFunc
 						message.type = Models.Type.TAMPER;
 						break;
 				}
-				dm.insertMess(message);
+				szwlForm.mainForm.dm.insertMess(message);
 				//更新通知
 				if (refreshInterface != null)
 				{
@@ -247,9 +255,9 @@ namespace szwlFormsApplication.CommonFunc
 				message.isRFID = true;
 				message.time = DateTime.Now;
 				message.status = STATUS.FINISH;
-				dm.updateMess(message);
+				szwlForm.mainForm.dm.updateMess(message);
 				bool exist = false;
-				employee_list = dm.selectEmployeeRFID();
+				employee_list = szwlForm.mainForm.dm.selectEmployeeRFID();
 				foreach (Employee employee in employee_list)
 				{
 					if (employee.employeeNum == message.employeeNum)
@@ -262,8 +270,8 @@ namespace szwlFormsApplication.CommonFunc
 				{
 					Employee employ = new Employee();
 					employ.employeeNum = message.employeeNum;
-					dm.insertEmployeeRFID(employ);
-					employee_list = dm.selectEmployeeRFID();
+					szwlForm.mainForm.dm.insertEmployeeRFID(employ);
+					employee_list = szwlForm.mainForm.dm.selectEmployeeRFID();
 				}
 				//更新通知
 				if (refreshInterface != null)
@@ -281,12 +289,12 @@ namespace szwlFormsApplication.CommonFunc
 
 		public List<DataMessage> selectMess()
 		{
-			return dm.selectMess();
+			return szwlForm.mainForm.dm.selectMess();
 		}
 
 		public bool updateMessTimeOut(DataMessage mess)
 		{
-			return dm.updateMessTimeOut(mess);
+			return szwlForm.mainForm.dm.updateMessTimeOut(mess);
 		}
 	}
 }

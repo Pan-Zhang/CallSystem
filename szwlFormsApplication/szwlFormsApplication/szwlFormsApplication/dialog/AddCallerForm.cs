@@ -43,7 +43,7 @@ namespace szwlFormsApplication.dialog
 			{
 				caller.employeeNum = list_employee[worker.SelectedIndex].employeeNum;
 			}
-			if (dm.insertCaller(caller))
+			if (szwlForm.mainForm.dm.insertCaller(caller))
 			{
 				this.Hide();
 			}
@@ -57,8 +57,7 @@ namespace szwlFormsApplication.dialog
 
 		private void AddCallerForm_Load(object sender, EventArgs e)
 		{
-			dm = new DBManager();
-			list_zone = dm.selectZone();
+			list_zone = szwlForm.mainForm.dm.selectZone();
 
 			if (Common.isRFID)
 			{
@@ -68,7 +67,7 @@ namespace szwlFormsApplication.dialog
 			}
 			else
 			{
-				list_employee = dm.selectEmployee();
+				list_employee = szwlForm.mainForm.dm.selectEmployee();
 				initWorker();
 			}
 			initArea();

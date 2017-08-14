@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
+using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.CommonFunc
 {
@@ -46,7 +48,7 @@ namespace szwlFormsApplication.CommonFunc
 		}
 
 		//获取特定硬件端口号
-		public static int GetComNum()
+		public static int GetComNum1()
 		{
 			int comNum = -1;
 			string[] strArr = GetHarewareInfo(HardwareEnum.Win32_PnPEntity, "Name");
@@ -63,6 +65,75 @@ namespace szwlFormsApplication.CommonFunc
 			}
 
 			return comNum;
+
+		}
+		
+		public static List<int> GetComNum()
+		{
+			List<int> comNum = new List<int>();
+			string[] strArr = GetHarewareInfo(HardwareEnum.Win32_PnPEntity, "Name");
+			foreach (string s in strArr)
+			{
+				Debug.WriteLine(s);
+
+				if (s.Length >= 23 && s.Contains("CH340"))
+				{
+					int start = s.IndexOf("(") + 3;
+					int end = s.IndexOf(")");
+					comNum.Add(Convert.ToInt32(s.Substring(start + 1, end - start - 1)));
+				}
+			}
+			return comNum;
+
+		}
+		
+		//获取COM信息
+		public static COM GetComInfo()
+		{
+			COM com = new COM();
+			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["COMID"]))
+			{
+				if (GetComNum().Count()==0)
+					return null;
+				com.COMID = string.Format("COM{0}", GetComNum().FirstOrDefault());
+				ChangeAppConfig.ChangeConfig("COMID", com.COMID);
+			}
+			else
+				com.COMID = ConfigurationManager.AppSettings["COMID"];
+
+			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["DataBits"]))
+			{
+				com.DataBits = 8;
+				ChangeAppConfig.ChangeConfig("DataBits", com.DataBits.ToString());
+			}
+			else
+				com.DataBits = int.Parse(ConfigurationManager.AppSettings["DataBits"]);
+
+			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["StopBit"]))
+			{
+				com.StopBit = 7;
+				ChangeAppConfig.ChangeConfig("StopBit", com.StopBit.ToString());
+			}
+			else
+				com.StopBit = double.Parse(ConfigurationManager.AppSettings["StopBit"]);
+
+			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["BaudRate"]))
+			{
+				com.BaudRate = 115200;
+				ChangeAppConfig.ChangeConfig("BaudRate", com.BaudRate.ToString());
+			}
+			else
+				com.BaudRate = int.Parse(ConfigurationManager.AppSettings["BaudRate"]);
+
+
+			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["duration"]))
+			{
+				com.duration = 5;
+				ChangeAppConfig.ChangeConfig("duration", com.duration.ToString());
+			}
+			else
+				com.duration = int.Parse(ConfigurationManager.AppSettings["duration"]);
+			return com;
 
 		}
 

@@ -29,12 +29,12 @@
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.username = new System.Windows.Forms.TextBox();
-			this.password = new System.Windows.Forms.TextBox();
-			this.submit = new System.Windows.Forms.Button();
 			this.cancel = new System.Windows.Forms.Button();
+			this.submit = new System.Windows.Forms.Button();
+			this.password = new System.Windows.Forms.TextBox();
+			this.username = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -54,40 +54,15 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "用户登录";
 			// 
-			// label1
+			// cancel
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(107, 109);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(65, 12);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "用户名称：";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(107, 175);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(65, 12);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "用户密码：";
-			// 
-			// username
-			// 
-			this.username.Location = new System.Drawing.Point(178, 106);
-			this.username.Name = "username";
-			this.username.Size = new System.Drawing.Size(154, 21);
-			this.username.TabIndex = 2;
-			this.username.Text = "Admin";
-			// 
-			// password
-			// 
-			this.password.Location = new System.Drawing.Point(178, 172);
-			this.password.Name = "password";
-			this.password.Size = new System.Drawing.Size(154, 21);
-			this.password.TabIndex = 3;
-			this.password.Text = "123";
-			this.password.UseSystemPasswordChar = true;
+			this.cancel.Location = new System.Drawing.Point(257, 280);
+			this.cancel.Name = "cancel";
+			this.cancel.Size = new System.Drawing.Size(75, 23);
+			this.cancel.TabIndex = 5;
+			this.cancel.Text = "取消";
+			this.cancel.UseVisualStyleBackColor = true;
+			this.cancel.Click += new System.EventHandler(this.cancel_Click);
 			// 
 			// submit
 			// 
@@ -99,15 +74,40 @@
 			this.submit.UseVisualStyleBackColor = true;
 			this.submit.Click += new System.EventHandler(this.submit_Click);
 			// 
-			// cancel
+			// password
 			// 
-			this.cancel.Location = new System.Drawing.Point(257, 280);
-			this.cancel.Name = "cancel";
-			this.cancel.Size = new System.Drawing.Size(75, 23);
-			this.cancel.TabIndex = 5;
-			this.cancel.Text = "取消";
-			this.cancel.UseVisualStyleBackColor = true;
-			this.cancel.Click += new System.EventHandler(this.cancel_Click);
+			this.password.Location = new System.Drawing.Point(178, 172);
+			this.password.Name = "password";
+			this.password.Size = new System.Drawing.Size(154, 21);
+			this.password.TabIndex = 3;
+			this.password.Text = "123";
+			this.password.UseSystemPasswordChar = true;
+			// 
+			// username
+			// 
+			this.username.Location = new System.Drawing.Point(178, 106);
+			this.username.Name = "username";
+			this.username.Size = new System.Drawing.Size(154, 21);
+			this.username.TabIndex = 2;
+			this.username.Text = "Admin";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(107, 175);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(65, 12);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "用户密码：";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(107, 109);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(65, 12);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "用户名称：";
 			// 
 			// LogOnForm
 			// 
@@ -115,6 +115,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(454, 390);
 			this.Controls.Add(this.groupBox1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
 			this.Name = "LogOnForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

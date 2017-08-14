@@ -30,8 +30,7 @@ namespace szwlFormsApplication
 
 		private void userForm_Load(object sender, EventArgs e)
 		{
-			dm = new DBManager();
-			list = dm.selectUser();
+			list = szwlForm.mainForm.dm.selectUser();
 
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.DataSource = list;
@@ -44,7 +43,7 @@ namespace szwlFormsApplication
 			DialogResult rt = form.ShowDialog();
 			if (rt == DialogResult.OK)
 			{
-				list = dm.selectUser();
+				list = szwlForm.mainForm.dm.selectUser();
 
 				this.dataGridView1.AutoGenerateColumns = false;
 				this.dataGridView1.DataSource = list;
@@ -60,7 +59,7 @@ namespace szwlFormsApplication
 			DialogResult rt = form.ShowDialog();
 			if (rt == DialogResult.OK)
 			{
-				list = dm.selectUser();
+				list = szwlForm.mainForm.dm.selectUser();
 
 				this.dataGridView1.AutoGenerateColumns = false;
 				this.dataGridView1.DataSource = list;
@@ -91,9 +90,9 @@ namespace szwlFormsApplication
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
-					if (dm.deleteUser(admin))
+					if (szwlForm.mainForm.dm.deleteUser(admin))
 					{
-						list = dm.selectUser();
+						list = szwlForm.mainForm.dm.selectUser();
 						this.dataGridView1.AutoGenerateColumns = false;
 						this.dataGridView1.DataSource = list;
 						this.dataGridView1.Refresh();
@@ -128,6 +127,10 @@ namespace szwlFormsApplication
 
 			}
 		}
-		
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
 	}
 }

@@ -80,6 +80,7 @@
 			this.ClientSize = new System.Drawing.Size(767, 693);
 			this.Controls.Add(this.columnSetgroupBox);
 			this.Controls.Add(this.choosegroupBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
 			this.Name = "tableSettingsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

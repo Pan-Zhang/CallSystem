@@ -35,6 +35,12 @@
 			this.waiting5 = new System.Windows.Forms.Panel();
 			this.label5 = new System.Windows.Forms.Label();
 			this.waitingDataGridView = new System.Windows.Forms.DataGridView();
+			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callerNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.isRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.allDataGridView = new System.Windows.Forms.DataGridView();
 			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,12 +71,6 @@
 			this.waiting2 = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callerNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.waiting4.SuspendLayout();
 			this.waiting5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.waitingDataGridView)).BeginInit();
@@ -84,6 +84,8 @@
 			this.waiting2.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
+			this.FormClosing += SzwlForm_FormClosing;
+			this.FormClosed += SzwlForm_FormClosed;
 			// 
 			// waiting4
 			// 
@@ -146,6 +148,50 @@
 			this.waitingDataGridView.RowTemplate.Height = 23;
 			this.waitingDataGridView.Size = new System.Drawing.Size(567, 432);
 			this.waitingDataGridView.TabIndex = 4;
+			// 
+			// Id
+			// 
+			this.Id.DataPropertyName = "Id";
+			this.Id.HeaderText = "Id";
+			this.Id.Name = "Id";
+			this.Id.ReadOnly = true;
+			this.Id.Width = 30;
+			// 
+			// time
+			// 
+			this.time.DataPropertyName = "time";
+			this.time.HeaderText = "时间";
+			this.time.Name = "time";
+			this.time.ReadOnly = true;
+			// 
+			// callerNum
+			// 
+			this.callerNum.DataPropertyName = "callerNum";
+			this.callerNum.HeaderText = "呼叫器编号";
+			this.callerNum.Name = "callerNum";
+			this.callerNum.ReadOnly = true;
+			// 
+			// employeeNum
+			// 
+			this.employeeNum.DataPropertyName = "employeeNum";
+			this.employeeNum.HeaderText = "服务员编号";
+			this.employeeNum.Name = "employeeNum";
+			this.employeeNum.ReadOnly = true;
+			// 
+			// type
+			// 
+			this.type.DataPropertyName = "type";
+			this.type.HeaderText = "呼叫类型";
+			this.type.Name = "type";
+			this.type.ReadOnly = true;
+			// 
+			// isRFID
+			// 
+			this.isRFID.DataPropertyName = "isRFID";
+			this.isRFID.HeaderText = "isRFID";
+			this.isRFID.Name = "isRFID";
+			this.isRFID.ReadOnly = true;
+			this.isRFID.Width = 50;
 			// 
 			// allDataGridView
 			// 
@@ -468,50 +514,6 @@
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(1279, 442);
 			this.tableLayoutPanel3.TabIndex = 1;
 			// 
-			// Id
-			// 
-			this.Id.DataPropertyName = "Id";
-			this.Id.HeaderText = "Id";
-			this.Id.Name = "Id";
-			this.Id.ReadOnly = true;
-			this.Id.Width = 30;
-			// 
-			// time
-			// 
-			this.time.DataPropertyName = "time";
-			this.time.HeaderText = "时间";
-			this.time.Name = "time";
-			this.time.ReadOnly = true;
-			// 
-			// callerNum
-			// 
-			this.callerNum.DataPropertyName = "callerNum";
-			this.callerNum.HeaderText = "呼叫器编号";
-			this.callerNum.Name = "callerNum";
-			this.callerNum.ReadOnly = true;
-			// 
-			// employeeNum
-			// 
-			this.employeeNum.DataPropertyName = "employeeNum";
-			this.employeeNum.HeaderText = "服务员编号";
-			this.employeeNum.Name = "employeeNum";
-			this.employeeNum.ReadOnly = true;
-			// 
-			// type
-			// 
-			this.type.DataPropertyName = "type";
-			this.type.HeaderText = "呼叫类型";
-			this.type.Name = "type";
-			this.type.ReadOnly = true;
-			// 
-			// isRFID
-			// 
-			this.isRFID.DataPropertyName = "isRFID";
-			this.isRFID.HeaderText = "isRFID";
-			this.isRFID.Name = "isRFID";
-			this.isRFID.ReadOnly = true;
-			this.isRFID.Width = 50;
-			// 
 			// szwlForm
 			// 
 			this.ClientSize = new System.Drawing.Size(1279, 769);
@@ -542,6 +544,8 @@
 			this.ResumeLayout(false);
 
 		}
+
+
 
 		#endregion
 

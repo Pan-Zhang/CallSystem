@@ -471,6 +471,7 @@ namespace szwlFormsApplication
 			int timeover = 0;
 			int unsatisfy = 0;
 			int satisfy = 0;
+			int waiting = 0;
 			foreach (DataMessage mess in tem_list)//生成图表
 			{
 				if (mess.status == STATUS.FINISH && mess.type!=Models.Type.SATISFIED && mess.type!=Models.Type.DISSATISFIED)
@@ -488,6 +489,10 @@ namespace szwlFormsApplication
 				if (mess.type == Models.Type.SATISFIED)
 				{
 					satisfy++;
+				}
+				if(mess.status == STATUS.WAITING)
+				{
+					waiting++;
 				}
 			}
 			
@@ -512,6 +517,11 @@ namespace szwlFormsApplication
 			{
 				yData.Add(satisfy);
 				xData.Add("满意(" + satisfy + ")");
+			}
+			if (waiting > 0)
+			{
+				yData.Add(waiting);
+				xData.Add("等待(" + waiting + ")");
 			}
 			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
 			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。

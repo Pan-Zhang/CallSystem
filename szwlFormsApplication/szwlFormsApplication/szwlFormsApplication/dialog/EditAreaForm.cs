@@ -23,10 +23,9 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			dm = new DBManager();
 			zone.name = textBox1.Text;
 			this.DialogResult = DialogResult.OK;
-			if (dm.updateZone(zone))
+			if (szwlForm.mainForm.dm.updateZone(zone))
 			{
 				this.Hide();
 			}

@@ -24,11 +24,10 @@ namespace szwlFormsApplication.dialog
 
 		private void ensure_Click(object sender, EventArgs e)
 		{
-			dm = new DBManager();
 			admin.name = username.Text;
 			admin.pass = password.Text;
 			this.DialogResult = DialogResult.OK;
-			if(dm.updateUser(admin)){
+			if(szwlForm.mainForm.dm.updateUser(admin)){
 				this.Hide();
 			}
 		}

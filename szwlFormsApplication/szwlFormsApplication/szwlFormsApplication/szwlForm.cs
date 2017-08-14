@@ -49,34 +49,28 @@ namespace szwlFormsApplication
 			}
 		}
 		public static szwlForm mainForm = null;//创建一个自身的静态对象
-		Server _server;
+		public DBManager dm =null;
+		public Server _server;
 		List<DataMessage> messages, newmsg;
 		public bool isStop;
+		public int addCol;
 		private static object obj = new object();//锁
 		public szwlForm()
 		{
 			LibraryLogger.Instance.Init(LogDirectory, "szwlFormsApplication", Encoding.Default, LibraryLogger.libLogLevel.Debug);
 			InitializeComponent();
+			dm = new DBManager();
 			mainForm = this;
 			_server = new Server();
 			_server.refreshInterface = this;
+
+			//皮肤问题后面再处理
+			//string skinpath = ConfigurationManager.AppSettings["packagepath"] + "\\Skin\\SSK皮肤\\MSN\\MSN.ssk";
+			//skinEngine1.SkinFile = skinpath;
 		}
 
 		private void szwlForm_Load(object sender, EventArgs e)
 		{
-			openCom();
-
-			//测试代码，正式环境请注释掉
-			_server.open();
-
-			Common.isRFID = int.Parse(ConfigurationManager.AppSettings["isRFID"])==1?true:false;
-
-			messages = _server.selectMess();
-			newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
-			isStop = false;
-			new Thread(CheckTimeOut).Start();
-
-			refresh();
 			if (LogOnForm.currentUser == null)
 			{
 				mainForm.Hide();
@@ -84,8 +78,21 @@ namespace szwlFormsApplication
 				LogOnForm.loginform.Show();
 				return;
 			}
+			
 		}
+		public void Init()
+		{
+			openCom();
+			//测试代码，正式环境请注释掉
+			//_server.open();
 
+			messages = _server.selectMess();
+			newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+			isStop = false;
+			new Thread(CheckTimeOut).Start();
+			refresh(0);
+		}
+		
 		private void CheckTimeOut()
 		{
 			while (!isStop)
@@ -112,7 +119,7 @@ namespace szwlFormsApplication
 						}
 						this.Invoke((EventHandler)(delegate
 						{
-							refresh();
+							refresh(0);
 						}));
 					}
 				}
@@ -186,14 +193,17 @@ namespace szwlFormsApplication
 		private void buttonOpenClose_Click(object sender, EventArgs e)
 		{
 			//根据当前串口对象，来判断操作  
-			if (_server.com.IsOpen)
-			{
-				_server.Closing = true;
-				while (_server.Listening) Application.DoEvents();
-				//打开时点击，则关闭串口  
-				_server.com.Close();
-				_server.Closing = false;
-			}
+			closeCom();
+			Application.Exit();
+		}
+		private void SzwlForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			//根据当前串口对象，来判断操作  
+			closeCom();
+			isStop = true;
+		}
+		private void SzwlForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+		{
 			Application.Exit();
 		}
 		private void menutoolBar_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
@@ -201,6 +211,7 @@ namespace szwlFormsApplication
 
 			if (e.Button.Name == "logonbtn")
 			{
+				closeCom();
 				mainForm.Hide();
 				LogOnForm.loginform.Show();
 			}
@@ -247,8 +258,10 @@ namespace szwlFormsApplication
 		}
 		private void openCom()
 		{
-			int ComNum = Common.GetComNum();
-			if (ComNum == -1)
+			
+			COM com =InitData.com;
+			InitData.com = com;
+			if (com ==null)
 			{
 				DialogResult dr = MessageBox.Show(" 获取设备端口失败，请确认插入对应设备？",
 								 " 提示",
@@ -264,12 +277,14 @@ namespace szwlFormsApplication
 			}
 			else
 			{
-				_server.open(ComNum);
+				var opencomresult=_server.open(com);
+				if (!opencomresult.Item1)
+					MessageBox.Show(opencomresult.Item2);
 			}
 		}
 
 		//请调用此处关闭方法，不然可能产生死锁的问题
-		private void closeCom()
+		public void closeCom()
 		{
 			//根据当前串口对象，来判断操作  
 			if (_server.com.IsOpen)
@@ -298,7 +313,8 @@ namespace szwlFormsApplication
 					//更新组件
 					this.Invoke((EventHandler)(delegate
 					{
-						refresh();
+						refresh(addCol);
+						addCol = 0;//这里
 					}));
 				}
 				else
@@ -328,12 +344,13 @@ namespace szwlFormsApplication
 					else
 					{
 						messages.Insert(0, mess);
+						addCol++;//说明有插入数据
 					}
 				}
 			}
 		}
 
-		public void refresh()
+		public void refresh(int addColNum)
 		{
 			if (messages == null)
 				messages = new List<DataMessage>();
@@ -368,6 +385,16 @@ namespace szwlFormsApplication
 			if (newmsg.Count() >= 5)
 				this.label5.Text = string.Format("{0}号桌，类型：{1}", newmsg.ElementAt(4).callerNum, messages[4].type);
 
+			
+			if (addColNum > 0)
+			{
+				for(int i=0; i< addColNum; i++)
+				{
+					this.allDataGridView.DataSource = null;
+					this.allDataGridView.Rows.Add();
+				}
+			}
+			
 			this.allDataGridView.AutoGenerateColumns = false;
 			this.allDataGridView.DataSource = messages;
 			this.allDataGridView.Refresh();

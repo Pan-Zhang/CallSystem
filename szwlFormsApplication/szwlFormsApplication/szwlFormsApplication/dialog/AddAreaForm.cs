@@ -21,11 +21,10 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			DBManager dm = new DBManager();
 			Callzone zone = new Callzone();
 			zone.name = areaName.Text;
 			this.DialogResult = DialogResult.OK;
-			if (dm.insertZone(zone))
+			if (szwlForm.mainForm.dm.insertZone(zone))
 			{
 				this.Hide();
 			}

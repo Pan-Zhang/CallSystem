@@ -21,7 +21,6 @@ namespace szwlFormsApplication
 
 		public employeeSettingsForm()
 		{
-			dm = new DBManager();
 			InitializeComponent();
 			if (ConfigurationManager.AppSettings["isRFID"] == null)
 			{
@@ -29,6 +28,16 @@ namespace szwlFormsApplication
 			}
 			int index = int.Parse(ConfigurationManager.AppSettings["isRFID"]);
 			isRFIDBox.SelectedIndex = index;
+			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+			{
+				updateemployee.Enabled = true;
+				deleteemployee.Enabled = true;
+			}
+			else
+			{
+				updateemployee.Enabled = false;
+				deleteemployee.Enabled = false;
+			}
 			refresh();
 		}
 
@@ -40,26 +49,16 @@ namespace szwlFormsApplication
 		{
 			if (Common.isRFID)
 			{
-				list = dm.selectEmployeeRFID();
+				list = szwlForm.mainForm.dm.selectEmployeeRFID();
 			}
 			else
 			{
-				list = dm.selectEmployee();
+				list = szwlForm.mainForm.dm.selectEmployee();
 			}
 
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.DataSource = list;
 			this.dataGridView1.Refresh();
-			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
-			{
-				updateemployee.Enabled = true;
-				deleteemployee.Enabled = true;
-			}
-			else
-			{
-				updateemployee.Enabled = false;
-				deleteemployee.Enabled = false;
-			}
 		}
 
 		private void addemployee_Click(object sender, EventArgs e)
@@ -98,11 +97,11 @@ namespace szwlFormsApplication
 			{
 				if (Common.isRFID)
 				{
-					dm.deleteEmployeeRFID(emp);
+					szwlForm.mainForm.dm.deleteEmployeeRFID(emp);
 				}
 				else
 				{
-					dm.deleteEmployee(emp);
+					szwlForm.mainForm.dm.deleteEmployee(emp);
 				}
 				refresh();
 			}
@@ -123,11 +122,11 @@ namespace szwlFormsApplication
 			{
 				if (Common.isRFID)
 				{
-					dm.deleteAllEmployeeRFID();
+					szwlForm.mainForm.dm.deleteAllEmployeeRFID();
 				}
 				else
 				{
-					dm.deleteAllEmployee();
+					szwlForm.mainForm.dm.deleteAllEmployee();
 				}
 				refresh();
 			}
@@ -151,6 +150,34 @@ namespace szwlFormsApplication
 					break;
 			}
 			refresh();
+		}
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+			{
+				updateemployee.Enabled = true;
+				deleteemployee.Enabled = true;
+			}
+			else
+			{
+				updateemployee.Enabled = false;
+				deleteemployee.Enabled = false;
+			}
+		}
+		
+		private void DataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+			{
+				updateemployee.Enabled = true;
+				deleteemployee.Enabled = true;
+			}
+			else
+			{
+				updateemployee.Enabled = false;
+				deleteemployee.Enabled = false;
+			}
 		}
 	}
 }

@@ -73,6 +73,7 @@
 			this.ensure.TabIndex = 12;
 			this.ensure.Text = "确定";
 			this.ensure.UseVisualStyleBackColor = true;
+			this.ensure.Click += new System.EventHandler(this.ensure_Click);
 			// 
 			// password
 			// 

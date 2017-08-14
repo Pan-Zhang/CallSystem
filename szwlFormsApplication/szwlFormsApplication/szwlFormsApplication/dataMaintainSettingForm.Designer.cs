@@ -46,6 +46,14 @@
 			// comboBox1
 			// 
 			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Items.AddRange(new object[] {
+            "所有信息",
+            "呼叫器信息",
+            "区域信息",
+            "员工信息",
+            "用户信息",
+            "呼叫记录信息",
+            "表头信息"});
 			this.comboBox1.Location = new System.Drawing.Point(179, 31);
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(208, 20);
@@ -59,6 +67,7 @@
 			this.dataInitOK.TabIndex = 2;
 			this.dataInitOK.Text = "确定";
 			this.dataInitOK.UseVisualStyleBackColor = true;
+			this.dataInitOK.Click += new System.EventHandler(this.dataInitOK_Click);
 			// 
 			// label1
 			// 
@@ -83,6 +92,7 @@
 			this.Name = "dataMaintainSettingForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "数据维护";
+			this.Load += new System.EventHandler(this.dataMaintainSettingForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

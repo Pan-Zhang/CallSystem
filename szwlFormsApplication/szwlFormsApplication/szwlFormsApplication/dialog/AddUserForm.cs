@@ -25,7 +25,6 @@ namespace szwlFormsApplication.dialog
 
 		private void AddUserForm_Load(object sender, EventArgs e)
 		{
-			dm = new DBManager();
 			prompt.Hide();
 		}
 
@@ -34,11 +33,12 @@ namespace szwlFormsApplication.dialog
 			User admin = new User();
 			admin.name = username.Text;
 			admin.pass = password.Text;
+			admin.userClass = (User.UserClass)userClassComboBox.SelectedIndex;
 			if (username.Text.Equals("admin"))
 			{
 				prompt.Show();
 			}
-			else if (dm.insertUser(admin))
+			else if (szwlForm.mainForm.dm.insertUser(admin))
 			{
 				this.DialogResult = DialogResult.OK;
 				this.Close();
