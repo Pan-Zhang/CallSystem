@@ -1,6 +1,9 @@
 ﻿using System;
 using szwlFormsApplication.Models;
 using System.Windows.Forms;
+using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
+using System.Linq;
 
 namespace szwlFormsApplication
 {
@@ -15,15 +18,17 @@ namespace szwlFormsApplication
 
 		private void submit_Click(object sender, EventArgs e)
 		{
+			InitData.Clear();
 			if (String.IsNullOrWhiteSpace(username.Text) || String.IsNullOrWhiteSpace(password.Text))
 			{
-				MessageBox.Show("信息禁止为空！","登录提示");
+				MessageBox.Show(GlobalData.GlobalLanguage.empty_warn, GlobalData.GlobalLanguage.prompt);
 				clear();
 				return;
 			}
-			if (ValidUser(username.Text, password.Text))
+			var result = ValidUser(username.Text, password.Text);
+			if (result.Item1)
 			{
-				MessageBox.Show("欢迎登录本系统！", "消息提示");
+				MessageBox.Show(GlobalData.GlobalLanguage.welcome, GlobalData.GlobalLanguage.prompt);
 				this.Hide();
 				szwlForm.mainForm.Init();
 				szwlForm.mainForm.ShowInTaskbar = true;
@@ -31,7 +36,7 @@ namespace szwlFormsApplication
 			}
 			else
 			{
-				MessageBox.Show("用户名或密码不正确！", "消息提示");
+				MessageBox.Show(GlobalData.GlobalLanguage.login_error, GlobalData.GlobalLanguage.prompt);
 				clear();
 			}
 		}
@@ -39,20 +44,60 @@ namespace szwlFormsApplication
 		{
 			clear();
 		}
-		public bool ValidUser(string username, string password)
+		public Tuple<bool, string> ValidUser(string username, string password)
 		{
-			if (String.Equals(username, "Admin") && String.Equals(password, "123"))
+			InitData.users = szwlForm.mainForm.dm.selectUser();
+			if (InitData.users == null || InitData.users.Count == 0 || InitData.users.All(u => u.name != "Admin"))
 			{
-				currentUser = new User { name = "Admin", pass = "123" };
-				return true;
+				szwlForm.mainForm.dm.insertUser(new User { name = "Admin", pass = "123", userClass = User.UserClass.Admin });
+				InitData.users.Add(new User { name = "Admin", pass = "123", userClass = User.UserClass.Admin });
+
 			}
-			return false;
+			if (String.Equals(username, "Admin") && String.Equals(password, InitData.users.Where(u => u.name == "Admin").FirstOrDefault().pass))
+			{
+				currentUser = InitData.users.Where(u => u.name == "Admin").FirstOrDefault();
+				return Tuple.Create(true, default(string));
+			}
+			else
+			{
+				if (InitData.users.Any(u => u.name == username))
+				{
+					if (InitData.users.Any(u => u.pass == password))
+					{
+						currentUser = InitData.users.Where(u => u.name == username).FirstOrDefault();
+						return Tuple.Create(true, default(string));
+					}
+					else
+					{
+						return Tuple.Create(false, "用户密码不正确！");
+					}
+				}
+				else
+				{
+					return Tuple.Create(false, "用户不存在！");
+				}
+			}
 		}
 		public void clear()
 		{
 			username.Clear();
 			password.Clear();
 			username.Focus();
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.welcome_use;
+			groupBox1.Text = GlobalData.GlobalLanguage.user_login;
+			label1.Text = GlobalData.GlobalLanguage.username;
+			label2.Text = GlobalData.GlobalLanguage.password;
+			submit.Text = GlobalData.GlobalLanguage.login;
+			cancel.Text = GlobalData.GlobalLanguage.cancel;
+		}
+
+		private void LogOnForm_Load(object sender, EventArgs e)
+		{
+			changeLanguage();
 		}
 	}
 }

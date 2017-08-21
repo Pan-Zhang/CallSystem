@@ -120,6 +120,7 @@
 			this.Name = "LogOnForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "欢迎使用";
+			this.Load += new System.EventHandler(this.LogOnForm_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);

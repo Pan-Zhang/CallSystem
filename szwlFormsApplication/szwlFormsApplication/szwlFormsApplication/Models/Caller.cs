@@ -11,7 +11,7 @@ namespace szwlFormsApplication.Models
 		//呼叫器主键
 		public int ID { get; set; }
 		//呼叫器编号
-		public int callerNum { get; set; }
+		public string callerNum { get; set; }
 		//呼叫器区域
 		public int callZone { get; set; }
 		//服务员编号

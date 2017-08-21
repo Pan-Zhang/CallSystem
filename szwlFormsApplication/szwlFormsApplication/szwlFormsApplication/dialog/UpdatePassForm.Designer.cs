@@ -102,6 +102,7 @@
 			this.Name = "UpdatePassForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "修改密码";
+			this.Load += new System.EventHandler(this.UpdatePassForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

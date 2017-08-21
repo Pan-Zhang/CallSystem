@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
 using szwlFormsApplication.dialog;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication
 {
 	public partial class userForm : Form
 	{
-		List<User> list;
-		DBManager dm;
-
 		public userForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -30,11 +29,10 @@ namespace szwlFormsApplication
 
 		private void userForm_Load(object sender, EventArgs e)
 		{
-			list = szwlForm.mainForm.dm.selectUser();
-
-			this.dataGridView1.AutoGenerateColumns = false;
-			this.dataGridView1.DataSource = list;
-			this.dataGridView1.Refresh();
+			InitData.AddData(dataGridView1, InitData.users);
+			//this.dataGridView1.AutoGenerateColumns = false;
+			//this.dataGridView1.DataSource = InitData.users;
+			//this.dataGridView1.Refresh();
 		}
 
 		private void userAddbtn_Click(object sender, EventArgs e)
@@ -43,33 +41,42 @@ namespace szwlFormsApplication
 			DialogResult rt = form.ShowDialog();
 			if (rt == DialogResult.OK)
 			{
-				list = szwlForm.mainForm.dm.selectUser();
-
-				this.dataGridView1.AutoGenerateColumns = false;
-				this.dataGridView1.DataSource = list;
-				this.dataGridView1.Refresh();
+				InitData.AddData(dataGridView1, InitData.users);
+				//this.dataGridView1.AutoGenerateColumns = false;
+				//this.dataGridView1.DataSource = InitData.users;
+				//this.dataGridView1.Refresh();
 			}
 		}
 
 		private void userUpdatebtn_Click(object sender, EventArgs e)
 		{
 			ChangeUser form = new ChangeUser();
-			User admin = list[dataGridView1.CurrentRow.Index];
+			User admin = InitData.users[dataGridView1.CurrentRow.Index];
 			form.admin = admin;
 			DialogResult rt = form.ShowDialog();
 			if (rt == DialogResult.OK)
 			{
-				list = szwlForm.mainForm.dm.selectUser();
-
-				this.dataGridView1.AutoGenerateColumns = false;
-				this.dataGridView1.DataSource = list;
-				this.dataGridView1.Refresh();
+				InitData.AddData(dataGridView1, InitData.users);
+				//this.dataGridView1.AutoGenerateColumns = false;
+				//this.dataGridView1.DataSource = InitData.users;
+				//this.dataGridView1.Refresh();
 			}
 		}
 		private void userDeletebtn_Click(object sender, EventArgs e)
 		{
-			User admin = list[dataGridView1.CurrentRow.Index];
-			if (admin.name.Equals("admin"))
+			User admin = InitData.users[dataGridView1.CurrentRow.Index];
+			if (admin == null)
+			{
+				MessageBox.Show("未选中用户,不能执行删除！");
+				return;
+			}
+			if (InitData.users == null && InitData.users.Count == 0)
+			{
+				MessageBox.Show("暂时还没有用户,不能删除！");
+				return;
+			}
+
+			if (admin.name.Equals("Admin"))
 			{
 				DialogResult dr = MessageBox.Show("超级管理员用户不能被删除！",
 								 " 提示",
@@ -90,12 +97,22 @@ namespace szwlFormsApplication
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
-					if (szwlForm.mainForm.dm.deleteUser(admin))
+					if (InitData.users.Any(u => u.name == admin.name))
 					{
-						list = szwlForm.mainForm.dm.selectUser();
-						this.dataGridView1.AutoGenerateColumns = false;
-						this.dataGridView1.DataSource = list;
-						this.dataGridView1.Refresh();
+						if (szwlForm.mainForm.dm.deleteUser(admin))
+						{
+							InitData.users.RemoveAll(u=>u.name== admin.name);
+							InitData.AddData(dataGridView1, InitData.users);
+							//this.dataGridView1.AutoGenerateColumns = false;
+							//this.dataGridView1.DataSource = InitData.users;
+							//this.dataGridView1.Refresh();
+							MessageBox.Show("该账户删除成功！");
+						}
+					}
+					else
+					{
+						MessageBox.Show("该账户不存在,不能删除！");
+						return;
 					}
 				}
 				else
@@ -108,7 +125,17 @@ namespace szwlFormsApplication
 
 		private void userAuhtoritybtn_Click(object sender, EventArgs e)
 		{
-
+			ChangeUserAuthor form = new ChangeUserAuthor();
+			User user = InitData.users[dataGridView1.CurrentRow.Index];
+			form.user = user;
+			DialogResult rt = form.ShowDialog();
+			if (rt == DialogResult.OK)
+			{
+				InitData.AddData(dataGridView1, InitData.users);
+				//this.dataGridView1.AutoGenerateColumns = false;
+				//this.dataGridView1.DataSource = InitData.users;
+				//this.dataGridView1.Refresh();
+			}
 		}
 
 		private void userUpdatePwbtn_Click(object sender, EventArgs e)
@@ -124,13 +151,31 @@ namespace szwlFormsApplication
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
-
+				szwlForm.mainForm.dm.clearUser();
+				MessageBox.Show("数据清除成功！");
+				InitData.ClearData(this.dataGridView1, InitData.users);
 			}
 		}
 
 		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
 
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.user_setting;
+
+			dataGridView1.Columns[0].HeaderText = GlobalData.GlobalLanguage._username;
+			dataGridView1.Columns[1].HeaderText = GlobalData.GlobalLanguage._password;
+			dataGridView1.Columns[2].HeaderText = GlobalData.GlobalLanguage.user_type;
+
+			userAddbtn.Text = GlobalData.GlobalLanguage.add_user;
+			userUpdatebtn.Text = GlobalData.GlobalLanguage.edit_user;
+			userDeletebtn.Text = GlobalData.GlobalLanguage.del_user;
+			userAuhtoritybtn.Text = GlobalData.GlobalLanguage.authority;
+			userUpdatePwbtn.Text = GlobalData.GlobalLanguage.update_pwd;
+			userclearDatabtn.Text = GlobalData.GlobalLanguage.clear_data;
 		}
 	}
 }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO.Ports;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.CommonFunc
@@ -14,6 +16,15 @@ namespace szwlFormsApplication.CommonFunc
 	{
 
 		public static bool isRFID = true;
+
+		public static void SetTableHeader(DataGridView dataGridView)
+		{
+			dataGridView.Columns[1].HeaderCell.Value = DataMessage.Displaytime();
+			dataGridView.Columns[2].HeaderCell.Value = DataMessage.DisplaycallerNum();
+			dataGridView.Columns[3].HeaderCell.Value = DataMessage.DisplayemployeeNum();
+			dataGridView.Columns[4].HeaderCell.Value = DataMessage.Displaytype();
+			dataGridView.Columns[5].HeaderCell.Value = DataMessage.Displaystatus();
+		}
 
 		//获取所有端口号，获取串口可能比较经常用的是SerialPort.GetPortNames()这个方法，或者是读取注册表的方式，但是这两种方式都是有问题，尤其是在多次插拔串口后，会有重复串口出现，采用以下方式解决该问题
 		public static string[] MulGetHardwareInfo(HardwareEnum hardType, string propKey)
@@ -67,10 +78,10 @@ namespace szwlFormsApplication.CommonFunc
 			return comNum;
 
 		}
-		
-		public static List<int> GetComNum()
+
+		public static int GetComNum()
 		{
-			List<int> comNum = new List<int>();
+			int comNum = -1;
 			string[] strArr = GetHarewareInfo(HardwareEnum.Win32_PnPEntity, "Name");
 			foreach (string s in strArr)
 			{
@@ -80,23 +91,26 @@ namespace szwlFormsApplication.CommonFunc
 				{
 					int start = s.IndexOf("(") + 3;
 					int end = s.IndexOf(")");
-					comNum.Add(Convert.ToInt32(s.Substring(start + 1, end - start - 1)));
+					comNum = Convert.ToInt32(s.Substring(start + 1, end - start - 1));
+					break;
 				}
 			}
 			return comNum;
 
 		}
-		
+
 		//获取COM信息
 		public static COM GetComInfo()
 		{
 			COM com = new COM();
 			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["COMID"]))
 			{
-				if (GetComNum().Count()==0)
-					return null;
-				com.COMID = string.Format("COM{0}", GetComNum().FirstOrDefault());
-				ChangeAppConfig.ChangeConfig("COMID", com.COMID);
+				var tmp = Common.GetComNum();
+				if (tmp != -1)
+				{
+					com.COMID = string.Format("COM{0}", tmp);
+					ChangeAppConfig.ChangeConfig("COMID", com.COMID);
+				}
 			}
 			else
 				com.COMID = ConfigurationManager.AppSettings["COMID"];

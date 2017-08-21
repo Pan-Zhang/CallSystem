@@ -14,9 +14,6 @@ namespace szwlFormsApplication.dialog
 {
 	public partial class AddCallerForm : Form
 	{
-		DBManager dm;
-		List<Callzone> list_zone;
-		List<Employee> list_employee;
 		public AddCallerForm()
 		{
 			InitializeComponent();
@@ -24,28 +21,58 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
-			Caller caller = new Caller();
-			caller.callerNum = int.Parse(callerNum.Text);
-			if(list_zone==null || list_zone.Count == 0)
+			try
 			{
-				caller.callZone = -1;
+				this.DialogResult = DialogResult.OK;
+				Caller caller = new Caller();
+				if (InitData.list_caller != null && InitData.list_caller.Count != 0 && InitData.list_caller.Any(c => c.callerNum == callerNum.Text))
+				{
+					MessageBox.Show("该呼叫器编号已存在，不能新增！");
+					return;
+				}
+				caller.callerNum = callerNum.Text;
+				var zone = -1;
+				string zonename = null;
+				if (InitData.list_zone != null && InitData.list_zone.Count > 0)
+				{
+					DataRowView tmpdata = (DataRowView)callerArea.SelectedItem;
+					zone = Convert.ToInt32(tmpdata.Row[0]);
+					zonename = tmpdata.Row[1].ToString();
+				}
+
+				if (InitData.list_caller.Any(c => c.callZone == zone))
+				{
+					MessageBox.Show("该呼叫区域已绑定，不能新增！");
+					return;
+				}
+				caller.callZone = zone;
+				caller.callerZoneName = zonename;
+				if (InitData.employees == null || InitData.employees.Count == 0)
+				{
+					caller.employeeNum = -1;
+				}
+				else
+				{
+					caller.employeeNum = InitData.employees[worker.SelectedIndex].employeeNum;
+				}
+
+				if (InitData.list_caller == null)
+					InitData.list_caller = new List<Caller>();
+				if (szwlForm.mainForm.dm.insertCaller(caller))
+				{
+					InitData.list_caller = szwlForm.mainForm.dm.selectCaller();
+					MessageBox.Show("该呼叫器添加成功！");
+					this.DialogResult = DialogResult.OK;
+					this.Close();
+				}
+				else
+				{
+					MessageBox.Show("呼叫器添加失败,请重试！");
+				}
 			}
-			else
+			catch(Exception  ex)
 			{
-				caller.callZone = list_zone[callerArea.SelectedIndex].Id;
-			}
-			if(list_employee==null || list_employee.Count == 0)
-			{
-				caller.employeeNum = -1;
-			}
-			else
-			{
-				caller.employeeNum = list_employee[worker.SelectedIndex].employeeNum;
-			}
-			if (szwlForm.mainForm.dm.insertCaller(caller))
-			{
-				this.Hide();
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error,ex.ToString());
 			}
 		}
 
@@ -57,8 +84,6 @@ namespace szwlFormsApplication.dialog
 
 		private void AddCallerForm_Load(object sender, EventArgs e)
 		{
-			list_zone = szwlForm.mainForm.dm.selectZone();
-
 			if (Common.isRFID)
 			{
 				//list_employee = dm.selectEmployeeRFID();
@@ -67,11 +92,10 @@ namespace szwlFormsApplication.dialog
 			}
 			else
 			{
-				list_employee = szwlForm.mainForm.dm.selectEmployee();
 				initWorker();
 			}
 			initArea();
-			
+
 		}
 
 		private void initArea()
@@ -79,11 +103,11 @@ namespace szwlFormsApplication.dialog
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));
 			dt.Columns.Add("val", typeof(String));
-			for (int i = 0; i < list_zone.Count; i++)
+			foreach (var item in InitData.list_zone)
 			{
 				DataRow dr = dt.NewRow();
-				dr[0] = i;
-				dr[1] = list_zone[i].name;
+				dr[0] = item.Id;
+				dr[1] =item.name;
 
 				dt.Rows.Add(dr);
 			}
@@ -97,11 +121,11 @@ namespace szwlFormsApplication.dialog
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));
 			dt.Columns.Add("val", typeof(String));
-			for (int i = 0; i < list_employee.Count; i++)
+			foreach (var item in InitData.employees)
 			{
 				DataRow dr = dt.NewRow();
-				dr[0] = i;
-				dr[1] = list_employee[i].employeeNum + "号 " + list_employee[i].name;
+				dr[0] = item.employeeNum;
+				dr[1] = item.employeeNum + "号 " + item.name; ;
 
 				dt.Rows.Add(dr);
 			}

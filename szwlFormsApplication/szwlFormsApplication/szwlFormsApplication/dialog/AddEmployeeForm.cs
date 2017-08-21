@@ -21,23 +21,44 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Employee employee = new Employee();
-			employee.employeeNum = int.Parse(textBox1.Text.Trim());
-			employee.name = textBox4.Text;
-			employee.phonenum = textBox2.Text;
-			employee.remarks = textBox3.Text;
-			if (radioButton1.Checked)
+			int num = 0;
+			if (int.TryParse(textBox1.Text.Trim(), out num))
 			{
-				employee.sex = Sex.MALE;
+				Employee employee = new Employee();
+				employee.employeeNum = num;
+				employee.name = textBox4.Text;
+				employee.phonenum = textBox2.Text;
+				employee.remarks = textBox3.Text;
+				if (radioButton1.Checked)
+				{
+					employee.sex = Sex.MALE;
+				}
+				else
+				{
+					employee.sex = Sex.FEMALE;
+				}
+				this.DialogResult = DialogResult.OK;
+				if (InitData.employees == null)
+					InitData.employees = new List<Employee>();
+				if (InitData.employees.Any(em=> em.employeeNum == num))
+				{
+					MessageBox.Show("员工编号已存在,不能新增！");
+					return;
+				}
+				else
+				{
+					if (szwlForm.mainForm.dm.insertEmployee(employee))
+					{
+						InitData.employees = szwlForm.mainForm.dm.selectEmployee();
+						MessageBox.Show("员工新增成功！");
+						this.Hide();
+					}
+				}
 			}
 			else
 			{
-				employee.sex = Sex.FEMALE;
-			}
-			this.DialogResult = DialogResult.OK;
-			if (szwlForm.mainForm.dm.insertEmployee(employee))
-			{
-				this.Hide();
+				MessageBox.Show("员工编号不为数字类型,不能新增！");
+				return;
 			}
 		}
 

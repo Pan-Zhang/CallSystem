@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Chinese>
+	<app_name>深圳物联呼叫系统</app_name>
+	<no_quest>无请求</no_quest>
+	<have_quest>{0}号桌，类型：{1}</have_quest>
+	<no_device> 获取设备端口失败，请确认插入对应设备？</no_device>
+	<prompt>提示</prompt>
+	<empty_warn>信息禁止为空！</empty_warn>
+	<login_prompt>登录提示</login_prompt>
+	<welcome>欢迎登录本系统！</welcome>
+	<login_error>用户名或密码不正确！</login_error>
+	<number>号 </number>
+	<nothing>无</nothing>
+	<name>姓名:</name>
+	<finish>完成</finish>
+	<overtime>超时</overtime>
+	<waiting>等待</waiting>
+	<satisfy>满意</satisfy>
+	<unsatisfy>不满意</unsatisfy>
+	<records>条记录</records>
+	<time>次</time>
+	<record_null>当前记录为空！</record_null>
+	<choose_file>请选择文件路径</choose_file>
+	<save_path>导出文件已存为：</save_path>
+	<export_succ>导出数据成功</export_succ>
+	<delete_all>您确定希望删除所有信息？</delete_all>
+	<delete_caller>您确定希望删除所有呼叫器信息？</delete_caller>
+	<delete_zone>您确定希望删除所有区域信息？</delete_zone>
+	<delete_employee>您确定希望删除所有员工信息？</delete_employee>
+	<delete_user>您确定希望删除所有用户信息？</delete_user>
+	<delete_record>您确定希望删除所有呼叫记录？</delete_record>
+	<delete_header>您确定希望删除所有表头信息？</delete_header>
+	<login_setting>登录设置</login_setting>
+	<system_setting>系统设置</system_setting>
+	<user_setting>用户设置</user_setting>
+	<caller_setting>呼叫器设置</caller_setting>
+	<employee_setting>员工设置</employee_setting>
+	<header_setting>表头设置</header_setting>
+	<data_setting>数据管理</data_setting>
+	<summary_setting>统计</summary_setting>
+	<about_setting>关于</about_setting>
+	<ID>序号</ID>
+	<Time>时间</Time>
+	<caller_num>呼叫器编号</caller_num>
+	<employee_num>员工编号</employee_num>
+	<type>类型</type>
+	<status>状态</status>
+	<isRFID>isRFID</isRFID>
+	<welcome_use>欢迎使用</welcome_use>
+	<user_login>用户登录</user_login>
+	<username>用户名称:</username>
+	<password>密码:</password>
+	<login>登录</login>
+	<cancel>取消</cancel>
+	<summary_result>统计结果</summary_result>
+	<total>总计:</total>
+	<zone_search>区域查询</zone_search>
+	<employee_search>员工查询</employee_search>
+	<option>查询选项</option>
+	<start>开始日期</start>
+	<end>截止日期</end>
+	<zone>呼叫区域</zone>
+	<employee>员工信息</employee>
+	<ensure>确定</ensure>
+	<export>导出</export>
+	<summary>统计</summary>
+	<sreach_result>查询结果</sreach_result>
+	<Data_initialization>数据初始化</Data_initialization>
+	<watch_out>请谨慎使用该功能</watch_out>
+	<all_message>所有信息</all_message>
+	<all_caller>呼叫器信息</all_caller>
+	<all_zone>区域信息</all_zone>
+	<all_employee>员工信息</all_employee>
+	<all_user>用户信息</all_user>
+	<all_record>呼叫记录信息</all_record>
+	<all_header>表头信息</all_header>
+	<ensure_operation>请确认您将要进行的操作</ensure_operation>
+	<exist_app>关闭程序</exist_app>
+	<minimal>程序最小化</minimal>
+
+	<company_name>公司名称</company_name>
+	<com_setting>串口设置</com_setting>
+	<button_function>呼叫按钮设置</button_function>
+	<record_show>呼叫记录显示</record_show>
+	<effective_time>有效服务时间</effective_time>
+
+	<SerialPort>串口号</SerialPort>
+	<data_bits>数据位</data_bits>
+	<baud_rate>波特率</baud_rate>
+	<stop_bit>停止位</stop_bit>
+
+	<sort>呼叫记录排序</sort>
+	<Ascending>升序</Ascending>
+	<Descending>降序</Descending>
+	<color>呼叫信息颜色</color>
+	<timeout>超时</timeout>
+	<setting>设置</setting>
+	<Set_timeout>设置超时时间</Set_timeout>
+
+	<second>秒</second>
+	<minute>分</minute>
+	<hour>时</hour>
+
+	<Wireless_calling_system>无线呼叫系统</Wireless_calling_system>
+	<set_succe>设置成功</set_succe>
+	<set_fail>设置失败</set_fail>
+	<user_type>用户类型</user_type>
+
+	<add_user>添加用户</add_user>
+	<edit_user>修改用户</edit_user>
+	<authority>权限管理</authority>
+	<update_pwd>更改密码</update_pwd>
+	<clear_data>清除数据</clear_data>
+	<_username>用户名</_username>
+	<_password>密码</_password>
+	<del_user>删除用户</del_user>
+	<caller_zone_setting>呼叫区域设置</caller_zone_setting>
+	<caller_num_setting>呼叫器设置</caller_num_setting>
+	<call_zone>呼叫区域</call_zone>
+	<callAreaAddbtn>添加</callAreaAddbtn>
+	<callAreaUpdatebtn>修改</callAreaUpdatebtn>
+	<callAreaDeletebtn>删除</callAreaDeletebtn>
+	<callAreaBatchUpdatebtn>批量修改</callAreaBatchUpdatebtn>
+	<callAreaBatchDelbtn>批量删除</callAreaBatchDelbtn>
+	<callAreaOKbtn>确定</callAreaOKbtn>
+	<callAreaclearDatabtn>清除数据</callAreaclearDatabtn>
+
+	<telephone>电话号码</telephone>
+	<remarks>备注</remarks>
+	<gender>性别</gender>
+
+	<rfid_mode>RFID模式</rfid_mode>
+	<button_mode>按钮模式</button_mode>
+	<choose_table>选择表</choose_table>
+	<other_name>列表名设置</other_name>
+	<call_message>呼叫信息</call_message>
+	<employ_info>员工信息</employ_info>
+	<old_name>原列名</old_name>
+	<new_name>新列名</new_name>
+	<header_set_succe>表头设置成功</header_set_succe>
+	<Caller_number>呼叫器编号</Caller_number>
+	<Caller_zone>呼叫器区域</Caller_zone>
+</Chinese>

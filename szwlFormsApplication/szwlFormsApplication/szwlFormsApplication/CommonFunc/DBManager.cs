@@ -59,18 +59,19 @@ namespace szwlFormsApplication.CommonFunc
 				connection.Close();
 
 				Models.User admin = new Models.User();
-				admin.name = "admin";
-				admin.pass = "123456";
+				admin.name = "Admin";
+				admin.pass = "123";
+				new UserProgram(admin);
 				insertUser(admin);
 
 				for (int i = 1; i < 101; i++)
 				{
 					Callzone zone = new Callzone();
-					zone.name = "桌位" + i;
+					zone.name = "name" + i;
 					insertZone(zone);
 
 					Caller caller = new Caller();
-					caller.callerNum = i;
+					caller.callerNum = i.ToString();
 					caller.callZone = i;
 					caller.employeeNum = -1;
 					insertCaller(caller);
@@ -80,127 +81,170 @@ namespace szwlFormsApplication.CommonFunc
 
 		public void createAdmin(Catalog catalog)
 		{
-			Table table = new Table();
-			table.Name = TABLE_ADMIN;
-			Column column = new Column();
-			column.ParentCatalog = catalog;
-			column.Name = "Id";
-			column.Type = DataTypeEnum.adInteger;
-			column.DefinedSize = 9;
-			column.Properties["AutoIncrement"].Value = true;
-			table.Columns.Append(column, DataTypeEnum.adInteger, 9);
-			table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
+			try
+			{
+				Table table = new Table();
+				table.Name = TABLE_ADMIN;
+				Column column = new Column();
+				column.ParentCatalog = catalog;
+				column.Name = "Id";
+				column.Type = DataTypeEnum.adInteger;
+				column.DefinedSize = 9;
+				column.Properties["AutoIncrement"].Value = true;
+				table.Columns.Append(column, DataTypeEnum.adInteger, 9);
+				table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
 
-			table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("pass", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("userClass", DataTypeEnum.adInteger, 2);
-			catalog.Tables.Append(table);
+				table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("pass", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("userClass", DataTypeEnum.adInteger, 2);
+				table.Columns.Append("programs", DataTypeEnum.adVarWChar,50);
+				catalog.Tables.Append(table);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+			}
 		}
 
 		public void createEmployee(Catalog catalog)
 		{
-			Table table = new Table();
-			table.Name = TABLE_EMPLOYEE;
-			Column column = new Column();
-			column.ParentCatalog = catalog;
-			column.Name = "Id";
-			column.Type = DataTypeEnum.adInteger;
-			column.DefinedSize = 9;
-			column.Properties["AutoIncrement"].Value = true;
-			table.Columns.Append(column, DataTypeEnum.adInteger, 9);
-			table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
+			try
+			{
+				Table table = new Table();
+				table.Name = TABLE_EMPLOYEE;
+				Column column = new Column();
+				column.ParentCatalog = catalog;
+				column.Name = "Id";
+				column.Type = DataTypeEnum.adInteger;
+				column.DefinedSize = 9;
+				column.Properties["AutoIncrement"].Value = true;
+				table.Columns.Append(column, DataTypeEnum.adInteger, 9);
+				table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
 
-			table.Columns.Append("num", DataTypeEnum.adInteger, 2);
-			table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("phoneNum", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("remarks", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("sex", DataTypeEnum.adInteger, 1);
-			catalog.Tables.Append(table);
+				table.Columns.Append("num", DataTypeEnum.adInteger, 2);
+				table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("phoneNum", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("remarks", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("sex", DataTypeEnum.adInteger, 1);
+				catalog.Tables.Append(table);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+			}
 
 			//connection.Close();
 		}
 		public void createEmployeeRFID(Catalog catalog)
 		{
-			Table table = new Table();
-			table.Name = TABLE_EMPLOYEE_RFID;
-			Column column = new Column();
-			column.ParentCatalog = catalog;
-			column.Name = "Id";
-			column.Type = DataTypeEnum.adInteger;
-			column.DefinedSize = 9;
-			column.Properties["AutoIncrement"].Value = true;
-			table.Columns.Append(column, DataTypeEnum.adInteger, 9);
-			table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
+			try
+			{
+				Table table = new Table();
+				table.Name = TABLE_EMPLOYEE_RFID;
+				Column column = new Column();
+				column.ParentCatalog = catalog;
+				column.Name = "Id";
+				column.Type = DataTypeEnum.adInteger;
+				column.DefinedSize = 9;
+				column.Properties["AutoIncrement"].Value = true;
+				table.Columns.Append(column, DataTypeEnum.adInteger, 9);
+				table.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
 
-			table.Columns.Append("num", DataTypeEnum.adInteger, 2);
-			table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("phoneNum", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("remarks", DataTypeEnum.adVarWChar, 50);
-			table.Columns.Append("sex", DataTypeEnum.adInteger, 1);
-			catalog.Tables.Append(table);
+				table.Columns.Append("num", DataTypeEnum.adInteger, 2);
+				table.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("phoneNum", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("remarks", DataTypeEnum.adVarWChar, 50);
+				table.Columns.Append("sex", DataTypeEnum.adInteger, 1);
+				catalog.Tables.Append(table);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+			}
 
 			//connection.Close();
 		}
 
 		public void createZone(Catalog catalog)
 		{
-			Table zone = new Table();
-			zone.Name = TABLE_ZONE;
-			Column column = new Column();
-			column.ParentCatalog = catalog;
-			column.Name = "Id";
-			column.Type = DataTypeEnum.adInteger;
-			column.DefinedSize = 9;
-			column.Properties["AutoIncrement"].Value = true;
-			zone.Columns.Append(column, DataTypeEnum.adInteger, 9);
-			zone.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
+			try
+			{
+				Table zone = new Table();
+				zone.Name = TABLE_ZONE;
+				Column column = new Column();
+				column.ParentCatalog = catalog;
+				column.Name = "Id";
+				column.Type = DataTypeEnum.adInteger;
+				column.DefinedSize = 9;
+				column.Properties["AutoIncrement"].Value = true;
+				zone.Columns.Append(column, DataTypeEnum.adInteger, 9);
+				zone.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
 
-			zone.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
-			catalog.Tables.Append(zone);
+				zone.Columns.Append("name", DataTypeEnum.adVarWChar, 50);
+				catalog.Tables.Append(zone);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+			}
 
 		}
 
 		public void createCaller(Catalog catalog)
 		{
-			Table caller = new Table();
-			caller.Name = TABLE_CALLER;
-			Column column = new Column();
-			column.ParentCatalog = catalog;
-			column.Name = "Id";
-			column.Type = DataTypeEnum.adInteger;
-			column.DefinedSize = 9;
-			column.Properties["AutoIncrement"].Value = true;
-			caller.Columns.Append(column, DataTypeEnum.adInteger, 9);
-			caller.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
-			caller.Columns.Append("callerNum", DataTypeEnum.adInteger, 9);
-			caller.Columns.Append("callZone", DataTypeEnum.adInteger, 9);
-			caller.Columns.Append("waiterNum", DataTypeEnum.adInteger, 9);
+			try
+			{
+				Table caller = new Table();
+				caller.Name = TABLE_CALLER;
+				Column column = new Column();
+				column.ParentCatalog = catalog;
+				column.Name = "Id";
+				column.Type = DataTypeEnum.adInteger;
+				column.DefinedSize = 9;
+				column.Properties["AutoIncrement"].Value = true;
+				caller.Columns.Append(column, DataTypeEnum.adInteger, 9);
+				caller.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
+				caller.Columns.Append("callerNum", DataTypeEnum.adInteger, 9);
+				caller.Columns.Append("callZone", DataTypeEnum.adInteger, 9);
+				caller.Columns.Append("waiterNum", DataTypeEnum.adInteger, 9);
 
-			catalog.Tables.Append(caller);
+				catalog.Tables.Append(caller);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+			}
 
 		}
 
 		public void createMess(Catalog catalog)
 		{
-			Table message = new Table();
-			message.Name = TABLE_MESS;
-			Column column = new Column();
-			column.ParentCatalog = catalog;
-			column.Name = "Id";
-			column.Type = DataTypeEnum.adInteger;
-			column.DefinedSize = 9;
-			column.Properties["AutoIncrement"].Value = true;
-			message.Columns.Append(column, DataTypeEnum.adInteger, 9);
-			message.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
+			try
+			{
+				Table message = new Table();
+				message.Name = TABLE_MESS;
+				Column column = new Column();
+				column.ParentCatalog = catalog;
+				column.Name = "Id";
+				column.Type = DataTypeEnum.adInteger;
+				column.DefinedSize = 9;
+				column.Properties["AutoIncrement"].Value = true;
+				message.Columns.Append(column, DataTypeEnum.adInteger, 9);
+				message.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
 
-			message.Columns.Append("time", DataTypeEnum.adDate, 1);
-			message.Columns.Append("callerNum", DataTypeEnum.adInteger, 9);
-			message.Columns.Append("waiterNum", DataTypeEnum.adInteger, 9);
-			message.Columns.Append("type", DataTypeEnum.adInteger, 9);
-			message.Columns.Append("status", DataTypeEnum.adInteger, 9);
-			message.Columns.Append("isRFID", DataTypeEnum.adInteger, 9);
+				message.Columns.Append("time", DataTypeEnum.adVarWChar, 50);
+				message.Columns.Append("callerNum", DataTypeEnum.adVarWChar, 9);
+				message.Columns.Append("waiterNum", DataTypeEnum.adInteger, 9);
+				message.Columns.Append("type", DataTypeEnum.adInteger, 9);
+				message.Columns.Append("status", DataTypeEnum.adInteger, 9);
+				message.Columns.Append("isRFID", DataTypeEnum.adInteger, 9);
 
-			catalog.Tables.Append(message);
+				catalog.Tables.Append(message);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+			}
 		}
 
 		public DataTable select(string sql)
@@ -223,7 +267,7 @@ namespace szwlFormsApplication.CommonFunc
 				}
 				catch (Exception e)
 				{
-
+					LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, e.ToString());
 				}
 
 				connection.Close();
@@ -252,9 +296,13 @@ namespace szwlFormsApplication.CommonFunc
 				}
 				catch (Exception e)
 				{
-
+					LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, sql);
+					LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, e.ToString());
 				}
-				connection.Close();
+				finally
+				{
+					connection.Close();
+				}
 			}
 
 			if (cum > 0)
@@ -277,47 +325,68 @@ namespace szwlFormsApplication.CommonFunc
 		//查找所有管理员
 		public List<Models.User> selectUser()
 		{
-			DataTable dataTable = select("select * from " + TABLE_ADMIN);
-			List<Models.User> list = new List<Models.User>();
-			if (dataTable == null)
-				return list;
-			for (int i = 0; i < dataTable.Rows.Count; i++)
+			try
 			{
-				Models.User admin = new Models.User();
-				int id = (int)dataTable.Rows[i][0];
-				string name = dataTable.Rows[i][1].ToString();
-				string pass = dataTable.Rows[i][2].ToString();
-				int type = (int)dataTable.Rows[i][3];
-				if (type == 0)
+				DataTable dataTable = select("select * from " + TABLE_ADMIN);
+				List<Models.User> list = new List<Models.User>();
+				if (dataTable == null)
+					return list;
+				for (int i = 0; i < dataTable.Rows.Count; i++)
 				{
-					admin.userClass = Models.User.UserClass.Admin;
+					Models.User admin = new Models.User();
+					int id = (int)dataTable.Rows[i][0];
+					string name = dataTable.Rows[i][1].ToString();
+					string pass = dataTable.Rows[i][2].ToString();
+					Models.User.UserClass type = (Models.User.UserClass)Enum.Parse(typeof(Models.User.UserClass), dataTable.Rows[i][3].ToString());
+
+					admin.userClass = type;
+					admin.id = id;
+					admin.name = name;
+					admin.pass = pass;
+
+					if (dataTable.Columns.Count < 5)
+					{
+						var tmp = new UserProgram(admin);
+						admin.programs = tmp.programs;
+					}
+					else
+					{
+						string programs = dataTable.Rows[i][4].ToString();
+						admin.programs = programs == null ? null : programs.Split(',').Select(p => int.Parse(p)).ToList();
+					}
+
+					list.Add(admin);
 				}
-				else
-				{
-					admin.userClass = Models.User.UserClass.normal;
-				}
-				admin.id = id;
-				admin.name = name;
-				admin.pass = pass;
-				
-				list.Add(admin);
+				return list;
 			}
-			return list;
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<Models.User>();
+			}
 		}
 
 		//添加新的管理员
 		public bool insertUser(Models.User admin)
 		{
-			int type = 0;
-			if (admin.userClass == Models.User.UserClass.Admin)
+			try
 			{
-				type = 0;
+				int type = 0;
+				if (admin.userClass == Models.User.UserClass.Admin)
+				{
+					type = 0;
+				}
+				else
+				{
+					type = 1;
+				}
+				return operateData("insert into " + TABLE_ADMIN + "(name, pass, userClass, programs) values('" + admin.name + "', '" + admin.pass + "', '" + type.ToString() + "', '" + string.Join(",", admin.programs) + "')");
 			}
-			else
+			catch (Exception ex)
 			{
-				type = 1;
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
 			}
-			return operateData("insert into " + TABLE_ADMIN + "(name, pass, userClass) values('" + admin.name + "', '" + admin.pass + "', '" + type.ToString() + "')");
 		}
 
 		//查找特定管理员（用于登录验证）
@@ -339,16 +408,24 @@ namespace szwlFormsApplication.CommonFunc
 
 		public bool updateUser(Models.User admin)
 		{
-			int type = 0;
-			if (admin.userClass == Models.User.UserClass.Admin)
+			try
 			{
-				type = 0;
+				int type = 0;
+				if (admin.userClass == Models.User.UserClass.Admin)
+				{
+					type = 0;
+				}
+				else
+				{
+					type = 1;
+				}
+				return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "', userClass='" + type + "', programs='" + string.Join(",", admin.programs) + "' where Id=" + admin.id);
 			}
-			else
+			catch (Exception ex)
 			{
-				type = 1;
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
 			}
-			return operateData("update " + TABLE_ADMIN + " set name='" + admin.name + "', pass='" + admin.pass + "', userClass=" + type + " where Id=" + admin.id);
 		}
 
 		/**
@@ -359,80 +436,120 @@ namespace szwlFormsApplication.CommonFunc
 		//查找所有员工信息
 		public List<Employee> selectEmployee()
 		{
-			DataTable dataTable = select("select * from " + TABLE_EMPLOYEE);
-			List<Employee> list = new List<Employee>();
-			if (dataTable == null)
-				return list;
-			for (int i = 0; i < dataTable.Rows.Count; i++)
+			try
 			{
-				Employee employee = new Employee();
-				int id = (int)dataTable.Rows[i][0];
-				int num = (int)dataTable.Rows[i][1];
-				string name = dataTable.Rows[i][2].ToString();
-				string phoneNum = dataTable.Rows[i][3].ToString();
-				string remarks = dataTable.Rows[i][4].ToString();
-				int sex = (int)dataTable.Rows[i][5];
-				employee.Id = id;
-				employee.name = name;
-				employee.phonenum = phoneNum;
-				employee.remarks = remarks;
-				employee.employeeNum = num;
-				if (sex == 0)
+				DataTable dataTable = select("select * from " + TABLE_EMPLOYEE);
+				List<Employee> list = new List<Employee>();
+				if (dataTable == null)
+					return list;
+				for (int i = 0; i < dataTable.Rows.Count; i++)
 				{
-					employee.sex = Sex.MALE;
+					Employee employee = new Employee();
+					int id = (int)dataTable.Rows[i][0];
+					int num = (int)dataTable.Rows[i][1];
+					string name = dataTable.Rows[i][2].ToString();
+					string phoneNum = dataTable.Rows[i][3].ToString();
+					string remarks = dataTable.Rows[i][4].ToString();
+					int sex = (int)dataTable.Rows[i][5];
+					employee.Id = id;
+					employee.name = name;
+					employee.phonenum = phoneNum;
+					employee.remarks = remarks;
+					employee.employeeNum = num;
+					if (sex == 0)
+					{
+						employee.sex = Sex.MALE;
+					}
+					else
+					{
+						employee.sex = Sex.FEMALE;
+					}
+					list.Add(employee);
 				}
-				else
-				{
-					employee.sex = Sex.FEMALE;
-				}
-				list.Add(employee);
+				return list;
 			}
-			return list;
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<Employee>();
+			}
 		}
 
 		//插入新员工信息
 		public bool insertEmployee(Employee employee)
 		{
-			string sql = "";
-			switch (employee.sex)
+			try
 			{
-				case Sex.MALE:
-					sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
-					break;
+				string sql = "";
+				switch (employee.sex)
+				{
+					case Sex.MALE:
+						sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
+						break;
 
-				case Sex.FEMALE:
-					sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
-					break;
+					case Sex.FEMALE:
+						sql = "insert into " + TABLE_EMPLOYEE + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
+						break;
+				}
+				return operateData(sql);
 			}
-			return operateData(sql);
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//修改员工信息
 		public bool updateEmployee(Employee employee)
 		{
-			int sex = 0;
-			switch (employee.sex)
+			try
 			{
-				case Sex.MALE:
-					sex = 0;
-					break;
+				int sex = 0;
+				switch (employee.sex)
+				{
+					case Sex.MALE:
+						sex = 0;
+						break;
 
-				case Sex.FEMALE:
-					sex = 1;
-					break;
+					case Sex.FEMALE:
+						sex = 1;
+						break;
+				}
+				return operateData("update " + TABLE_EMPLOYEE + " set num=" + employee.employeeNum + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
 			}
-			return operateData("update " + TABLE_EMPLOYEE + " set num=" + employee.employeeNum + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//删除某个员工
 		public bool deleteEmployee(Employee employee)
 		{
-			return operateData("delete from " + TABLE_EMPLOYEE + " where Id=" + employee.Id);
+			try
+			{
+				return operateData("delete from " + TABLE_EMPLOYEE + " where Id=" + employee.Id);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool deleteAllEmployee()
 		{
-			return operateData("delete from " + TABLE_EMPLOYEE);
+			try
+			{
+				return operateData("delete from " + TABLE_EMPLOYEE);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		/**
@@ -441,50 +558,66 @@ namespace szwlFormsApplication.CommonFunc
 		//查找所有员工信息
 		public List<Employee> selectEmployeeRFID()
 		{
-			DataTable dataTable = select("select * from " + TABLE_EMPLOYEE_RFID);
-			List<Employee> list = new List<Employee>();
-			for (int i = 0; i < dataTable.Rows.Count; i++)
+			try
 			{
-				Employee employee = new Employee();
-				int id = (int)dataTable.Rows[i][0];
-				int num = (int)dataTable.Rows[i][1];
-				string name = dataTable.Rows[i][2].ToString();
-				string phoneNum = dataTable.Rows[i][3].ToString();
-				string remarks = dataTable.Rows[i][4].ToString();
-				int sex = (int)dataTable.Rows[i][5];
-				employee.Id = id;
-				employee.name = name;
-				employee.phonenum = phoneNum;
-				employee.remarks = remarks;
-				employee.employeeNum = num;
-				if (sex == 0)
+				DataTable dataTable = select("select * from " + TABLE_EMPLOYEE_RFID);
+				List<Employee> list = new List<Employee>();
+				for (int i = 0; i < dataTable.Rows.Count; i++)
 				{
-					employee.sex = Sex.MALE;
+					Employee employee = new Employee();
+					int id = (int)dataTable.Rows[i][0];
+					int num = (int)dataTable.Rows[i][1];
+					string name = dataTable.Rows[i][2].ToString();
+					string phoneNum = dataTable.Rows[i][3].ToString();
+					string remarks = dataTable.Rows[i][4].ToString();
+					int sex = (int)dataTable.Rows[i][5];
+					employee.Id = id;
+					employee.name = name;
+					employee.phonenum = phoneNum;
+					employee.remarks = remarks;
+					employee.employeeNum = num;
+					if (sex == 0)
+					{
+						employee.sex = Sex.MALE;
+					}
+					else
+					{
+						employee.sex = Sex.FEMALE;
+					}
+					list.Add(employee);
 				}
-				else
-				{
-					employee.sex = Sex.FEMALE;
-				}
-				list.Add(employee);
+				return list;
 			}
-			return list;
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<Employee>();
+			}
 		}
 
 		//插入新员工信息
 		public bool insertEmployeeRFID(Employee employee)
 		{
-			string sql = "";
-			switch (employee.sex)
+			try
 			{
-				case Sex.MALE:
-					sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
-					break;
+				string sql = "";
+				switch (employee.sex)
+				{
+					case Sex.MALE:
+						sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 0)";
+						break;
 
-				case Sex.FEMALE:
-					sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
-					break;
+					case Sex.FEMALE:
+						sql = "insert into " + TABLE_EMPLOYEE_RFID + "(num, name, phoneNum, remarks, sex) values('" + employee.employeeNum.ToString() + "', '" + employee.name + "', '" + employee.phonenum + "', '" + employee.remarks + "', 1)";
+						break;
+				}
+				return operateData(sql);
 			}
-			return operateData(sql);
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//table.Columns.Append("num", DataTypeEnum.adInteger, 2);
@@ -495,29 +628,53 @@ namespace szwlFormsApplication.CommonFunc
 		//修改员工信息
 		public bool updateEmployeeRFID(Employee employee)
 		{
-			int sex = 0;
-			switch (employee.sex)
+			try
 			{
-				case Sex.MALE:
-					sex = 0;
-					break;
+				int sex = 0;
+				switch (employee.sex)
+				{
+					case Sex.MALE:
+						sex = 0;
+						break;
 
-				case Sex.FEMALE:
-					sex = 1;
-					break;
+					case Sex.FEMALE:
+						sex = 1;
+						break;
+				}
+				return operateData("update " + TABLE_EMPLOYEE_RFID + " set num=" + employee.employeeNum + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
 			}
-			return operateData("update " + TABLE_EMPLOYEE_RFID + " set num=" + employee.employeeNum + ", name='" + employee.name + "', phoneNum='" + employee.phonenum + "', remarks='" + employee.remarks + "', sex='" + sex + "' where Id=" + employee.Id);
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//删除某个员工
 		public bool deleteEmployeeRFID(Employee employee)
 		{
-			return operateData("delete from " + TABLE_EMPLOYEE_RFID + " where Id=" + employee.Id);
+			try
+			{
+				return operateData("delete from " + TABLE_EMPLOYEE_RFID + " where Id=" + employee.Id);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool deleteAllEmployeeRFID()
 		{
-			return operateData("delete from " + TABLE_EMPLOYEE_RFID);
+			try
+			{
+				return operateData("delete from " + TABLE_EMPLOYEE_RFID);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		/**
@@ -528,38 +685,70 @@ namespace szwlFormsApplication.CommonFunc
 		//获取区域信息
 		public List<Callzone> selectZone()
 		{
-			DataTable dataTable = select("select * from " + TABLE_ZONE);
-			List<Callzone> list = new List<Callzone>();
-			if (dataTable == null)
-				return list;
-			for (int i = 0; i < dataTable.Rows.Count; i++)
+			try
 			{
-				Callzone zone = new Callzone();
-				int id = (int)dataTable.Rows[i][0];
-				string name = dataTable.Rows[i][1].ToString();
-				zone.Id = id;
-				zone.name = name;
-				list.Add(zone);
+				DataTable dataTable = select("select * from " + TABLE_ZONE);
+				List<Callzone> list = new List<Callzone>();
+				if (dataTable == null)
+					return list;
+				for (int i = 0; i < dataTable.Rows.Count; i++)
+				{
+					Callzone zone = new Callzone();
+					int id = (int)dataTable.Rows[i][0];
+					string name = dataTable.Rows[i][1].ToString();
+					zone.Id = id;
+					zone.name = name;
+					list.Add(zone);
+				}
+				return list;
 			}
-			return list;
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<Callzone>();
+			}
 		}
 
 		//插入区域信息
 		public bool insertZone(Callzone zone)
 		{
-			return operateData("insert into " + TABLE_ZONE + "(name) values('" + zone.name + "')");
+			try
+			{
+				return operateData("insert into " + TABLE_ZONE + "(name) values('" + zone.name + "')");
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//修改区域信息
 		public bool updateZone(Callzone zone)
 		{
-			return operateData("update " + TABLE_ZONE + " set name='" + zone.name + "' where Id=" + zone.Id);
+			try
+			{
+				return operateData("update " + TABLE_ZONE + " set name='" + zone.name + "' where Id=" + zone.Id);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//删除区域信息
 		public bool deleteZone(Callzone zone)
 		{
-			return operateData("delete from " + TABLE_ZONE + " where Id=" + zone.Id);
+			try
+			{
+				return operateData("delete from " + TABLE_ZONE + " where Id=" + zone.Id);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 
@@ -570,43 +759,75 @@ namespace szwlFormsApplication.CommonFunc
 
 		public List<Caller> selectCaller()
 		{
-			DataTable dataTable = select("select * from " + TABLE_CALLER);
-			List<Caller> list = new List<Caller>();
-			if (dataTable == null)
-				return list;
-			for (int i = 0; i < dataTable.Rows.Count; i++)
+			try
 			{
-				Caller caller = new Caller();
-				int id = (int)dataTable.Rows[i][0];
-				int callerNum = (int)dataTable.Rows[i][1];
-				int callerZone = (int)dataTable.Rows[i][2];
-				int waiternum = (int)dataTable.Rows[i][3];
-				caller.ID = id;
-				caller.callerNum = callerNum;
-				caller.callZone = callerZone;
-				caller.employeeNum = waiternum;
-				list.Add(caller);
+				DataTable dataTable = select("select * from " + TABLE_CALLER);
+				List<Caller> list = new List<Caller>();
+				if (dataTable == null)
+					return list;
+				for (int i = 0; i < dataTable.Rows.Count; i++)
+				{
+					Caller caller = new Caller();
+					int id = (int)dataTable.Rows[i][0];
+					string callerNum = dataTable.Rows[i][1].ToString();
+					int callerZone = (int)dataTable.Rows[i][2];
+					int waiternum = (int)dataTable.Rows[i][3];
+					caller.ID = id;
+					caller.callerNum = callerNum;
+					caller.callZone = callerZone;
+					caller.employeeNum = waiternum;
+					list.Add(caller);
+				}
+				return list;
 			}
-			return list;
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<Caller>();
+			}
 		}
 
 
 		//插入呼叫器
 		public bool insertCaller(Caller caller)
 		{
-			return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values(" + caller.callerNum + ", " + caller.callZone + ", " + caller.employeeNum + ")");
+			try
+			{
+				return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values(" + caller.callerNum + ", " + caller.callZone + ", " + caller.employeeNum + ")");
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//修改呼叫器信息
 		public bool updateCaller(Caller caller)
 		{
-			return operateData("update " + TABLE_CALLER + " set callerNum=" + caller.callerNum + ", callZone=" + caller.callZone + ", waiterNum=" + caller.employeeNum + " where Id=" + caller.ID);
+			try
+			{
+				return operateData("update " + TABLE_CALLER + " set callerNum=" + caller.callerNum + ", callZone=" + caller.callZone + ", waiterNum=" + caller.employeeNum + " where Id=" + caller.ID);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//删除呼叫器
 		public bool deleteCaller(Caller caller)
 		{
-			return operateData("delete from " + TABLE_CALLER + " where Id=" + caller.ID + "");
+			try
+			{
+				return operateData("delete from " + TABLE_CALLER + " where Id=" + caller.ID + "");
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		/**
@@ -617,295 +838,382 @@ namespace szwlFormsApplication.CommonFunc
 		//获取呼叫信息
 		public List<DataMessage> selectMess()
 		{
-			DataTable dataTable = select("select * from " + TABLE_MESS + " order by Id desc");
-			List<DataMessage> list = new List<DataMessage>();
-			for (int i = 0; i < dataTable.Rows.Count; i++)
+			try
 			{
-				DataMessage message = new DataMessage();
-				int id = (int)dataTable.Rows[i][0];
-				DateTime time = (DateTime)dataTable.Rows[i][1];
-				int callerNum = (int)dataTable.Rows[i][2];
-				int waiterNum = (int)dataTable.Rows[i][3];
-				int type = (int)dataTable.Rows[i][4];
-				int status = (int)dataTable.Rows[i][5];
-				int isRFID = (int)dataTable.Rows[i][6];
-
-				message.Id = id;
-				message.time = time;
-				message.callerNum = callerNum;
-				message.employeeNum = waiterNum;
-				switch (type)
+				DataTable dataTable = select("select * from " + TABLE_MESS + " order by Id desc");
+				List<DataMessage> list = new List<DataMessage>();
+				for (int i = 0; i < dataTable.Rows.Count; i++)
 				{
-					case 0:
-						message.type = Models.Type.CANCEL;
-						break;
+					DataMessage message = new DataMessage();
+					int id = (int)dataTable.Rows[i][0];
+					message.time = dataTable.Rows[i][1].ToString();
+					string callerNum = dataTable.Rows[i][2].ToString();
+					int waiterNum = (int)dataTable.Rows[i][3];
+					int type = (int)dataTable.Rows[i][4];
+					int status = (int)dataTable.Rows[i][5];
+					int isRFID = (int)dataTable.Rows[i][6];
 
-					case 1:
-						message.type = Models.Type.ORDER;
-						break;
+					message.Id = id;
+					message.callerNum = callerNum;
+					message.employeeNum = waiterNum;
+					switch (type)
+					{
+						case 0:
+							message.type = Models.Type.CANCEL;
+							break;
 
-					case 2:
-						message.type = Models.Type.CALL;
-						break;
+						case 1:
+							message.type = Models.Type.ORDER;
+							break;
 
-					case 3:
-						message.type = Models.Type.CHECK_OUT;
-						break;
+						case 2:
+							message.type = Models.Type.CALL;
+							break;
 
-					case 4:
-						message.type = Models.Type.CHANGE_MEDICATION;
-						break;
+						case 3:
+							message.type = Models.Type.CHECK_OUT;
+							break;
 
-					case 5:
-						message.type = Models.Type.EMERGENCY_CALL;
-						break;
+						case 4:
+							message.type = Models.Type.CHANGE_MEDICATION;
+							break;
 
-					case 6:
-						message.type = Models.Type.PULING_NEEDLE;
-						break;
+						case 5:
+							message.type = Models.Type.EMERGENCY_CALL;
+							break;
 
-					case 7:
-						message.type = Models.Type.NEED_SERVICE;
-						break;
+						case 6:
+							message.type = Models.Type.PULING_NEEDLE;
+							break;
 
-					case 8:
-						message.type = Models.Type.NEED_WATER;
-						break;
+						case 7:
+							message.type = Models.Type.NEED_SERVICE;
+							break;
 
-					case 9:
-						message.type = Models.Type.WANT_TO_PAY;
-						break;
+						case 8:
+							message.type = Models.Type.NEED_WATER;
+							break;
 
-					case 10:
-						message.type = Models.Type.NEED_NURSES;
-						break;
+						case 9:
+							message.type = Models.Type.WANT_TO_PAY;
+							break;
 
-					case 11:
-						message.type = Models.Type.SATISFIED;
-						break;
+						case 10:
+							message.type = Models.Type.NEED_NURSES;
+							break;
 
-					case 12:
-						message.type = Models.Type.DISSATISFIED;
-						break;
+						case 11:
+							message.type = Models.Type.SATISFIED;
+							break;
 
-					case 13:
-						message.type = Models.Type.LOW_POWER;
-						break;
+						case 12:
+							message.type = Models.Type.DISSATISFIED;
+							break;
 
-					case 14:
-						message.type = Models.Type.TAMPER;
-						break;
+						case 13:
+							message.type = Models.Type.LOW_POWER;
+							break;
+
+						case 14:
+							message.type = Models.Type.TAMPER;
+							break;
+					}
+					switch (status)
+					{
+						case 0:
+							message.status = STATUS.WAITING;
+							break;
+
+						case 1:
+							message.status = STATUS.FINISH;
+							break;
+
+						case 2:
+							message.status = STATUS.OVERTIME;
+							break;
+					}
+					if (isRFID == 0)
+					{
+						message.isRFID = false;
+					}
+					else
+					{
+						message.isRFID = true;
+					}
+					list.Add(message);
 				}
-				switch (status)
-				{
-					case 0:
-						message.status = STATUS.WAITING;
-						break;
-
-					case 1:
-						message.status = STATUS.FINISH;
-						break;
-
-					case 2:
-						message.status = STATUS.OVERTIME;
-						break;
-				}
-				if (isRFID == 0)
-				{
-					message.isRFID = false;
-				}
-				else
-				{
-					message.isRFID = true;
-				}
-				list.Add(message);
+				return list;
 			}
-			return list;
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<DataMessage>();
+			}
 		}
 
 		//添加呼叫信息
 		public bool insertMess(DataMessage message)
 		{
-			int type = 0;
-			switch (message.type)
+			try
 			{
-				case Models.Type.CANCEL:
-					type = 0;
-					break;
+				int type = 0;
+				switch (message.type)
+				{
+					case Models.Type.CANCEL:
+						type = 0;
+						break;
 
-				case Models.Type.ORDER:
-					type = 1;
-					break;
+					case Models.Type.ORDER:
+						type = 1;
+						break;
 
-				case Models.Type.CALL:
-					type = 2;
-					break;
+					case Models.Type.CALL:
+						type = 2;
+						break;
 
-				case Models.Type.CHECK_OUT:
-					type = 3;
-					break;
+					case Models.Type.CHECK_OUT:
+						type = 3;
+						break;
 
-				case Models.Type.CHANGE_MEDICATION:
-					type = 4;
-					break;
+					case Models.Type.CHANGE_MEDICATION:
+						type = 4;
+						break;
 
-				case Models.Type.EMERGENCY_CALL:
-					type = 5;
-					break;
+					case Models.Type.EMERGENCY_CALL:
+						type = 5;
+						break;
 
-				case Models.Type.PULING_NEEDLE:
-					type = 6;
-					break;
+					case Models.Type.PULING_NEEDLE:
+						type = 6;
+						break;
 
-				case Models.Type.NEED_SERVICE:
-					type = 7;
-					break;
+					case Models.Type.NEED_SERVICE:
+						type = 7;
+						break;
 
-				case Models.Type.NEED_WATER:
-					type = 8;
-					break;
+					case Models.Type.NEED_WATER:
+						type = 8;
+						break;
 
-				case Models.Type.WANT_TO_PAY:
-					type = 9;
-					break;
+					case Models.Type.WANT_TO_PAY:
+						type = 9;
+						break;
 
-				case Models.Type.NEED_NURSES:
-					type = 10;
-					break;
+					case Models.Type.NEED_NURSES:
+						type = 10;
+						break;
 
-				case Models.Type.SATISFIED:
-					type = 11;
-					break;
+					case Models.Type.SATISFIED:
+						type = 11;
+						break;
 
-				case Models.Type.DISSATISFIED:
-					type = 12;
-					break;
+					case Models.Type.DISSATISFIED:
+						type = 12;
+						break;
 
-				case Models.Type.LOW_POWER:
-					type = 13;
-					break;
+					case Models.Type.LOW_POWER:
+						type = 13;
+						break;
 
-				case Models.Type.TAMPER:
-					type = 14;
-					break;
+					case Models.Type.TAMPER:
+						type = 14;
+						break;
+				}
+				int status = 0;
+				switch (message.status)
+				{
+					case STATUS.WAITING:
+						status = 0;
+						break;
+
+					case STATUS.FINISH:
+						status = 1;
+						break;
+
+					case STATUS.OVERTIME:
+						status = 2;
+						break;
+				}
+				int isRFID = 0;
+				if (message.isRFID)
+				{
+					isRFID = 1;
+				}
+				return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID]) values ('" + message.timeConvert() + "', '" + message.callerNum + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "')");
 			}
-			int status = 0;
-			switch (message.status)
+			catch (Exception ex)
 			{
-				case STATUS.WAITING:
-					status = 0;
-					break;
-
-				case STATUS.FINISH:
-					status = 1;
-					break;
-
-				case STATUS.OVERTIME:
-					status = 2;
-					break;
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
 			}
-			int isRFID = 0;
-			if (message.isRFID)
-			{
-				isRFID = 1;
-			}
-			return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID]) values (#" + message.time + "#, '" + message.callerNum.ToString() + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "')");
 		}
 
 		//删除呼叫信息
 		public bool deleteMess(DataMessage message)
 		{
-			return operateData("delete from " + TABLE_MESS + " where Id ='" + message.Id + "'");
+			try
+			{
+				return operateData("delete from " + TABLE_MESS + " where Id ='" + message.Id + "'");
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		//更改呼叫信息，主要用于完成服务的修改
 		public bool updateMess(DataMessage message)
 		{
-			int status = 0;
-			switch (message.status)
+			try
 			{
-				case STATUS.WAITING:
-					status = 0;
-					break;
+				int status = 0;
+				switch (message.status)
+				{
+					case STATUS.WAITING:
+						status = 0;
+						break;
 
-				case STATUS.FINISH:
-					status = 1;
-					break;
+					case STATUS.FINISH:
+						status = 1;
+						break;
 
-				case STATUS.OVERTIME:
-					status = 2;
-					break;
+					case STATUS.OVERTIME:
+						status = 2;
+						break;
+				}
+				int isRFID = 0;
+				if (message.isRFID)
+				{
+					isRFID = 1;
+				}
+
+				return operateData("update " + TABLE_MESS + " set [time]='" + message.timeConvert() + "', [waiterNum]=" + message.employeeNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]='" + message.callerNum + "' and [status]=0");
 			}
-			int isRFID = 0;
-			if (message.isRFID)
+			catch (Exception ex)
 			{
-				isRFID = 1;
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
 			}
-
-			return operateData("update " + TABLE_MESS + " set [time]=#" + message.time + "#, [waiterNum]=" + message.employeeNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]=" + message.callerNum + " and [status]=0");
 		}
 
 		//更改呼叫信息，主要用于服务超时的修改
 		public bool updateMessTimeOut(DataMessage message)
 		{
-			int status = 0;
-			switch (message.status)
+			try
 			{
-				case STATUS.WAITING:
-					status = 0;
-					break;
+				int status = 0;
+				switch (message.status)
+				{
+					case STATUS.WAITING:
+						status = 0;
+						break;
 
-				case STATUS.FINISH:
-					status = 1;
-					break;
+					case STATUS.FINISH:
+						status = 1;
+						break;
 
-				case STATUS.OVERTIME:
-					status = 2;
-					break;
+					case STATUS.OVERTIME:
+						status = 2;
+						break;
+				}
+				int isRFID = 0;
+				if (message.isRFID)
+				{
+					isRFID = 1;
+				}
+
+				return operateData("update " + TABLE_MESS + " set [status]=" + status + " where [callerNum]='" + message.callerNum + "' and [time] ='" + message.timeConvert() + "'");
 			}
-			int isRFID = 0;
-			if (message.isRFID)
+			catch (Exception ex)
 			{
-				isRFID = 1;
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
 			}
-
-			return operateData("update " + TABLE_MESS + " set [status]=" + status + " where [callerNum]=" + message.callerNum + " and [time] =#" + message.time + "#");
 		}
 
 		public bool clearAll()
 		{
-			operateData("delete from " + TABLE_ADMIN + " where Id>0");
-			operateData("delete from " + TABLE_CALLER);
-			operateData("delete from " + TABLE_ZONE);
-			operateData("delete from " + TABLE_EMPLOYEE);
-			operateData("delete from " + TABLE_EMPLOYEE_RFID);
-			return operateData("delete from " + TABLE_MESS);
+			try
+			{
+				operateData("delete from " + TABLE_ADMIN + " where Id>0");
+				operateData("delete from " + TABLE_CALLER);
+				operateData("delete from " + TABLE_ZONE);
+				operateData("delete from " + TABLE_EMPLOYEE);
+				operateData("delete from " + TABLE_EMPLOYEE_RFID);
+				return operateData("delete from " + TABLE_MESS);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool clearCaller()
 		{
-			return operateData("delete from " + TABLE_CALLER);
+			try
+			{
+				return operateData("delete from " + TABLE_CALLER);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool clearZone()
 		{
-			return operateData("delete from " + TABLE_ZONE);
+			try
+			{
+				return operateData("delete from " + TABLE_ZONE);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool clearEmployee()
 		{
-			operateData("delete from " + TABLE_EMPLOYEE);
-			return operateData("delete from " + TABLE_EMPLOYEE_RFID);
+			try
+			{
+				operateData("delete from " + TABLE_EMPLOYEE);
+				return operateData("delete from " + TABLE_EMPLOYEE_RFID);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool clearUser()
 		{
-			return operateData("delete from " + TABLE_ADMIN + " where userClass>0");
+			try
+			{
+				return operateData("delete from " + TABLE_ADMIN + " where userClass>0");
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool clearRecodrd()
 		{
-			return operateData("delete from " + TABLE_MESS);
+			try
+			{
+				return operateData("delete from " + TABLE_MESS);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
 		}
 
 		public bool clearTableHead()

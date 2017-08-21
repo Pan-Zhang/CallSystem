@@ -34,9 +34,6 @@
 			this.callArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callNumtabPage = new System.Windows.Forms.TabPage();
 			this.callNumdataGridView = new System.Windows.Forms.DataGridView();
-			this.callNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callAreaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callAreaclearDatabtn = new System.Windows.Forms.Button();
 			this.callAreaOKbtn = new System.Windows.Forms.Button();
 			this.callAreaDeletebtn = new System.Windows.Forms.Button();
@@ -44,6 +41,9 @@
 			this.callAreaAddbtn = new System.Windows.Forms.Button();
 			this.callAreaBatchUpdatebtn = new System.Windows.Forms.Button();
 			this.callAreaBatchDelbtn = new System.Windows.Forms.Button();
+			this.callNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callAreaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.callAreatabControl.SuspendLayout();
 			this.callAreatabPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.callAreadataGridView)).BeginInit();
@@ -74,14 +74,18 @@
 			// 
 			// callAreadataGridView
 			// 
+			this.callAreadataGridView.AllowUserToAddRows = false;
 			this.callAreadataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.callAreadataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.callArea});
+			this.callAreadataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.callAreadataGridView.Location = new System.Drawing.Point(-4, 0);
 			this.callAreadataGridView.Name = "callAreadataGridView";
 			this.callAreadataGridView.RowTemplate.Height = 23;
+			this.callAreadataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.callAreadataGridView.Size = new System.Drawing.Size(345, 554);
 			this.callAreadataGridView.TabIndex = 13;
+			this.callAreadataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.callAreadataGridView_CellContentClick);
 			// 
 			// callArea
 			// 
@@ -102,34 +106,20 @@
 			// 
 			// callNumdataGridView
 			// 
+			this.callNumdataGridView.AllowUserToAddRows = false;
 			this.callNumdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.callNumdataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.callNum,
             this.callAreaf,
             this.user});
+			this.callNumdataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.callNumdataGridView.Location = new System.Drawing.Point(0, 0);
 			this.callNumdataGridView.Name = "callNumdataGridView";
 			this.callNumdataGridView.RowTemplate.Height = 23;
+			this.callNumdataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.callNumdataGridView.Size = new System.Drawing.Size(349, 554);
 			this.callNumdataGridView.TabIndex = 14;
-			// 
-			// callNum
-			// 
-			this.callNum.DataPropertyName = "callerNum";
-			this.callNum.HeaderText = "呼叫器编号";
-			this.callNum.Name = "callNum";
-			// 
-			// callAreaf
-			// 
-			this.callAreaf.DataPropertyName = "callerZoneName";
-			this.callAreaf.HeaderText = "呼叫区域";
-			this.callAreaf.Name = "callAreaf";
-			// 
-			// user
-			// 
-			this.user.DataPropertyName = "waiterNum";
-			this.user.HeaderText = "服务员";
-			this.user.Name = "user";
+			this.callNumdataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.callNumdataGridView_CellContentClick);
 			// 
 			// callAreaclearDatabtn
 			// 
@@ -201,6 +191,24 @@
 			this.callAreaBatchDelbtn.UseVisualStyleBackColor = true;
 			this.callAreaBatchDelbtn.Click += new System.EventHandler(this.callAreaBatchDelbtn_Click);
 			// 
+			// callNum
+			// 
+			this.callNum.DataPropertyName = "callerNum";
+			this.callNum.HeaderText = "呼叫器编号";
+			this.callNum.Name = "callNum";
+			// 
+			// callAreaf
+			// 
+			this.callAreaf.DataPropertyName = "callerZoneName";
+			this.callAreaf.HeaderText = "呼叫区域";
+			this.callAreaf.Name = "callAreaf";
+			// 
+			// user
+			// 
+			this.user.DataPropertyName = "waiterNum";
+			this.user.HeaderText = "员工";
+			this.user.Name = "user";
+			// 
 			// settingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -241,10 +249,10 @@
 		private System.Windows.Forms.Button callAreaOKbtn;
 		private System.Windows.Forms.Button callAreaclearDatabtn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn callArea;
+		private System.Windows.Forms.Button callAreaBatchUpdatebtn;
+		private System.Windows.Forms.Button callAreaBatchDelbtn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn callNum;
 		private System.Windows.Forms.DataGridViewTextBoxColumn callAreaf;
 		private System.Windows.Forms.DataGridViewTextBoxColumn user;
-		private System.Windows.Forms.Button callAreaBatchUpdatebtn;
-		private System.Windows.Forms.Button callAreaBatchDelbtn;
 	}
 }

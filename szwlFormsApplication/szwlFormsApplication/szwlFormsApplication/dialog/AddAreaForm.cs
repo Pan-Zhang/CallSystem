@@ -23,10 +23,26 @@ namespace szwlFormsApplication.dialog
 		{
 			Callzone zone = new Callzone();
 			zone.name = areaName.Text;
+			if (string.IsNullOrWhiteSpace(zone.name))
+			{
+				MessageBox.Show("呼叫区域不能为空,不能新增！");
+				return;
+			}
+
 			this.DialogResult = DialogResult.OK;
+			if (InitData.list_zone == null)
+				InitData.list_zone = new List<Callzone>();
+			if (InitData.list_zone.Any(z => z.name == zone.name))
+			{
+				MessageBox.Show("该呼叫区域已存在,不能新增！");
+				return;
+			}
 			if (szwlForm.mainForm.dm.insertZone(zone))
 			{
-				this.Hide();
+				InitData.list_zone = szwlForm.mainForm.dm.selectZone();
+				MessageBox.Show("该呼叫区域添加成功！");
+				this.DialogResult = DialogResult.OK;
+				this.Close();
 			}
 		}
 

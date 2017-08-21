@@ -15,7 +15,6 @@ namespace szwlFormsApplication.dialog
 	public partial class EditAreaForm : Form
 	{
 		public Callzone zone { get; set; }
-		DBManager dm;
 		public EditAreaForm()
 		{
 			InitializeComponent();
@@ -23,11 +22,43 @@ namespace szwlFormsApplication.dialog
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			zone.name = textBox1.Text;
 			this.DialogResult = DialogResult.OK;
-			if (szwlForm.mainForm.dm.updateZone(zone))
+			if(String.IsNullOrWhiteSpace(oldareaname.Text))
 			{
-				this.Hide();
+				MessageBox.Show("未选中呼叫呼叫区域数据,不能修改！");
+				return;
+			}
+
+			if (InitData.list_zone == null || InitData.list_zone.Count == 0)
+			{
+				MessageBox.Show("暂时还未有呼叫区域数据,不能修改！");
+				return;
+			}
+			if (InitData.list_zone.Any(z => z.Id == zone.Id))
+			{
+				if (textBox1.Text == oldareaname.Text)
+					return;
+				if (InitData.list_zone.Where(z=>z.name!=oldareaname.Text).Any(z => z.name == textBox1.Text))
+				{
+					MessageBox.Show("该呼叫器已存在,修改失败！");
+					return;
+				}
+				zone.name = textBox1.Text;
+				if (szwlForm.mainForm.dm.updateZone(zone))
+				{
+					InitData.list_zone = InitData.list_zone.Select(z => z.Id == zone.Id ? zone : z).ToList();
+					this.Hide();
+				}
+				else
+				{
+					MessageBox.Show("修改失败，请重试！");
+					return;
+				}
+			}
+			else
+			{
+				MessageBox.Show("该呼叫区域不存在,不能修改！");
+				return;
 			}
 		}
 
@@ -38,7 +69,7 @@ namespace szwlFormsApplication.dialog
 
 		private void EditAreaForm_Load(object sender, EventArgs e)
 		{
-			textBox1.Text = zone.name;
+			oldareaname.Text=textBox1.Text = zone.name;
 		}
 	}
 }

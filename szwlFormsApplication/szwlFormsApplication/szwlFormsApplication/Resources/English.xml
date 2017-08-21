@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<English>
+	<app_name>SZWL caller system</app_name>
+	<no_quest>No request</no_quest>
+	<have_quest>Number: {0}，Type：{1}</have_quest>
+	<no_device> Failed to get device port. Make sure to insert device?</no_device>
+	<prompt>Prompt</prompt>
+	<empty_warn>Can't be null！</empty_warn>
+	<login_prompt>Prompt</login_prompt>
+	<welcome>Welcome！</welcome>
+	<login_error>username or password is wrong！</login_error>
+	<number>Number </number>
+	<nothing>NO</nothing>
+	<name>name:</name>
+	<finish>finish</finish>
+	<overtime>overtime</overtime>
+	<waiting>waiting</waiting>
+	<satisfy>satisfy</satisfy>
+	<unsatisfy>unsatisfy</unsatisfy>
+	<records> records</records>
+	<time> times</time>
+	<record_null>Record is empty！</record_null>
+	<choose_file>Choose File</choose_file>
+	<save_path>File path is：</save_path>
+	<export_succ>Export file success</export_succ>
+	<delete_all>Do you want to delete all info？</delete_all>
+	<delete_caller>Do you want to delete all caller？</delete_caller>
+	<delete_zone>Do you want to delete all zone？</delete_zone>
+	<delete_employee>Do you want to delete all employee？</delete_employee>
+	<delete_user>Do you want to delete all user？</delete_user>
+	<delete_record>Do you want to delte all records？</delete_record>
+	<delete_header>Do you want to delete all header？</delete_header>
+	<login_setting>Login</login_setting>
+	<system_setting>System</system_setting>
+	<user_setting>User</user_setting>
+	<caller_setting>Caller</caller_setting>
+	<employee_setting>Employee</employee_setting>
+	<header_setting>Header</header_setting>
+	<data_setting>Data</data_setting>
+	<summary_setting>Summary</summary_setting>
+	<about_setting>About</about_setting>
+	<ID>Num</ID>
+	<Time>Time</Time>
+	<caller_num>CallerNum</caller_num>
+	<employee_num>Employee</employee_num>
+	<type>Type</type>
+	<status>Status</status>
+	<isRFID>isRFID</isRFID>
+	<welcome_use>Welcome to use</welcome_use>
+	<user_login>User Login</user_login>
+	<username>UserName:</username>
+	<password>PassWord:</password>
+	<login>Login</login>
+	<cancel>Cancel</cancel>
+	<summary_result>Summary Result</summary_result>
+	<total>Total:</total>
+	<zone_search>Region query</zone_search>
+	<employee_search>Staff inquiries</employee_search>
+	<option>Option</option>
+	<start>Start date</start>
+	<end>End date</end>
+	<zone>Call zone</zone>
+	<employee>Employee</employee>
+	<ensure>Ensure</ensure>
+	<export>Export</export>
+	<summary>Summary</summary>
+	<sreach_result>Search Result</sreach_result>
+	<Data_initialization>Data init</Data_initialization>
+	<watch_out>Please use this function carefully!</watch_out>
+	<all_message>all information</all_message>
+	<all_caller>all caller</all_caller>
+	<all_zone>call zone</all_zone>
+	<all_employee>all employee</all_employee>
+	<all_user>all user</all_user>
+	<all_record>all record</all_record>
+	<all_header>header</all_header>
+	<ensure_operation>please ensure your operation!</ensure_operation>
+	<exist_app>Exit</exist_app>
+	<minimal>Minimal</minimal>
+
+	<company_name>Company</company_name>
+	<com_setting>SerialPort</com_setting>
+	<button_function>Button</button_function>
+	<record_show>Record</record_show>
+	<effective_time>Valid time</effective_time>
+
+	<SerialPort>Serial Port</SerialPort>
+	<data_bits>Data Bits</data_bits>
+	<baud_rate>Baud Rate</baud_rate>
+	<stop_bit>Stop Bit</stop_bit>
+
+	<sort>Sort</sort>
+	<Ascending>Ascending</Ascending>
+	<Descending>Descending</Descending>
+	<color>Record Color</color>
+	<timeout>overtime</timeout>
+	<setting>Set</setting>
+	<Set_timeout>Set Timeout</Set_timeout>
+
+	<second>Second</second>
+	<minute>Minute</minute>
+	<hour>Hour</hour>
+
+	<Wireless_calling_system>Wireless calling system</Wireless_calling_system>
+	<set_succe>Set successfully!</set_succe>
+	<set_fail>Set fail!</set_fail>
+	<user_type>Type</user_type>
+
+	<add_user>Add</add_user>
+	<edit_user>Edit</edit_user>
+	<authority>Authority</authority>
+	<update_pwd>Update</update_pwd>
+	<clear_data>Clear</clear_data>
+	<_username>username</_username>
+	<_password>password</_password>
+	<del_user>Delete</del_user>
+
+	<caller_zone_setting>Zone setting</caller_zone_setting>
+	<caller_num_setting>Caller setting</caller_num_setting>
+	<call_zone>ZoneName</call_zone>
+	<callAreaAddbtn>Add</callAreaAddbtn>
+	<callAreaUpdatebtn>Update</callAreaUpdatebtn>
+	<callAreaDeletebtn>Delete</callAreaDeletebtn>
+	<callAreaBatchUpdatebtn>BatchUpdate</callAreaBatchUpdatebtn>
+	<callAreaBatchDelbtn>BatchDel</callAreaBatchDelbtn>
+	<callAreaOKbtn>Ensure</callAreaOKbtn>
+	<callAreaclearDatabtn>Clear</callAreaclearDatabtn>
+
+	<telephone>Tel</telephone>
+	<remarks>remarks</remarks>
+	<gender>gender</gender>
+
+	<rfid_mode>RFID Mode</rfid_mode>
+	<button_mode>Button Mode</button_mode>
+	<choose_table>choose table</choose_table>
+	<other_name>column name</other_name>
+	<call_message>call massage</call_message>
+	<employ_info>employ info</employ_info>
+	<old_name>old name</old_name>
+	<new_name>new name</new_name>
+	<header_set_succe>Column name update sucess!</header_set_succe>
+	<Caller_number>CallerNum</Caller_number>
+	<Caller_zone>CallerZone</Caller_zone>
+
+</English>

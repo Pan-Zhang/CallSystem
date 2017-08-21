@@ -15,7 +15,6 @@ namespace szwlFormsApplication.dialog
 	public partial class EditEmployeeForm : Form
 	{
 		public Employee employee { get; set; }
-		DBManager dm;
 		public EditEmployeeForm()
 		{
 			InitializeComponent();
@@ -31,16 +30,52 @@ namespace szwlFormsApplication.dialog
 			this.DialogResult = DialogResult.OK;
 			if (Common.isRFID)
 			{
-				if (szwlForm.mainForm.dm.updateEmployeeRFID(employee))
+				if (InitData.employeeRFID == null)
 				{
-					this.Hide();
+					MessageBox.Show("员工不存在，不能修改！");
+					return;
+				}
+				else
+				{
+					if (InitData.employeeRFID.Any(em => em.employeeNum == employee.employeeNum))
+					{
+						if (szwlForm.mainForm.dm.updateEmployeeRFID(employee))
+						{
+							InitData.employeeRFID = InitData.employeeRFID.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
+							MessageBox.Show("员工修改成功！");
+							this.Hide();
+						}
+					}
+					else
+					{
+						MessageBox.Show("员工不存在，不能修改！");
+						return;
+					}
 				}
 			}
 			else
 			{
-				if (szwlForm.mainForm.dm.updateEmployee(employee))
+				if (InitData.employees == null)
 				{
-					this.Hide();
+					MessageBox.Show("员工不存在，不能修改！");
+					return;
+				}
+				else
+				{
+					if (InitData.employees.Any(em => em.employeeNum == employee.employeeNum))
+					{
+						if (szwlForm.mainForm.dm.updateEmployee(employee))
+						{
+							InitData.employees = InitData.employees.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
+							MessageBox.Show("员工修改成功！");
+							this.Hide();
+						}
+					}
+					else
+					{
+						MessageBox.Show("员工不存在，不能修改！");
+						return;
+					}
 				}
 			}
 		}

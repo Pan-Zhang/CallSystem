@@ -15,20 +15,40 @@ namespace szwlFormsApplication.dialog
 	public partial class ChangeUser : Form
 	{
 		public User admin { get; set; }
-		DBManager dm;
 
 		public ChangeUser()
 		{
 			InitializeComponent();
+			userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
+			userClassComboBox.Items.Add(User.UserClass.normal.ToString());
 		}
 
 		private void ensure_Click(object sender, EventArgs e)
 		{
 			admin.name = username.Text;
 			admin.pass = password.Text;
+			admin.userClass = (User.UserClass)userClassComboBox.SelectedIndex;
+			new UserProgram(admin);
 			this.DialogResult = DialogResult.OK;
-			if(szwlForm.mainForm.dm.updateUser(admin)){
-				this.Hide();
+			if (InitData.users == null)
+			{
+				MessageBox.Show("该用户不存在不能修改！");
+			}
+ 			else 
+			{
+				if (InitData.users.Any(u => u.name == admin.name))
+				{
+					if (szwlForm.mainForm.dm.updateUser(admin))
+					{
+						InitData.users = InitData.users.Select(u => u.name == admin.name ? admin : u).ToList();
+						MessageBox.Show("该用户修改成功！");
+						this.Hide();
+					}
+				}
+				else
+				{
+					MessageBox.Show("该用户不存在不能修改！");
+				}
 			}
 		}
 
@@ -42,7 +62,8 @@ namespace szwlFormsApplication.dialog
 		{
 			username.Text = admin.name;
 			password.Text = admin.pass;
-			if (admin.name.Equals("admin"))
+			userClassComboBox.SelectedIndex = (int)admin.userClass;
+			if (admin.name.Equals("Admin"))
 			{
 				username.Enabled = false;
 				prompt.Show();

@@ -63,7 +63,7 @@
 			this.prompt.Name = "prompt";
 			this.prompt.Size = new System.Drawing.Size(131, 12);
 			this.prompt.TabIndex = 13;
-			this.prompt.Text = "不允许命名为‘admin’";
+			this.prompt.Text = "不允许命名为‘Admin’";
 			// 
 			// ensure
 			// 

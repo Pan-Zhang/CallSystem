@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 
 namespace szwlFormsApplication
 {
@@ -17,6 +18,7 @@ namespace szwlFormsApplication
 		public dataMaintainSettingForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void dataMaintainSettingForm_Load(object sender, EventArgs e)
@@ -31,31 +33,31 @@ namespace szwlFormsApplication
 			switch (index)
 			{
 				case 0:
-					mess = "您确定希望删除所有信息？";
+					mess = GlobalData.GlobalLanguage.delete_all;
 					break;
 
 				case 1:
-					mess = "您确定希望删除所有呼叫器信息？";
+					mess = GlobalData.GlobalLanguage.delete_caller;
 					break;
 
 				case 2:
-					mess = "您确定希望删除所有区域信息？";
+					mess = GlobalData.GlobalLanguage.delete_zone;
 					break;
 
 				case 3:
-					mess = "您确定希望删除所有员工信息？";
+					mess = GlobalData.GlobalLanguage.delete_employee;
 					break;
 
 				case 4:
-					mess = "您确定希望删除所有用户信息？";
+					mess = GlobalData.GlobalLanguage.delete_user;
 					break;
 
 				case 5:
-					mess = "您确定希望删除所有呼叫记录？";
+					mess = GlobalData.GlobalLanguage.delete_record;
 					break;
 
 				case 6:
-					mess = "您确定希望删除所有表头信息？";
+					mess = GlobalData.GlobalLanguage.delete_header;
 					break;
 
 				default:
@@ -63,7 +65,7 @@ namespace szwlFormsApplication
 					return;
 			}
 
-			DialogResult dr = MessageBox.Show(mess, "提示", MessageBoxButtons.OKCancel);
+			DialogResult dr = MessageBox.Show(mess, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OKCancel);
 			if (dr == DialogResult.OK)
 			{
 				switch (index)
@@ -98,6 +100,24 @@ namespace szwlFormsApplication
 				}
 			}
 			this.Hide();
+		}
+
+		private void changeLanguage()
+		{
+			dataInitLabel.Text = GlobalData.GlobalLanguage.Data_initialization;
+			dataInitOK.Text = GlobalData.GlobalLanguage.ensure;
+			this.Text = GlobalData.GlobalLanguage.about_setting;
+			label1.Text = GlobalData.GlobalLanguage.watch_out;
+
+			comboBox1.Items[0] = GlobalData.GlobalLanguage.all_message;
+			comboBox1.Items[1] = GlobalData.GlobalLanguage.all_caller;
+			comboBox1.Items[2] = GlobalData.GlobalLanguage.all_zone;
+			comboBox1.Items[3] = GlobalData.GlobalLanguage.all_employee;
+			comboBox1.Items[4] = GlobalData.GlobalLanguage.all_user;
+			comboBox1.Items[5] = GlobalData.GlobalLanguage.all_record;
+			comboBox1.Items[6] = GlobalData.GlobalLanguage.all_header;
+
+
 		}
 	}
 }

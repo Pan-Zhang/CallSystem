@@ -82,6 +82,7 @@
     <Compile Include="CommonFunc\ChangeAppConfig.cs" />
     <Compile Include="CommonFunc\Common.cs" />
     <Compile Include="CommonFunc\DBManager.cs" />
+    <Compile Include="CommonFunc\ExcelFile.cs" />
     <Compile Include="CommonFunc\InitData.cs" />
     <Compile Include="CommonFunc\RefreshInterface.cs" />
     <Compile Include="CommonFunc\Server.cs" />
@@ -121,6 +122,12 @@
     <Compile Include="dialog\ChangeUser.Designer.cs">
       <DependentUpon>ChangeUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\ChangeUserAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\ChangeUserAuthor.Designer.cs">
+      <DependentUpon>ChangeUserAuthor.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialog\EditAreaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,12 +146,20 @@
     <Compile Include="dialog\EditEmployeeForm.Designer.cs">
       <DependentUpon>EditEmployeeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dialog\ExitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialog\ExitForm.Designer.cs">
+      <DependentUpon>ExitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dialog\UpdatePassForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dialog\UpdatePassForm.Designer.cs">
       <DependentUpon>UpdatePassForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Language\GlobalData.cs" />
+    <Compile Include="Language\Language.cs" />
     <Compile Include="LogOnForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +167,7 @@
       <DependentUpon>LogOnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\COM.cs" />
+    <Compile Include="Models\TableHeader.cs" />
     <Compile Include="Models\TimeColor.cs" />
     <Compile Include="Models\OrderBy.cs" />
     <Compile Include="Models\User.cs" />
@@ -186,12 +202,6 @@
     <Compile Include="tableSettingsForm.Designer.cs">
       <DependentUpon>tableSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="tempForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="tempForm.Designer.cs">
-      <DependentUpon>tempForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="userForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +216,7 @@
     </Compile>
     <EmbeddedResource Include="aboutForm.resx">
       <DependentUpon>aboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="callHistoriesSummaryForm.resx">
       <DependentUpon>callHistoriesSummaryForm.cs</DependentUpon>
@@ -228,6 +239,9 @@
     <EmbeddedResource Include="dialog\ChangeUser.resx">
       <DependentUpon>ChangeUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dialog\ChangeUserAuthor.resx">
+      <DependentUpon>ChangeUserAuthor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dialog\EditAreaForm.resx">
       <DependentUpon>EditAreaForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dialog\EditEmployeeForm.resx">
       <DependentUpon>EditEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialog\ExitForm.resx">
+      <DependentUpon>ExitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dialog\UpdatePassForm.resx">
       <DependentUpon>UpdatePassForm.cs</DependentUpon>
@@ -251,6 +268,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="szwlForm.resx">
       <DependentUpon>szwlForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -264,9 +282,6 @@
     <EmbeddedResource Include="tableSettingsForm.resx">
       <DependentUpon>tableSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="tempForm.resx">
-      <DependentUpon>tempForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="userForm.resx">
       <DependentUpon>userForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,6 +289,121 @@
       <DependentUpon>employeeSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="packages\Newtonsoft.Json.6.0.1\Newtonsoft.Json.6.0.1.nupkg" />
+    <None Include="packages\Newtonsoft.Json.6.0.1\tools\install.ps1" />
+    <None Include="packages\NLog.4.2.3\NLog.4.2.3.nupkg" />
+    <None Include="packages\Skin\skn皮肤\Aquanox-DEEP.skn" />
+    <None Include="packages\Skin\skn皮肤\Aquanox-SHALLOW2.skn" />
+    <None Include="packages\Skin\skn皮肤\black-BLACK.skn" />
+    <None Include="packages\Skin\skn皮肤\BlackMesa-NORMAL.skn" />
+    <None Include="packages\Skin\skn皮肤\ClearLook-SYSTEM.skn" />
+    <None Include="packages\Skin\skn皮肤\ClearLooks-BLUE.skn" />
+    <None Include="packages\Skin\skn皮肤\ClearLooks-HUMAN.skn" />
+    <None Include="packages\Skin\skn皮肤\corona-CORONA12.skn" />
+    <None Include="packages\Skin\skn皮肤\Element-CLASSIC.skn" />
+    <None Include="packages\Skin\skn皮肤\Element-ROYAL.skn" />
+    <None Include="packages\Skin\skn皮肤\Extensis-COPPERL.skn" />
+    <None Include="packages\Skin\skn皮肤\Extensis-EXTENSIS.skn" />
+    <None Include="packages\Skin\skn皮肤\Jade Style-JADEC.skn" />
+    <None Include="packages\Skin\skn皮肤\Klarheit-ERGOCOM.skn" />
+    <None Include="packages\Skin\skn皮肤\LE4-BLACK.skn" />
+    <None Include="packages\Skin\skn皮肤\LE4-DEFAULT.skn" />
+    <None Include="packages\Skin\skn皮肤\luna-BLUE.skn" />
+    <None Include="packages\Skin\skn皮肤\luna-HOMESTEAD.skn" />
+    <None Include="packages\Skin\skn皮肤\luna-METALLIC.skn" />
+    <None Include="packages\Skin\skn皮肤\Mac OS X-BLUE.skn" />
+    <None Include="packages\Skin\skn皮肤\MNS-STANDART.skn" />
+    <None Include="packages\Skin\skn皮肤\Office 2007-OFFICE07.skn" />
+    <None Include="packages\Skin\skn皮肤\Plex Style-M6SVRBAR.skn" />
+    <None Include="packages\Skin\skn皮肤\Plex Style-PLEXM6BAR.skn" />
+    <None Include="packages\Skin\skn皮肤\Pro Genius-BLUE.skn" />
+    <None Include="packages\Skin\skn皮肤\ProLCD-PROLCDAC.skn" />
+    <None Include="packages\Skin\skn皮肤\Royale Glass-GRAPHITET.skn" />
+    <None Include="packages\Skin\skn皮肤\Royale Glass-INDIGOT.skn" />
+    <None Include="packages\Skin\skn皮肤\SimpleXp-DARKBC.skn" />
+    <None Include="packages\Skin\skn皮肤\SimpleXp-LIGHTBC.skn" />
+    <None Include="packages\Skin\skn皮肤\SimpleXp-OLIVE.skn" />
+    <None Include="packages\Skin\skn皮肤\SimpleXp-REBLUE.skn" />
+    <None Include="packages\Skin\skn皮肤\Slate PDC-SLATEC.skn" />
+    <None Include="packages\Skin\skn皮肤\Slate PDC-SLATECBT.skn" />
+    <None Include="packages\Skin\skn皮肤\Slate XP-SLATE.skn" />
+    <None Include="packages\Skin\skn皮肤\Slate XP-SLATEBT.skn" />
+    <None Include="packages\Skin\skn皮肤\Souluna Remix Final-NORMAL.skn" />
+    <None Include="packages\Skin\skn皮肤\Tiger-TGR.skn" />
+    <None Include="packages\Skin\skn皮肤\Tiger-TGRB2.skn" />
+    <None Include="packages\Skin\skn皮肤\Tiger-TGRP.skn" />
+    <None Include="packages\Skin\skn皮肤\VistaXP-VISTAXPB2.skn" />
+    <None Include="packages\Skin\skn皮肤\VistaXP-VISTAXPS2.skn" />
+    <None Include="packages\Skin\skn皮肤\Watercolor-BLUE.skn" />
+    <None Include="packages\Skin\skn皮肤\Watercolor-ERGONOMIC.skn" />
+    <None Include="packages\Skin\skn皮肤\Watercolor-OLIVE.skn" />
+    <None Include="packages\Skin\skn皮肤\Watercolor-SILVER.skn" />
+    <None Include="packages\Skin\skn皮肤\wmpx-XMP2.skn" />
+    <None Include="packages\Skin\skn皮肤\wmpx-XMPX3.skn" />
+    <None Include="packages\Skin\SSK皮肤\Carlmness\Calmness.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Carlmness\CalmnessColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Carlmness\CalmnessColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Deep\DeepCyan.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Deep\DeepGreen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Deep\DeepOrange.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Diamond\DiamondBlue.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Diamond\DiamondGreen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Eighteen\Eighteen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Eighteen\EighteenColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Eighteen\EighteenColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Emerald\Emerald.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Emerald\EmeraldColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Emerald\EmeraldColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Emerald\EmeraldColor3.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Glass\GlassBrown.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Glass\GlassGreen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Glass\GlassOrange.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Longhorn\Longhorn.ssk" />
+    <None Include="packages\Skin\SSK皮肤\MacOS\MacOS.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Midsummer\Midsummer.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Midsummer\MidsummerColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Midsummer\MidsummerColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Midsummer\MidsummerColor3.ssk" />
+    <None Include="packages\Skin\SSK皮肤\MP10\MP10.ssk" />
+    <None Include="packages\Skin\SSK皮肤\MSN\MSN.ssk" />
+    <None Include="packages\Skin\SSK皮肤\One\OneBlue.ssk" />
+    <None Include="packages\Skin\SSK皮肤\One\OneCyan.ssk" />
+    <None Include="packages\Skin\SSK皮肤\One\OneGreen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\One\OneOrange.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Page\Page.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Page\PageColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Page\PageColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\RealOne\RealOne.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Silver\Silver.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Silver\SilverColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Silver\SilverColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Sports\SportsBlack.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Sports\SportsBlue.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Sports\SportsCyan.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Sports\SportsGreen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Sports\SportsOrange.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Steel\SteelBlack.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Steel\SteelBlue.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista1\vista1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista1\vista1_green.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color3.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color4.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color5.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color6.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Vista2\Vista2_color7.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Warm\Warm.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Warm\WarmColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Warm\WarmColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Warm\WarmColor3.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Wave\Wave.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Wave\WaveColor1.ssk" />
+    <None Include="packages\Skin\SSK皮肤\Wave\WaveColor2.ssk" />
+    <None Include="packages\Skin\SSK皮肤\WinXP\XPBlue.ssk" />
+    <None Include="packages\Skin\SSK皮肤\WinXP\XPGreen.ssk" />
+    <None Include="packages\Skin\SSK皮肤\WinXP\XPOrange.ssk" />
+    <None Include="packages\Skin\SSK皮肤\WinXP\XPSilver.ssk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -283,9 +413,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\Record.xls" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
@@ -306,6 +439,111 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages\DotNetSkin.dll" />
+    <Content Include="packages\IrisSkin2.dll" />
+    <Content Include="packages\LogHelper.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net20\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net20\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net35\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net35\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\netcore45\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\netcore45\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.6.0.1\lib\portable-net45+wp80+win8\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.dll" />
+    <Content Include="packages\NLog.4.2.3\lib\net35\NLog.dll" />
+    <Content Include="packages\NLog.4.2.3\lib\net35\NLog.xml" />
+    <Content Include="packages\NLog.4.2.3\lib\net40\NLog.dll" />
+    <Content Include="packages\NLog.4.2.3\lib\net40\NLog.xml" />
+    <Content Include="packages\NLog.4.2.3\lib\net45\NLog.dll" />
+    <Content Include="packages\NLog.4.2.3\lib\net45\NLog.xml" />
+    <Content Include="packages\NLog.4.2.3\lib\sl4\NLog.dll" />
+    <Content Include="packages\NLog.4.2.3\lib\sl4\NLog.xml" />
+    <Content Include="packages\NLog.4.2.3\lib\sl5\NLog.dll" />
+    <Content Include="packages\NLog.4.2.3\lib\sl5\NLog.xml" />
+    <Content Include="packages\NLog.dll" />
+    <Content Include="packages\Skin\DotNetSkin.dll" />
+    <Content Include="packages\Skin\IrisSkin2.dll" />
+    <Content Include="packages\Skin\sn.txt" />
+    <Content Include="packages\Skin\SSK皮肤\Carlmness\calmness.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Carlmness\calmness_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Carlmness\calmness_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Deep\deepcyan.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Deep\deepgreen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Deep\deeporange.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Diamond\diamondblue.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Diamond\diamondgreen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Eighteen\eighteen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Eighteen\eighteen_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Eighteen\eighteen_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Emerald\emerald.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Emerald\emerald_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Emerald\emerald_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Emerald\emerald_color3.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Glass\glassbrown.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Glass\glassgreen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Glass\glassorange.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Longhorn\longhorn.gif" />
+    <Content Include="packages\Skin\SSK皮肤\MacOS\macos.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Midsummer\midsummer.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Midsummer\midsummer_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Midsummer\midsummer_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Midsummer\midsummer_color3.gif" />
+    <Content Include="packages\Skin\SSK皮肤\MP10\mp10.gif" />
+    <Content Include="packages\Skin\SSK皮肤\MSN\msn.gif" />
+    <Content Include="packages\Skin\SSK皮肤\One\oneblue.gif" />
+    <Content Include="packages\Skin\SSK皮肤\One\onecyan.gif" />
+    <Content Include="packages\Skin\SSK皮肤\One\onegreen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\One\oneorange.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Page\page.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Page\page_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Page\page_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\RealOne\realone.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Silver\silver.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Silver\silver_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Silver\silver_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Sports\sportsblack.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Sports\sportsblue.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Sports\sportscyan.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Sports\sportsgreen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Sports\sportsorange.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Steel\steelblack.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Steel\steelblue.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista1\vista1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista1\vista1_green.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color3.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color4.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color5.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color6.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Vista2\vista2_color7.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Warm\warm.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Warm\warm_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Warm\warm_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Warm\warm_color3.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Wave\wave.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Wave\wave_color1.gif" />
+    <Content Include="packages\Skin\SSK皮肤\Wave\wave_color2.gif" />
+    <Content Include="packages\Skin\SSK皮肤\WinXP\xpblue.gif" />
+    <Content Include="packages\Skin\SSK皮肤\WinXP\xpgreen.gif" />
+    <Content Include="packages\Skin\SSK皮肤\WinXP\xporange.gif" />
+    <Content Include="packages\Skin\SSK皮肤\WinXP\xpsilver.gif" />
+    <Content Include="Resources\Chinese.xml" />
+    <Content Include="Resources\English.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

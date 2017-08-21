@@ -48,6 +48,7 @@ namespace szwlFormsApplication
 			// 
 			// dataGridView1
 			// 
+			this.dataGridView1.AllowUserToAddRows = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserName,
@@ -55,9 +56,12 @@ namespace szwlFormsApplication
             this.mobile,
             this.remark,
             this.sex});
+			this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+			this.dataGridView1.Enabled = false;
 			this.dataGridView1.Location = new System.Drawing.Point(0, 1);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.RowTemplate.Height = 23;
+			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.Size = new System.Drawing.Size(545, 657);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -65,7 +69,7 @@ namespace szwlFormsApplication
 			// 
 			// UserName
 			// 
-			this.UserName.DataPropertyName = "num";
+			this.UserName.DataPropertyName = "employeeNum";
 			this.UserName.HeaderText = "员工编号";
 			this.UserName.Name = "UserName";
 			// 
@@ -187,11 +191,11 @@ namespace szwlFormsApplication
 		private System.Windows.Forms.Button deleteemployee;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button clearemployee;
-		private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn name;
-		private System.Windows.Forms.DataGridViewTextBoxColumn mobile;
-		private System.Windows.Forms.DataGridViewTextBoxColumn remark;
-		private System.Windows.Forms.DataGridViewTextBoxColumn sex;
 		private System.Windows.Forms.ComboBox isRFIDBox;
+		private DataGridViewTextBoxColumn sex;
+		private DataGridViewTextBoxColumn remark;
+		private DataGridViewTextBoxColumn mobile;
+		private DataGridViewTextBoxColumn name;
+		private DataGridViewTextBoxColumn UserName;
 	}
 }

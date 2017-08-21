@@ -71,6 +71,8 @@
 			this.waiting2 = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+			this.notifyIcon2 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.waiting4.SuspendLayout();
 			this.waiting5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.waitingDataGridView)).BeginInit();
@@ -84,8 +86,6 @@
 			this.waiting2.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
-			this.FormClosing += SzwlForm_FormClosing;
-			this.FormClosed += SzwlForm_FormClosed;
 			// 
 			// waiting4
 			// 
@@ -133,6 +133,7 @@
 			// 
 			// waitingDataGridView
 			// 
+			this.waitingDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.waitingDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.waitingDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -146,7 +147,7 @@
 			this.waitingDataGridView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
 			this.waitingDataGridView.Name = "waitingDataGridView";
 			this.waitingDataGridView.RowTemplate.Height = 23;
-			this.waitingDataGridView.Size = new System.Drawing.Size(567, 432);
+			this.waitingDataGridView.Size = new System.Drawing.Size(581, 432);
 			this.waitingDataGridView.TabIndex = 4;
 			// 
 			// Id
@@ -155,7 +156,6 @@
 			this.Id.HeaderText = "Id";
 			this.Id.Name = "Id";
 			this.Id.ReadOnly = true;
-			this.Id.Width = 30;
 			// 
 			// time
 			// 
@@ -191,10 +191,10 @@
 			this.isRFID.HeaderText = "isRFID";
 			this.isRFID.Name = "isRFID";
 			this.isRFID.ReadOnly = true;
-			this.isRFID.Width = 50;
 			// 
 			// allDataGridView
 			// 
+			this.allDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.allDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.allDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id2,
@@ -205,11 +205,11 @@
             this.status2,
             this.isRFID2});
 			this.allDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.allDataGridView.Location = new System.Drawing.Point(567, 5);
+			this.allDataGridView.Location = new System.Drawing.Point(581, 5);
 			this.allDataGridView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
 			this.allDataGridView.Name = "allDataGridView";
 			this.allDataGridView.RowTemplate.Height = 23;
-			this.allDataGridView.Size = new System.Drawing.Size(712, 432);
+			this.allDataGridView.Size = new System.Drawing.Size(728, 432);
 			this.allDataGridView.TabIndex = 12;
 			// 
 			// Id2
@@ -218,7 +218,6 @@
 			this.Id2.HeaderText = "Id";
 			this.Id2.Name = "Id2";
 			this.Id2.ReadOnly = true;
-			this.Id2.Width = 60;
 			// 
 			// time2
 			// 
@@ -240,7 +239,6 @@
 			this.employeeNum2.HeaderText = "服务员编号";
 			this.employeeNum2.Name = "employeeNum2";
 			this.employeeNum2.ReadOnly = true;
-			this.employeeNum2.Width = 120;
 			// 
 			// type2
 			// 
@@ -255,7 +253,6 @@
 			this.status2.HeaderText = "状态 ";
 			this.status2.Name = "status2";
 			this.status2.ReadOnly = true;
-			this.status2.Width = 80;
 			// 
 			// isRFID2
 			// 
@@ -263,7 +260,6 @@
 			this.isRFID2.HeaderText = "isRFID";
 			this.isRFID2.Name = "isRFID2";
 			this.isRFID2.ReadOnly = true;
-			this.isRFID2.Width = 60;
 			// 
 			// tableLayoutPanel5
 			// 
@@ -272,7 +268,7 @@
 			this.tableLayoutPanel5.Controls.Add(this.waiting5, 0, 1);
 			this.tableLayoutPanel5.Controls.Add(this.waiting4, 0, 0);
 			this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel5.Location = new System.Drawing.Point(879, 0);
+			this.tableLayoutPanel5.Location = new System.Drawing.Point(909, 0);
 			this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
 			this.tableLayoutPanel5.RowCount = 2;
@@ -307,7 +303,7 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.22478F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.77522F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 441F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(1279, 769);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(1309, 769);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// menutoolBar
@@ -327,7 +323,7 @@
 			this.menutoolBar.Location = new System.Drawing.Point(3, 3);
 			this.menutoolBar.Name = "menutoolBar";
 			this.menutoolBar.ShowToolTips = true;
-			this.menutoolBar.Size = new System.Drawing.Size(1273, 75);
+			this.menutoolBar.Size = new System.Drawing.Size(1303, 75);
 			this.menutoolBar.TabIndex = 12;
 			this.menutoolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.menutoolBar_ButtonClick);
 			// 
@@ -356,15 +352,15 @@
 			// 
 			this.settingsbtn.ImageIndex = 3;
 			this.settingsbtn.Name = "settingsbtn";
-			this.settingsbtn.Text = "设置";
-			this.settingsbtn.ToolTipText = "设置";
+			this.settingsbtn.Text = "呼叫器设置";
+			this.settingsbtn.ToolTipText = "呼叫器设置";
 			// 
 			// employeesettingsbtn
 			// 
 			this.employeesettingsbtn.ImageIndex = 4;
 			this.employeesettingsbtn.Name = "employeesettingsbtn";
-			this.employeesettingsbtn.Text = "服务员设置";
-			this.employeesettingsbtn.ToolTipText = "服务员设置";
+			this.employeesettingsbtn.Text = "员工设置";
+			this.employeesettingsbtn.ToolTipText = "员工设置";
 			// 
 			// tablesettingsbtn
 			// 
@@ -384,8 +380,8 @@
 			// 
 			this.searchbtn.ImageIndex = 7;
 			this.searchbtn.Name = "searchbtn";
-			this.searchbtn.Text = "历史记录查询";
-			this.searchbtn.ToolTipText = "历史记录查询";
+			this.searchbtn.Text = "数据统计";
+			this.searchbtn.ToolTipText = "数据统计";
 			// 
 			// aboutbtn
 			// 
@@ -423,7 +419,7 @@
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(1279, 241);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(1309, 241);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
 			// waiting1
@@ -435,7 +431,7 @@
 			this.waiting1.Location = new System.Drawing.Point(0, 0);
 			this.waiting1.Margin = new System.Windows.Forms.Padding(0);
 			this.waiting1.Name = "waiting1";
-			this.waiting1.Size = new System.Drawing.Size(434, 241);
+			this.waiting1.Size = new System.Drawing.Size(449, 241);
 			this.waiting1.TabIndex = 8;
 			// 
 			// label1
@@ -456,13 +452,13 @@
 			this.tableLayoutPanel4.Controls.Add(this.waiting3, 0, 1);
 			this.tableLayoutPanel4.Controls.Add(this.waiting2, 0, 0);
 			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(434, 0);
+			this.tableLayoutPanel4.Location = new System.Drawing.Point(449, 0);
 			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 2;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(445, 241);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(460, 241);
 			this.tableLayoutPanel4.TabIndex = 7;
 			// 
 			// waiting3
@@ -473,7 +469,7 @@
 			this.waiting3.Location = new System.Drawing.Point(0, 120);
 			this.waiting3.Margin = new System.Windows.Forms.Padding(0);
 			this.waiting3.Name = "waiting3";
-			this.waiting3.Size = new System.Drawing.Size(445, 121);
+			this.waiting3.Size = new System.Drawing.Size(460, 121);
 			this.waiting3.TabIndex = 9;
 			// 
 			// waiting2
@@ -484,7 +480,7 @@
 			this.waiting2.Location = new System.Drawing.Point(0, 0);
 			this.waiting2.Margin = new System.Windows.Forms.Padding(0);
 			this.waiting2.Name = "waiting2";
-			this.waiting2.Size = new System.Drawing.Size(445, 120);
+			this.waiting2.Size = new System.Drawing.Size(460, 120);
 			this.waiting2.TabIndex = 8;
 			// 
 			// label2
@@ -511,13 +507,25 @@
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(1279, 442);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(1309, 442);
 			this.tableLayoutPanel3.TabIndex = 1;
+			// 
+			// notifyIcon1
+			// 
+			this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+			// 
+			// notifyIcon2
+			// 
+			this.notifyIcon2.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon2.Icon")));
+			this.notifyIcon2.Text = "notifyIcon2";
+			this.notifyIcon2.Visible = true;
+			this.notifyIcon2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon2_MouseDoubleClick);
 			// 
 			// szwlForm
 			// 
-			this.ClientSize = new System.Drawing.Size(1279, 769);
+			this.ClientSize = new System.Drawing.Size(1309, 769);
 			this.Controls.Add(this.tableLayoutPanel1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "szwlForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "szwlFor无线呼叫系统";
@@ -595,12 +603,14 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn time2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID;
-		private System.Windows.Forms.DataGridViewTextBoxColumn type;
-		private System.Windows.Forms.DataGridViewTextBoxColumn employeeNum;
-		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum;
-		private System.Windows.Forms.DataGridViewTextBoxColumn time;
+		private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+		private System.Windows.Forms.DataGridViewTextBoxColumn time;
+		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum;
+		private System.Windows.Forms.DataGridViewTextBoxColumn employeeNum;
+		private System.Windows.Forms.DataGridViewTextBoxColumn type;
+		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID;
+		private System.Windows.Forms.NotifyIcon notifyIcon2;
 	}
 }
 

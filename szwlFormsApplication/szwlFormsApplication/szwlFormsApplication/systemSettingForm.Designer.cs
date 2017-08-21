@@ -34,12 +34,10 @@
 			this.companyNametextBox = new System.Windows.Forms.TextBox();
 			this.companyNamelabel = new System.Windows.Forms.Label();
 			this.COMSetting = new System.Windows.Forms.TabPage();
-			this.TimeSpancomboBox = new System.Windows.Forms.ComboBox();
 			this.stopComboBox = new System.Windows.Forms.ComboBox();
 			this.bundRateComboBox = new System.Windows.Forms.ComboBox();
 			this.dataComboBox = new System.Windows.Forms.ComboBox();
 			this.COMcomboBox = new System.Windows.Forms.ComboBox();
-			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -144,12 +142,10 @@
 			// 
 			// COMSetting
 			// 
-			this.COMSetting.Controls.Add(this.TimeSpancomboBox);
 			this.COMSetting.Controls.Add(this.stopComboBox);
 			this.COMSetting.Controls.Add(this.bundRateComboBox);
 			this.COMSetting.Controls.Add(this.dataComboBox);
 			this.COMSetting.Controls.Add(this.COMcomboBox);
-			this.COMSetting.Controls.Add(this.label5);
 			this.COMSetting.Controls.Add(this.label4);
 			this.COMSetting.Controls.Add(this.label3);
 			this.COMSetting.Controls.Add(this.label2);
@@ -162,18 +158,10 @@
 			this.COMSetting.Text = "串口设置";
 			this.COMSetting.UseVisualStyleBackColor = true;
 			// 
-			// TimeSpancomboBox
-			// 
-			this.TimeSpancomboBox.FormattingEnabled = true;
-			this.TimeSpancomboBox.Location = new System.Drawing.Point(216, 290);
-			this.TimeSpancomboBox.Name = "TimeSpancomboBox";
-			this.TimeSpancomboBox.Size = new System.Drawing.Size(176, 20);
-			this.TimeSpancomboBox.TabIndex = 9;
-			// 
 			// stopComboBox
 			// 
 			this.stopComboBox.FormattingEnabled = true;
-			this.stopComboBox.Location = new System.Drawing.Point(216, 238);
+			this.stopComboBox.Location = new System.Drawing.Point(241, 269);
 			this.stopComboBox.Name = "stopComboBox";
 			this.stopComboBox.Size = new System.Drawing.Size(176, 20);
 			this.stopComboBox.TabIndex = 8;
@@ -181,7 +169,7 @@
 			// bundRateComboBox
 			// 
 			this.bundRateComboBox.FormattingEnabled = true;
-			this.bundRateComboBox.Location = new System.Drawing.Point(216, 185);
+			this.bundRateComboBox.Location = new System.Drawing.Point(241, 216);
 			this.bundRateComboBox.Name = "bundRateComboBox";
 			this.bundRateComboBox.Size = new System.Drawing.Size(176, 20);
 			this.bundRateComboBox.TabIndex = 7;
@@ -189,7 +177,7 @@
 			// dataComboBox
 			// 
 			this.dataComboBox.FormattingEnabled = true;
-			this.dataComboBox.Location = new System.Drawing.Point(216, 144);
+			this.dataComboBox.Location = new System.Drawing.Point(241, 175);
 			this.dataComboBox.Name = "dataComboBox";
 			this.dataComboBox.Size = new System.Drawing.Size(176, 20);
 			this.dataComboBox.TabIndex = 6;
@@ -197,24 +185,15 @@
 			// COMcomboBox
 			// 
 			this.COMcomboBox.FormattingEnabled = true;
-			this.COMcomboBox.Location = new System.Drawing.Point(216, 101);
+			this.COMcomboBox.Location = new System.Drawing.Point(241, 132);
 			this.COMcomboBox.Name = "COMcomboBox";
 			this.COMcomboBox.Size = new System.Drawing.Size(176, 20);
 			this.COMcomboBox.TabIndex = 5;
 			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(73, 298);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(101, 12);
-			this.label5.TabIndex = 4;
-			this.label5.Text = "相同的键呼叫间隔";
-			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(129, 245);
+			this.label4.Location = new System.Drawing.Point(154, 276);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(41, 12);
 			this.label4.TabIndex = 3;
@@ -223,7 +202,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(129, 193);
+			this.label3.Location = new System.Drawing.Point(154, 224);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(41, 12);
 			this.label3.TabIndex = 2;
@@ -232,7 +211,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(129, 152);
+			this.label2.Location = new System.Drawing.Point(154, 183);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(41, 12);
 			this.label2.TabIndex = 1;
@@ -241,7 +220,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(129, 109);
+			this.label1.Location = new System.Drawing.Point(154, 140);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(41, 12);
 			this.label1.TabIndex = 0;
@@ -612,12 +591,10 @@
 		private System.Windows.Forms.TabPage useableTime;
 		private System.Windows.Forms.TextBox companyNametextBox;
 		private System.Windows.Forms.Label companyNamelabel;
-		private System.Windows.Forms.ComboBox TimeSpancomboBox;
 		private System.Windows.Forms.ComboBox stopComboBox;
 		private System.Windows.Forms.ComboBox bundRateComboBox;
 		private System.Windows.Forms.ComboBox dataComboBox;
 		private System.Windows.Forms.ComboBox COMcomboBox;
-		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;

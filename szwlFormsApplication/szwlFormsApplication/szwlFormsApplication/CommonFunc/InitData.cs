@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using Newtonsoft.Json;
 using szwlFormsApplication.Models;
+using System.Windows.Forms;
 
 namespace szwlFormsApplication.CommonFunc
 {
@@ -15,13 +16,72 @@ namespace szwlFormsApplication.CommonFunc
 	public class InitData
 	{
 		//初始化串口号
-		public static COM com = Common.GetComInfo();
-		public static CallBtnSetting callbtnsetting = GetCallBtnSetting();
-		public static OrderBy orderby = GetOrederBy();
-		public static TimeColor timecolor = GetTimeColor();
+		public static COM com = null;
+		public static CallBtnSetting callbtnsetting = null;
+		public static OrderBy orderby = null;
+		public static TimeColor timecolor = null;
 		public static int TimeOut = 5;
+		public static List<User> users = null;
+		public static UserProgram program = null;
+		public static List<Employee> employees = null;
+		public static List<Employee> employeeRFID = null;
+
+		public static List<Callzone> list_zone=null;
+		public static List<Caller> list_caller = null;
 
 		//设置COM信息
+		public static void Init()
+		{
+			com = Common.GetComInfo();
+			callbtnsetting = GetCallBtnSetting();
+			orderby = GetOrederBy();
+			timecolor = GetTimeColor();
+			TimeOut = 5;
+			users = szwlForm.mainForm.dm.selectUser();
+			employees = szwlForm.mainForm.dm.selectEmployee();
+			employeeRFID = szwlForm.mainForm.dm.selectEmployeeRFID();
+			list_zone = szwlForm.mainForm.dm.selectZone();
+	        list_caller = szwlForm.mainForm.dm.selectCaller();
+			program = new UserProgram(LogOnForm.currentUser);
+		}
+		//设置COM信息
+		public static void Clear()
+		{
+			com = null;
+			callbtnsetting = null;
+			orderby = null;
+			timecolor = null;
+			TimeOut = 5;
+			users = null;
+			employees = null;
+			employeeRFID = null;
+			list_zone = null;
+			list_caller = null;
+			program = null;
+			LogOnForm.currentUser = null;
+		}
+		public static void ClearData<T>(DataGridView grid,T data)
+		{
+			data = default(T); 
+			grid.AutoGenerateColumns = false;
+			grid.DataSource = null;
+			grid.Refresh();
+		}
+		public static void AddData<T>(DataGridView grid, List<T> data)
+		{
+			grid.AutoGenerateColumns = false;
+			grid.DataSource = null;
+			grid.Rows.Add();
+			grid.DataSource = data;
+			grid.Refresh();
+		}
+		public static void RemoveData<T>(DataGridView grid, List<T> data)
+		{
+			grid.AutoGenerateColumns = false;
+			grid.DataSource = data;
+			grid.Rows.Remove(grid.Rows[grid.Rows.Count]);
+			grid.Refresh();
+		}
 		public static bool SetComInfo()
 		{
 			try

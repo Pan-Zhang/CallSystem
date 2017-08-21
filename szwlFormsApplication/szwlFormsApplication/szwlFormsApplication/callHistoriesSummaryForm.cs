@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication
@@ -23,10 +20,12 @@ namespace szwlFormsApplication
 		public callHistoriesSummaryForm()
 		{
 			InitializeComponent();
+			Common.SetTableHeader(historyRecordsdataGridView);
 		}
 
 		private void callHistoriesSummaryForm_Load(object sender, EventArgs e)
 		{
+			changeLanguage();
 			dm = new DBManager();
 			list_caller = dm.selectCaller();
 			initZone();
@@ -84,7 +83,7 @@ namespace szwlFormsApplication
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
-				dr[1] = list_employee[i].employeeNum + "号 " + list_employee[i].name;
+				dr[1] = list_employee[i].employeeNum + GlobalData.GlobalLanguage.number + list_employee[i].name;
 
 				dt.Rows.Add(dr);
 			}
@@ -97,14 +96,14 @@ namespace szwlFormsApplication
 		{
 			int index = callArea.SelectedIndex;
 			Callzone zone = list_zone[index];
-			label13.Text = "无";
+			label13.Text = GlobalData.GlobalLanguage.nothing;
 			foreach (Caller caller in list_caller)
 			{
 				if (caller.callZone == zone.Id)
 				{
 					if (caller.employeeNum == -1)
 					{
-						label13.Text = "无";
+						label13.Text = GlobalData.GlobalLanguage.nothing;
 						break;
 					}
 					Employee tem_emp = null;
@@ -121,11 +120,11 @@ namespace szwlFormsApplication
 					}
 					if (tem_emp == null)
 					{
-						label13.Text = caller.employeeNum + "号";
+						label13.Text = caller.employeeNum + GlobalData.GlobalLanguage.number;
 					}
 					else
 					{
-						label13.Text = caller.employeeNum + "号  姓名：" + tem_emp.name;
+						label13.Text = caller.employeeNum + GlobalData.GlobalLanguage.number + GlobalData.GlobalLanguage.name + tem_emp.name;
 					}
 					break;
 				}
@@ -152,7 +151,7 @@ namespace szwlFormsApplication
 					}
 					if (tem_zone == null)
 					{
-						label9.Text = "无";
+						label9.Text = GlobalData.GlobalLanguage.nothing;
 					}
 					else
 					{
@@ -167,11 +166,11 @@ namespace szwlFormsApplication
 		{
 			tem_list = new List<DataMessage>();
 			DateTime start = date_start.Value.Date;//开始时间
-			DateTime end = date_end.Value.Date;//结束时间
+			DateTime end = date_end.Value.Date.AddDays(1).AddMilliseconds(-1);//结束时间
 
 			Callzone zone = list_zone[callArea.SelectedIndex];//区域
 															  //查找对应呼叫器编号
-			int callerNum = 0;
+			string callerNum = "";
 			foreach (Caller caller in list_caller)
 			{
 				if (caller.callZone == zone.Id)
@@ -189,10 +188,20 @@ namespace szwlFormsApplication
 			{
 				foreach (DataMessage mess in list_allmess)
 				{
-					if (mess.time>start && mess.time<end && mess.callerNum == callerNum)
+					try
 					{
-						tem_list.Add(mess);
+						if (mess.timeConvert() > start && mess.timeConvert() < end && mess.callerNum == callerNum)
+						{
+							tem_list.Add(mess);
+						}
+						LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error,(tem_list == null ? 0 : tem_list.Count).ToString());
 					}
+					catch(Exception ex)
+					{
+						LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error,ex.ToString());
+						return;
+					}
+					
 				}
 			}
 			else if (_type == 0 && _status != 0)//某区域特定状态的所有记录
@@ -215,7 +224,7 @@ namespace szwlFormsApplication
 							break;
 					}
 
-					if (mess.time > start && mess.time < end && mess.callerNum == callerNum && _status == status)
+					if (mess.timeConvert() > start && mess.timeConvert() < end && mess.callerNum == callerNum && _status == status)
 					{
 						tem_list.Add(mess);
 					}
@@ -288,7 +297,7 @@ namespace szwlFormsApplication
 							type = 14;
 							break;
 					}
-					if (message.time > start && message.time < end && message.callerNum == callerNum && type == (_type - 1))
+					if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && type == (_type - 1))
 					{
 						tem_list.Add(message);
 					}
@@ -377,7 +386,7 @@ namespace szwlFormsApplication
 							type = 14;
 							break;
 					}
-					if (message.time > start && message.time < end && message.callerNum == callerNum && type == (_type - 1) && status == _status)
+					if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && type == (_type - 1) && status == _status)
 					{
 						tem_list.Add(message);
 					}
@@ -393,7 +402,7 @@ namespace szwlFormsApplication
 		{
 			tem_list = new List<DataMessage>();
 			DateTime start = dateTimePicker2.Value.Date;//开始时间
-			DateTime end = dateTimePicker1.Value.Date;//结束时间
+			DateTime end = dateTimePicker1.Value.Date.AddDays(1).AddMilliseconds(-1);//结束时间
 
 			Employee employ = list_employee[worker.SelectedIndex];
 
@@ -401,7 +410,7 @@ namespace szwlFormsApplication
 			{
 				foreach (DataMessage message in list_allmess)
 				{
-					if (message.time > start && message.time < end && message.employeeNum == employ.employeeNum)
+					if (message.timeConvert() > start && message.timeConvert() < end && message.employeeNum == employ.employeeNum)
 					{
 						tem_list.Add(message);
 					}
@@ -410,7 +419,7 @@ namespace szwlFormsApplication
 			}
 			else
 			{
-				int callerNum = -2;
+				string callerNum = "";
 				foreach (Caller caller in list_caller)
 				{
 					if (caller.employeeNum == employ.employeeNum)
@@ -426,7 +435,7 @@ namespace szwlFormsApplication
 				{
 					foreach (DataMessage message in list_allmess)
 					{
-						if (message.time > start && message.time < end && message.callerNum == callerNum)
+						if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum))
 						{
 							tem_list.Add(message);
 						}
@@ -451,7 +460,7 @@ namespace szwlFormsApplication
 								status = 3;
 								break;
 						}
-						if (message.time > start && message.time < end && message.callerNum == callerNum && status == _status)
+						if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && status == _status)
 						{
 							tem_list.Add(message);
 						}
@@ -501,38 +510,38 @@ namespace szwlFormsApplication
 			if (finish > 0)
 			{
 				yData.Add(finish);
-				xData.Add("完成(" + finish + ")");
+				xData.Add(GlobalData.GlobalLanguage.finish + "(" + finish + ")");
 			}
 			if (timeover > 0)
 			{
 				yData.Add(timeover);
-				xData.Add("超时(" + timeover + ")");
+				xData.Add(GlobalData.GlobalLanguage.overtime + "(" + timeover + ")");
 			}
 			if (unsatisfy > 0)
 			{
 				yData.Add(unsatisfy);
-				xData.Add("不满意(" + unsatisfy + ")");
+				xData.Add(GlobalData.GlobalLanguage.unsatisfy + "(" + unsatisfy + ")");
 			}
 			if (satisfy > 0)
 			{
 				yData.Add(satisfy);
-				xData.Add("满意(" + satisfy + ")");
+				xData.Add(GlobalData.GlobalLanguage.satisfy + "(" + satisfy + ")");
 			}
 			if (waiting > 0)
 			{
 				yData.Add(waiting);
-				xData.Add("等待(" + waiting + ")");
+				xData.Add(GlobalData.GlobalLanguage.waiting + "(" + waiting + ")");
 			}
 			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
 			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
 			chart2.Series[0].Points.DataBindXY(xData, yData);
 
-			total.Text = tem_list.Count + "条记录";
+			total.Text = tem_list.Count + GlobalData.GlobalLanguage.records;
 		}
 
 		private void makeChartRFID()
 		{
-			Dictionary<int, int> dic = new Dictionary<int, int>();
+			Dictionary<string, int> dic = new Dictionary<string, int>();
 
 			foreach (DataMessage mess in tem_list)
 			{
@@ -548,7 +557,7 @@ namespace szwlFormsApplication
 			}
 			List<int> yData = new List<int>();
 			List<string> xData = new List<string>();
-			foreach (KeyValuePair<int, int> kvp in dic)
+			foreach (KeyValuePair<string, int> kvp in dic)
 			{
 				yData.Add(kvp.Value);
 				string name = "";
@@ -573,7 +582,75 @@ namespace szwlFormsApplication
 			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
 			chart2.Series[0].Points.DataBindXY(xData, yData);
 
-			total.Text = tem_list.Count + "条记录";
+			total.Text = tem_list.Count + GlobalData.GlobalLanguage.time;
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			MakeExcel();
+		}
+
+		private void button7_Click(object sender, EventArgs e)
+		{
+			MakeExcel();
+		}
+
+		private void MakeExcel()
+		{
+			if(tem_list==null || tem_list.Count == 0)
+			{
+				MessageBox.Show(GlobalData.GlobalLanguage.record_null, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OK);
+			}
+			else
+			{
+				FolderBrowserDialog dialog = new FolderBrowserDialog();
+				dialog.Description = GlobalData.GlobalLanguage.choose_file;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					string foldPath = dialog.SelectedPath;
+					ExcelFile.makeExcel(tem_list, foldPath);
+					MessageBox.Show(GlobalData.GlobalLanguage.save_path + foldPath + "\\Record.xls", GlobalData.GlobalLanguage.export_succ, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			}
+		}
+
+		public void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.summary_setting;
+
+			//historyRecordsdataGridView.Columns[0].HeaderText = GlobalData.GlobalLanguage.ID;
+			//historyRecordsdataGridView.Columns[1].HeaderText = GlobalData.GlobalLanguage.Time;
+			//historyRecordsdataGridView.Columns[2].HeaderText = GlobalData.GlobalLanguage.caller_num;
+			//historyRecordsdataGridView.Columns[3].HeaderText = GlobalData.GlobalLanguage.employee_num;
+			//historyRecordsdataGridView.Columns[4].HeaderText = GlobalData.GlobalLanguage.type;
+			//historyRecordsdataGridView.Columns[5].HeaderText = GlobalData.GlobalLanguage.status;
+			//historyRecordsdataGridView.Columns[6].HeaderText = GlobalData.GlobalLanguage.isRFID;
+
+			historySummarygroupBox.Text = GlobalData.GlobalLanguage.summary_result;
+			label8.Text = GlobalData.GlobalLanguage.total;
+			historyRecordsgroupBox.Text = GlobalData.GlobalLanguage.sreach_result;
+
+			tabControl1.TabPages[0].Text = GlobalData.GlobalLanguage.zone_search;
+			tabControl1.TabPages[1].Text = GlobalData.GlobalLanguage.employee_search;
+			historyOptiongroupBox.Text = GlobalData.GlobalLanguage.option;
+			groupBox1.Text = GlobalData.GlobalLanguage.option;
+			label1.Text = GlobalData.GlobalLanguage.start;
+			label2.Text = GlobalData.GlobalLanguage.end;
+			label3.Text = GlobalData.GlobalLanguage.zone;
+			label4.Text = GlobalData.GlobalLanguage.employee;
+			label5.Text = GlobalData.GlobalLanguage.type;
+			label6.Text = GlobalData.GlobalLanguage.status;
+
+			button1.Text = GlobalData.GlobalLanguage.ensure;
+			button2.Text = GlobalData.GlobalLanguage.export;
+
+			label12.Text = GlobalData.GlobalLanguage.start;
+			label11.Text = GlobalData.GlobalLanguage.end;
+			label10.Text = GlobalData.GlobalLanguage.employee;
+			label14.Text = GlobalData.GlobalLanguage.zone;
+			label7.Text = GlobalData.GlobalLanguage.status;
+			button8.Text = GlobalData.GlobalLanguage.ensure;
+			button7.Text = GlobalData.GlobalLanguage.export;
 		}
 	}
 }

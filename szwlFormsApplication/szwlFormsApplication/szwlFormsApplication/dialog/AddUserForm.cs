@@ -14,13 +14,12 @@ namespace szwlFormsApplication.dialog
 {
 	public partial class AddUserForm : Form
 	{
-		DBManager dm;
-
 		public AddUserForm()
 		{
 			InitializeComponent();
-			this.userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
-			this.userClassComboBox.Items.Add(User.UserClass.normal.ToString());
+			userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
+			userClassComboBox.Items.Add(User.UserClass.normal.ToString());
+			userClassComboBox.SelectedIndex = 0;
 		}
 
 		private void AddUserForm_Load(object sender, EventArgs e)
@@ -34,14 +33,26 @@ namespace szwlFormsApplication.dialog
 			admin.name = username.Text;
 			admin.pass = password.Text;
 			admin.userClass = (User.UserClass)userClassComboBox.SelectedIndex;
-			if (username.Text.Equals("admin"))
+			var tmp = new UserProgram(admin);
+			if (username.Text.Equals("Admin"))
 			{
 				prompt.Show();
 			}
-			else if (szwlForm.mainForm.dm.insertUser(admin))
+			else
 			{
-				this.DialogResult = DialogResult.OK;
-				this.Close();
+				if (InitData.users == null)
+					InitData.users = new List<User>();
+				if (InitData.users.Any(u => u.name == admin.name))
+				{
+					MessageBox.Show("该用户已存在不能添加！");
+				}
+				else if (szwlForm.mainForm.dm.insertUser(admin))
+				{
+					InitData.users=szwlForm.mainForm.dm.selectUser();
+					MessageBox.Show("该用户添加成功！");
+					this.DialogResult = DialogResult.OK;
+					this.Close();
+				}
 			}
 		}
 	}

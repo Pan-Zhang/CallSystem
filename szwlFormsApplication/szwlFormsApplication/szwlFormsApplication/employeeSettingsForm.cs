@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
 using szwlFormsApplication.dialog;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication
@@ -17,17 +18,21 @@ namespace szwlFormsApplication
 	public partial class employeeSettingsForm : Form
 	{
 		List<Employee> list;
-		DBManager dm;
 
 		public employeeSettingsForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 			if (ConfigurationManager.AppSettings["isRFID"] == null)
 			{
 				ChangeAppConfig.ChangeConfig("isRFID", "0");
 			}
-			int index = int.Parse(ConfigurationManager.AppSettings["isRFID"]);
-			isRFIDBox.SelectedIndex = index;
+			
+			this.dataGridView1.Columns[0].HeaderCell.Value = Employee.DisplayemployeeNum();
+			this.dataGridView1.Columns[1].HeaderCell.Value = Employee.Displayname();
+			this.dataGridView1.Columns[2].HeaderCell.Value = Employee.Displayphonenum();
+			this.dataGridView1.Columns[3].HeaderCell.Value = Employee.Displayremarks();
+			this.dataGridView1.Columns[4].HeaderCell.Value = Employee.Displaysex();
 			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
 			{
 				updateemployee.Enabled = true;
@@ -43,22 +48,57 @@ namespace szwlFormsApplication
 
 		private void employeeSettingsForm_Load(object sender, EventArgs e)
 		{
+			if (Common.isRFID)
+			{
+				list = InitData.employeeRFID;
+			}
+			else
+			{
+				list = InitData.employees;
+			}
+			isRFIDBox.SelectedIndex = Common.isRFID ? 1 : 0;
 		}
 
 		private void refresh()
 		{
+			
+			isRFIDBox.SelectedIndex = Common.isRFID ? 1 : 0;
+
 			if (Common.isRFID)
 			{
-				list = szwlForm.mainForm.dm.selectEmployeeRFID();
+				list = InitData.employeeRFID;
 			}
 			else
 			{
-				list = szwlForm.mainForm.dm.selectEmployee();
+				list = InitData.employees;
 			}
 
-			this.dataGridView1.AutoGenerateColumns = false;
-			this.dataGridView1.DataSource = list;
-			this.dataGridView1.Refresh();
+			InitData.AddData(dataGridView1, list);
+			if (!Common.isRFID)
+			{
+				if (list != null && list.Count > 0)
+				{
+					updateemployee.Enabled = true;
+					deleteemployee.Enabled = true;
+				}
+				else
+				{
+					updateemployee.Enabled = false;
+					deleteemployee.Enabled = false;
+				}
+			}
+			else if (list != null && list.Count > 0)
+			{
+				deleteemployee.Enabled = true;
+			}
+			else
+			{
+				updateemployee.Enabled = false;
+				deleteemployee.Enabled = false;
+			}
+			//this.dataGridView1.AutoGenerateColumns = false;
+			//this.dataGridView1.DataSource = list;
+			//this.dataGridView1.Refresh();
 		}
 
 		private void addemployee_Click(object sender, EventArgs e)
@@ -91,17 +131,55 @@ namespace szwlFormsApplication
 			int index = dataGridView1.CurrentRow.Index;
 			Employee emp = list[index];
 			DialogResult dr = MessageBox.Show("您确定想删除区域：" + emp.employeeNum + "号员工吗？",
-								 " 提示",
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
 				if (Common.isRFID)
 				{
-					szwlForm.mainForm.dm.deleteEmployeeRFID(emp);
+					if (InitData.employeeRFID == null || InitData.employeeRFID.Count == 0)
+					{
+						MessageBox.Show("暂时还未有员工资料,不能删除！");
+						return;
+					}
+					else
+					{
+						if (InitData.employeeRFID.Any(em => em.employeeNum == emp.employeeNum))
+						{
+							szwlForm.mainForm.dm.deleteEmployeeRFID(emp);
+							InitData.employeeRFID.RemoveAll(em => em.employeeNum == emp.employeeNum);
+
+							MessageBox.Show("该员工删除成功！");
+						}
+						else
+						{
+							MessageBox.Show("改员工不存在,不能删除！");
+							return;
+						}
+					}
 				}
 				else
 				{
-					szwlForm.mainForm.dm.deleteEmployee(emp);
+					if (InitData.employees == null || InitData.employees.Count == 0)
+					{
+						MessageBox.Show("暂时还未有员工资料,不能删除！");
+						return;
+					}
+					else
+					{
+						if (InitData.employees.Any(em => em.employeeNum == emp.employeeNum))
+						{
+							szwlForm.mainForm.dm.deleteEmployee(emp);
+							InitData.employees.RemoveAll(em => em.employeeNum == emp.employeeNum);
+
+							MessageBox.Show("该员工删除成功！");
+						}
+						else
+						{
+							MessageBox.Show("改员工不存在,不能删除！");
+							return;
+						}
+					}
 				}
 				refresh();
 			}
@@ -115,18 +193,20 @@ namespace szwlFormsApplication
 
 		private void clearemployee_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show("您确定想所有员工数据吗？",
-								 " 提示",
+			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.delete_employee,
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
 				if (Common.isRFID)
 				{
 					szwlForm.mainForm.dm.deleteAllEmployeeRFID();
+					InitData.employeeRFID = null;
 				}
 				else
 				{
 					szwlForm.mainForm.dm.deleteAllEmployee();
+					InitData.employees = null;
 				}
 				refresh();
 			}
@@ -165,7 +245,7 @@ namespace szwlFormsApplication
 				deleteemployee.Enabled = false;
 			}
 		}
-		
+
 		private void DataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
@@ -178,6 +258,25 @@ namespace szwlFormsApplication
 				updateemployee.Enabled = false;
 				deleteemployee.Enabled = false;
 			}
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.employee_setting;
+
+			//dataGridView1.Columns[0].HeaderText = GlobalData.GlobalLanguage.employee_num;
+			//dataGridView1.Columns[1].HeaderText = GlobalData.GlobalLanguage.name;
+			//dataGridView1.Columns[2].HeaderText = GlobalData.GlobalLanguage.telephone;
+			//dataGridView1.Columns[3].HeaderText = GlobalData.GlobalLanguage.remarks;
+			//dataGridView1.Columns[4].HeaderText = GlobalData.GlobalLanguage.gender;
+
+			isRFIDBox.Items[0] = GlobalData.GlobalLanguage.button_mode;
+			isRFIDBox.Items[1] = GlobalData.GlobalLanguage.rfid_mode;
+			addemployee.Text = GlobalData.GlobalLanguage.callAreaAddbtn;
+			updateemployee.Text = GlobalData.GlobalLanguage.callAreaUpdatebtn;
+			deleteemployee.Text = GlobalData.GlobalLanguage.callAreaDeletebtn;
+			button3.Text = GlobalData.GlobalLanguage.callAreaOKbtn;
+			clearemployee.Text = GlobalData.GlobalLanguage.callAreaclearDatabtn;
 		}
 	}
 }
