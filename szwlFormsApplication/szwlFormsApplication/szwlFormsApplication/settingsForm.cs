@@ -154,19 +154,19 @@ namespace szwlFormsApplication
 			{
 				int index = callAreadataGridView.CurrentRow.Index;
 				Callzone zone = InitData.list_zone[index];
-				DialogResult dr = MessageBox.Show("您确定想删除区域：" + zone.name + "吗？",
-								 " 提示",
+				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_delete_zone + zone.name + "？",
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
 					if (InitData.list_zone == null || InitData.list_zone.Count == 0)
 					{
-						MessageBox.Show("暂时还未有呼叫区域数据,不能删除！");
+						MessageBox.Show(GlobalData.GlobalLanguage.no_zone_to_delete);
 						return;
 					}
 					szwlForm.mainForm.dm.deleteZone(zone);
 					InitData.list_zone.RemoveAll(z => z.Id == zone.Id);
-					MessageBox.Show("该呼叫区域删除成功！");
+					MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 					refreshZone();
 					refreshCaller();
 				}
@@ -175,19 +175,19 @@ namespace szwlFormsApplication
 			{
 				int index = callNumdataGridView.CurrentRow.Index;
 				Caller caller = InitData.list_caller[index];
-				DialogResult dr = MessageBox.Show("您确定想删除呼叫器：" + caller.callerNum + "吗？",
-								 " 提示",
+				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_delte_caller + caller.callerNum + "？",
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
 					if (InitData.list_zone == null || InitData.list_zone.Count == 0)
 					{
-						MessageBox.Show("暂时还未有呼叫器数据,不能删除！");
+						MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
 						return;
 					}
 					szwlForm.mainForm.dm.deleteCaller(caller);
 					InitData.list_caller.RemoveAll(c => c.callerNum == caller.callerNum);
-					MessageBox.Show("该呼叫区域删除成功！");
+					MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 					refreshCaller();
 				}
 			}
@@ -207,20 +207,20 @@ namespace szwlFormsApplication
 
 		private void callAreaclearDatabtn_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show("是否清除这些数据？",
-									" 提示",
+			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_clear,
+									GlobalData.GlobalLanguage.prompt,
 								   MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
 				if (callAreatabControl.SelectedIndex == 0)
 				{
-					MessageBox.Show("数据清除成功！");
+					MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
 					InitData.ClearData(this.callAreadataGridView, InitData.list_zone);
 				}
 				else
 				{
 					szwlForm.mainForm.dm.clearCaller();
-					MessageBox.Show("数据清除成功！");
+					MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
 					InitData.ClearData(this.callNumdataGridView, InitData.list_caller);
 				}
 			}

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -23,11 +24,10 @@ namespace szwlFormsApplication.dialog
 		{
 			try
 			{
-				this.DialogResult = DialogResult.OK;
 				Caller caller = new Caller();
 				if (InitData.list_caller != null && InitData.list_caller.Count != 0 && InitData.list_caller.Any(c => c.callerNum == callerNum.Text))
 				{
-					MessageBox.Show("该呼叫器编号已存在，不能新增！");
+					MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
 					return;
 				}
 				caller.callerNum = callerNum.Text;
@@ -42,7 +42,7 @@ namespace szwlFormsApplication.dialog
 
 				if (InitData.list_caller.Any(c => c.callZone == zone))
 				{
-					MessageBox.Show("该呼叫区域已绑定，不能新增！");
+					MessageBox.Show(GlobalData.GlobalLanguage.zone_bound);
 					return;
 				}
 				caller.callZone = zone;
@@ -61,13 +61,13 @@ namespace szwlFormsApplication.dialog
 				if (szwlForm.mainForm.dm.insertCaller(caller))
 				{
 					InitData.list_caller = szwlForm.mainForm.dm.selectCaller();
-					MessageBox.Show("该呼叫器添加成功！");
+					MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
 				else
 				{
-					MessageBox.Show("呼叫器添加失败,请重试！");
+					MessageBox.Show(GlobalData.GlobalLanguage.add_fail);
 				}
 			}
 			catch(Exception  ex)
@@ -84,6 +84,7 @@ namespace szwlFormsApplication.dialog
 
 		private void AddCallerForm_Load(object sender, EventArgs e)
 		{
+			changeLanguage();
 			if (Common.isRFID)
 			{
 				//list_employee = dm.selectEmployeeRFID();
@@ -125,13 +126,23 @@ namespace szwlFormsApplication.dialog
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = item.employeeNum;
-				dr[1] = item.employeeNum + "号 " + item.name; ;
+				dr[1] = string.Format("{0}:{1} {2}:{3}", GlobalData.GlobalLanguage.number, item.employeeNum, GlobalData.GlobalLanguage.Name, item.name);
 
 				dt.Rows.Add(dr);
 			}
 			worker.DataSource = dt;
 			worker.DisplayMember = "val";
 			worker.ValueMember = "id";
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.add_caller;
+			label1.Text = GlobalData.GlobalLanguage.caller_num;
+			label2.Text = GlobalData.GlobalLanguage.Caller_zone;
+			label3.Text = GlobalData.GlobalLanguage.employee;
+			ensure.Text = GlobalData.GlobalLanguage.ensure;
+			cancel.Text = GlobalData.GlobalLanguage.cancel;
 		}
 	}
 }

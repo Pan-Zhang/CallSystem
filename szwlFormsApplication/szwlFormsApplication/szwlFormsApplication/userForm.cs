@@ -67,19 +67,19 @@ namespace szwlFormsApplication
 			User admin = InitData.users[dataGridView1.CurrentRow.Index];
 			if (admin == null)
 			{
-				MessageBox.Show("未选中用户,不能执行删除！");
+				MessageBox.Show(GlobalData.GlobalLanguage.not_choose);
 				return;
 			}
 			if (InitData.users == null && InitData.users.Count == 0)
 			{
-				MessageBox.Show("暂时还没有用户,不能删除！");
+				MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
 				return;
 			}
 
-			if (admin.name.Equals("Admin"))
+			if (admin.id==1)
 			{
-				DialogResult dr = MessageBox.Show("超级管理员用户不能被删除！",
-								 " 提示",
+				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.Admin_cannot_delete,
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
@@ -92,8 +92,8 @@ namespace szwlFormsApplication
 			}
 			else
 			{
-				DialogResult dr = MessageBox.Show(" 你确定删除用户：" + admin.name + "？",
-								 " 提示",
+				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_delete_user + admin.name + "？",
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
@@ -106,12 +106,12 @@ namespace szwlFormsApplication
 							//this.dataGridView1.AutoGenerateColumns = false;
 							//this.dataGridView1.DataSource = InitData.users;
 							//this.dataGridView1.Refresh();
-							MessageBox.Show("该账户删除成功！");
+							MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 						}
 					}
 					else
 					{
-						MessageBox.Show("该账户不存在,不能删除！");
+						MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
 						return;
 					}
 				}
@@ -146,13 +146,13 @@ namespace szwlFormsApplication
 
 		private void userclearDatabtn_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show("是否清除这些数据？",
-								 " 提示",
+			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_clear,
+								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
 				szwlForm.mainForm.dm.clearUser();
-				MessageBox.Show("数据清除成功！");
+				MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
 				InitData.ClearData(this.dataGridView1, InitData.users);
 			}
 		}

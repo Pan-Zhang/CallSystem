@@ -17,7 +17,7 @@ namespace szwlFormsApplication.CommonFunc
 		List<Employee> employee_list;//员工信息缓存数据，避免每次都去查询员工表
 
 		private List<byte> buffer = new List<byte>(4096);//默认分配1页内存，并始终限制不允许超过 
-
+		Dictionary<int, byte[]> dic = new Dictionary<int, byte[]>();
 		public RefreshInterface refreshInterface { get; set; }
 
 		public Server()
@@ -81,7 +81,8 @@ namespace szwlFormsApplication.CommonFunc
 					if (buffer[0] == 0x53 && buffer[1] == 0x5A && buffer[2] == 0x57 && buffer[3] == 0x4C)
 					{
 						int len = buffer[5];//数据长度  
-						if (buffer.Count < len + 7) break;//数据不够的时候什么都不做  
+						int totalLen = len + 7;
+						if (buffer.Count < totalLen) break;//数据不够的时候什么都不做  
 						byte checksum = 0;//校验和校验，逐个字节异或得到校验码  
 						for (int i = 0; i < len + 6; i++)//len+6表示校验之前的位置  
 						{
@@ -91,16 +92,24 @@ namespace szwlFormsApplication.CommonFunc
 
 						if (checksum != buffer[len + 6]) //如果数据校验失败，丢弃这一包数据  
 						{
-							buffer.RemoveRange(0, len + 7);//从缓存中删除错误数据  
+							buffer.RemoveRange(0, totalLen);//从缓存中删除错误数据  
 							continue;//继续下一次循环  
 						}
+						byte[] binary_data_1;
+						if (dic.ContainsKey(totalLen))
+						{
+							dic.TryGetValue(totalLen, out binary_data_1);
+						}
+						else
+						{
+							binary_data_1 = new byte[totalLen];
+							dic.Add(totalLen, binary_data_1);
+						}
 
-						byte[] binary_data_1 = new byte[len + 7];//53 5A 57 4C 01 03 03 E6 60 9D   
-
-						buffer.CopyTo(0, binary_data_1, 0, len + 7);//复制一条完整数据到具体的数据缓存  
+						buffer.CopyTo(0, binary_data_1, 0, totalLen);//复制一条完整数据到具体的数据缓存  
 						data_1_catched = true;
 						//53 5A 57 4C 01 03 03 E6 60 9D
-						buffer.RemoveRange(0, len + 7);//正确分析一条数据，从缓存中移除数据。
+						buffer.RemoveRange(0, totalLen);//正确分析一条数据，从缓存中移除数据。
 													   //解析数据  
 						Analytic(binary_data_1);
 					}
@@ -144,6 +153,7 @@ namespace szwlFormsApplication.CommonFunc
 				message.callerNum = table.ToString();
 				DateTimeFormatInfo datestyle = new CultureInfo("en-US",false).DateTimeFormat;
 				message.time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+				long ti = DateTime.Now.ToFileTime();
 				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Info, message.timeConvert().ToString());
 				message.isRFID = false;
 				message.status = STATUS.WAITING;
@@ -458,6 +468,11 @@ namespace szwlFormsApplication.CommonFunc
 		public List<DataMessage> selectMess()
 		{
 			return szwlForm.mainForm.dm.selectMess();
+		}
+
+		public List<DataMessage> selectMess(long longTime)
+		{
+			return szwlForm.mainForm.dm.selectMess(longTime);
 		}
 
 		public bool updateMessTimeOut(DataMessage mess)

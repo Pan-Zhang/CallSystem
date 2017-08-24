@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -21,6 +22,7 @@ namespace szwlFormsApplication.dialog
 			InitializeComponent();
 			userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
 			userClassComboBox.Items.Add(User.UserClass.normal.ToString());
+			changeLanguage();
 		}
 
 		private void ensure_Click(object sender, EventArgs e)
@@ -29,10 +31,13 @@ namespace szwlFormsApplication.dialog
 			admin.pass = password.Text;
 			admin.userClass = (User.UserClass)userClassComboBox.SelectedIndex;
 			new UserProgram(admin);
-			this.DialogResult = DialogResult.OK;
 			if (InitData.users == null)
 			{
-				MessageBox.Show("该用户不存在不能修改！");
+				MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
+			}
+			else if (username.Text.Equals("Admin")&&admin.id!=1)
+			{
+				MessageBox.Show(GlobalData.GlobalLanguage.admin_forbid);
 			}
  			else 
 			{
@@ -40,14 +45,15 @@ namespace szwlFormsApplication.dialog
 				{
 					if (szwlForm.mainForm.dm.updateUser(admin))
 					{
+						this.DialogResult = DialogResult.OK;
 						InitData.users = InitData.users.Select(u => u.name == admin.name ? admin : u).ToList();
-						MessageBox.Show("该用户修改成功！");
+						MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 						this.Hide();
 					}
 				}
 				else
 				{
-					MessageBox.Show("该用户不存在不能修改！");
+					MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
 				}
 			}
 		}
@@ -72,6 +78,17 @@ namespace szwlFormsApplication.dialog
 			{
 				prompt.Hide();
 			}
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.change_user;
+			label1.Text = GlobalData.GlobalLanguage.username;
+			label2.Text = GlobalData.GlobalLanguage.password;
+			label3.Text = GlobalData.GlobalLanguage.type;
+			ensure.Text = GlobalData.GlobalLanguage.ensure;
+			cancel.Text = GlobalData.GlobalLanguage.cancel;
+			prompt.Text = GlobalData.GlobalLanguage.admin_forbid_edit;
 		}
 	}
 }

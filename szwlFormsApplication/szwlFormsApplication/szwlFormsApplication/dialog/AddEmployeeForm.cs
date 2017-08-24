@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -17,6 +18,7 @@ namespace szwlFormsApplication.dialog
 		public AddEmployeeForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -37,12 +39,12 @@ namespace szwlFormsApplication.dialog
 				{
 					employee.sex = Sex.FEMALE;
 				}
-				this.DialogResult = DialogResult.OK;
+				
 				if (InitData.employees == null)
 					InitData.employees = new List<Employee>();
 				if (InitData.employees.Any(em=> em.employeeNum == num))
 				{
-					MessageBox.Show("员工编号已存在,不能新增！");
+					MessageBox.Show(GlobalData.GlobalLanguage.employee_exist);
 					return;
 				}
 				else
@@ -50,14 +52,15 @@ namespace szwlFormsApplication.dialog
 					if (szwlForm.mainForm.dm.insertEmployee(employee))
 					{
 						InitData.employees = szwlForm.mainForm.dm.selectEmployee();
-						MessageBox.Show("员工新增成功！");
+						this.DialogResult = DialogResult.OK;
+						MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 						this.Hide();
 					}
 				}
 			}
 			else
 			{
-				MessageBox.Show("员工编号不为数字类型,不能新增！");
+				MessageBox.Show(GlobalData.GlobalLanguage.employeenum_number_type);
 				return;
 			}
 		}
@@ -70,6 +73,19 @@ namespace szwlFormsApplication.dialog
 		private void AddEmployeeForm_Load(object sender, EventArgs e)
 		{
 			radioButton1.Checked = true;
+		}
+
+		private void changeLanguage()
+		{
+			label1.Text = GlobalData.GlobalLanguage.employee_num;
+			label3.Text = GlobalData.GlobalLanguage.Name;
+			label2.Text = GlobalData.GlobalLanguage.telephone;
+			label5.Text = GlobalData.GlobalLanguage.gender;
+			radioButton1.Text = GlobalData.GlobalLanguage.male;
+			radioButton2.Text = GlobalData.GlobalLanguage.female;
+			label4.Text = GlobalData.GlobalLanguage.remarks;
+			button1.Text = GlobalData.GlobalLanguage.ensure;
+			button2.Text = GlobalData.GlobalLanguage.cancel;
 		}
 	}
 }

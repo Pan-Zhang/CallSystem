@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using szwlFormsApplication.Language;
 
 namespace szwlFormsApplication.Models
 {
@@ -25,7 +26,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeeIdHeader"]))
 			{
-				return "服务员主键";
+				return GlobalData.GlobalLanguage.ID;
 			}
 			else
 			{
@@ -36,7 +37,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeeemployeeNumHeader"]))
 			{
-				return "服务员编号";
+				return GlobalData.GlobalLanguage.employee_num;
 			}
 			else
 			{
@@ -47,7 +48,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeenameHeader"]))
 			{
-				return "姓名";
+				return GlobalData.GlobalLanguage.Name;
 			}
 			else
 			{
@@ -58,7 +59,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeephonenumHeader"]))
 			{
-				return "电话号码";
+				return GlobalData.GlobalLanguage.telephone;
 			}
 			else
 			{
@@ -69,7 +70,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeeremarksHeader"]))
 			{
-				return "备注";
+				return GlobalData.GlobalLanguage.remarks;
 			}
 			else
 			{
@@ -80,7 +81,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeesexHeader"]))
 			{
-				return "性别";
+				return GlobalData.GlobalLanguage.gender;
 			}
 			else
 			{

@@ -67,7 +67,7 @@ namespace szwlFormsApplication
 					if (headers.Count() > 4 && !String.IsNullOrWhiteSpace(headers[4].newheader))
 						ChangeAppConfig.ChangeConfig("MessagestatusHeader", headers[4].newheader);
 					if (headers.Count() > 5 && !String.IsNullOrWhiteSpace(headers[5].newheader))
-						ChangeAppConfig.ChangeConfig("MessagecallZoneHeader", headers[4].newheader);
+						ChangeAppConfig.ChangeConfig("MessagecallZoneHeader", headers[5].newheader);
 				}
 				else if (item.Text == GlobalData.GlobalLanguage.employ_info)
 				{

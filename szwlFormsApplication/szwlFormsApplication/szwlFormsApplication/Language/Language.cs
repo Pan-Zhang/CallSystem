@@ -142,6 +142,54 @@ namespace szwlFormsApplication.Language
 		public string header_set_succe { get; set; }
 		public string Caller_number { get; set; }
 		public string Caller_zone { get; set; }
+		public string password_wrong { get; set; }
+		public string user_not_exist { get; set; }
+		public string Name { get; set; }
+		public string zone_null { get; set; }
+		public string zone_had_exist { get; set; }
+		public string add_success { get; set; }
+		public string caller_exist { get; set; }
+		public string zone_bound { get; set; }
+		public string add_fail { get; set; }
+		public string add_caller { get; set; }
+		public string add_area { get; set; }
+		public string employee_exist { get; set; }
+		public string employeenum_number_type { get; set; }
+		public string male { get; set; }
+		public string female { get; set; }
+		public string user_exist { get; set; }
+		public string admin_forbid { get; set; }
+		public string Copyright { get; set; }
+		public string Version { get; set; }
+		public string right { get; set; }
+		public string wireles_system { get; set; }
+		public string change_user { get; set; }
+		public string admin_forbid_edit { get; set; }
+		public string user_no_exist { get; set; }
+		public string permission { get; set; }
+		public string admin_permission_cannot_change { get; set; }
+		public string edit_user_permission { get; set; }
+		public string not_choose { get; set; }
+		public string no_data_to_edit { get; set; }
+		public string edit_failed { get; set; }
+		public string zone_eixst { get; set; }
+		public string edit_zone { get; set; }
+		public string no_caller_to_edit { get; set; }
+		public string update_success { get; set; }
+		public string edit_caller { get; set; }
+		public string employee_not_exist { get; set; }
+		public string edit_employee { get; set; }
+		public string old_pwd { get; set; }
+		public string new_pwd { get; set; }
+		public string clear_success { get; set; }
+		public string want_to_clear { get; set; }
+		public string delete_succe { get; set; }
+		public string want_delete_user { get; set; }
+		public string Admin_cannot_delete { get; set; }
+		public string no_zone_to_delete { get; set; }
+		public string want_to_delte_caller { get; set; }
+		public string want_to_delete_zone { get; set; }
+		public string employee_select { get; set; }
 
 		protected Dictionary<string, string> DicLanguage = new Dictionary<string, string>();
 
@@ -160,11 +208,11 @@ namespace szwlFormsApplication.Language
             try
             {
                 XmlDocument doc = new XmlDocument();
-				if (language.Equals("Chinese"))
+				if (language.Equals(GlobalData.CHINESE))
 				{
 					doc.LoadXml(Resources.Chinese);
 				}
-				else if (language.Equals("English"))
+				else if (language.Equals(GlobalData.ENGLISH))
 				{
 					doc.LoadXml(Resources.English);
 				}
@@ -334,7 +382,56 @@ namespace szwlFormsApplication.Language
 
 			Caller_number = DicLanguage["Caller_number"];
 			Caller_zone = DicLanguage["Caller_zone"];
+			password_wrong = DicLanguage["password_wrong"];
+			user_not_exist = DicLanguage["user_not_exist"];
+			Name = DicLanguage["Name"];
 
+			zone_null = DicLanguage["zone_null"];
+			zone_had_exist = DicLanguage["zone_had_exist"];
+			add_success = DicLanguage["add_success"];
+			caller_exist = DicLanguage["caller_exist"];
+			zone_bound = DicLanguage["zone_bound"];
+			add_fail = DicLanguage["add_fail"];
+
+			add_caller = DicLanguage["add_caller"];
+			add_area = DicLanguage["add_area"];
+			employee_exist = DicLanguage["employee_exist"];
+			employeenum_number_type = DicLanguage["employeenum_number_type"];
+			male = DicLanguage["male"];
+			female = DicLanguage["female"];
+			user_exist = DicLanguage["user_exist"];
+			admin_forbid = DicLanguage["admin_forbid"];
+
+			Copyright = DicLanguage["Copyright"];
+			Version = DicLanguage["Version"];
+			right = DicLanguage["right"];
+			wireles_system = DicLanguage["wireles_system"];
+			change_user = DicLanguage["change_user"];
+			admin_forbid_edit = DicLanguage["admin_forbid_edit"];
+			user_no_exist = DicLanguage["user_no_exist"];
+			permission = DicLanguage["permission"];
+			admin_permission_cannot_change = DicLanguage["admin_permission_cannot_change"];
+			edit_user_permission = DicLanguage["edit_user_permission"];
+			not_choose = DicLanguage["not_choose"];
+			no_data_to_edit = DicLanguage["no_data_to_edit"];
+			edit_failed = DicLanguage["edit_failed"];
+			zone_eixst = DicLanguage["zone_eixst"];
+			edit_zone = DicLanguage["edit_zone"];
+			no_caller_to_edit = DicLanguage["no_caller_to_edit"];
+			update_success = DicLanguage["update_success"];
+			edit_caller = DicLanguage["edit_caller"];
+			employee_not_exist = DicLanguage["employee_not_exist"];
+			edit_employee = DicLanguage["edit_employee"];
+			old_pwd = DicLanguage["old_pwd"];
+			new_pwd = DicLanguage["new_pwd"];
+			want_to_clear = DicLanguage["want_to_clear"];
+			delete_succe = DicLanguage["delete_succe"];
+			want_delete_user = DicLanguage["want_delete_user"];
+			Admin_cannot_delete = DicLanguage["Admin_cannot_delete"];
+			no_zone_to_delete = DicLanguage["no_zone_to_delete"];
+			want_to_delte_caller = DicLanguage["want_to_delte_caller"];
+			want_to_delete_zone = DicLanguage["want_to_delete_zone"];
+			employee_select = DicLanguage["employee_select"];
 		}
 	}
 }

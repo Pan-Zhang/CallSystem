@@ -204,7 +204,7 @@ namespace szwlFormsApplication.CommonFunc
 				column.Properties["AutoIncrement"].Value = true;
 				caller.Columns.Append(column, DataTypeEnum.adInteger, 9);
 				caller.Keys.Append("PrimaryKey", KeyTypeEnum.adKeyPrimary, column, null, null);
-				caller.Columns.Append("callerNum", DataTypeEnum.adInteger, 9);
+				caller.Columns.Append("callerNum", DataTypeEnum.adVarWChar, 50);
 				caller.Columns.Append("callZone", DataTypeEnum.adInteger, 9);
 				caller.Columns.Append("waiterNum", DataTypeEnum.adInteger, 9);
 
@@ -238,6 +238,7 @@ namespace szwlFormsApplication.CommonFunc
 				message.Columns.Append("type", DataTypeEnum.adInteger, 9);
 				message.Columns.Append("status", DataTypeEnum.adInteger, 9);
 				message.Columns.Append("isRFID", DataTypeEnum.adInteger, 9);
+				message.Columns.Append("longTime", DataTypeEnum.adDouble, 20);
 
 				catalog.Tables.Append(message);
 			}
@@ -793,7 +794,7 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values(" + caller.callerNum + ", " + caller.callZone + ", " + caller.employeeNum + ")");
+				return operateData("insert into " + TABLE_CALLER + "(callerNum, callZone, waiterNum) values('" + caller.callerNum + "', " + caller.callZone + ", " + caller.employeeNum + ")");
 			}
 			catch (Exception ex)
 			{
@@ -807,7 +808,7 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				return operateData("update " + TABLE_CALLER + " set callerNum=" + caller.callerNum + ", callZone=" + caller.callZone + ", waiterNum=" + caller.employeeNum + " where Id=" + caller.ID);
+				return operateData("update " + TABLE_CALLER + " set callerNum='" + caller.callerNum + "', callZone=" + caller.callZone + ", waiterNum=" + caller.employeeNum + " where Id=" + caller.ID);
 			}
 			catch (Exception ex)
 			{
@@ -847,11 +848,13 @@ namespace szwlFormsApplication.CommonFunc
 					DataMessage message = new DataMessage();
 					int id = (int)dataTable.Rows[i][0];
 					message.time = dataTable.Rows[i][1].ToString();
+					message.time = message.timeConvert().ToString("yyyy-MM-dd HH:mm:ss");
 					string callerNum = dataTable.Rows[i][2].ToString();
 					int waiterNum = (int)dataTable.Rows[i][3];
 					int type = (int)dataTable.Rows[i][4];
 					int status = (int)dataTable.Rows[i][5];
 					int isRFID = (int)dataTable.Rows[i][6];
+					double longTime = (double)dataTable.Rows[i][7];
 
 					message.Id = id;
 					message.callerNum = callerNum;
@@ -940,6 +943,125 @@ namespace szwlFormsApplication.CommonFunc
 					{
 						message.isRFID = true;
 					}
+					message.longTime = longTime;
+					list.Add(message);
+				}
+				return list;
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new List<DataMessage>();
+			}
+		}
+
+		public List<DataMessage> selectMess(long time)
+		{
+			try
+			{
+				DataTable dataTable = select("select * from " + TABLE_MESS + " where longTime>" + time + " order by Id desc");
+				List<DataMessage> list = new List<DataMessage>();
+				for (int i = 0; i < dataTable.Rows.Count; i++)
+				{
+					DataMessage message = new DataMessage();
+					int id = (int)dataTable.Rows[i][0];
+					message.time = dataTable.Rows[i][1].ToString();
+					message.time = message.timeConvert().ToString("yyyy-MM-dd HH:mm:ss");
+					string callerNum = dataTable.Rows[i][2].ToString();
+					int waiterNum = (int)dataTable.Rows[i][3];
+					int type = (int)dataTable.Rows[i][4];
+					int status = (int)dataTable.Rows[i][5];
+					int isRFID = (int)dataTable.Rows[i][6];
+					double longTime = (double)dataTable.Rows[i][7];
+
+					message.Id = id;
+					message.callerNum = callerNum;
+					message.employeeNum = waiterNum;
+					switch (type)
+					{
+						case 0:
+							message.type = Models.Type.CANCEL;
+							break;
+
+						case 1:
+							message.type = Models.Type.ORDER;
+							break;
+
+						case 2:
+							message.type = Models.Type.CALL;
+							break;
+
+						case 3:
+							message.type = Models.Type.CHECK_OUT;
+							break;
+
+						case 4:
+							message.type = Models.Type.CHANGE_MEDICATION;
+							break;
+
+						case 5:
+							message.type = Models.Type.EMERGENCY_CALL;
+							break;
+
+						case 6:
+							message.type = Models.Type.PULING_NEEDLE;
+							break;
+
+						case 7:
+							message.type = Models.Type.NEED_SERVICE;
+							break;
+
+						case 8:
+							message.type = Models.Type.NEED_WATER;
+							break;
+
+						case 9:
+							message.type = Models.Type.WANT_TO_PAY;
+							break;
+
+						case 10:
+							message.type = Models.Type.NEED_NURSES;
+							break;
+
+						case 11:
+							message.type = Models.Type.SATISFIED;
+							break;
+
+						case 12:
+							message.type = Models.Type.DISSATISFIED;
+							break;
+
+						case 13:
+							message.type = Models.Type.LOW_POWER;
+							break;
+
+						case 14:
+							message.type = Models.Type.TAMPER;
+							break;
+					}
+					switch (status)
+					{
+						case 0:
+							message.status = STATUS.WAITING;
+							break;
+
+						case 1:
+							message.status = STATUS.FINISH;
+							break;
+
+						case 2:
+							message.status = STATUS.OVERTIME;
+							break;
+					}
+					if (isRFID == 0)
+					{
+						message.isRFID = false;
+					}
+					else
+					{
+						message.isRFID = true;
+					}
+					message.longTime = longTime;
 					list.Add(message);
 				}
 				return list;
@@ -1039,7 +1161,7 @@ namespace szwlFormsApplication.CommonFunc
 				{
 					isRFID = 1;
 				}
-				return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID]) values ('" + message.timeConvert() + "', '" + message.callerNum + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "')");
+				return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID], [longTime]) values ('" + message.timeConvert() + "', '" + message.callerNum + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "', '" + DateTime.Now.ToFileTime().ToString() + "')");
 			}
 			catch (Exception ex)
 			{

@@ -2,7 +2,7 @@
 <English>
 	<app_name>SZWL caller system</app_name>
 	<no_quest>No request</no_quest>
-	<have_quest>Number: {0}，Type：{1}</have_quest>
+	<have_quest>Number: {0}{1}Type：{2}</have_quest>
 	<no_device> Failed to get device port. Make sure to insert device?</no_device>
 	<prompt>Prompt</prompt>
 	<empty_warn>Can't be null！</empty_warn>
@@ -126,7 +126,7 @@
 	<callAreaOKbtn>Ensure</callAreaOKbtn>
 	<callAreaclearDatabtn>Clear</callAreaclearDatabtn>
 
-	<telephone>Tel</telephone>
+	<telephone>telephone</telephone>
 	<remarks>remarks</remarks>
 	<gender>gender</gender>
 
@@ -141,5 +141,58 @@
 	<header_set_succe>Column name update sucess!</header_set_succe>
 	<Caller_number>CallerNum</Caller_number>
 	<Caller_zone>CallerZone</Caller_zone>
+
+	<password_wrong>Password wrong!</password_wrong>
+	<user_not_exist>User not exist!</user_not_exist>
+	<Name>name</Name>
+
+	<zone_null>Zone can't be empty!</zone_null>
+	<zone_had_exist>Region already exists!</zone_had_exist>
+	<add_success>Add success!</add_success>
+	<caller_exist>Caller already exists!</caller_exist>
+	<zone_bound>This zone is bound!</zone_bound>
+	<add_fail>Add failed, please try again!</add_fail>
+	<add_caller>Add caller</add_caller>
+	<add_area>Add zone</add_area>
+	<employee_exist>Employee already exists</employee_exist>
+	<employeenum_number_type>Employee number must be numeric</employeenum_number_type>
+	<male>Male</male>
+	<female>Female</female>
+	<user_exist>User has exist!</user_exist>
+	<admin_forbid>Username can't be 'Admin'!</admin_forbid>
+
+	<Copyright>Copyright</Copyright>
+	<Version>Version 1.0</Version>
+	<right>right(C)WCS 2017</right>
+	<wireles_system>Wireless calling system(WCS)</wireles_system>
+	<change_user>Update User</change_user>
+	<admin_forbid_edit>'Admin' can't be change！</admin_forbid_edit>
+	<user_no_exist>User not exist!</user_no_exist>
+	<permission>Permission</permission>
+	<admin_permission_cannot_change>Admin permisssion can't edit</admin_permission_cannot_change>
+	<edit_user_permission>Edit Permission</edit_user_permission>
+	<not_choose>Modified row not checked</not_choose>
+	<no_data_to_edit>No data to edit</no_data_to_edit>
+	<edit_failed>Eidt failed, try again!</edit_failed>
+	<zone_eixst>Zone exist, failed!</zone_eixst>
+	<edit_zone>Edit Zone</edit_zone>
+
+	<no_caller_to_edit>No caller to edit!</no_caller_to_edit>
+	<update_success>Update success!</update_success>
+	<edit_caller>Edit Caller</edit_caller>
+	<employee_not_exist>Employee not exist!</employee_not_exist>
+	<edit_employee>Employee Edit</edit_employee>
+	<old_pwd>Old password</old_pwd>
+	<new_pwd>New password</new_pwd>
+
+	<clear_success>Clear successful!</clear_success>
+	<want_to_clear>Do you want to clear all data?</want_to_clear>
+	<delete_succe>Delete Successful!</delete_succe>
+	<want_delete_user>Do you want to delete </want_delete_user>
+	<Admin_cannot_delete>Admin can't be deleted!</Admin_cannot_delete>
+	<no_zone_to_delete>No zone to be deleted</no_zone_to_delete>
+	<want_to_delte_caller>Do you want to delete </want_to_delte_caller>
+	<want_to_delete_zone>Do you want to delete </want_to_delete_zone>
+	<employee_select>Number:{0} Name:{1}</employee_select>
 
 </English>

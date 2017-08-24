@@ -130,7 +130,7 @@ namespace szwlFormsApplication
 				return;
 			int index = dataGridView1.CurrentRow.Index;
 			Employee emp = list[index];
-			DialogResult dr = MessageBox.Show("您确定想删除区域：" + emp.employeeNum + "号员工吗？",
+			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_delete_user + emp.employeeNum + "？",
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
@@ -139,7 +139,7 @@ namespace szwlFormsApplication
 				{
 					if (InitData.employeeRFID == null || InitData.employeeRFID.Count == 0)
 					{
-						MessageBox.Show("暂时还未有员工资料,不能删除！");
+						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 					else
@@ -149,11 +149,11 @@ namespace szwlFormsApplication
 							szwlForm.mainForm.dm.deleteEmployeeRFID(emp);
 							InitData.employeeRFID.RemoveAll(em => em.employeeNum == emp.employeeNum);
 
-							MessageBox.Show("该员工删除成功！");
+							MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 						}
 						else
 						{
-							MessageBox.Show("改员工不存在,不能删除！");
+							MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 							return;
 						}
 					}
@@ -162,7 +162,7 @@ namespace szwlFormsApplication
 				{
 					if (InitData.employees == null || InitData.employees.Count == 0)
 					{
-						MessageBox.Show("暂时还未有员工资料,不能删除！");
+						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 					else
@@ -172,11 +172,11 @@ namespace szwlFormsApplication
 							szwlForm.mainForm.dm.deleteEmployee(emp);
 							InitData.employees.RemoveAll(em => em.employeeNum == emp.employeeNum);
 
-							MessageBox.Show("该员工删除成功！");
+							MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 						}
 						else
 						{
-							MessageBox.Show("改员工不存在,不能删除！");
+							MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 							return;
 						}
 					}

@@ -19,6 +19,7 @@ namespace szwlFormsApplication.Models
 		public Type type { get; set; }
 		public STATUS status { get; set; }
 		public bool isRFID { get; set; }
+		public double longTime { get; set; }
 		public static string DisplaycallerNum()
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["MessagecallerNumHeader"]))
@@ -83,7 +84,7 @@ namespace szwlFormsApplication.Models
 		{
 			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["MessagetimeHeader"]))
 			{
-				return GlobalData.GlobalLanguage.time;
+				return GlobalData.GlobalLanguage.Time;
 			}
 			else
 			{

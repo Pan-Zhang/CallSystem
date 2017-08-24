@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
 using szwlFormsApplication.Language;
 using System.Linq;
+using System.Configuration;
 
 namespace szwlFormsApplication
 {
@@ -69,12 +70,12 @@ namespace szwlFormsApplication
 					}
 					else
 					{
-						return Tuple.Create(false, "用户密码不正确！");
+						return Tuple.Create(false, GlobalData.GlobalLanguage.password_wrong);
 					}
 				}
 				else
 				{
-					return Tuple.Create(false, "用户不存在！");
+					return Tuple.Create(false, GlobalData.GlobalLanguage.user_not_exist);
 				}
 			}
 		}
@@ -97,6 +98,42 @@ namespace szwlFormsApplication
 
 		private void LogOnForm_Load(object sender, EventArgs e)
 		{
+			if (ConfigurationManager.AppSettings[GlobalData.LANGUAGE].Equals(GlobalData.ENGLISH))
+			{
+				comboBox1.SelectedIndex = 0;
+			}
+			else
+			{
+				comboBox1.SelectedIndex = 1;
+			}
+			changeLanguage();
+		}
+
+		public const int WM_SYSCOMMAND = 0x0112;
+		//winuser.h文件中有SC_...的定义
+		public const int SC_CLOSE = 0xF060;
+		protected override void WndProc(ref Message m)
+		{
+			if (m.Msg == WM_SYSCOMMAND && ((int)m.WParam == SC_CLOSE))
+			{
+				szwlForm.mainForm.isStop = true;
+				szwlForm.mainForm.closeCom();
+				Application.Exit();
+			}
+			base.WndProc(ref m);
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (comboBox1.SelectedIndex == 0)
+			{
+				ChangeAppConfig.ChangeConfig(GlobalData.LANGUAGE, GlobalData.ENGLISH);
+			}
+			else
+			{
+				ChangeAppConfig.ChangeConfig(GlobalData.LANGUAGE, GlobalData.CHINESE);
+			}
+			GlobalData.CHANGE = true;
 			changeLanguage();
 		}
 	}

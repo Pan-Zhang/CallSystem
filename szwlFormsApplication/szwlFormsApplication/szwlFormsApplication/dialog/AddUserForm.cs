@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -17,6 +18,7 @@ namespace szwlFormsApplication.dialog
 		public AddUserForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 			userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
 			userClassComboBox.Items.Add(User.UserClass.normal.ToString());
 			userClassComboBox.SelectedIndex = 0;
@@ -44,16 +46,26 @@ namespace szwlFormsApplication.dialog
 					InitData.users = new List<User>();
 				if (InitData.users.Any(u => u.name == admin.name))
 				{
-					MessageBox.Show("该用户已存在不能添加！");
+					MessageBox.Show(GlobalData.GlobalLanguage.user_exist);
 				}
 				else if (szwlForm.mainForm.dm.insertUser(admin))
 				{
 					InitData.users=szwlForm.mainForm.dm.selectUser();
-					MessageBox.Show("该用户添加成功！");
+					MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
 			}
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.add_user;
+			label1.Text = GlobalData.GlobalLanguage.username;
+			label2.Text = GlobalData.GlobalLanguage.password;
+			label3.Text = GlobalData.GlobalLanguage.type;
+			ensure.Text = GlobalData.GlobalLanguage.ensure;
+			prompt.Text = GlobalData.GlobalLanguage.admin_forbid;
 		}
 	}
 }

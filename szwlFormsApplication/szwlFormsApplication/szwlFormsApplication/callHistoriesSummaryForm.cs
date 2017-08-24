@@ -21,6 +21,7 @@ namespace szwlFormsApplication
 		{
 			InitializeComponent();
 			Common.SetTableHeader(historyRecordsdataGridView);
+			list_allmess = new List<DataMessage>();
 		}
 
 		private void callHistoriesSummaryForm_Load(object sender, EventArgs e)
@@ -39,7 +40,6 @@ namespace szwlFormsApplication
 				label7.Hide();
 				comboBox1.Hide();
 			}
-			list_allmess = dm.selectMess();
 			typeBox.SelectedIndex = 0;
 			statusBox.SelectedIndex = 0;
 			comboBox1.SelectedIndex = 0;
@@ -83,7 +83,7 @@ namespace szwlFormsApplication
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
-				dr[1] = list_employee[i].employeeNum + GlobalData.GlobalLanguage.number + list_employee[i].name;
+				dr[1] = string.Format(GlobalData.GlobalLanguage.employee_select, list_employee[i].employeeNum, list_employee[i].name);
 
 				dt.Rows.Add(dr);
 			}
@@ -183,6 +183,8 @@ namespace szwlFormsApplication
 			int _type = typeBox.SelectedIndex;//服务类型
 
 			int _status = statusBox.SelectedIndex; //服务状态
+
+			list_allmess = dm.selectMess(start.ToFileTime());
 
 			if (_type == 0 && _status == 0)//某区域所有呼叫记录
 			{
@@ -404,8 +406,12 @@ namespace szwlFormsApplication
 			DateTime start = dateTimePicker2.Value.Date;//开始时间
 			DateTime end = dateTimePicker1.Value.Date.AddDays(1).AddMilliseconds(-1);//结束时间
 
+			if (worker.SelectedIndex == -1)
+			{
+				return;
+			}
 			Employee employ = list_employee[worker.SelectedIndex];
-
+			list_allmess = dm.selectMess(start.ToFileTime());
 			if (Common.isRFID)
 			{
 				foreach (DataMessage message in list_allmess)

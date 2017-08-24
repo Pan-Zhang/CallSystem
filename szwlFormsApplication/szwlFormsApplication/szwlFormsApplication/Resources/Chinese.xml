@@ -2,14 +2,14 @@
 <Chinese>
 	<app_name>深圳物联呼叫系统</app_name>
 	<no_quest>无请求</no_quest>
-	<have_quest>{0}号桌，类型：{1}</have_quest>
+	<have_quest>{0}号桌{1}类型：{2}</have_quest>
 	<no_device> 获取设备端口失败，请确认插入对应设备？</no_device>
 	<prompt>提示</prompt>
 	<empty_warn>信息禁止为空！</empty_warn>
 	<login_prompt>登录提示</login_prompt>
 	<welcome>欢迎登录本系统！</welcome>
 	<login_error>用户名或密码不正确！</login_error>
-	<number>号 </number>
+	<number>号码</number>
 	<nothing>无</nothing>
 	<name>姓名:</name>
 	<finish>完成</finish>
@@ -140,4 +140,57 @@
 	<header_set_succe>表头设置成功</header_set_succe>
 	<Caller_number>呼叫器编号</Caller_number>
 	<Caller_zone>呼叫器区域</Caller_zone>
+
+	<password_wrong>用户密码不正确！</password_wrong>
+	<user_not_exist>用户不存在！</user_not_exist>
+	<Name>姓名</Name>
+
+	<zone_null>呼叫区域不能为空！</zone_null>
+	<zone_had_exist>该呼叫区域已存在,不能新增！</zone_had_exist>
+	<add_success>添加成功！</add_success>
+	<caller_exist>该呼叫器编号已存在!</caller_exist>
+	<zone_bound>该区域已被绑定！</zone_bound>
+	<add_fail>添加失败，请重试！</add_fail>
+	<add_caller>添加呼叫器</add_caller>
+	<add_area>添加区域</add_area>
+	<employee_exist>员工已存在，不能添加！</employee_exist>
+	<employeenum_number_type>员工编号必须为数字</employeenum_number_type>
+	<male>男</male>
+	<female>女</female>
+	<user_exist>用户已存在！</user_exist>
+	<admin_forbid>用户名不能为'Admin'</admin_forbid>
+
+	<Copyright>版权所有</Copyright>
+	<Version>版本1.0</Version>
+	<right>right(C)WCS 2017</right>
+	<wireles_system>无线呼叫系统(WCS)</wireles_system>
+	<change_user>修改用户</change_user>
+	<admin_forbid_edit>'Admin'不允许修改</admin_forbid_edit>
+	<user_no_exist>用户不存在</user_no_exist>
+	<permission>用户权限</permission>
+	<admin_permission_cannot_change>管理员权限不能更改</admin_permission_cannot_change>
+	<edit_user_permission>修改用户权限</edit_user_permission>
+	<not_choose>未选中修改行</not_choose>
+	<no_data_to_edit>无数据可编辑</no_data_to_edit>
+	<edit_failed>修改失败，请重试！</edit_failed>
+	<zone_eixst>该呼叫区域不存在,不能修改！</zone_eixst>
+	<edit_zone>修改区域</edit_zone>
+
+	<no_caller_to_edit>未添加呼叫器，不能修改！</no_caller_to_edit>
+	<update_success>更新成功</update_success>
+	<edit_caller>修改呼叫器</edit_caller>
+	<employee_not_exist>员工不存在，不能修改</employee_not_exist>
+	<edit_employee>员工修改</edit_employee>
+	<old_pwd>原密码</old_pwd>
+	<new_pwd>新密码</new_pwd>
+
+	<clear_success>数据清除成功！</clear_success>
+	<want_to_clear>是否清除这些数据？</want_to_clear>
+	<delete_succe>删除成功</delete_succe>
+	<want_delete_user>你确定删除用户：</want_delete_user>
+	<Admin_cannot_delete>超级管理员用户不能被删除！</Admin_cannot_delete>
+	<no_zone_to_delete>无呼叫区域可删除</no_zone_to_delete>
+	<want_to_delte_caller>	你确定想删除呼叫器：</want_to_delte_caller>
+	<want_to_delete_zone>你确定想删除区域：</want_to_delete_zone>
+	<employee_select>编号:{0} 姓名:{1}</employee_select>
 </Chinese>

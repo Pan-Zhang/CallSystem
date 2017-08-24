@@ -35,20 +35,7 @@
 			this.waiting5 = new System.Windows.Forms.Panel();
 			this.label5 = new System.Windows.Forms.Label();
 			this.waitingDataGridView = new System.Windows.Forms.DataGridView();
-			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callerNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.allDataGridView = new System.Windows.Forms.DataGridView();
-			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.type2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.status2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRFID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.label3 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -73,6 +60,19 @@
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.notifyIcon2 = new System.Windows.Forms.NotifyIcon(this.components);
+			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callerNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.type2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.status2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.isRFID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callerNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.isRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.waiting4.SuspendLayout();
 			this.waiting5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.waitingDataGridView)).BeginInit();
@@ -150,48 +150,6 @@
 			this.waitingDataGridView.Size = new System.Drawing.Size(581, 432);
 			this.waitingDataGridView.TabIndex = 4;
 			// 
-			// Id
-			// 
-			this.Id.DataPropertyName = "Id";
-			this.Id.HeaderText = "Id";
-			this.Id.Name = "Id";
-			this.Id.ReadOnly = true;
-			// 
-			// time
-			// 
-			this.time.DataPropertyName = "time";
-			this.time.HeaderText = "时间";
-			this.time.Name = "time";
-			this.time.ReadOnly = true;
-			// 
-			// callerNum
-			// 
-			this.callerNum.DataPropertyName = "callerNum";
-			this.callerNum.HeaderText = "呼叫器编号";
-			this.callerNum.Name = "callerNum";
-			this.callerNum.ReadOnly = true;
-			// 
-			// employeeNum
-			// 
-			this.employeeNum.DataPropertyName = "employeeNum";
-			this.employeeNum.HeaderText = "服务员编号";
-			this.employeeNum.Name = "employeeNum";
-			this.employeeNum.ReadOnly = true;
-			// 
-			// type
-			// 
-			this.type.DataPropertyName = "type";
-			this.type.HeaderText = "呼叫类型";
-			this.type.Name = "type";
-			this.type.ReadOnly = true;
-			// 
-			// isRFID
-			// 
-			this.isRFID.DataPropertyName = "isRFID";
-			this.isRFID.HeaderText = "isRFID";
-			this.isRFID.Name = "isRFID";
-			this.isRFID.ReadOnly = true;
-			// 
 			// allDataGridView
 			// 
 			this.allDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -211,55 +169,6 @@
 			this.allDataGridView.RowTemplate.Height = 23;
 			this.allDataGridView.Size = new System.Drawing.Size(728, 432);
 			this.allDataGridView.TabIndex = 12;
-			// 
-			// Id2
-			// 
-			this.Id2.DataPropertyName = "Id";
-			this.Id2.HeaderText = "Id";
-			this.Id2.Name = "Id2";
-			this.Id2.ReadOnly = true;
-			// 
-			// time2
-			// 
-			this.time2.DataPropertyName = "time";
-			this.time2.HeaderText = "时间";
-			this.time2.Name = "time2";
-			this.time2.ReadOnly = true;
-			// 
-			// callerNum2
-			// 
-			this.callerNum2.DataPropertyName = "callerNum";
-			this.callerNum2.HeaderText = "呼叫器编号";
-			this.callerNum2.Name = "callerNum2";
-			this.callerNum2.ReadOnly = true;
-			// 
-			// employeeNum2
-			// 
-			this.employeeNum2.DataPropertyName = "employeeNum";
-			this.employeeNum2.HeaderText = "服务员编号";
-			this.employeeNum2.Name = "employeeNum2";
-			this.employeeNum2.ReadOnly = true;
-			// 
-			// type2
-			// 
-			this.type2.DataPropertyName = "type";
-			this.type2.HeaderText = "呼叫类型";
-			this.type2.Name = "type2";
-			this.type2.ReadOnly = true;
-			// 
-			// status2
-			// 
-			this.status2.DataPropertyName = "status";
-			this.status2.HeaderText = "状态 ";
-			this.status2.Name = "status2";
-			this.status2.ReadOnly = true;
-			// 
-			// isRFID2
-			// 
-			this.isRFID2.DataPropertyName = "isRFID";
-			this.isRFID2.HeaderText = "isRFID";
-			this.isRFID2.Name = "isRFID2";
-			this.isRFID2.ReadOnly = true;
 			// 
 			// tableLayoutPanel5
 			// 
@@ -419,6 +328,7 @@
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(1309, 241);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
@@ -521,6 +431,110 @@
 			this.notifyIcon2.Visible = true;
 			this.notifyIcon2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon2_MouseDoubleClick);
 			// 
+			// Id2
+			// 
+			this.Id2.DataPropertyName = "Id";
+			this.Id2.FillWeight = 77.41113F;
+			this.Id2.HeaderText = "Id";
+			this.Id2.Name = "Id2";
+			this.Id2.ReadOnly = true;
+			// 
+			// time2
+			// 
+			this.time2.DataPropertyName = "time";
+			this.time2.FillWeight = 157.9819F;
+			this.time2.HeaderText = "时间";
+			this.time2.Name = "time2";
+			this.time2.ReadOnly = true;
+			// 
+			// callerNum2
+			// 
+			this.callerNum2.DataPropertyName = "callerNum";
+			this.callerNum2.FillWeight = 138.8631F;
+			this.callerNum2.HeaderText = "呼叫器编号";
+			this.callerNum2.Name = "callerNum2";
+			this.callerNum2.ReadOnly = true;
+			// 
+			// employeeNum2
+			// 
+			this.employeeNum2.DataPropertyName = "employeeNum";
+			this.employeeNum2.FillWeight = 117.6222F;
+			this.employeeNum2.HeaderText = "服务员编号";
+			this.employeeNum2.Name = "employeeNum2";
+			this.employeeNum2.ReadOnly = true;
+			// 
+			// type2
+			// 
+			this.type2.DataPropertyName = "type";
+			this.type2.FillWeight = 77.41113F;
+			this.type2.HeaderText = "呼叫类型";
+			this.type2.Name = "type2";
+			this.type2.ReadOnly = true;
+			// 
+			// status2
+			// 
+			this.status2.DataPropertyName = "status";
+			this.status2.FillWeight = 77.41113F;
+			this.status2.HeaderText = "状态 ";
+			this.status2.Name = "status2";
+			this.status2.ReadOnly = true;
+			// 
+			// isRFID2
+			// 
+			this.isRFID2.DataPropertyName = "isRFID";
+			this.isRFID2.FillWeight = 53.2995F;
+			this.isRFID2.HeaderText = "isRFID";
+			this.isRFID2.Name = "isRFID2";
+			this.isRFID2.ReadOnly = true;
+			// 
+			// Id
+			// 
+			this.Id.DataPropertyName = "Id";
+			this.Id.FillWeight = 94.87119F;
+			this.Id.HeaderText = "Id";
+			this.Id.Name = "Id";
+			this.Id.ReadOnly = true;
+			// 
+			// time
+			// 
+			this.time.DataPropertyName = "time";
+			this.time.FillWeight = 118.4313F;
+			this.time.HeaderText = "时间";
+			this.time.Name = "time";
+			this.time.ReadOnly = true;
+			// 
+			// callerNum
+			// 
+			this.callerNum.DataPropertyName = "callerNum";
+			this.callerNum.FillWeight = 107.5707F;
+			this.callerNum.HeaderText = "呼叫器编号";
+			this.callerNum.Name = "callerNum";
+			this.callerNum.ReadOnly = true;
+			// 
+			// employeeNum
+			// 
+			this.employeeNum.DataPropertyName = "employeeNum";
+			this.employeeNum.FillWeight = 102.8903F;
+			this.employeeNum.HeaderText = "服务员编号";
+			this.employeeNum.Name = "employeeNum";
+			this.employeeNum.ReadOnly = true;
+			// 
+			// type
+			// 
+			this.type.DataPropertyName = "type";
+			this.type.FillWeight = 106.599F;
+			this.type.HeaderText = "呼叫类型";
+			this.type.Name = "type";
+			this.type.ReadOnly = true;
+			// 
+			// isRFID
+			// 
+			this.isRFID.DataPropertyName = "isRFID";
+			this.isRFID.FillWeight = 69.63755F;
+			this.isRFID.HeaderText = "isRFID";
+			this.isRFID.Name = "isRFID";
+			this.isRFID.ReadOnly = true;
+			// 
 			// szwlForm
 			// 
 			this.ClientSize = new System.Drawing.Size(1309, 769);
@@ -596,21 +610,21 @@
 		private System.Windows.Forms.Panel waiting5;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Panel waiting4;
-		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn status2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn type2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn employeeNum2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn time2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Id2;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
+		private System.Windows.Forms.NotifyIcon notifyIcon2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Id2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn time2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn employeeNum2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn type2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn status2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.DataGridViewTextBoxColumn time;
 		private System.Windows.Forms.DataGridViewTextBoxColumn callerNum;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeNum;
 		private System.Windows.Forms.DataGridViewTextBoxColumn type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID;
-		private System.Windows.Forms.NotifyIcon notifyIcon2;
 	}
 }
 

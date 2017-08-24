@@ -66,8 +66,6 @@ namespace szwlFormsApplication
 			_server = new Server();
 			_server.refreshInterface = this;
 			SetTableHeader();
-			
-			this.Text = string.Format("{0}" + GlobalData.GlobalLanguage.Wireless_calling_system, ConfigurationManager.AppSettings["CompanyName"]);
 
 			//皮肤问题后面再处理
 			//string skinpath = ConfigurationManager.AppSettings["packagepath"] + "\\Skin\\SSK皮肤\\MSN\\MSN.ssk";
@@ -88,7 +86,6 @@ namespace szwlFormsApplication
 		}
 		private void szwlForm_Load(object sender, EventArgs e)
 		{
-			changeLanguage();
 			if (LogOnForm.currentUser == null)
 			{
 				mainForm.Hide();
@@ -99,6 +96,7 @@ namespace szwlFormsApplication
 		}
 		public void Init()
 		{
+			changeLanguage();
 			foreach (ToolBarButton btn in menutoolBar.Buttons)
 			{
 				btn.Visible = false;
@@ -115,7 +113,7 @@ namespace szwlFormsApplication
 			//测试代码，正式环境请注释掉
 			//_server.open();
 
-			messages = _server.selectMess();
+			messages = _server.selectMess(DateTime.Now.Date.ToFileTime());//只查询当天的数据
 			newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
 			isStop = false;
 			new Thread(CheckTimeOut).Start();
@@ -158,6 +156,8 @@ namespace szwlFormsApplication
 
 		public void changeLanguage()
 		{
+			SetTableHeader();
+
 			menutoolBar.Buttons[0].Text = GlobalData.GlobalLanguage.login_setting;
 			menutoolBar.Buttons[1].Text = GlobalData.GlobalLanguage.system_setting;
 			menutoolBar.Buttons[2].Text = GlobalData.GlobalLanguage.user_setting;
@@ -168,20 +168,7 @@ namespace szwlFormsApplication
 			menutoolBar.Buttons[7].Text = GlobalData.GlobalLanguage.summary_setting;
 			menutoolBar.Buttons[8].Text = GlobalData.GlobalLanguage.about_setting;
 
-			waitingDataGridView.Columns[0].HeaderText = GlobalData.GlobalLanguage.ID;
-			waitingDataGridView.Columns[1].HeaderText = GlobalData.GlobalLanguage.Time;
-			waitingDataGridView.Columns[2].HeaderText = GlobalData.GlobalLanguage.caller_num;
-			waitingDataGridView.Columns[3].HeaderText = GlobalData.GlobalLanguage.employee_num;
-			waitingDataGridView.Columns[4].HeaderText = GlobalData.GlobalLanguage.type;
-			waitingDataGridView.Columns[5].HeaderText = GlobalData.GlobalLanguage.isRFID;
-
-			allDataGridView.Columns[0].HeaderText = GlobalData.GlobalLanguage.ID;
-			allDataGridView.Columns[1].HeaderText = GlobalData.GlobalLanguage.Time;
-			allDataGridView.Columns[2].HeaderText = GlobalData.GlobalLanguage.caller_num;
-			allDataGridView.Columns[3].HeaderText = GlobalData.GlobalLanguage.employee_num;
-			allDataGridView.Columns[4].HeaderText = GlobalData.GlobalLanguage.type;
-			allDataGridView.Columns[5].HeaderText = GlobalData.GlobalLanguage.status;
-			allDataGridView.Columns[6].HeaderText = GlobalData.GlobalLanguage.isRFID;
+			this.Text = string.Format("{0}" + GlobalData.GlobalLanguage.Wireless_calling_system, ConfigurationManager.AppSettings["CompanyName"]);
 		}
 
 		public const int WM_DEVICE_CHANGE = 0x219;
@@ -219,14 +206,20 @@ namespace szwlFormsApplication
 			{
 				switch (m.WParam.ToInt32())
 				{
-					case DBT_DEVICE_REMOVE_COMPLETE:    // USB拔出                        
+					case DBT_DEVICE_REMOVE_COMPLETE:    // USB拔出     
+						DEV_BROADCAST_HDR dbhdr0 = (DEV_BROADCAST_HDR)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_HDR));
+						if (dbhdr0.dbch_devicetype == DBT_DEVTYP_PORT)
+						{
+							string portName = Marshal.PtrToStringUni((IntPtr)(m.LParam.ToInt32() + Marshal.SizeOf(typeof(DEV_BROADCAST_PORT_Fixed))));
+							LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, "串口掉线，串口号:" + portName);
+						}
 						break;
 					case DBT_DEVICEARRIVAL:             // USB插入获取对应串口名称
 						DEV_BROADCAST_HDR dbhdr = (DEV_BROADCAST_HDR)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_HDR));
 						if (dbhdr.dbch_devicetype == DBT_DEVTYP_PORT)
 						{
 							string portName = Marshal.PtrToStringUni((IntPtr)(m.LParam.ToInt32() + Marshal.SizeOf(typeof(DEV_BROADCAST_PORT_Fixed))));
-							Console.WriteLine("Port '" + portName + "' arrived.");
+							LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, "串口接入，串口号:" + portName);
 						}
 						break;
 				}
@@ -332,7 +325,7 @@ namespace szwlFormsApplication
 			
 			COM com =InitData.com;
 			InitData.com = com;
-			if (com ==null)
+			if (string.IsNullOrEmpty(com.COMID))
 			{
 				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.no_device,
 								 GlobalData.GlobalLanguage.prompt,
@@ -358,7 +351,7 @@ namespace szwlFormsApplication
 		public void closeCom()
 		{
 			//根据当前串口对象，来判断操作  
-			if (_server.com.IsOpen)
+			if (_server!=null && _server.com!=null && _server.com.IsOpen)
 			{
 				_server.Closing = true;
 				while (_server.Listening) Application.DoEvents();
@@ -414,6 +407,7 @@ namespace szwlFormsApplication
 					}
 					else
 					{
+						mess.Id = messages[0].Id + 1;
 						messages.Insert(0, mess);
 						addCol++;//说明有插入数据
 					}
@@ -464,15 +458,15 @@ namespace szwlFormsApplication
 			this.label5.Text = GlobalData.GlobalLanguage.no_quest;
 
 			if (newmsg.Count() >= 1)
-				this.label1.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(0).callerNum, messages[0].type);
+				this.label1.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(0).callerNum, "\r\n\r\n", messages[0].type);
 			if (newmsg.Count() >= 2)
-				this.label2.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(1).callerNum, messages[1].type);
+				this.label2.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(1).callerNum, "\r\n\r\n", messages[1].type);
 			if (newmsg.Count() >= 3)
-				this.label3.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(2).callerNum, messages[2].type);
+				this.label3.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(2).callerNum, "\r\n\r\n", messages[2].type);
 			if (newmsg.Count() >= 4)
-				this.label4.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(3).callerNum, messages[3].type);
+				this.label4.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(3).callerNum, "\r\n\r\n", messages[3].type);
 			if (newmsg.Count() >= 5)
-				this.label5.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(4).callerNum, messages[4].type);
+				this.label5.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(4).callerNum, "\r\n\r\n", messages[4].type);
 
 			
 			if (addColNum > 0)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -17,6 +18,7 @@ namespace szwlFormsApplication.dialog
 		public AddAreaForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -25,22 +27,21 @@ namespace szwlFormsApplication.dialog
 			zone.name = areaName.Text;
 			if (string.IsNullOrWhiteSpace(zone.name))
 			{
-				MessageBox.Show("呼叫区域不能为空,不能新增！");
+				MessageBox.Show(GlobalData.GlobalLanguage.zone_null);
 				return;
 			}
 
-			this.DialogResult = DialogResult.OK;
 			if (InitData.list_zone == null)
 				InitData.list_zone = new List<Callzone>();
 			if (InitData.list_zone.Any(z => z.name == zone.name))
 			{
-				MessageBox.Show("该呼叫区域已存在,不能新增！");
+				MessageBox.Show(GlobalData.GlobalLanguage.zone_had_exist);
 				return;
 			}
 			if (szwlForm.mainForm.dm.insertZone(zone))
 			{
 				InitData.list_zone = szwlForm.mainForm.dm.selectZone();
-				MessageBox.Show("该呼叫区域添加成功！");
+				MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}
@@ -50,6 +51,14 @@ namespace szwlFormsApplication.dialog
 		{
 			this.DialogResult = DialogResult.Cancel;
 			this.Hide();
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.add_area;
+			label1.Text = GlobalData.GlobalLanguage.Caller_zone;
+			button1.Text = GlobalData.GlobalLanguage.ensure;
+			button2.Text = GlobalData.GlobalLanguage.cancel;
 		}
 	}
 }

@@ -103,17 +103,23 @@ namespace szwlFormsApplication.CommonFunc
 		public static COM GetComInfo()
 		{
 			COM com = new COM();
-			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["COMID"]))
+			//if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["COMID"]))
+			//{
+			//	var tmp = Common.GetComNum();
+			//	if (tmp != -1)
+			//	{
+			//		com.COMID = string.Format("COM{0}", tmp);
+			//		ChangeAppConfig.ChangeConfig("COMID", com.COMID);
+			//	}
+			//}
+			//else
+			//	com.COMID = ConfigurationManager.AppSettings["COMID"];
+
+			var tmp = Common.GetComNum();
+			if (tmp != -1)
 			{
-				var tmp = Common.GetComNum();
-				if (tmp != -1)
-				{
-					com.COMID = string.Format("COM{0}", tmp);
-					ChangeAppConfig.ChangeConfig("COMID", com.COMID);
-				}
+				com.COMID = string.Format("COM{0}", tmp);
 			}
-			else
-				com.COMID = ConfigurationManager.AppSettings["COMID"];
 
 			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["DataBits"]))
 			{

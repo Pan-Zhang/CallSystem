@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -18,6 +19,7 @@ namespace szwlFormsApplication.dialog
 		public EditEmployeeForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -27,12 +29,12 @@ namespace szwlFormsApplication.dialog
 			employee.phonenum = textBox4.Text;
 			employee.remarks = textBox3.Text;
 			employee.sex = radioButton1.Checked ? Sex.MALE : Sex.FEMALE;
-			this.DialogResult = DialogResult.OK;
+			
 			if (Common.isRFID)
 			{
 				if (InitData.employeeRFID == null)
 				{
-					MessageBox.Show("员工不存在，不能修改！");
+					MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 					return;
 				}
 				else
@@ -42,13 +44,13 @@ namespace szwlFormsApplication.dialog
 						if (szwlForm.mainForm.dm.updateEmployeeRFID(employee))
 						{
 							InitData.employeeRFID = InitData.employeeRFID.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
-							MessageBox.Show("员工修改成功！");
+							MessageBox.Show(GlobalData.GlobalLanguage.update_success);
 							this.Hide();
 						}
 					}
 					else
 					{
-						MessageBox.Show("员工不存在，不能修改！");
+						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 				}
@@ -57,7 +59,7 @@ namespace szwlFormsApplication.dialog
 			{
 				if (InitData.employees == null)
 				{
-					MessageBox.Show("员工不存在，不能修改！");
+					MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 					return;
 				}
 				else
@@ -67,13 +69,14 @@ namespace szwlFormsApplication.dialog
 						if (szwlForm.mainForm.dm.updateEmployee(employee))
 						{
 							InitData.employees = InitData.employees.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
-							MessageBox.Show("员工修改成功！");
+							this.DialogResult = DialogResult.OK;
+							MessageBox.Show(GlobalData.GlobalLanguage.update_success);
 							this.Hide();
 						}
 					}
 					else
 					{
-						MessageBox.Show("员工不存在，不能修改！");
+						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 				}
@@ -101,6 +104,20 @@ namespace szwlFormsApplication.dialog
 					break;
 			}
 			textBox3.Text = employee.remarks;
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.edit_employee;
+			label1.Text = GlobalData.GlobalLanguage.employee_num;
+			label5.Text = GlobalData.GlobalLanguage.name;
+			label3.Text = GlobalData.GlobalLanguage.telephone;
+			label4.Text = GlobalData.GlobalLanguage.gender;
+			label2.Text = GlobalData.GlobalLanguage.remarks;
+			radioButton1.Text = GlobalData.GlobalLanguage.male;
+			radioButton2.Text = GlobalData.GlobalLanguage.female;
+			button1.Text = GlobalData.GlobalLanguage.ensure;
+			button2.Text = GlobalData.GlobalLanguage.cancel;
 		}
 	}
 }

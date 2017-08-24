@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -19,17 +20,22 @@ namespace szwlFormsApplication.dialog
 		public EditCallerForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
 			if (InitData.list_caller == null || InitData.list_caller.Count == 0)
 			{
-				MessageBox.Show("暂时还未有呼叫器数据,不能修改！");
+				MessageBox.Show(GlobalData.GlobalLanguage.no_caller_to_edit);
 				return;
 			}
-			if (InitData.list_caller.Any(c=> c.callerNum == textBox1.Text))
+			if (InitData.list_caller.Any(c=> c.callerNum == textBox1.Text && c.ID != caller.ID))
+			{
+				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
+				return;
+			}
+			else
 			{
 				var zone = -1;
 				string zonename = null;
@@ -40,35 +46,36 @@ namespace szwlFormsApplication.dialog
 					zonename = tmpdata.Row[1].ToString();
 				}
 
-				if (InitData.list_caller.Any(c => c.callZone == zone))
+				if (InitData.list_caller.Any(c => c.callZone == zone && c.ID != caller.ID))
 				{
-					MessageBox.Show("该呼叫区域已绑定，更改失败！");
+					MessageBox.Show(GlobalData.GlobalLanguage.zone_bound);
 					return;
 				}
 				caller.callZone = zone;
 				caller.callerZoneName = zonename;
 				caller.callerNum = textBox1.Text;
+				if (!Common.isRFID)
+				{
+					caller.employeeNum = InitData.employees[comboBox2.SelectedIndex].employeeNum;
+				}
 				if (szwlForm.mainForm.dm.updateCaller(caller))
 				{
-					InitData.list_caller = InitData.list_caller.Select(c => c.callerNum == caller.callerNum?caller:c).ToList();
-					this.Hide();
+					this.DialogResult = DialogResult.OK;
+					InitData.list_caller = InitData.list_caller.Select(c => c.callerNum == caller.callerNum ? caller : c).ToList();
+					MessageBox.Show(GlobalData.GlobalLanguage.update_success);
+					this.Close();
 				}
 				else
 				{
-					MessageBox.Show("修改失败，请重试！");
+					MessageBox.Show(GlobalData.GlobalLanguage.edit_failed);
 					return;
 				}
-			}
-			else
-			{
-				MessageBox.Show("该呼叫器不存在,不能修改！");
-				return;
 			}
 		}
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			this.Hide();
+			this.Close();
 		}
 
 		private void EditCallerForm_Load(object sender, EventArgs e)
@@ -104,7 +111,7 @@ namespace szwlFormsApplication.dialog
 					{
 						index = i;
 					}
-
+					i++;
 					dt.Rows.Add(dr);
 				}
 				comboBox1.DataSource = dt;
@@ -153,6 +160,16 @@ namespace szwlFormsApplication.dialog
 			//	Employee emp = InitData.employees[index];
 			//	caller.employeeNum = emp.employeeNum;
 			//}
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.edit_caller;
+			label1.Text = GlobalData.GlobalLanguage.Caller_number;
+			label2.Text = GlobalData.GlobalLanguage.Caller_zone;
+			label3.Text = GlobalData.GlobalLanguage.employee_num;
+			button1.Text = GlobalData.GlobalLanguage.ensure;
+			button2.Text = GlobalData.GlobalLanguage.cancel;
 		}
 	}
 }

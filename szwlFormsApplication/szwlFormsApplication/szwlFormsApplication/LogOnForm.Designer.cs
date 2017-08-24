@@ -35,11 +35,13 @@
 			this.username = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.comboBox1);
 			this.groupBox1.Controls.Add(this.cancel);
 			this.groupBox1.Controls.Add(this.submit);
 			this.groupBox1.Controls.Add(this.password);
@@ -109,6 +111,18 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "用户名称：";
 			// 
+			// comboBox1
+			// 
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Items.AddRange(new object[] {
+            "English",
+            "中文"});
+			this.comboBox1.Location = new System.Drawing.Point(211, 218);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(97, 20);
+			this.comboBox1.TabIndex = 6;
+			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			// 
 			// LogOnForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -136,5 +150,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button cancel;
 		private System.Windows.Forms.Button submit;
+		private System.Windows.Forms.ComboBox comboBox1;
 	}
 }

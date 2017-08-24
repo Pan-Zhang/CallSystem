@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 
 namespace szwlFormsApplication.Models
 {
@@ -60,16 +61,16 @@ namespace szwlFormsApplication.Models
 		{
 			switch (p)
 			{
-				case 0: return "用户登录";
-				case 1: return "系统设置";
-				case 2: return "用户";
-				case 3: return "呼叫器设置";
-				case 4: return "员工设置";
-				case 5: return "表头设置";
-				case 6: return "数据维护";
-				case 7: return "数据统计";
-				case 8: return "关于";
-				default: return null;
+				case 0: return GlobalData.GlobalLanguage.user_login;
+				case 1: return GlobalData.GlobalLanguage.system_setting;
+				case 2: return GlobalData.GlobalLanguage.caller_setting;
+				case 3: return GlobalData.GlobalLanguage.user_setting;
+				case 4: return GlobalData.GlobalLanguage.employee_setting;
+				case 5: return GlobalData.GlobalLanguage.header_setting;
+				case 6: return GlobalData.GlobalLanguage.data_setting;
+				case 7: return GlobalData.GlobalLanguage.summary_setting;
+				case 8: return GlobalData.GlobalLanguage.about_setting;
+			default: return null;
 			}
 		}
 	}

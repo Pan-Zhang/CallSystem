@@ -28,20 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(callHistoriesSummaryForm));
 			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(callHistoriesSummaryForm));
 			this.historyRecordsgroupBox = new System.Windows.Forms.GroupBox();
 			this.historyRecordsdataGridView = new System.Windows.Forms.DataGridView();
-			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.historySummarygroupBox = new System.Windows.Forms.GroupBox();
 			this.total = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
@@ -77,6 +70,13 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
+			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.historyRecordsgroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.historyRecordsdataGridView)).BeginInit();
 			this.historySummarygroupBox.SuspendLayout();
@@ -109,48 +109,6 @@
 			resources.ApplyResources(this.historyRecordsdataGridView, "historyRecordsdataGridView");
 			this.historyRecordsdataGridView.Name = "historyRecordsdataGridView";
 			this.historyRecordsdataGridView.RowTemplate.Height = 23;
-			// 
-			// id
-			// 
-			this.id.DataPropertyName = "Id";
-			resources.ApplyResources(this.id, "id");
-			this.id.Name = "id";
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "time";
-			resources.ApplyResources(this.Column2, "Column2");
-			this.Column2.Name = "Column2";
-			// 
-			// Column1
-			// 
-			this.Column1.DataPropertyName = "callerNum";
-			resources.ApplyResources(this.Column1, "Column1");
-			this.Column1.Name = "Column1";
-			// 
-			// Column3
-			// 
-			this.Column3.DataPropertyName = "employeeNum";
-			resources.ApplyResources(this.Column3, "Column3");
-			this.Column3.Name = "Column3";
-			// 
-			// Column4
-			// 
-			this.Column4.DataPropertyName = "type";
-			resources.ApplyResources(this.Column4, "Column4");
-			this.Column4.Name = "Column4";
-			// 
-			// Column5
-			// 
-			this.Column5.DataPropertyName = "status";
-			resources.ApplyResources(this.Column5, "Column5");
-			this.Column5.Name = "Column5";
-			// 
-			// Column6
-			// 
-			this.Column6.DataPropertyName = "isRFID";
-			resources.ApplyResources(this.Column6, "Column6");
-			this.Column6.Name = "Column6";
 			// 
 			// historySummarygroupBox
 			// 
@@ -439,6 +397,48 @@
 			resources.ApplyResources(this.label12, "label12");
 			this.label12.Name = "label12";
 			// 
+			// id
+			// 
+			this.id.DataPropertyName = "Id";
+			resources.ApplyResources(this.id, "id");
+			this.id.Name = "id";
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "time";
+			resources.ApplyResources(this.Column2, "Column2");
+			this.Column2.Name = "Column2";
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "callerNum";
+			resources.ApplyResources(this.Column1, "Column1");
+			this.Column1.Name = "Column1";
+			// 
+			// Column3
+			// 
+			this.Column3.DataPropertyName = "employeeNum";
+			resources.ApplyResources(this.Column3, "Column3");
+			this.Column3.Name = "Column3";
+			// 
+			// Column4
+			// 
+			this.Column4.DataPropertyName = "type";
+			resources.ApplyResources(this.Column4, "Column4");
+			this.Column4.Name = "Column4";
+			// 
+			// Column5
+			// 
+			this.Column5.DataPropertyName = "status";
+			resources.ApplyResources(this.Column5, "Column5");
+			this.Column5.Name = "Column5";
+			// 
+			// Column6
+			// 
+			this.Column6.DataPropertyName = "isRFID";
+			resources.ApplyResources(this.Column6, "Column6");
+			this.Column6.Name = "Column6";
+			// 
 			// callHistoriesSummaryForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -501,6 +501,8 @@
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.Label total;
+		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.DataGridViewTextBoxColumn id;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -508,7 +510,5 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-		private System.Windows.Forms.Label total;
-		private System.Windows.Forms.Label label8;
 	}
 }

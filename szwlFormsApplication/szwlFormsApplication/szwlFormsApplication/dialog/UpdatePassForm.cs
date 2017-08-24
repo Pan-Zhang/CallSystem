@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -17,6 +18,7 @@ namespace szwlFormsApplication.dialog
 		public UpdatePassForm()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 
 		private void ensure_Click(object sender, EventArgs e)
@@ -32,6 +34,15 @@ namespace szwlFormsApplication.dialog
 		private void UpdatePassForm_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.update_pwd;
+			label1.Text = GlobalData.GlobalLanguage.old_pwd;
+			label2.Text = GlobalData.GlobalLanguage.new_pwd;
+			ensure.Text = GlobalData.GlobalLanguage.ensure;
+			cancel.Text = GlobalData.GlobalLanguage.cancel;
 		}
 	}
 }

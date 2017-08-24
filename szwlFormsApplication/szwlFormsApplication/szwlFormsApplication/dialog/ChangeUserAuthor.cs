@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
 
 namespace szwlFormsApplication.dialog
@@ -18,6 +19,7 @@ namespace szwlFormsApplication.dialog
 		public ChangeUserAuthor()
 		{
 			InitializeComponent();
+			changeLanguage();
 		}
 		private void cancel_Click(object sender, EventArgs e)
 		{
@@ -66,10 +68,10 @@ namespace szwlFormsApplication.dialog
 					user.programs.Add(i);
 				}
 			}
-			this.DialogResult = DialogResult.OK;
+			
 			if (InitData.users == null)
 			{
-				MessageBox.Show("该用户不存在不能修改！");
+				MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
 			}
 			else
 			{
@@ -79,16 +81,25 @@ namespace szwlFormsApplication.dialog
 					if (szwlForm.mainForm.dm.updateUser(user))
 					{
 						InitData.users = InitData.users.Select(u => u.name == user.name ? user : u).ToList();
-						MessageBox.Show("该用户权限修改成功！");
+						this.DialogResult = DialogResult.OK;
+						MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 						this.Close();
 					}
 				}
 				else
 				{
-					MessageBox.Show("该用户不存在不能修改！");
+					MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
 				}
 			}
 		}
 		
+		private void changeLanguage()
+		{
+			this.Text = GlobalData.GlobalLanguage.edit_user_permission;
+			label1.Text = GlobalData.GlobalLanguage.permission;
+			prompt.Text = GlobalData.GlobalLanguage.admin_permission_cannot_change;
+			ensure.Text = GlobalData.GlobalLanguage.ensure;
+			cancel.Text = GlobalData.GlobalLanguage.cancel;
+		}
 	}
 }
