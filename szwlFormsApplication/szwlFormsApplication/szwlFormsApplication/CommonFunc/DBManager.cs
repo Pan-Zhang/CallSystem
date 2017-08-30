@@ -21,7 +21,7 @@ namespace szwlFormsApplication.CommonFunc
 		string TABLE_CALLER = "Caller_tb";
 		string TABLE_MESS = "Mess_tb";
 
-		string systemPath = String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["systemPath"]) ? "D:\\szwl" : ConfigurationManager.AppSettings["systemPath"];
+		string systemPath = Common.basePath;
 
 		private OleDbConnection connection;
 
@@ -64,12 +64,22 @@ namespace szwlFormsApplication.CommonFunc
 				new UserProgram(admin);
 				insertUser(admin);
 
-				for (int i = 1; i < 101; i++)
+				for(int i=1; i<6; i++)
 				{
 					Callzone zone = new Callzone();
-					zone.name = "name" + i;
+					zone.name = "Hall" + i;
 					insertZone(zone);
+				}
 
+				for (int i = 6; i < 101; i++)
+				{
+					Callzone zone = new Callzone();
+					zone.name = "name" + (i-5);
+					insertZone(zone);
+				}
+
+				for (int i = 1; i < 101; i++)
+				{
 					Caller caller = new Caller();
 					caller.callerNum = i.ToString();
 					caller.callZone = i;
@@ -1316,7 +1326,7 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				return operateData("delete from " + TABLE_ADMIN + " where userClass>0");
+				return operateData("delete from " + TABLE_ADMIN + " where Id>1");
 			}
 			catch (Exception ex)
 			{

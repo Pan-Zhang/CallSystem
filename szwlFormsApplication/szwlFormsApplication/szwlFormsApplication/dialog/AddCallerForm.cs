@@ -27,7 +27,7 @@ namespace szwlFormsApplication.dialog
 				Caller caller = new Caller();
 				if (InitData.list_caller != null && InitData.list_caller.Count != 0 && InitData.list_caller.Any(c => c.callerNum == callerNum.Text))
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
 					return;
 				}
 				caller.callerNum = callerNum.Text;
@@ -42,7 +42,7 @@ namespace szwlFormsApplication.dialog
 
 				if (InitData.list_caller.Any(c => c.callZone == zone))
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.zone_bound);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.zone_bound);
 					return;
 				}
 				caller.callZone = zone;
@@ -61,13 +61,13 @@ namespace szwlFormsApplication.dialog
 				if (szwlForm.mainForm.dm.insertCaller(caller))
 				{
 					InitData.list_caller = szwlForm.mainForm.dm.selectCaller();
-					MessageBox.Show(GlobalData.GlobalLanguage.add_success);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
 				else
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.add_fail);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_fail);
 				}
 			}
 			catch(Exception  ex)

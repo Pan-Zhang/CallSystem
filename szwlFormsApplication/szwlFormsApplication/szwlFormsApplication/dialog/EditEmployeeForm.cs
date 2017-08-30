@@ -34,7 +34,7 @@ namespace szwlFormsApplication.dialog
 			{
 				if (InitData.employeeRFID == null)
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 					return;
 				}
 				else
@@ -44,13 +44,13 @@ namespace szwlFormsApplication.dialog
 						if (szwlForm.mainForm.dm.updateEmployeeRFID(employee))
 						{
 							InitData.employeeRFID = InitData.employeeRFID.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
-							MessageBox.Show(GlobalData.GlobalLanguage.update_success);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.update_success);
 							this.Hide();
 						}
 					}
 					else
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 				}
@@ -59,7 +59,7 @@ namespace szwlFormsApplication.dialog
 			{
 				if (InitData.employees == null)
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 					return;
 				}
 				else
@@ -70,13 +70,13 @@ namespace szwlFormsApplication.dialog
 						{
 							InitData.employees = InitData.employees.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
 							this.DialogResult = DialogResult.OK;
-							MessageBox.Show(GlobalData.GlobalLanguage.update_success);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.update_success);
 							this.Hide();
 						}
 					}
 					else
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 				}

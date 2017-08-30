@@ -190,6 +190,33 @@ namespace szwlFormsApplication.Language
 		public string want_to_delte_caller { get; set; }
 		public string want_to_delete_zone { get; set; }
 		public string employee_select { get; set; }
+		public string want_delete_employee { get; set; }
+		public string Order { get; set; }
+		public string Call { get; set; }
+		public string CheckOut { get; set; }
+		public string Satisfied { get; set; }
+		public string Dissatisfied { get; set; }
+		public string other { get; set; }
+		public string all { get; set; }
+		public string batch_update { get; set; }
+		public string choose_employee { get; set; }
+		public string no_employee_coose { get; set; }
+		public string zone_cannot_batch { get; set; }
+		public string want_to_delete_choosed { get; set; }
+		public string satisfied_rank { get; set; }
+		public string dissatisfied_rank { get; set; }
+		public string finish_rank { get; set; }
+		public string unfinish_rank { get; set; }
+		public string overtime_rank { get; set; }
+		public string overtime_total { get; set; }
+		public string satisfied_totla { get; set; }
+		public string dissatisfied_total { get; set; }
+		public string frequency { get; set; }
+		public string Total { get; set; }
+		public string percent { get; set; }
+		public string employee_name { get; set; }
+		public string Summary_statistics { get; set; }
+		public string print { get; set; }
 
 		protected Dictionary<string, string> DicLanguage = new Dictionary<string, string>();
 
@@ -432,6 +459,36 @@ namespace szwlFormsApplication.Language
 			want_to_delte_caller = DicLanguage["want_to_delte_caller"];
 			want_to_delete_zone = DicLanguage["want_to_delete_zone"];
 			employee_select = DicLanguage["employee_select"];
+			clear_success = DicLanguage["clear_success"];
+			want_delete_employee = DicLanguage["want_delete_employee"];
+
+			Order = DicLanguage["Order"];
+			Call = DicLanguage["Call"];
+			CheckOut = DicLanguage["CheckOut"];
+			Satisfied = DicLanguage["Satisfied"];
+			Dissatisfied = DicLanguage["Dissatisfied"];
+			other = DicLanguage["other"];
+			all = DicLanguage["all"];
+			batch_update = DicLanguage["batch_update"];
+			choose_employee = DicLanguage["choose_employee"];
+			no_employee_coose = DicLanguage["no_employee_coose"];
+			zone_cannot_batch = DicLanguage["zone_cannot_batch"];
+			want_to_delete_choosed = DicLanguage["want_to_delete_choosed"];
+
+			satisfied_rank = DicLanguage["satisfied_rank"];
+			dissatisfied_rank = DicLanguage["dissatisfied_rank"];
+			finish_rank = DicLanguage["finish_rank"];
+			unfinish_rank = DicLanguage["unfinish_rank"];
+			overtime_rank = DicLanguage["overtime_rank"];
+			overtime_total = DicLanguage["overtime_total"];
+			satisfied_totla = DicLanguage["satisfied_totla"];
+			dissatisfied_total = DicLanguage["dissatisfied_total"];
+			frequency = DicLanguage["frequency"];
+			Total = DicLanguage["Total"];
+			percent = DicLanguage["percent"];
+			employee_name = DicLanguage["employee_name"];
+			Summary_statistics = DicLanguage["Summary_statistics"];
+			print = DicLanguage["print"];
 		}
 	}
 }

@@ -132,7 +132,7 @@ namespace szwlFormsApplication.CommonFunc
 				{
 					if (set.callBtnSettings == null)
 						set.callBtnSettings = new Dictionary<CallBtnSetting.CallBtnType, string>();
-					set.callBtnSettings.Add((CallBtnSetting.CallBtnType)Enum.Parse(typeof(CallBtnSetting.CallBtnType), type), ConfigurationManager.AppSettings[type] == null ? "" : ConfigurationManager.AppSettings[type]);
+					set.callBtnSettings.Add((CallBtnSetting.CallBtnType)Enum.Parse(typeof(CallBtnSetting.CallBtnType), type), ChangeAppConfig.getValueFromKey(type) == null ? "" : ChangeAppConfig.getValueFromKey(type));
 				}
 				return set;
 			}
@@ -149,7 +149,7 @@ namespace szwlFormsApplication.CommonFunc
 			try
 			{
 				OrderBy orderby = new OrderBy();
-				orderby.ordertype = ConfigurationManager.AppSettings["orderby"] == null ? OrderBy.OrderType.ASC : (OrderBy.OrderType)int.Parse(ConfigurationManager.AppSettings["orderby"]);
+				orderby.ordertype = ChangeAppConfig.getValueFromKey("orderby") == null ? OrderBy.OrderType.ASC : (OrderBy.OrderType)int.Parse(ChangeAppConfig.getValueFromKey("orderby"));
 
 				return orderby;
 			}
@@ -183,9 +183,9 @@ namespace szwlFormsApplication.CommonFunc
 			try
 			{
 				TimeColor timecolor = new TimeColor();
-				timecolor.WaitTime = ConfigurationManager.AppSettings["waittimecolor"] == null ? 0 : int.Parse(ConfigurationManager.AppSettings["waittimecolor"]);
-				timecolor.TimeOutTime = ConfigurationManager.AppSettings["timeouttimecolor"] == null ? 0 : int.Parse(ConfigurationManager.AppSettings["timeouttimecolor"]);
-				timecolor.FinishedTime = ConfigurationManager.AppSettings["finishedtimecolor"] == null ? 0 : int.Parse(ConfigurationManager.AppSettings["finishedtimecolor"]);
+				timecolor.WaitTime = ChangeAppConfig.getValueFromKey("waittimecolor") == null ? 0 : int.Parse(ChangeAppConfig.getValueFromKey("waittimecolor"));
+				timecolor.TimeOutTime = ChangeAppConfig.getValueFromKey("timeouttimecolor") == null ? 0 : int.Parse(ChangeAppConfig.getValueFromKey("timeouttimecolor"));
+				timecolor.FinishedTime = ChangeAppConfig.getValueFromKey("finishedtimecolor") == null ? 0 : int.Parse(ChangeAppConfig.getValueFromKey("finishedtimecolor"));
 
 				return timecolor;
 			}
@@ -220,7 +220,7 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				TimeOut = ConfigurationManager.AppSettings["TimeOut"] == null ? 5 : int.Parse(ConfigurationManager.AppSettings["TimeOut"]);
+				TimeOut = ChangeAppConfig.getValueFromKey("TimeOut") == null ? 5 : int.Parse(ChangeAppConfig.getValueFromKey("TimeOut"));
 				return TimeOut;
 			}
 			catch (Exception ex)

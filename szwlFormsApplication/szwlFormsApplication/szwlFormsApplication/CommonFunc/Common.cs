@@ -16,7 +16,7 @@ namespace szwlFormsApplication.CommonFunc
 	{
 
 		public static bool isRFID = true;
-
+		public static string basePath = "C:\\Users\\Public\\Documents\\szwlFormsApplication";
 		public static void SetTableHeader(DataGridView dataGridView)
 		{
 			dataGridView.Columns[1].HeaderCell.Value = DataMessage.Displaytime();
@@ -103,7 +103,7 @@ namespace szwlFormsApplication.CommonFunc
 		public static COM GetComInfo()
 		{
 			COM com = new COM();
-			//if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["COMID"]))
+			//if (string.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("COMID"]))
 			//{
 			//	var tmp = Common.GetComNum();
 			//	if (tmp != -1)
@@ -113,7 +113,7 @@ namespace szwlFormsApplication.CommonFunc
 			//	}
 			//}
 			//else
-			//	com.COMID = ConfigurationManager.AppSettings["COMID"];
+			//	com.COMID = ChangeAppConfig.getValueFromKey("COMID"];
 
 			var tmp = Common.GetComNum();
 			if (tmp != -1)
@@ -121,38 +121,38 @@ namespace szwlFormsApplication.CommonFunc
 				com.COMID = string.Format("COM{0}", tmp);
 			}
 
-			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["DataBits"]))
+			if (string.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("DataBits")))
 			{
 				com.DataBits = 8;
 				ChangeAppConfig.ChangeConfig("DataBits", com.DataBits.ToString());
 			}
 			else
-				com.DataBits = int.Parse(ConfigurationManager.AppSettings["DataBits"]);
+				com.DataBits = int.Parse(ChangeAppConfig.getValueFromKey("DataBits"));
 
-			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["StopBit"]))
+			if (string.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("StopBit")))
 			{
 				com.StopBit = 7;
 				ChangeAppConfig.ChangeConfig("StopBit", com.StopBit.ToString());
 			}
 			else
-				com.StopBit = double.Parse(ConfigurationManager.AppSettings["StopBit"]);
+				com.StopBit = double.Parse(ChangeAppConfig.getValueFromKey("StopBit"));
 
-			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["BaudRate"]))
+			if (string.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("BaudRate")))
 			{
 				com.BaudRate = 115200;
 				ChangeAppConfig.ChangeConfig("BaudRate", com.BaudRate.ToString());
 			}
 			else
-				com.BaudRate = int.Parse(ConfigurationManager.AppSettings["BaudRate"]);
+				com.BaudRate = int.Parse(ChangeAppConfig.getValueFromKey("BaudRate"));
 
 
-			if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["duration"]))
+			if (string.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("duration")))
 			{
 				com.duration = 5;
 				ChangeAppConfig.ChangeConfig("duration", com.duration.ToString());
 			}
 			else
-				com.duration = int.Parse(ConfigurationManager.AppSettings["duration"]);
+				com.duration = int.Parse(ChangeAppConfig.getValueFromKey("duration"));
 			return com;
 
 		}

@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,6 +17,7 @@ using szwlFormsApplication.CommonFunc;
 using szwlFormsApplication.dialog;
 using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
+using szwlFormsApplication.Properties;
 
 namespace szwlFormsApplication
 {
@@ -28,7 +30,7 @@ namespace szwlFormsApplication
 			{
 				if (string.IsNullOrEmpty(logDirectory))
 				{
-					string loglocation = ConfigurationManager.AppSettings["LogDirectory"];
+					string loglocation = ChangeAppConfig.getValueFromKey("LogDirectory");
 					StringBuilder fullpath = new StringBuilder();
 
 					if (string.IsNullOrEmpty(loglocation))
@@ -53,14 +55,29 @@ namespace szwlFormsApplication
 		public static szwlForm mainForm = null;//创建一个自身的静态对象
 		public DBManager dm = null;
 		public Server _server;
-		List<DataMessage> messages, newmsg;
+		public List<DataMessage> messages { get; set; }
+		public List<DataMessage> newmsg { get; set; }
 		public bool isStop;
 		public int addCol;
 		private static object obj = new object();//锁
 		public szwlForm()
 		{
-			LibraryLogger.Instance.Init(LogDirectory, "szwlFormsApplication", Encoding.Default, LibraryLogger.libLogLevel.Info);
+			string basePath = Common.basePath;
+			if (!Directory.Exists(basePath))
+			{
+				Directory.CreateDirectory(basePath);
+			}
+			string path = basePath + "\\App.config";
+			if (!File.Exists(path))
+			{
+				byte[] bytes = System.Text.Encoding.ASCII.GetBytes(Resources.App);
+				FileStream outputExcelFile = new FileStream(path, FileMode.Create, FileAccess.Write);
+				outputExcelFile.Write(bytes, 0, bytes.Length);
+				outputExcelFile.Close();
+			}
+			LibraryLogger.Instance.Init(basePath, "szwlFormsApplication", Encoding.Default, LibraryLogger.libLogLevel.Info);
 			InitializeComponent();
+			Common.isRFID = ChangeAppConfig.getValueFromKey("isRFID").Equals("1");
 			dm = new DBManager();
 			mainForm = this;
 			_server = new Server();
@@ -68,7 +85,7 @@ namespace szwlFormsApplication
 			SetTableHeader();
 
 			//皮肤问题后面再处理
-			//string skinpath = ConfigurationManager.AppSettings["packagepath"] + "\\Skin\\SSK皮肤\\MSN\\MSN.ssk";
+			//string skinpath = ChangeAppConfig.getValueFromKey("packagepath"] + "\\Skin\\SSK皮肤\\MSN\\MSN.ssk";
 			//skinEngine1.SkinFile = skinpath;
 		}
 		public void SetTableHeader()
@@ -129,12 +146,35 @@ namespace szwlFormsApplication
 					bool needRefresh = false;
 					foreach (DataMessage message in newmsg)
 					{
-						if (DateTime.Compare(message.timeConvert().AddMinutes(InitData.TimeOut), DateTime.Now) < 0)
+						string unit = ChangeAppConfig.getValueFromKey("TimeUnit");
+						if (unit.Equals("H") || unit.Equals("时"))
 						{
-							message.status = STATUS.OVERTIME;
-							_server.updateMessTimeOut(message);
-							needRefresh = true;
+							if (DateTime.Compare(message.timeConvert().AddHours(InitData.GetTimeOut()), DateTime.Now) < 0)
+							{
+								message.status = STATUS.OVERTIME;
+								_server.updateMessTimeOut(message);
+								needRefresh = true;
+							}
 						}
+						else if (unit.Equals("M") || unit.Equals("分"))
+						{
+							if (DateTime.Compare(message.timeConvert().AddMinutes(InitData.GetTimeOut()), DateTime.Now) < 0)
+							{
+								message.status = STATUS.OVERTIME;
+								_server.updateMessTimeOut(message);
+								needRefresh = true;
+							}
+						}
+						else
+						{
+							if (DateTime.Compare(message.timeConvert().AddSeconds(InitData.GetTimeOut()), DateTime.Now) < 0)
+							{
+								message.status = STATUS.OVERTIME;
+								_server.updateMessTimeOut(message);
+								needRefresh = true;
+							}
+						}
+						
 					}
 					if (needRefresh)
 					{
@@ -168,7 +208,7 @@ namespace szwlFormsApplication
 			menutoolBar.Buttons[7].Text = GlobalData.GlobalLanguage.summary_setting;
 			menutoolBar.Buttons[8].Text = GlobalData.GlobalLanguage.about_setting;
 
-			this.Text = string.Format("{0}" + GlobalData.GlobalLanguage.Wireless_calling_system, ConfigurationManager.AppSettings["CompanyName"]);
+			this.Text = string.Format("{0} " + GlobalData.GlobalLanguage.Wireless_calling_system, ChangeAppConfig.getValueFromKey("CompanyName"));
 		}
 
 		public const int WM_DEVICE_CHANGE = 0x219;
@@ -282,7 +322,8 @@ namespace szwlFormsApplication
 			else if (e.Button.Name == "systemsettingsbtn")
 			{
 				systemSettingForm systemSettingform = new systemSettingForm();
-				systemSettingform.ShowDialog();
+				DialogResult dr = systemSettingform.ShowDialog();
+				refresh(0);
 			}
 			else if (e.Button.Name == "userbtn")
 			{
@@ -327,7 +368,7 @@ namespace szwlFormsApplication
 			InitData.com = com;
 			if (string.IsNullOrEmpty(com.COMID))
 			{
-				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.no_device,
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.no_device,
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
@@ -343,7 +384,7 @@ namespace szwlFormsApplication
 			{
 				var opencomresult=_server.open(com);
 				if (!opencomresult.Item1)
-					MessageBox.Show(opencomresult.Item2);
+					dialog.MessageBox.Show(opencomresult.Item2);
 			}
 		}
 
@@ -407,7 +448,10 @@ namespace szwlFormsApplication
 					}
 					else
 					{
-						mess.Id = messages[0].Id + 1;
+						if(messages!=null && messages.Count > 0)
+						{
+							mess.Id = messages[0].Id + 1;
+						}
 						messages.Insert(0, mess);
 						addCol++;//说明有插入数据
 					}
@@ -456,32 +500,182 @@ namespace szwlFormsApplication
 			this.label3.Text = GlobalData.GlobalLanguage.no_quest;
 			this.label4.Text = GlobalData.GlobalLanguage.no_quest;
 			this.label5.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label6.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label7.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label8.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label9.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label10.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label11.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label12.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label13.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label14.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label15.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label16.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label17.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label18.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label19.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label20.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label21.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label22.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label23.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label24.Text = GlobalData.GlobalLanguage.no_quest;
+			this.label25.Text = GlobalData.GlobalLanguage.no_quest;
 
 			if (newmsg.Count() >= 1)
-				this.label1.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(0).callerNum, "\r\n\r\n", messages[0].type);
-			if (newmsg.Count() >= 2)
-				this.label2.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(1).callerNum, "\r\n\r\n", messages[1].type);
-			if (newmsg.Count() >= 3)
-				this.label3.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(2).callerNum, "\r\n\r\n", messages[2].type);
-			if (newmsg.Count() >= 4)
-				this.label4.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(3).callerNum, "\r\n\r\n", messages[3].type);
-			if (newmsg.Count() >= 5)
-				this.label5.Text = string.Format(GlobalData.GlobalLanguage.have_quest, newmsg.ElementAt(4).callerNum, "\r\n\r\n", messages[4].type);
-
-			
-			if (addColNum > 0)
 			{
-				for(int i=0; i< addColNum; i++)
-				{
-					this.allDataGridView.DataSource = null;
-					this.allDataGridView.Rows.Add();
-				}
+				this.label1.Text = newmsg.ElementAt(0).callerNum;
+				this.label6.Text = getType(newmsg.ElementAt(0));
+				label6.Left = label1.Left + label1.Width + 5;
+				this.label7.Text = newmsg.ElementAt(0).getZoneName();
+				this.label8.Text = newmsg.ElementAt(0).timeConvert().ToString("yyyy MM dd");
+				this.label9.Text = newmsg.ElementAt(0).timeConvert().TimeOfDay.ToString();
+			}
+			if (newmsg.Count() >= 2)
+			{
+				this.label2.Text = newmsg.ElementAt(1).callerNum;
+				this.label10.Text = getType(newmsg.ElementAt(1));
+				label10.Left = label2.Left + label2.Width + 5;
+				this.label11.Text = newmsg.ElementAt(1).getZoneName();
+				this.label12.Text = newmsg.ElementAt(1).timeConvert().ToString("yyyy MM dd");
+				this.label13.Text = newmsg.ElementAt(1).timeConvert().TimeOfDay.ToString();
+			}
+			if (newmsg.Count() >= 3)
+			{
+				this.label3.Text = newmsg.ElementAt(2).callerNum;
+				this.label18.Text = getType(newmsg.ElementAt(2));
+				label18.Left = label3.Left + label3.Width + 5;
+				this.label19.Text = newmsg.ElementAt(2).getZoneName();
+				this.label20.Text = newmsg.ElementAt(2).timeConvert().ToString("yyyy MM dd");
+				this.label21.Text = newmsg.ElementAt(2).timeConvert().TimeOfDay.ToString();
+			}
+			if (newmsg.Count() >= 4)
+			{
+				this.label4.Text = newmsg.ElementAt(3).callerNum;
+				this.label14.Text = getType(newmsg.ElementAt(3));
+				label14.Left = label4.Left + label4.Width + 5;
+				this.label15.Text = newmsg.ElementAt(3).getZoneName();
+				this.label16.Text = newmsg.ElementAt(3).timeConvert().ToString("yyyy MM dd");
+				this.label17.Text = newmsg.ElementAt(3).timeConvert().TimeOfDay.ToString();
+			}
+			if (newmsg.Count() >= 5)
+			{
+				this.label5.Text = newmsg.ElementAt(4).callerNum;
+				this.label22.Text = getType(newmsg.ElementAt(4));
+				label22.Left = label5.Left + label5.Width + 5;
+				this.label23.Text = newmsg.ElementAt(4).getZoneName();
+				this.label24.Text = newmsg.ElementAt(4).timeConvert().ToString("yyyy MM dd");
+				this.label25.Text = newmsg.ElementAt(4).timeConvert().TimeOfDay.ToString();
 			}
 
-			InitData.AddData(allDataGridView, messages);
-			//this.allDataGridView.AutoGenerateColumns = false;
-			//this.allDataGridView.DataSource = messages;
-			//this.allDataGridView.Refresh();
+			//if (addColNum > 0)
+			//{
+			//	for(int i=0; i< addColNum; i++)
+			//	{
+			//		this.allDataGridView.DataSource = null;
+			//		this.allDataGridView.Rows.Add();
+			//	}
+			//}
+
+			//InitData.AddData(allDataGridView, messages);
+			this.allDataGridView.AutoGenerateColumns = false;
+			this.allDataGridView.DataSource = null;
+			this.allDataGridView.DataBindingComplete += dataBindCompleted;
+			this.allDataGridView.DataSource = messages;
+			this.allDataGridView.Refresh();
+		}
+
+		private void dataBindCompleted(object sender, DataGridViewBindingCompleteEventArgs e)
+		{
+			int i = 0;
+			foreach(DataMessage mess in messages)
+			{ 
+				if(mess.status == STATUS.WAITING)
+				{
+					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(InitData.timecolor.WaitTime);
+				}
+				else if(mess.status == STATUS.OVERTIME)
+				{
+					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(InitData.timecolor.TimeOutTime);
+				}
+				else
+				{
+					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(InitData.timecolor.FinishedTime);
+				}
+				i++;
+			}
+		}
+
+		private string getType(DataMessage message)
+		{
+			string type;
+			switch (message.type)
+			{
+				case Models.Type.ORDER:
+					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("A")))
+					{
+						type = GlobalData.GlobalLanguage.Order;
+					}else
+					{
+						type = ChangeAppConfig.getValueFromKey("A");
+					}
+					break;
+
+				case Models.Type.CALL:
+					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("B")))
+					{
+						type = GlobalData.GlobalLanguage.Order;
+					}
+					else
+					{
+						type = ChangeAppConfig.getValueFromKey("B");
+					}
+					break;
+
+				case Models.Type.CHECK_OUT:
+					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("C")))
+					{
+						type = GlobalData.GlobalLanguage.Order;
+					}
+					else
+					{
+						type = ChangeAppConfig.getValueFromKey("C");
+					}
+					break;
+
+				case Models.Type.SATISFIED:
+					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("D")))
+					{
+						type = GlobalData.GlobalLanguage.Order;
+					}
+					else
+					{
+						type = ChangeAppConfig.getValueFromKey("D");
+					}
+					break;
+
+				case Models.Type.DISSATISFIED:
+					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("E")))
+					{
+						type = GlobalData.GlobalLanguage.Order;
+					}
+					else
+					{
+						type = ChangeAppConfig.getValueFromKey("E");
+					}
+					break;
+
+				default:
+					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("F")))
+					{
+						type = GlobalData.GlobalLanguage.Order;
+					}
+					else
+					{
+						type = ChangeAppConfig.getValueFromKey("F");
+					}
+					break;
+			}
+			return type;
 		}
 
 	}

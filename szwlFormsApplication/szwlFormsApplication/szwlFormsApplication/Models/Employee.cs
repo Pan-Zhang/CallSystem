@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using szwlFormsApplication.CommonFunc;
 using szwlFormsApplication.Language;
 
 namespace szwlFormsApplication.Models
@@ -24,68 +25,68 @@ namespace szwlFormsApplication.Models
 		public Sex sex { get; set; }
 		public static string DisplayId()
 		{
-			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeeIdHeader"]))
+			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("EmployeeIdHeader")))
 			{
 				return GlobalData.GlobalLanguage.ID;
 			}
 			else
 			{
-				return ConfigurationManager.AppSettings["EmployeeIdHeader"];
+				return ChangeAppConfig.getValueFromKey("EmployeeIdHeader");
 			}
 		}
 		public static string DisplayemployeeNum()
 		{
-			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeeemployeeNumHeader"]))
+			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("EmployeeemployeeNumHeader")))
 			{
 				return GlobalData.GlobalLanguage.employee_num;
 			}
 			else
 			{
-				return ConfigurationManager.AppSettings["EmployeeemployeeNumHeader"];
+				return ChangeAppConfig.getValueFromKey("EmployeeemployeeNumHeader");
 			}
 		}
 		public static string Displayname()
 		{
-			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeenameHeader"]))
+			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("EmployeenameHeader")))
 			{
-				return GlobalData.GlobalLanguage.Name;
+				return GlobalData.GlobalLanguage.employee_name;
 			}
 			else
 			{
-				return ConfigurationManager.AppSettings["EmployeenameHeader"];
+				return ChangeAppConfig.getValueFromKey("EmployeenameHeader");
 			}
 		}
 		public static string Displayphonenum()
 		{
-			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeephonenumHeader"]))
+			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("EmployeephonenumHeader")))
 			{
 				return GlobalData.GlobalLanguage.telephone;
 			}
 			else
 			{
-				return ConfigurationManager.AppSettings["EmployeephonenumHeader"];
+				return ChangeAppConfig.getValueFromKey("EmployeephonenumHeader");
 			}
 		}
 		public static string Displayremarks()
 		{
-			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeeremarksHeader"]))
+			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("EmployeeremarksHeader")))
 			{
 				return GlobalData.GlobalLanguage.remarks;
 			}
 			else
 			{
-				return ConfigurationManager.AppSettings["EmployeeremarksHeader"];
+				return ChangeAppConfig.getValueFromKey("EmployeeremarksHeader");
 			}
 		}
 		public static string Displaysex()
 		{
-			if (String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["EmployeesexHeader"]))
+			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("EmployeesexHeader")))
 			{
 				return GlobalData.GlobalLanguage.gender;
 			}
 			else
 			{
-				return ConfigurationManager.AppSettings["EmployeesexHeader"];
+				return ChangeAppConfig.getValueFromKey("EmployeesexHeader");
 			}
 		}
 	}

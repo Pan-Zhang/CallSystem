@@ -2,10 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
+using szwlFormsApplication.dialog;
 using szwlFormsApplication.Language;
 using szwlFormsApplication.Models;
+using Spire.Xls;
+using System.Drawing.Printing;
+using System.Configuration;
 
 namespace szwlFormsApplication
 {
@@ -52,11 +57,19 @@ namespace szwlFormsApplication
 			DataTable dt = new DataTable();//创建一个数据集
 			dt.Columns.Add("id", typeof(String));
 			dt.Columns.Add("val", typeof(String));
-			for (int i = 0; i < list_zone.Count; i++)
+			for (int i = 0; i < list_zone.Count + 1; i++)
 			{
 				DataRow dr = dt.NewRow();
 				dr[0] = i;
-				dr[1] = list_zone[i].name;
+				if (i == 0)
+				{
+					dr[1] = GlobalData.GlobalLanguage.all;
+				}
+				else
+				{
+					dr[1] = list_zone[i-1].name;
+				}
+				
 
 				dt.Rows.Add(dr);
 			}
@@ -95,7 +108,12 @@ namespace szwlFormsApplication
 		private void callArea_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			int index = callArea.SelectedIndex;
-			Callzone zone = list_zone[index];
+			if (index == 0)
+			{
+				label13.Text = "";
+				return;
+			}
+			Callzone zone = list_zone[index-1];
 			label13.Text = GlobalData.GlobalLanguage.nothing;
 			foreach (Caller caller in list_caller)
 			{
@@ -124,7 +142,7 @@ namespace szwlFormsApplication
 					}
 					else
 					{
-						label13.Text = caller.employeeNum + GlobalData.GlobalLanguage.number + GlobalData.GlobalLanguage.name + tem_emp.name;
+						label13.Text = string.Format(GlobalData.GlobalLanguage.employee_select, tem_emp.employeeNum, tem_emp.name);
 					}
 					break;
 				}
@@ -168,25 +186,244 @@ namespace szwlFormsApplication
 			DateTime start = date_start.Value.Date;//开始时间
 			DateTime end = date_end.Value.Date.AddDays(1).AddMilliseconds(-1);//结束时间
 
-			Callzone zone = list_zone[callArea.SelectedIndex];//区域
-															  //查找对应呼叫器编号
 			string callerNum = "";
-			foreach (Caller caller in list_caller)
+			if (callArea.SelectedIndex == 0)
 			{
-				if (caller.callZone == zone.Id)
+
+			}
+			else if(callArea.SelectedIndex>0)
+			{
+				callerNum = "-1";
+				Callzone zone = list_zone[callArea.SelectedIndex-1];//区域
+																  //查找对应呼叫器编号
+				foreach (Caller caller in list_caller)
 				{
-					callerNum = caller.callerNum;
-					break;
+					if (caller.callZone == zone.Id)
+					{
+						callerNum = caller.callerNum;
+						break;
+					}
 				}
 			}
-
+			
 			int _type = typeBox.SelectedIndex;//服务类型
 
 			int _status = statusBox.SelectedIndex; //服务状态
 
 			list_allmess = dm.selectMess(start.ToFileTime());
 
-			if (_type == 0 && _status == 0)//某区域所有呼叫记录
+			if (callerNum.Equals(""))//所有区域
+			{
+				if(_type == 0 && _status == 0)//所有呼叫记录
+				{
+					foreach (DataMessage mess in list_allmess)
+					{
+						try
+						{
+							if (mess.timeConvert() > start && mess.timeConvert() < end)
+							{
+								tem_list.Add(mess);
+							}
+							LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, (tem_list == null ? 0 : tem_list.Count).ToString());
+						}
+						catch (Exception ex)
+						{
+							LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+							return;
+						}
+
+					}
+				}
+				else if (_type == 0 && _status != 0)//特定状态的记录
+				{
+					foreach (DataMessage mess in list_allmess)
+					{
+						int status = 0;
+						switch (mess.status)
+						{
+							case STATUS.WAITING:
+								status = 1;
+								break;
+
+							case STATUS.FINISH:
+								status = 2;
+								break;
+
+							case STATUS.OVERTIME:
+								status = 3;
+								break;
+						}
+
+						if (mess.timeConvert() > start && mess.timeConvert() < end && _status == status)
+						{
+							tem_list.Add(mess);
+						}
+					}
+				}
+				else if(_type != 0 && _status == 0)//特定类型的记录
+				{
+					foreach (DataMessage message in list_allmess)
+					{
+						int type = 0;
+						switch (message.type)
+						{
+							case Models.Type.CANCEL:
+								type = 0;
+								break;
+
+							case Models.Type.ORDER:
+								type = 1;
+								break;
+
+							case Models.Type.CALL:
+								type = 2;
+								break;
+
+							case Models.Type.CHECK_OUT:
+								type = 3;
+								break;
+
+							case Models.Type.CHANGE_MEDICATION:
+								type = 4;
+								break;
+
+							case Models.Type.EMERGENCY_CALL:
+								type = 5;
+								break;
+
+							case Models.Type.PULING_NEEDLE:
+								type = 6;
+								break;
+
+							case Models.Type.NEED_SERVICE:
+								type = 7;
+								break;
+
+							case Models.Type.NEED_WATER:
+								type = 8;
+								break;
+
+							case Models.Type.WANT_TO_PAY:
+								type = 9;
+								break;
+
+							case Models.Type.NEED_NURSES:
+								type = 10;
+								break;
+
+							case Models.Type.SATISFIED:
+								type = 11;
+								break;
+
+							case Models.Type.DISSATISFIED:
+								type = 12;
+								break;
+
+							case Models.Type.LOW_POWER:
+								type = 13;
+								break;
+
+							case Models.Type.TAMPER:
+								type = 14;
+								break;
+						}
+						if (message.timeConvert() > start && message.timeConvert() < end && type == (_type - 1))
+						{
+							tem_list.Add(message);
+						}
+					}
+				}
+				else//特定状态特定类型的记录
+				{
+					foreach (DataMessage message in list_allmess)
+					{
+						int status = 0;
+						switch (message.status)
+						{
+							case STATUS.WAITING:
+								status = 1;
+								break;
+
+							case STATUS.FINISH:
+								status = 2;
+								break;
+
+							case STATUS.OVERTIME:
+								status = 3;
+								break;
+						}
+
+						int type = 0;
+						switch (message.type)
+						{
+							case Models.Type.CANCEL:
+								type = 0;
+								break;
+
+							case Models.Type.ORDER:
+								type = 1;
+								break;
+
+							case Models.Type.CALL:
+								type = 2;
+								break;
+
+							case Models.Type.CHECK_OUT:
+								type = 3;
+								break;
+
+							case Models.Type.CHANGE_MEDICATION:
+								type = 4;
+								break;
+
+							case Models.Type.EMERGENCY_CALL:
+								type = 5;
+								break;
+
+							case Models.Type.PULING_NEEDLE:
+								type = 6;
+								break;
+
+							case Models.Type.NEED_SERVICE:
+								type = 7;
+								break;
+
+							case Models.Type.NEED_WATER:
+								type = 8;
+								break;
+
+							case Models.Type.WANT_TO_PAY:
+								type = 9;
+								break;
+
+							case Models.Type.NEED_NURSES:
+								type = 10;
+								break;
+
+							case Models.Type.SATISFIED:
+								type = 11;
+								break;
+
+							case Models.Type.DISSATISFIED:
+								type = 12;
+								break;
+
+							case Models.Type.LOW_POWER:
+								type = 13;
+								break;
+
+							case Models.Type.TAMPER:
+								type = 14;
+								break;
+						}
+						if (message.timeConvert() > start && message.timeConvert() < end && type == (_type - 1) && status == _status)
+						{
+							tem_list.Add(message);
+						}
+					}
+				}
+			}
+			else if (_type == 0 && _status == 0)//某区域所有呼叫记录
 			{
 				foreach (DataMessage mess in list_allmess)
 				{
@@ -203,7 +440,6 @@ namespace szwlFormsApplication
 						LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error,ex.ToString());
 						return;
 					}
-					
 				}
 			}
 			else if (_type == 0 && _status != 0)//某区域特定状态的所有记录
@@ -582,7 +818,7 @@ namespace szwlFormsApplication
 						break;
 					}
 				}
-				xData.Add(name+"("+kvp.Value+"次)");
+				xData.Add(name+"("+kvp.Value+")");
 			}
 			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
 			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
@@ -605,17 +841,18 @@ namespace szwlFormsApplication
 		{
 			if(tem_list==null || tem_list.Count == 0)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.record_null, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OK);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.record_null, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OK);
 			}
 			else
 			{
-				FolderBrowserDialog dialog = new FolderBrowserDialog();
-				dialog.Description = GlobalData.GlobalLanguage.choose_file;
-				if (dialog.ShowDialog() == DialogResult.OK)
+				FolderBrowserDialog FDialog = new FolderBrowserDialog();
+				FDialog.Description = GlobalData.GlobalLanguage.choose_file;
+				if (FDialog.ShowDialog() == DialogResult.OK)
 				{
-					string foldPath = dialog.SelectedPath;
-					ExcelFile.makeExcel(tem_list, foldPath);
-					MessageBox.Show(GlobalData.GlobalLanguage.save_path + foldPath + "\\Record.xls", GlobalData.GlobalLanguage.export_succ, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					string foldPath = FDialog.SelectedPath;
+					string path = "";
+					ExcelFile.makeExcel(tem_list, foldPath, out path);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.save_path + path, GlobalData.GlobalLanguage.export_succ, MessageBoxButtons.OK);
 				}
 			}
 		}
@@ -624,20 +861,13 @@ namespace szwlFormsApplication
 		{
 			this.Text = GlobalData.GlobalLanguage.summary_setting;
 
-			//historyRecordsdataGridView.Columns[0].HeaderText = GlobalData.GlobalLanguage.ID;
-			//historyRecordsdataGridView.Columns[1].HeaderText = GlobalData.GlobalLanguage.Time;
-			//historyRecordsdataGridView.Columns[2].HeaderText = GlobalData.GlobalLanguage.caller_num;
-			//historyRecordsdataGridView.Columns[3].HeaderText = GlobalData.GlobalLanguage.employee_num;
-			//historyRecordsdataGridView.Columns[4].HeaderText = GlobalData.GlobalLanguage.type;
-			//historyRecordsdataGridView.Columns[5].HeaderText = GlobalData.GlobalLanguage.status;
-			//historyRecordsdataGridView.Columns[6].HeaderText = GlobalData.GlobalLanguage.isRFID;
-
 			historySummarygroupBox.Text = GlobalData.GlobalLanguage.summary_result;
 			label8.Text = GlobalData.GlobalLanguage.total;
 			historyRecordsgroupBox.Text = GlobalData.GlobalLanguage.sreach_result;
 
 			tabControl1.TabPages[0].Text = GlobalData.GlobalLanguage.zone_search;
 			tabControl1.TabPages[1].Text = GlobalData.GlobalLanguage.employee_search;
+			tabControl1.TabPages[2].Text = GlobalData.GlobalLanguage.Summary_statistics;
 			historyOptiongroupBox.Text = GlobalData.GlobalLanguage.option;
 			groupBox1.Text = GlobalData.GlobalLanguage.option;
 			label1.Text = GlobalData.GlobalLanguage.start;
@@ -657,6 +887,472 @@ namespace szwlFormsApplication
 			label7.Text = GlobalData.GlobalLanguage.status;
 			button8.Text = GlobalData.GlobalLanguage.ensure;
 			button7.Text = GlobalData.GlobalLanguage.export;
+
+			label15.Text = GlobalData.GlobalLanguage.start;
+			label16.Text = GlobalData.GlobalLanguage.end;
+			radioButton1.Text = GlobalData.GlobalLanguage.satisfied_rank;
+			radioButton2.Text = GlobalData.GlobalLanguage.dissatisfied_rank;
+			radioButton3.Text = GlobalData.GlobalLanguage.finish_rank;
+			radioButton4.Text = GlobalData.GlobalLanguage.unfinish_rank;
+			radioButton5.Text = GlobalData.GlobalLanguage.overtime_rank;
+			radioButton6.Text = GlobalData.GlobalLanguage.overtime_total;
+			radioButton7.Text = GlobalData.GlobalLanguage.satisfied_totla;
+			radioButton8.Text = GlobalData.GlobalLanguage.dissatisfied_total;
+
+			button3.Text = GlobalData.GlobalLanguage.ensure;
+			button6.Text = GlobalData.GlobalLanguage.print;
+			button9.Text = GlobalData.GlobalLanguage.print;
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			tem_list = new List<DataMessage>();
+			DateTime start = dateTimePicker3.Value.Date;//开始时间
+			DateTime end = dateTimePicker4.Value.Date.AddDays(1).AddMilliseconds(-1);//结束时间
+			list_allmess = dm.selectMess(start.ToFileTime());
+			Dictionary<string, int> dic = new Dictionary<string, int>();
+			if (radioButton1.Checked)//满意次数排名
+			{
+				foreach(DataMessage mess in list_allmess)
+				{
+					if(mess.type == Models.Type.SATISFIED)
+					{
+						if (dic.ContainsKey(mess.callerNum))
+						{
+							int value;
+							dic.TryGetValue(mess.callerNum, out value);
+							value++;
+							dic[mess.callerNum] = value;
+						}
+						else
+						{
+							dic.Add(mess.callerNum, 1);
+						}
+					}
+				}
+				summary(dic, GlobalData.GlobalLanguage.satisfied_rank);
+			}
+			if (radioButton2.Checked)//不满意次数排名
+			{
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (mess.type == Models.Type.DISSATISFIED)
+					{
+						if (dic.ContainsKey(mess.callerNum))
+						{
+							int value;
+							dic.TryGetValue(mess.callerNum, out value);
+							value++;
+							dic[mess.callerNum] = value;
+						}
+						else
+						{
+							dic.Add(mess.callerNum, 1);
+						}
+					}
+				}
+				summary(dic, GlobalData.GlobalLanguage.dissatisfied_rank);
+			}
+			if (radioButton3.Checked)//完成次数排名
+			{
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (mess.status == STATUS.FINISH)
+					{
+						if (dic.ContainsKey(mess.callerNum))
+						{
+							int value;
+							dic.TryGetValue(mess.callerNum, out value);
+							value++;
+							dic[mess.callerNum] = value;
+						}
+						else
+						{
+							dic.Add(mess.callerNum, 1);
+						}
+					}
+				}
+				summary(dic, GlobalData.GlobalLanguage.finish_rank);
+			}
+			if (radioButton4.Checked)//未完成次数排名
+			{
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (mess.status == STATUS.WAITING)
+					{
+						if (dic.ContainsKey(mess.callerNum))
+						{
+							int value;
+							dic.TryGetValue(mess.callerNum, out value);
+							value++;
+							dic[mess.callerNum] = value;
+						}
+						else
+						{
+							dic.Add(mess.callerNum, 1);
+						}
+					}
+				}
+
+				summary(dic, GlobalData.GlobalLanguage.unfinish_rank);
+			}
+			if (radioButton5.Checked)//超时次数排名
+			{
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (mess.status == STATUS.OVERTIME)
+					{
+						if (dic.ContainsKey(mess.callerNum))
+						{
+							int value;
+							dic.TryGetValue(mess.callerNum, out value);
+							value++;
+							dic[mess.callerNum] = value;
+						}
+						else
+						{
+							dic.Add(mess.callerNum, 1);
+						}
+					}
+				}
+				summary(dic, GlobalData.GlobalLanguage.overtime_rank);
+			}
+			if (radioButton6.Checked)//超时与总次数占比排名
+			{
+				Dictionary<string, Summary> dictionary = new Dictionary<string, Summary>();
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (dictionary.ContainsKey(mess.callerNum))
+					{
+						Summary value = null;
+						dictionary.TryGetValue(mess.callerNum, out value);
+						value.total++;
+						if (mess.status == STATUS.OVERTIME)
+						{
+							value.count++;
+						}
+					}
+					else
+					{
+						Summary summary = new Summary();
+						summary.callerNum = mess.callerNum;
+						foreach(Caller caller in InitData.list_caller)
+						{
+							if(caller.callerNum == mess.callerNum)
+							{
+								foreach (Callzone zone in InitData.list_zone)
+								{
+									if (zone.Id == caller.callZone)
+									{
+										summary.zoneName = zone.name;
+										break;
+									}
+								}
+								if (Common.isRFID)
+								{
+									foreach (Employee emp in InitData.employeeRFID)
+									{
+										if (emp.employeeNum == caller.employeeNum)
+										{
+											summary.employeeNum = emp.employeeNum;
+											summary.employeeName = emp.name;
+											break;
+										}
+									}
+								}
+								else
+								{
+									foreach (Employee emp in InitData.employees)
+									{
+										if (emp.employeeNum == caller.employeeNum)
+										{
+											summary.employeeNum = emp.employeeNum;
+											summary.employeeName = emp.name;
+											break;
+										}
+									}
+								}
+								break;
+							}
+						}
+						if(mess.status == STATUS.OVERTIME)
+						{
+							summary.count = 1;
+						}
+						else
+						{
+							summary.count = 0;
+						}
+						summary.total = 1;
+						dictionary.Add(mess.callerNum, summary);
+					}
+				}
+				Dictionary<string, Summary> dic1_SortedByValue = dictionary.OrderByDescending(o => o.Value.count * 100/o.Value.total).ToDictionary(p => p.Key, o => o.Value);
+				List<Summary> list_sum = dic1_SortedByValue.Values.ToList();
+
+				PercentForm form = new PercentForm();
+				form.title = GlobalData.GlobalLanguage.overtime_total;
+				form.type = 1;
+				form.list = list_sum;
+				form.ShowDialog();
+			}
+			if (radioButton7.Checked)//满意与总次数占比排名
+			{
+				Dictionary<string, Summary> dictionary = new Dictionary<string, Summary>();
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (dictionary.ContainsKey(mess.callerNum))
+					{
+						Summary value = null;
+						dictionary.TryGetValue(mess.callerNum, out value);
+						value.total++;
+						if (mess.type == Models.Type.SATISFIED)
+						{
+							value.count++;
+						}
+					}
+					else
+					{
+						Summary summary = new Summary();
+						summary.callerNum = mess.callerNum;
+						foreach (Caller caller in InitData.list_caller)
+						{
+							if (caller.callerNum == mess.callerNum)
+							{
+								foreach (Callzone zone in InitData.list_zone)
+								{
+									if (zone.Id == caller.callZone)
+									{
+										summary.zoneName = zone.name;
+										break;
+									}
+								}
+								if (Common.isRFID)
+								{
+									foreach (Employee emp in InitData.employeeRFID)
+									{
+										if (emp.employeeNum == caller.employeeNum)
+										{
+											summary.employeeNum = emp.employeeNum;
+											summary.employeeName = emp.name;
+											break;
+										}
+									}
+								}
+								else
+								{
+									foreach (Employee emp in InitData.employees)
+									{
+										if (emp.employeeNum == caller.employeeNum)
+										{
+											summary.employeeNum = emp.employeeNum;
+											summary.employeeName = emp.name;
+											break;
+										}
+									}
+								}
+								break;
+							}
+						}
+						if (mess.type == Models.Type.SATISFIED)
+						{
+							summary.count = 1;
+						}
+						else
+						{
+							summary.count = 0;
+						}
+						summary.total = 1;
+						dictionary.Add(mess.callerNum, summary);
+					}
+				}
+				Dictionary<string, Summary> dic1_SortedByValue = dictionary.OrderByDescending(o => o.Value.count * 100 / o.Value.total).ToDictionary(p => p.Key, o => o.Value);
+				List<Summary> list_sum = dic1_SortedByValue.Values.ToList();
+
+				PercentForm form = new PercentForm();
+				form.title = GlobalData.GlobalLanguage.satisfied_totla;
+				form.type = 2;
+				form.list = list_sum;
+				form.ShowDialog();
+			}
+			if (radioButton8.Checked)//不满意与总次数占比排名
+			{
+				Dictionary<string, Summary> dictionary = new Dictionary<string, Summary>();
+				foreach (DataMessage mess in list_allmess)
+				{
+					if (dictionary.ContainsKey(mess.callerNum))
+					{
+						Summary value = null;
+						dictionary.TryGetValue(mess.callerNum, out value);
+						value.total++;
+						if (mess.type == Models.Type.DISSATISFIED)
+						{
+							value.count++;
+						}
+					}
+					else
+					{
+						Summary summary = new Summary();
+						summary.callerNum = mess.callerNum;
+						foreach (Caller caller in InitData.list_caller)
+						{
+							if (caller.callerNum == mess.callerNum)
+							{
+								foreach (Callzone zone in InitData.list_zone)
+								{
+									if (zone.Id == caller.callZone)
+									{
+										summary.zoneName = zone.name;
+										break;
+									}
+								}
+								if (Common.isRFID)
+								{
+									foreach (Employee emp in InitData.employeeRFID)
+									{
+										if (emp.employeeNum == caller.employeeNum)
+										{
+											summary.employeeNum = emp.employeeNum;
+											summary.employeeName = emp.name;
+											break;
+										}
+									}
+								}
+								else
+								{
+									foreach (Employee emp in InitData.employees)
+									{
+										if (emp.employeeNum == caller.employeeNum)
+										{
+											summary.employeeNum = emp.employeeNum;
+											summary.employeeName = emp.name;
+											break;
+										}
+									}
+								}
+								break;
+							}
+						}
+						if (mess.type == Models.Type.DISSATISFIED)
+						{
+							summary.count = 1;
+						}
+						else
+						{
+							summary.count = 0;
+						}
+						summary.total = 1;
+						dictionary.Add(mess.callerNum, summary);
+					}
+				}
+				Dictionary<string, Summary> dic1_SortedByValue = dictionary.OrderByDescending(o => o.Value.count * 100 / o.Value.total).ToDictionary(p => p.Key, o => o.Value);
+				List<Summary> list_sum = dic1_SortedByValue.Values.ToList();
+
+				PercentForm form = new PercentForm();
+				form.title = GlobalData.GlobalLanguage.dissatisfied_total;
+				form.type = 3;
+				form.list = list_sum;
+				form.ShowDialog();
+			}
+		}
+
+		private void summary(Dictionary<string, int> dic, string title)
+		{
+			Dictionary<string, int> dic1_SortedByValue = dic.OrderByDescending(o => o.Value).ToDictionary(p => p.Key, o => o.Value);
+			List<Summary> list_sum = new List<Summary>();
+			foreach (KeyValuePair<string, int> item in dic1_SortedByValue)
+			{
+				Summary summary = new Summary();
+				summary.callerNum = item.Key;
+				summary.count = item.Value;
+				foreach (Caller caller in InitData.list_caller)
+				{
+					if (caller.callerNum == item.Key)
+					{
+						summary.employeeNum = caller.employeeNum;
+						foreach (Callzone zone in InitData.list_zone)
+						{
+							if (zone.Id == caller.callZone)
+							{
+								summary.zoneName = zone.name;
+								break;
+							}
+						}
+						if (Common.isRFID)
+						{
+							foreach (Employee emp in InitData.employeeRFID)
+							{
+								if (emp.employeeNum == caller.employeeNum)
+								{
+									summary.employeeName = emp.name;
+									break;
+								}
+							}
+						}
+						else
+						{
+							foreach (Employee emp in InitData.employees)
+							{
+								if (emp.employeeNum == caller.employeeNum)
+								{
+									summary.employeeName = emp.name;
+									break;
+								}
+							}
+						}
+						break;
+					}
+				}
+				list_sum.Add(summary);
+			}
+			SummaryForm form = new SummaryForm();
+			form.list = list_sum;
+			form.title = title;
+			form.ShowDialog();
+		}
+
+		private void button6_Click(object sender, EventArgs e)
+		{
+			print();
+		}
+
+		private void button9_Click(object sender, EventArgs e)
+		{
+			print();
+		}
+
+		private void print()
+		{
+			string path;
+			ExcelFile.makeExcel(tem_list, ChangeAppConfig.getValueFromKey("tem_file"), out path);
+
+			Workbook workbook = new Workbook();
+			workbook.LoadFromFile(path);
+
+			Worksheet sheet = workbook.Worksheets[0];
+			sheet.PageSetup.PrintArea = "A7:T8";
+			sheet.PageSetup.PrintTitleRows = "$1:$1";
+			sheet.PageSetup.FitToPagesWide = 1;
+			sheet.PageSetup.FitToPagesTall = 1;
+			//sheet.PageSetup.Orientation = PageOrientationType.Landscape;
+			//sheet.PageSetup.PaperSize = PaperSizeType.PaperA3;
+
+			PrintDialog dialog = new PrintDialog();
+			dialog.AllowPrintToFile = true;
+			dialog.AllowCurrentPage = true;
+			dialog.AllowSomePages = true;
+			dialog.AllowSelection = true;
+			dialog.UseEXDialog = true;
+			dialog.PrinterSettings.Duplex = Duplex.Simplex;
+			dialog.PrinterSettings.FromPage = 0;
+			dialog.PrinterSettings.ToPage = 8;
+			dialog.PrinterSettings.PrintRange = PrintRange.SomePages;
+			workbook.PrintDialog = dialog;
+			PrintDocument pd = workbook.PrintDocument;
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				pd.Print();
+			}
 		}
 	}
 }

@@ -83,7 +83,7 @@ namespace szwlFormsApplication
 						ChangeAppConfig.ChangeConfig("EmployeesexHeader", headers[4].newheader);
 				}
 			}
-			MessageBox.Show(GlobalData.GlobalLanguage.header_set_succe);
+			dialog.MessageBox.Show(GlobalData.GlobalLanguage.header_set_succe);
 			this.Close();
 			szwlForm.mainForm.SetTableHeader();
 		}

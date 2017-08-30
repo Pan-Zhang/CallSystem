@@ -21,7 +21,7 @@ namespace szwlFormsApplication
 		public systemSettingForm()
 		{
 			InitializeComponent();
-			companyNametextBox.Text = ConfigurationManager.AppSettings["CompanyName"];
+			companyNametextBox.Text = ChangeAppConfig.getValueFromKey("CompanyName");
 			//string[] comNums = Common.MulGetHardwareInfo(HardwareEnum.Win32_SerialPort, "Name");
 			
 			List<string> COMs = SerialPort.GetPortNames().ToList();
@@ -32,7 +32,15 @@ namespace szwlFormsApplication
 			if (!COMs.Contains(InitData.com.COMID))
 				COMs.Add(InitData.com.COMID);
 			COMcomboBox.DataSource = COMs;
-			COMcomboBox.SelectedItem = InitData.com.COMID;
+			if (InitData.com.COMID==null && COMs.Count>0)
+			{
+				COMcomboBox.SelectedIndex = 0;
+			}
+			else
+			{
+				COMcomboBox.SelectedItem = InitData.com.COMID;
+			}
+			
 			if (!databytes.Contains(InitData.com.DataBits))
 				databytes.Add(InitData.com.DataBits);
 			dataComboBox.DataSource = databytes;
@@ -82,6 +90,19 @@ namespace szwlFormsApplication
 			trackBar3.Update();
 
 			changeLanguage();
+			string unit = ChangeAppConfig.getValueFromKey("TimeUnit");
+			if (unit.Equals("S") || unit.Equals("秒"))
+			{
+				unit_box.SelectedIndex = 0;
+			}
+			else if (unit.Equals("M") || unit.Equals("分"))
+			{
+				unit_box.SelectedIndex = 1;
+			}
+			else
+			{
+				unit_box.SelectedIndex = 2;
+			}
 		}
 
 		private void ssOkBtn_Click(object sender, EventArgs e)
@@ -90,7 +111,7 @@ namespace szwlFormsApplication
 			{
 				if (String.IsNullOrWhiteSpace(companyNametextBox.Text))
 				{
-					companyNametextBox.Text = ConfigurationManager.AppSettings["CompanyName"];
+					companyNametextBox.Text = ChangeAppConfig.getValueFromKey("CompanyName");
 				}
 				else
 				{
@@ -99,7 +120,7 @@ namespace szwlFormsApplication
 				szwlForm.mainForm.Text = string.Format("{0}"+GlobalData.GlobalLanguage.Wireless_calling_system, companyNametextBox.Text);
 
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 					this.Close();
 				}
 			}
@@ -113,11 +134,11 @@ namespace szwlFormsApplication
 				szwlForm.mainForm._server.open(InitData.com);
 				if (InitData.SetComInfo())
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 					this.Close();
 				}
 				else
-					MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
 			}
 			else if (this.SSControl.SelectedIndex == 2)//呼叫按钮功能设置
 			{
@@ -129,11 +150,11 @@ namespace szwlFormsApplication
 				InitData.callbtnsetting.callBtnSettings[CallBtnSetting.CallBtnType.F] = FtextBox.Text;
 				if (InitData.SetCallBtnSetting())
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 					this.Close();
 				}
 				else
-					MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
 			}
 			else if (this.SSControl.SelectedIndex == 3)//呼叫按钮功能设置
 			{
@@ -143,22 +164,22 @@ namespace szwlFormsApplication
 				InitData.orderby.ordertype = (OrderBy.OrderType)(ASCradioButton.Checked ? 0 : 1);
 				if (InitData.SetTimeColor() && InitData.SetOrdreBy())
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 					this.Close();
 				}
 				else
-					MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
 			}
 			else
 			{
 				InitData.TimeOut = trackBar3.Value;
 				if (InitData.SetTimeOut())
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 					this.Close();
 				}
 				else
-					MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_fail);
 			}
 		}
 		private void undoBtn_Click(object sender, EventArgs e)
@@ -220,6 +241,36 @@ namespace szwlFormsApplication
 			unit_box.Items[0] = GlobalData.GlobalLanguage.second;
 			unit_box.Items[1] = GlobalData.GlobalLanguage.minute;
 			unit_box.Items[2] = GlobalData.GlobalLanguage.hour;
+
+			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("A")))
+			{
+				AtextBox.Text = GlobalData.GlobalLanguage.Order;
+			}
+			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("B")))
+			{
+				BtextBox.Text = GlobalData.GlobalLanguage.Call;
+			}
+			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("C")))
+			{
+				CtextBox.Text = GlobalData.GlobalLanguage.CheckOut;
+			}
+			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("D")))
+			{
+				DtextBox.Text = GlobalData.GlobalLanguage.Satisfied;
+			}
+			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("E")))
+			{
+				EtextBox.Text = GlobalData.GlobalLanguage.Dissatisfied;
+			}
+			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("F")))
+			{
+				FtextBox.Text = GlobalData.GlobalLanguage.other;
+			}	
+		}
+
+		private void unit_box_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ChangeAppConfig.ChangeConfig("TimeUnit", unit_box.Text);
 		}
 	}
 }

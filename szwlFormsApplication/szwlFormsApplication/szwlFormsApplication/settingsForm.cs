@@ -16,6 +16,7 @@ namespace szwlFormsApplication
 {
 	public partial class settingsForm : Form
 	{
+		public static Employee employee { get; set; }
 		public settingsForm()
 		{
 			InitializeComponent();
@@ -154,19 +155,19 @@ namespace szwlFormsApplication
 			{
 				int index = callAreadataGridView.CurrentRow.Index;
 				Callzone zone = InitData.list_zone[index];
-				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_delete_zone + zone.name + "？",
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_to_delete_zone + zone.name + "？",
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
 					if (InitData.list_zone == null || InitData.list_zone.Count == 0)
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.no_zone_to_delete);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.no_zone_to_delete);
 						return;
 					}
 					szwlForm.mainForm.dm.deleteZone(zone);
 					InitData.list_zone.RemoveAll(z => z.Id == zone.Id);
-					MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 					refreshZone();
 					refreshCaller();
 				}
@@ -175,19 +176,19 @@ namespace szwlFormsApplication
 			{
 				int index = callNumdataGridView.CurrentRow.Index;
 				Caller caller = InitData.list_caller[index];
-				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_delte_caller + caller.callerNum + "？",
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_to_delte_caller + caller.callerNum + "？",
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
 				{
 					if (InitData.list_zone == null || InitData.list_zone.Count == 0)
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
 						return;
 					}
 					szwlForm.mainForm.dm.deleteCaller(caller);
 					InitData.list_caller.RemoveAll(c => c.callerNum == caller.callerNum);
-					MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 					refreshCaller();
 				}
 			}
@@ -207,33 +208,106 @@ namespace szwlFormsApplication
 
 		private void callAreaclearDatabtn_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_clear,
+			DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_to_clear,
 									GlobalData.GlobalLanguage.prompt,
 								   MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
 				if (callAreatabControl.SelectedIndex == 0)
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
+					szwlForm.mainForm.dm.clearZone();
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
 					InitData.ClearData(this.callAreadataGridView, InitData.list_zone);
+					InitData.list_zone.Clear();
 				}
 				else
 				{
 					szwlForm.mainForm.dm.clearCaller();
-					MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
 					InitData.ClearData(this.callNumdataGridView, InitData.list_caller);
+					InitData.list_caller.Clear();
 				}
 			}
 		}
 
 		private void callAreaBatchUpdatebtn_Click(object sender, EventArgs e)
 		{
-
+			if (callAreatabControl.SelectedIndex == 0)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.zone_cannot_batch);
+			}
+			else
+			{
+				BatchUpdateForm form = new BatchUpdateForm();
+				DialogResult dr = form.ShowDialog();
+				if(dr == DialogResult.OK)
+				{
+					DataGridViewSelectedCellCollection collection = callNumdataGridView.SelectedCells;
+					for (int i = 0; i < collection.Count; i = i + 3)
+					{
+						DataGridViewCell cell = collection[i];
+						Caller caller = InitData.list_caller[cell.RowIndex];
+						Caller tem = new Caller();
+						tem.ID = caller.ID;
+						tem.callerNum = caller.callerNum;
+						tem.callZone = caller.callZone;
+						tem.employeeNum = employee.employeeNum;
+						szwlForm.mainForm.dm.updateCaller(tem);
+					}
+					InitData.list_caller = szwlForm.mainForm.dm.selectCaller();
+					callNumdataGridView.DataSource = null;
+					callNumdataGridView.DataSource = InitData.list_caller;
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.update_success);
+				}
+			}
 		}
 
 		private void callAreaBatchDelbtn_Click(object sender, EventArgs e)
 		{
-
+			if (callAreatabControl.SelectedIndex == 0)
+			{
+				DataGridViewSelectedCellCollection collection = callAreadataGridView.SelectedCells;
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_to_delete_choosed, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OKCancel);
+				if(dr == DialogResult.OK)
+				{
+					for (int i = 0; i < collection.Count; i = i + 2)
+					{
+						DataGridViewCell cell = collection[i];
+						Callzone zone = InitData.list_zone[cell.RowIndex];
+						Callzone tem = new Callzone();
+						tem.Id = zone.Id;
+						tem.name = zone.name;
+						szwlForm.mainForm.dm.deleteZone(tem);
+					}
+					InitData.list_zone = szwlForm.mainForm.dm.selectZone();
+					callAreadataGridView.DataSource = null;
+					callAreadataGridView.DataSource = InitData.list_zone;
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+				}
+			}
+			else
+			{
+				DataGridViewSelectedCellCollection collection = callNumdataGridView.SelectedCells;
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_to_delete_choosed, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OKCancel);
+				if (dr == DialogResult.OK)
+				{
+					for (int i = 0; i < collection.Count; i = i + 3)
+					{
+						DataGridViewCell cell = collection[i];
+						Caller caller = InitData.list_caller[cell.RowIndex];
+						Caller tem = new Caller();
+						tem.ID = caller.ID;
+						tem.callerNum = caller.callerNum;
+						tem.callZone = caller.callZone;
+						tem.employeeNum = caller.employeeNum;
+						szwlForm.mainForm.dm.deleteCaller(tem);
+					}
+					InitData.list_caller = szwlForm.mainForm.dm.selectCaller();
+					callNumdataGridView.DataSource = null;
+					callNumdataGridView.DataSource = InitData.list_caller;
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+				}
+			}
 		}
 
 		private void callAreadataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

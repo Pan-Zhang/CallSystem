@@ -67,18 +67,18 @@ namespace szwlFormsApplication
 			User admin = InitData.users[dataGridView1.CurrentRow.Index];
 			if (admin == null)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.not_choose);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.not_choose);
 				return;
 			}
 			if (InitData.users == null && InitData.users.Count == 0)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
 				return;
 			}
 
 			if (admin.id==1)
 			{
-				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.Admin_cannot_delete,
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.Admin_cannot_delete,
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
@@ -92,7 +92,7 @@ namespace szwlFormsApplication
 			}
 			else
 			{
-				DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_delete_user + admin.name + "？",
+				DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_delete_user + admin.name + "？",
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 				if (dr == DialogResult.Yes)
@@ -106,12 +106,12 @@ namespace szwlFormsApplication
 							//this.dataGridView1.AutoGenerateColumns = false;
 							//this.dataGridView1.DataSource = InitData.users;
 							//this.dataGridView1.Refresh();
-							MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 						}
 					}
 					else
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
 						return;
 					}
 				}
@@ -146,14 +146,15 @@ namespace szwlFormsApplication
 
 		private void userclearDatabtn_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_to_clear,
+			DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_to_clear,
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
 			{
 				szwlForm.mainForm.dm.clearUser();
-				MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
-				InitData.ClearData(this.dataGridView1, InitData.users);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.clear_success);
+				InitData.users = szwlForm.mainForm.dm.selectUser();
+				dataGridView1.DataSource = InitData.users;
 			}
 		}
 

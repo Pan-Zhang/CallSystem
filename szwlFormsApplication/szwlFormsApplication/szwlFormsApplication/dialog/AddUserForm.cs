@@ -46,12 +46,12 @@ namespace szwlFormsApplication.dialog
 					InitData.users = new List<User>();
 				if (InitData.users.Any(u => u.name == admin.name))
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.user_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_exist);
 				}
 				else if (szwlForm.mainForm.dm.insertUser(admin))
 				{
 					InitData.users=szwlForm.mainForm.dm.selectUser();
-					MessageBox.Show(GlobalData.GlobalLanguage.add_success);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}

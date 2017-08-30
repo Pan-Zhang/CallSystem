@@ -164,7 +164,7 @@
     <value>True</value>
   </metadata>
   <data name="Column6.HeaderText" xml:space="preserve">
-    <value>isRFID</value>
+    <value>RFID</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="historyRecordsdataGridView.Location" type="System.Drawing.Point, System.Drawing">
@@ -311,6 +311,30 @@
   <data name="&gt;&gt;historySummarygroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="button6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 535</value>
+  </data>
+  <data name="button6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button6.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="button6.Text" xml:space="preserve">
+    <value>打印</value>
+  </data>
+  <data name="&gt;&gt;button6.Name" xml:space="preserve">
+    <value>button6</value>
+  </data>
+  <data name="&gt;&gt;button6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button6.Parent" xml:space="preserve">
+    <value>historyOptiongroupBox</value>
+  </data>
+  <data name="&gt;&gt;button6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -336,7 +360,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -363,7 +387,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 472</value>
@@ -387,7 +411,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 420</value>
@@ -411,19 +435,19 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="statusBox.Items" xml:space="preserve">
-    <value>所有</value>
+    <value>all</value>
   </data>
   <data name="statusBox.Items1" xml:space="preserve">
-    <value>等待</value>
+    <value>unfinish</value>
   </data>
   <data name="statusBox.Items2" xml:space="preserve">
-    <value>完成</value>
+    <value>finish</value>
   </data>
   <data name="statusBox.Items3" xml:space="preserve">
-    <value>超时</value>
+    <value>overtime</value>
   </data>
   <data name="statusBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 339</value>
@@ -444,7 +468,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;statusBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="typeBox.AutoCompleteCustomSource" xml:space="preserve">
     <value>所有</value>
@@ -492,7 +516,7 @@
     <value>Tamper</value>
   </data>
   <data name="typeBox.Items" xml:space="preserve">
-    <value>所有</value>
+    <value>All</value>
   </data>
   <data name="typeBox.Items1" xml:space="preserve">
     <value>Cannel</value>
@@ -558,7 +582,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;typeBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="callArea.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 165</value>
@@ -579,7 +603,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;callArea.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="date_end.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 100</value>
@@ -600,7 +624,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;date_end.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="date_start.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 9pt</value>
@@ -624,7 +648,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;date_start.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -651,7 +675,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -678,7 +702,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -705,7 +729,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -732,7 +756,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -759,7 +783,7 @@
     <value>historyOptiongroupBox</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="historyOptiongroupBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 9pt</value>
@@ -816,6 +840,30 @@
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="button9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 529</value>
+  </data>
+  <data name="button9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button9.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="button9.Text" xml:space="preserve">
+    <value>打印</value>
+  </data>
+  <data name="&gt;&gt;button9.Name" xml:space="preserve">
+    <value>button9</value>
+  </data>
+  <data name="&gt;&gt;button9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button9.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;button9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -841,7 +889,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="button7.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 472</value>
@@ -865,7 +913,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;button7.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 420</value>
@@ -889,19 +937,19 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;button8.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="comboBox1.Items" xml:space="preserve">
-    <value>所有</value>
+    <value>all</value>
   </data>
   <data name="comboBox1.Items1" xml:space="preserve">
-    <value>等待</value>
+    <value>unfinish</value>
   </data>
   <data name="comboBox1.Items2" xml:space="preserve">
-    <value>完成</value>
+    <value>funish</value>
   </data>
   <data name="comboBox1.Items3" xml:space="preserve">
-    <value>超时</value>
+    <value>overtime</value>
   </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 268</value>
@@ -922,7 +970,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="worker.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 162</value>
@@ -943,7 +991,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;worker.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="dateTimePicker1.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 100</value>
@@ -964,7 +1012,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;dateTimePicker1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="dateTimePicker2.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 45</value>
@@ -985,7 +1033,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;dateTimePicker2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1012,7 +1060,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1039,7 +1087,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1066,7 +1114,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1093,7 +1141,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1120,7 +1168,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 6</value>
@@ -1172,6 +1220,390 @@
   </data>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 589</value>
+  </data>
+  <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button3.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="button3.Text" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="&gt;&gt;button3.Name" xml:space="preserve">
+    <value>button3</value>
+  </data>
+  <data name="&gt;&gt;button3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button3.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="radioButton8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 458</value>
+  </data>
+  <data name="radioButton8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 16</value>
+  </data>
+  <data name="radioButton8.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="radioButton8.Text" xml:space="preserve">
+    <value>不满意与总次数占比排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton8.Name" xml:space="preserve">
+    <value>radioButton8</value>
+  </data>
+  <data name="&gt;&gt;radioButton8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton8.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton8.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="radioButton7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 414</value>
+  </data>
+  <data name="radioButton7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 16</value>
+  </data>
+  <data name="radioButton7.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="radioButton7.Text" xml:space="preserve">
+    <value>满意与总次数占比排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton7.Name" xml:space="preserve">
+    <value>radioButton7</value>
+  </data>
+  <data name="&gt;&gt;radioButton7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton7.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="radioButton6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 372</value>
+  </data>
+  <data name="radioButton6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 16</value>
+  </data>
+  <data name="radioButton6.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="radioButton6.Text" xml:space="preserve">
+    <value>超时与总次数占比排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.Name" xml:space="preserve">
+    <value>radioButton6</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="radioButton5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 330</value>
+  </data>
+  <data name="radioButton5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 16</value>
+  </data>
+  <data name="radioButton5.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="radioButton5.Text" xml:space="preserve">
+    <value>超时次数排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.Name" xml:space="preserve">
+    <value>radioButton5</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="radioButton4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 284</value>
+  </data>
+  <data name="radioButton4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 16</value>
+  </data>
+  <data name="radioButton4.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="radioButton4.Text" xml:space="preserve">
+    <value>未完成次数排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton4.Name" xml:space="preserve">
+    <value>radioButton4</value>
+  </data>
+  <data name="&gt;&gt;radioButton4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton4.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton4.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="radioButton3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 241</value>
+  </data>
+  <data name="radioButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 16</value>
+  </data>
+  <data name="radioButton3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="radioButton3.Text" xml:space="preserve">
+    <value>完成次数排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton3.Name" xml:space="preserve">
+    <value>radioButton3</value>
+  </data>
+  <data name="&gt;&gt;radioButton3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton3.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton3.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="radioButton2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 200</value>
+  </data>
+  <data name="radioButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 16</value>
+  </data>
+  <data name="radioButton2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="radioButton2.Text" xml:space="preserve">
+    <value>不满意次数排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton2.Name" xml:space="preserve">
+    <value>radioButton2</value>
+  </data>
+  <data name="&gt;&gt;radioButton2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton2.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton2.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="radioButton1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 158</value>
+  </data>
+  <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 16</value>
+  </data>
+  <data name="radioButton1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="radioButton1.Text" xml:space="preserve">
+    <value>满意次数排名</value>
+  </data>
+  <data name="&gt;&gt;radioButton1.Name" xml:space="preserve">
+    <value>radioButton1</value>
+  </data>
+  <data name="&gt;&gt;radioButton1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton1.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;radioButton1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 113</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="label16.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>结束时间</value>
+  </data>
+  <data name="&gt;&gt;label16.Name" xml:space="preserve">
+    <value>label16</value>
+  </data>
+  <data name="&gt;&gt;label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 53</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="dateTimePicker4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 107</value>
+  </data>
+  <data name="dateTimePicker4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 21</value>
+  </data>
+  <data name="dateTimePicker4.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker4.Name" xml:space="preserve">
+    <value>dateTimePicker4</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker4.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker4.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="dateTimePicker3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 47</value>
+  </data>
+  <data name="dateTimePicker3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 21</value>
+  </data>
+  <data name="dateTimePicker3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker3.Name" xml:space="preserve">
+    <value>dateTimePicker3</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker3.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker3.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>349, 721</value>
+  </data>
+  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>汇总查询</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>809, 34</value>

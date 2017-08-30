@@ -27,7 +27,7 @@ namespace szwlFormsApplication.dialog
 			zone.name = areaName.Text;
 			if (string.IsNullOrWhiteSpace(zone.name))
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.zone_null);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.zone_null);
 				return;
 			}
 
@@ -35,13 +35,13 @@ namespace szwlFormsApplication.dialog
 				InitData.list_zone = new List<Callzone>();
 			if (InitData.list_zone.Any(z => z.name == zone.name))
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.zone_had_exist);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.zone_had_exist);
 				return;
 			}
 			if (szwlForm.mainForm.dm.insertZone(zone))
 			{
 				InitData.list_zone = szwlForm.mainForm.dm.selectZone();
-				MessageBox.Show(GlobalData.GlobalLanguage.add_success);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}

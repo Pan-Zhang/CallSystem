@@ -1,10 +1,10 @@
 ﻿using System;
 using szwlFormsApplication.Models;
-using System.Windows.Forms;
 using szwlFormsApplication.CommonFunc;
 using szwlFormsApplication.Language;
 using System.Linq;
 using System.Configuration;
+using System.Windows.Forms;
 
 namespace szwlFormsApplication
 {
@@ -22,14 +22,14 @@ namespace szwlFormsApplication
 			InitData.Clear();
 			if (String.IsNullOrWhiteSpace(username.Text) || String.IsNullOrWhiteSpace(password.Text))
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.empty_warn, GlobalData.GlobalLanguage.prompt);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.empty_warn, GlobalData.GlobalLanguage.prompt);
 				clear();
 				return;
 			}
 			var result = ValidUser(username.Text, password.Text);
 			if (result.Item1)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.welcome, GlobalData.GlobalLanguage.prompt);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.welcome, GlobalData.GlobalLanguage.prompt);
 				this.Hide();
 				szwlForm.mainForm.Init();
 				szwlForm.mainForm.ShowInTaskbar = true;
@@ -37,7 +37,7 @@ namespace szwlFormsApplication
 			}
 			else
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.login_error, GlobalData.GlobalLanguage.prompt);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.login_error, GlobalData.GlobalLanguage.prompt);
 				clear();
 			}
 		}
@@ -98,7 +98,7 @@ namespace szwlFormsApplication
 
 		private void LogOnForm_Load(object sender, EventArgs e)
 		{
-			if (ConfigurationManager.AppSettings[GlobalData.LANGUAGE].Equals(GlobalData.ENGLISH))
+			if (ChangeAppConfig.getValueFromKey(GlobalData.LANGUAGE).Equals(GlobalData.ENGLISH))
 			{
 				comboBox1.SelectedIndex = 0;
 			}

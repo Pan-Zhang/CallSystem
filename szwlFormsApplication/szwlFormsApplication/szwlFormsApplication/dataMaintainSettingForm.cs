@@ -61,52 +61,75 @@ namespace szwlFormsApplication
 					break;
 
 				default:
-					this.Hide();
+					this.Close();
 					return;
 			}
 
-			DialogResult dr = MessageBox.Show(mess, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OKCancel);
+			DialogResult dr = dialog.MessageBox.Show(mess, GlobalData.GlobalLanguage.prompt, MessageBoxButtons.OKCancel);
 			if (dr == DialogResult.OK)
 			{
 				switch (index)
 				{
 					case 0:
 						dm.clearAll();
+						InitData.list_caller.Clear();
+						InitData.list_zone.Clear();
+						InitData.employeeRFID.Clear();
+						InitData.users.Clear();
+						InitData.employees.Clear();
+						szwlForm.mainForm.messages.Clear();
 						break;
 
 					case 1:
 						dm.clearCaller();
+						InitData.list_caller.Clear();
 						break;
 
 					case 2:
 						dm.clearZone();
+						InitData.list_zone.Clear();
 						break;
 
 					case 3:
 						dm.clearEmployee();
+						InitData.employeeRFID.Clear();
+						InitData.employees.Clear();
 						break;
 
 					case 4:
 						dm.clearUser();
+						InitData.users.Clear();
 						break;
 
 					case 5:
 						dm.clearRecodrd();
+						szwlForm.mainForm.messages.Clear();
 						break;
 
 					case 6:
 						dm.clearTableHead();
+						ChangeAppConfig.ChangeConfig("MessagetimeHeader", "");
+						ChangeAppConfig.ChangeConfig("MessagecallerNumHeader", "");
+						ChangeAppConfig.ChangeConfig("MessageemployeeNumHeader", "");
+						ChangeAppConfig.ChangeConfig("MessagetypeHeader", "");
+						ChangeAppConfig.ChangeConfig("MessagestatusHeader", "");
+						ChangeAppConfig.ChangeConfig("MessagecallZoneHeader", "");
+						ChangeAppConfig.ChangeConfig("EmployeeemployeeNumHeader", "");
+						ChangeAppConfig.ChangeConfig("EmployeenameHeader", "");
+						ChangeAppConfig.ChangeConfig("EmployeephonenumHeader", "");
+						ChangeAppConfig.ChangeConfig("EmployeeremarksHeader", "");
+						ChangeAppConfig.ChangeConfig("EmployeesexHeader", "");
 						break;
 				}
 			}
-			this.Hide();
+			this.Close();
 		}
 
 		private void changeLanguage()
 		{
+			this.Text = GlobalData.GlobalLanguage.data_setting;
 			dataInitLabel.Text = GlobalData.GlobalLanguage.Data_initialization;
 			dataInitOK.Text = GlobalData.GlobalLanguage.ensure;
-			this.Text = GlobalData.GlobalLanguage.about_setting;
 			label1.Text = GlobalData.GlobalLanguage.watch_out;
 
 			comboBox1.Items[0] = GlobalData.GlobalLanguage.all_message;

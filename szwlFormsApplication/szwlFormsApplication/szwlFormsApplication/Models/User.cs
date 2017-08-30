@@ -35,7 +35,7 @@ namespace szwlFormsApplication.Models
 			if (user.programs == null || user.programs.Count == 0)
 			{
 				userclass = user.userClass;
-				if (ConfigurationManager.AppSettings[Key] == null)
+				if (ChangeAppConfig.getValueFromKey(Key) == null)
 				{
 					switch (userclass)
 					{
@@ -43,7 +43,7 @@ namespace szwlFormsApplication.Models
 						case User.UserClass.normal: ChangeAppConfig.ChangeConfig(Key, "0_3_4_7_8"); break;
 					}
 				}
-				programs = ConfigurationManager.AppSettings[Key].Split('_').Select(p => int.Parse(p)).ToList();
+				programs = ChangeAppConfig.getValueFromKey(Key).Split('_').Select(p => int.Parse(p)).ToList();
 			}
 			else
 			{

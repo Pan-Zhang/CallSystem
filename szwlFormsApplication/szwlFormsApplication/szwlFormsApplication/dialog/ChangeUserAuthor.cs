@@ -71,7 +71,7 @@ namespace szwlFormsApplication.dialog
 			
 			if (InitData.users == null)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
 			}
 			else
 			{
@@ -82,13 +82,13 @@ namespace szwlFormsApplication.dialog
 					{
 						InitData.users = InitData.users.Select(u => u.name == user.name ? user : u).ToList();
 						this.DialogResult = DialogResult.OK;
-						MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 						this.Close();
 					}
 				}
 				else
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_not_exist);
 				}
 			}
 		}

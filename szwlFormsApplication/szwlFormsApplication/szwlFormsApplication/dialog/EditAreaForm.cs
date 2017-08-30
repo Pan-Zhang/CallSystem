@@ -26,13 +26,13 @@ namespace szwlFormsApplication.dialog
 		{
 			if(String.IsNullOrWhiteSpace(oldareaname.Text))
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.not_choose);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.not_choose);
 				return;
 			}
 
 			if (InitData.list_zone == null || InitData.list_zone.Count == 0)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.no_data_to_edit);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.no_data_to_edit);
 				return;
 			}
 			if (InitData.list_zone.Any(z => z.Id == zone.Id))
@@ -41,7 +41,7 @@ namespace szwlFormsApplication.dialog
 					return;
 				if (InitData.list_zone.Where(z=>z.name!=oldareaname.Text).Any(z => z.name == textBox1.Text))
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.caller_exist);
 					return;
 				}
 				zone.name = textBox1.Text;
@@ -53,13 +53,13 @@ namespace szwlFormsApplication.dialog
 				}
 				else
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.edit_failed);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.edit_failed);
 					return;
 				}
 			}
 			else
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.zone_eixst);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.zone_eixst);
 				return;
 			}
 		}

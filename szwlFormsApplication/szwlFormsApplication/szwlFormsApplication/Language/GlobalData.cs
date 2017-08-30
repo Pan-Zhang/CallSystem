@@ -1,4 +1,6 @@
 ﻿
+using szwlFormsApplication.CommonFunc;
+
 namespace szwlFormsApplication.Language
 {
 	class GlobalData
@@ -16,7 +18,7 @@ namespace szwlFormsApplication.Language
             {
                 if (globalLanguage == null || CHANGE)
                 {
-					SystemLanguage = System.Configuration.ConfigurationManager.AppSettings[LANGUAGE];
+					SystemLanguage = ChangeAppConfig.getValueFromKey(LANGUAGE);
 					CHANGE = false;
 					globalLanguage = new Language();
                     return globalLanguage;

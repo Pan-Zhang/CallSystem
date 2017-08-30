@@ -28,18 +28,26 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(callHistoriesSummaryForm));
 			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(callHistoriesSummaryForm));
 			this.historyRecordsgroupBox = new System.Windows.Forms.GroupBox();
 			this.historyRecordsdataGridView = new System.Windows.Forms.DataGridView();
+			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.historySummarygroupBox = new System.Windows.Forms.GroupBox();
 			this.total = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.historyOptiongroupBox = new System.Windows.Forms.GroupBox();
+			this.button6 = new System.Windows.Forms.Button();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.button2 = new System.Windows.Forms.Button();
@@ -58,6 +66,7 @@
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.button9 = new System.Windows.Forms.Button();
 			this.label14 = new System.Windows.Forms.Label();
 			this.button7 = new System.Windows.Forms.Button();
 			this.button8 = new System.Windows.Forms.Button();
@@ -70,13 +79,20 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
-			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.button3 = new System.Windows.Forms.Button();
+			this.radioButton8 = new System.Windows.Forms.RadioButton();
+			this.radioButton7 = new System.Windows.Forms.RadioButton();
+			this.radioButton6 = new System.Windows.Forms.RadioButton();
+			this.radioButton5 = new System.Windows.Forms.RadioButton();
+			this.radioButton4 = new System.Windows.Forms.RadioButton();
+			this.radioButton3 = new System.Windows.Forms.RadioButton();
+			this.radioButton2 = new System.Windows.Forms.RadioButton();
+			this.radioButton1 = new System.Windows.Forms.RadioButton();
+			this.label16 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+			this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
 			this.historyRecordsgroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.historyRecordsdataGridView)).BeginInit();
 			this.historySummarygroupBox.SuspendLayout();
@@ -86,6 +102,7 @@
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
+			this.tabPage3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// historyRecordsgroupBox
@@ -109,6 +126,48 @@
 			resources.ApplyResources(this.historyRecordsdataGridView, "historyRecordsdataGridView");
 			this.historyRecordsdataGridView.Name = "historyRecordsdataGridView";
 			this.historyRecordsdataGridView.RowTemplate.Height = 23;
+			// 
+			// id
+			// 
+			this.id.DataPropertyName = "Id";
+			resources.ApplyResources(this.id, "id");
+			this.id.Name = "id";
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "time";
+			resources.ApplyResources(this.Column2, "Column2");
+			this.Column2.Name = "Column2";
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "callerNum";
+			resources.ApplyResources(this.Column1, "Column1");
+			this.Column1.Name = "Column1";
+			// 
+			// Column3
+			// 
+			this.Column3.DataPropertyName = "employeeNum";
+			resources.ApplyResources(this.Column3, "Column3");
+			this.Column3.Name = "Column3";
+			// 
+			// Column4
+			// 
+			this.Column4.DataPropertyName = "showType";
+			resources.ApplyResources(this.Column4, "Column4");
+			this.Column4.Name = "Column4";
+			// 
+			// Column5
+			// 
+			this.Column5.DataPropertyName = "status";
+			resources.ApplyResources(this.Column5, "Column5");
+			this.Column5.Name = "Column5";
+			// 
+			// Column6
+			// 
+			this.Column6.DataPropertyName = "isRFID";
+			resources.ApplyResources(this.Column6, "Column6");
+			this.Column6.Name = "Column6";
 			// 
 			// historySummarygroupBox
 			// 
@@ -151,6 +210,7 @@
 			// 
 			// historyOptiongroupBox
 			// 
+			this.historyOptiongroupBox.Controls.Add(this.button6);
 			this.historyOptiongroupBox.Controls.Add(this.label13);
 			this.historyOptiongroupBox.Controls.Add(this.label4);
 			this.historyOptiongroupBox.Controls.Add(this.button2);
@@ -168,6 +228,13 @@
 			resources.ApplyResources(this.historyOptiongroupBox, "historyOptiongroupBox");
 			this.historyOptiongroupBox.Name = "historyOptiongroupBox";
 			this.historyOptiongroupBox.TabStop = false;
+			// 
+			// button6
+			// 
+			resources.ApplyResources(this.button6, "button6");
+			this.button6.Name = "button6";
+			this.button6.UseVisualStyleBackColor = true;
+			this.button6.Click += new System.EventHandler(this.button6_Click);
 			// 
 			// label13
 			// 
@@ -289,6 +356,7 @@
 			// 
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Controls.Add(this.tabPage3);
 			resources.ApplyResources(this.tabControl1, "tabControl1");
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
@@ -309,6 +377,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.button9);
 			this.groupBox1.Controls.Add(this.label14);
 			this.groupBox1.Controls.Add(this.button7);
 			this.groupBox1.Controls.Add(this.button8);
@@ -324,6 +393,13 @@
 			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
+			// 
+			// button9
+			// 
+			resources.ApplyResources(this.button9, "button9");
+			this.button9.Name = "button9";
+			this.button9.UseVisualStyleBackColor = true;
+			this.button9.Click += new System.EventHandler(this.button9_Click);
 			// 
 			// label14
 			// 
@@ -397,47 +473,107 @@
 			resources.ApplyResources(this.label12, "label12");
 			this.label12.Name = "label12";
 			// 
-			// id
+			// tabPage3
 			// 
-			this.id.DataPropertyName = "Id";
-			resources.ApplyResources(this.id, "id");
-			this.id.Name = "id";
+			this.tabPage3.Controls.Add(this.button3);
+			this.tabPage3.Controls.Add(this.radioButton8);
+			this.tabPage3.Controls.Add(this.radioButton7);
+			this.tabPage3.Controls.Add(this.radioButton6);
+			this.tabPage3.Controls.Add(this.radioButton5);
+			this.tabPage3.Controls.Add(this.radioButton4);
+			this.tabPage3.Controls.Add(this.radioButton3);
+			this.tabPage3.Controls.Add(this.radioButton2);
+			this.tabPage3.Controls.Add(this.radioButton1);
+			this.tabPage3.Controls.Add(this.label16);
+			this.tabPage3.Controls.Add(this.label15);
+			this.tabPage3.Controls.Add(this.dateTimePicker4);
+			this.tabPage3.Controls.Add(this.dateTimePicker3);
+			resources.ApplyResources(this.tabPage3, "tabPage3");
+			this.tabPage3.Name = "tabPage3";
+			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
-			// Column2
+			// button3
 			// 
-			this.Column2.DataPropertyName = "time";
-			resources.ApplyResources(this.Column2, "Column2");
-			this.Column2.Name = "Column2";
+			resources.ApplyResources(this.button3, "button3");
+			this.button3.Name = "button3";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
-			// Column1
+			// radioButton8
 			// 
-			this.Column1.DataPropertyName = "callerNum";
-			resources.ApplyResources(this.Column1, "Column1");
-			this.Column1.Name = "Column1";
+			resources.ApplyResources(this.radioButton8, "radioButton8");
+			this.radioButton8.Name = "radioButton8";
+			this.radioButton8.TabStop = true;
+			this.radioButton8.UseVisualStyleBackColor = true;
 			// 
-			// Column3
+			// radioButton7
 			// 
-			this.Column3.DataPropertyName = "employeeNum";
-			resources.ApplyResources(this.Column3, "Column3");
-			this.Column3.Name = "Column3";
+			resources.ApplyResources(this.radioButton7, "radioButton7");
+			this.radioButton7.Name = "radioButton7";
+			this.radioButton7.TabStop = true;
+			this.radioButton7.UseVisualStyleBackColor = true;
 			// 
-			// Column4
+			// radioButton6
 			// 
-			this.Column4.DataPropertyName = "type";
-			resources.ApplyResources(this.Column4, "Column4");
-			this.Column4.Name = "Column4";
+			resources.ApplyResources(this.radioButton6, "radioButton6");
+			this.radioButton6.Name = "radioButton6";
+			this.radioButton6.TabStop = true;
+			this.radioButton6.UseVisualStyleBackColor = true;
 			// 
-			// Column5
+			// radioButton5
 			// 
-			this.Column5.DataPropertyName = "status";
-			resources.ApplyResources(this.Column5, "Column5");
-			this.Column5.Name = "Column5";
+			resources.ApplyResources(this.radioButton5, "radioButton5");
+			this.radioButton5.Name = "radioButton5";
+			this.radioButton5.TabStop = true;
+			this.radioButton5.UseVisualStyleBackColor = true;
 			// 
-			// Column6
+			// radioButton4
 			// 
-			this.Column6.DataPropertyName = "isRFID";
-			resources.ApplyResources(this.Column6, "Column6");
-			this.Column6.Name = "Column6";
+			resources.ApplyResources(this.radioButton4, "radioButton4");
+			this.radioButton4.Name = "radioButton4";
+			this.radioButton4.TabStop = true;
+			this.radioButton4.UseVisualStyleBackColor = true;
+			// 
+			// radioButton3
+			// 
+			resources.ApplyResources(this.radioButton3, "radioButton3");
+			this.radioButton3.Name = "radioButton3";
+			this.radioButton3.TabStop = true;
+			this.radioButton3.UseVisualStyleBackColor = true;
+			// 
+			// radioButton2
+			// 
+			resources.ApplyResources(this.radioButton2, "radioButton2");
+			this.radioButton2.Name = "radioButton2";
+			this.radioButton2.TabStop = true;
+			this.radioButton2.UseVisualStyleBackColor = true;
+			// 
+			// radioButton1
+			// 
+			resources.ApplyResources(this.radioButton1, "radioButton1");
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.TabStop = true;
+			this.radioButton1.UseVisualStyleBackColor = true;
+			// 
+			// label16
+			// 
+			resources.ApplyResources(this.label16, "label16");
+			this.label16.Name = "label16";
+			// 
+			// label15
+			// 
+			resources.ApplyResources(this.label15, "label15");
+			this.label15.Name = "label15";
+			// 
+			// dateTimePicker4
+			// 
+			resources.ApplyResources(this.dateTimePicker4, "dateTimePicker4");
+			this.dateTimePicker4.Name = "dateTimePicker4";
+			// 
+			// dateTimePicker3
+			// 
+			resources.ApplyResources(this.dateTimePicker3, "dateTimePicker3");
+			this.dateTimePicker3.Name = "dateTimePicker3";
 			// 
 			// callHistoriesSummaryForm
 			// 
@@ -460,6 +596,8 @@
 			this.tabPage2.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			this.tabPage3.ResumeLayout(false);
+			this.tabPage3.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -503,6 +641,11 @@
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Label total;
 		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.TabPage tabPage3;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.DateTimePicker dateTimePicker4;
+		private System.Windows.Forms.DateTimePicker dateTimePicker3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn id;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -510,5 +653,16 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+		private System.Windows.Forms.RadioButton radioButton5;
+		private System.Windows.Forms.RadioButton radioButton4;
+		private System.Windows.Forms.RadioButton radioButton3;
+		private System.Windows.Forms.RadioButton radioButton2;
+		private System.Windows.Forms.RadioButton radioButton1;
+		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.RadioButton radioButton8;
+		private System.Windows.Forms.RadioButton radioButton7;
+		private System.Windows.Forms.RadioButton radioButton6;
+		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button button9;
 	}
 }

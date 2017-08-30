@@ -377,7 +377,7 @@
 			this.finish_btn.BackColor = System.Drawing.Color.Silver;
 			this.finish_btn.FlatAppearance.BorderSize = 0;
 			this.finish_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.finish_btn.Location = new System.Drawing.Point(179, 154);
+			this.finish_btn.Location = new System.Drawing.Point(212, 154);
 			this.finish_btn.Name = "finish_btn";
 			this.finish_btn.Size = new System.Drawing.Size(221, 23);
 			this.finish_btn.TabIndex = 8;
@@ -388,7 +388,7 @@
 			this.timeout_btn.BackColor = System.Drawing.Color.Yellow;
 			this.timeout_btn.FlatAppearance.BorderSize = 0;
 			this.timeout_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.timeout_btn.Location = new System.Drawing.Point(179, 107);
+			this.timeout_btn.Location = new System.Drawing.Point(212, 107);
 			this.timeout_btn.Name = "timeout_btn";
 			this.timeout_btn.Size = new System.Drawing.Size(221, 23);
 			this.timeout_btn.TabIndex = 7;
@@ -399,7 +399,7 @@
 			this.wait_btn.BackColor = System.Drawing.Color.Red;
 			this.wait_btn.FlatAppearance.BorderSize = 0;
 			this.wait_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.wait_btn.Location = new System.Drawing.Point(179, 58);
+			this.wait_btn.Location = new System.Drawing.Point(212, 58);
 			this.wait_btn.Name = "wait_btn";
 			this.wait_btn.Size = new System.Drawing.Size(221, 23);
 			this.wait_btn.TabIndex = 6;
@@ -520,6 +520,7 @@
 			this.unit_box.Size = new System.Drawing.Size(72, 20);
 			this.unit_box.TabIndex = 9;
 			this.unit_box.Text = "分钟";
+			this.unit_box.SelectedIndexChanged += new System.EventHandler(this.unit_box_SelectedIndexChanged);
 			// 
 			// number
 			// 
@@ -534,7 +535,7 @@
 			// label12
 			// 
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(51, 222);
+			this.label12.Location = new System.Drawing.Point(17, 222);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(83, 12);
 			this.label12.TabIndex = 7;

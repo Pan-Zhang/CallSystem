@@ -44,7 +44,7 @@ namespace szwlFormsApplication.dialog
 					InitData.employees = new List<Employee>();
 				if (InitData.employees.Any(em=> em.employeeNum == num))
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.employee_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_exist);
 					return;
 				}
 				else
@@ -53,14 +53,14 @@ namespace szwlFormsApplication.dialog
 					{
 						InitData.employees = szwlForm.mainForm.dm.selectEmployee();
 						this.DialogResult = DialogResult.OK;
-						MessageBox.Show(GlobalData.GlobalLanguage.add_success);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
 						this.Hide();
 					}
 				}
 			}
 			else
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.employeenum_number_type);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.employeenum_number_type);
 				return;
 			}
 		}

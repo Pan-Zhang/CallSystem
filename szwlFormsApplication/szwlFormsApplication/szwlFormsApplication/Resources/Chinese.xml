@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Chinese>
 	<app_name>深圳物联呼叫系统</app_name>
-	<no_quest>无请求</no_quest>
+	<no_quest></no_quest>
 	<have_quest>{0}号桌{1}类型：{2}</have_quest>
 	<no_device> 获取设备端口失败，请确认插入对应设备？</no_device>
 	<prompt>提示</prompt>
@@ -36,8 +36,8 @@
 	<caller_setting>呼叫器设置</caller_setting>
 	<employee_setting>员工设置</employee_setting>
 	<header_setting>表头设置</header_setting>
-	<data_setting>数据管理</data_setting>
-	<summary_setting>统计</summary_setting>
+	<data_setting>数据维护</data_setting>
+	<summary_setting>数据统计</summary_setting>
 	<about_setting>关于</about_setting>
 	<ID>序号</ID>
 	<Time>时间</Time>
@@ -45,7 +45,7 @@
 	<employee_num>员工编号</employee_num>
 	<type>类型</type>
 	<status>状态</status>
-	<isRFID>isRFID</isRFID>
+	<isRFID>RFID</isRFID>
 	<welcome_use>欢迎使用</welcome_use>
 	<user_login>用户登录</user_login>
 	<username>用户名称:</username>
@@ -193,4 +193,33 @@
 	<want_to_delte_caller>	你确定想删除呼叫器：</want_to_delte_caller>
 	<want_to_delete_zone>你确定想删除区域：</want_to_delete_zone>
 	<employee_select>编号:{0} 姓名:{1}</employee_select>
+	<want_delete_employee>你确定删除员工：</want_delete_employee>
+
+	<Order>点单</Order>
+	<Call>呼叫</Call>
+	<CheckOut>结账</CheckOut>
+	<Satisfied>满意</Satisfied>
+	<Dissatisfied>不满意</Dissatisfied>
+	<other></other>
+	<all>所有</all>
+	<batch_update>批量修改</batch_update>
+	<choose_employee>选择员工</choose_employee>
+	<no_employee_coose>当前没有员工可供选择</no_employee_coose>
+	<zone_cannot_batch>呼叫区域不能执行批量修改操作</zone_cannot_batch>
+	<want_to_delete_choosed>您确定要删除所有选中项？</want_to_delete_choosed>
+
+	<satisfied_rank>满意次数排名</satisfied_rank>
+	<dissatisfied_rank>不满意次数排名</dissatisfied_rank>
+	<finish_rank>完成次数排名</finish_rank>
+	<unfinish_rank>未完成次数排名</unfinish_rank>
+	<overtime_rank>超时次数排名</overtime_rank>
+	<overtime_total>超时与总次数占比排名</overtime_total>
+	<satisfied_totla>满意与总次数占比排名</satisfied_totla>
+	<dissatisfied_total>不满意与总次数占比排名</dissatisfied_total>
+	<frequency>次数</frequency>
+	<Total>总次数</Total>
+	<percent>百分比</percent>
+	<employee_name>员工姓名</employee_name>
+	<Summary_statistics>汇总统计</Summary_statistics>
+	<print>打印</print>
 </Chinese>

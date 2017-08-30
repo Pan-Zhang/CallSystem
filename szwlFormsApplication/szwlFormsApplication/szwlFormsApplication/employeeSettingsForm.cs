@@ -23,16 +23,16 @@ namespace szwlFormsApplication
 		{
 			InitializeComponent();
 			changeLanguage();
-			if (ConfigurationManager.AppSettings["isRFID"] == null)
+			if (ChangeAppConfig.getValueFromKey("isRFID") == null)
 			{
 				ChangeAppConfig.ChangeConfig("isRFID", "0");
 			}
 			
 			this.dataGridView1.Columns[0].HeaderCell.Value = Employee.DisplayemployeeNum();
 			this.dataGridView1.Columns[1].HeaderCell.Value = Employee.Displayname();
-			this.dataGridView1.Columns[2].HeaderCell.Value = Employee.Displayphonenum();
-			this.dataGridView1.Columns[3].HeaderCell.Value = Employee.Displayremarks();
-			this.dataGridView1.Columns[4].HeaderCell.Value = Employee.Displaysex();
+			this.dataGridView1.Columns[2].HeaderCell.Value = Employee.Displaysex();
+			this.dataGridView1.Columns[3].HeaderCell.Value = Employee.Displayphonenum();
+			this.dataGridView1.Columns[4].HeaderCell.Value = Employee.Displayremarks();
 			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
 			{
 				updateemployee.Enabled = true;
@@ -73,7 +73,7 @@ namespace szwlFormsApplication
 				list = InitData.employees;
 			}
 
-			InitData.AddData(dataGridView1, list);
+			//InitData.AddData(dataGridView1, list);
 			if (!Common.isRFID)
 			{
 				if (list != null && list.Count > 0)
@@ -96,9 +96,9 @@ namespace szwlFormsApplication
 				updateemployee.Enabled = false;
 				deleteemployee.Enabled = false;
 			}
-			//this.dataGridView1.AutoGenerateColumns = false;
-			//this.dataGridView1.DataSource = list;
-			//this.dataGridView1.Refresh();
+			this.dataGridView1.AutoGenerateColumns = false;
+			this.dataGridView1.DataSource = list;
+			this.dataGridView1.Refresh();
 		}
 
 		private void addemployee_Click(object sender, EventArgs e)
@@ -130,7 +130,7 @@ namespace szwlFormsApplication
 				return;
 			int index = dataGridView1.CurrentRow.Index;
 			Employee emp = list[index];
-			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.want_delete_user + emp.employeeNum + "？",
+			DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.want_delete_employee + emp.employeeNum + "？",
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
@@ -139,7 +139,7 @@ namespace szwlFormsApplication
 				{
 					if (InitData.employeeRFID == null || InitData.employeeRFID.Count == 0)
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 					else
@@ -149,11 +149,11 @@ namespace szwlFormsApplication
 							szwlForm.mainForm.dm.deleteEmployeeRFID(emp);
 							InitData.employeeRFID.RemoveAll(em => em.employeeNum == emp.employeeNum);
 
-							MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 						}
 						else
 						{
-							MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 							return;
 						}
 					}
@@ -162,7 +162,7 @@ namespace szwlFormsApplication
 				{
 					if (InitData.employees == null || InitData.employees.Count == 0)
 					{
-						MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 						return;
 					}
 					else
@@ -172,11 +172,11 @@ namespace szwlFormsApplication
 							szwlForm.mainForm.dm.deleteEmployee(emp);
 							InitData.employees.RemoveAll(em => em.employeeNum == emp.employeeNum);
 
-							MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_succe);
 						}
 						else
 						{
-							MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_not_exist);
 							return;
 						}
 					}
@@ -193,7 +193,7 @@ namespace szwlFormsApplication
 
 		private void clearemployee_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show(GlobalData.GlobalLanguage.delete_employee,
+			DialogResult dr = dialog.MessageBox.Show(GlobalData.GlobalLanguage.delete_employee,
 								 GlobalData.GlobalLanguage.prompt,
 								MessageBoxButtons.YesNo);
 			if (dr == DialogResult.Yes)
@@ -208,7 +208,8 @@ namespace szwlFormsApplication
 					szwlForm.mainForm.dm.deleteAllEmployee();
 					InitData.employees = null;
 				}
-				refresh();
+				dataGridView1.DataSource = null;
+				//dataGridView1.Refresh();
 			}
 		}
 
@@ -234,30 +235,30 @@ namespace szwlFormsApplication
 
 		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
-			{
-				updateemployee.Enabled = true;
-				deleteemployee.Enabled = true;
-			}
-			else
-			{
-				updateemployee.Enabled = false;
-				deleteemployee.Enabled = false;
-			}
+			//if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+			//{
+			//	updateemployee.Enabled = true;
+			//	deleteemployee.Enabled = true;
+			//}
+			//else
+			//{
+			//	updateemployee.Enabled = false;
+			//	deleteemployee.Enabled = false;
+			//}
 		}
 
 		private void DataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
-			{
-				updateemployee.Enabled = true;
-				deleteemployee.Enabled = true;
-			}
-			else
-			{
-				updateemployee.Enabled = false;
-				deleteemployee.Enabled = false;
-			}
+			//if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+			//{
+			//	updateemployee.Enabled = true;
+			//	deleteemployee.Enabled = true;
+			//}
+			//else
+			//{
+			//	updateemployee.Enabled = false;
+			//	deleteemployee.Enabled = false;
+			//}
 		}
 
 		private void changeLanguage()

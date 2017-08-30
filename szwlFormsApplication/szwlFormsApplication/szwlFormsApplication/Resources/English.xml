@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <English>
 	<app_name>SZWL caller system</app_name>
-	<no_quest>No request</no_quest>
+	<no_quest></no_quest>
 	<have_quest>Number: {0}{1}Type：{2}</have_quest>
 	<no_device> Failed to get device port. Make sure to insert device?</no_device>
 	<prompt>Prompt</prompt>
@@ -12,9 +12,9 @@
 	<number>Number </number>
 	<nothing>NO</nothing>
 	<name>name:</name>
-	<finish>finish</finish>
-	<overtime>overtime</overtime>
-	<waiting>waiting</waiting>
+	<finish>Cancelled or Finished</finish>
+	<overtime>Overtime</overtime>
+	<waiting>Unfinished</waiting>
 	<satisfy>satisfy</satisfy>
 	<unsatisfy>unsatisfy</unsatisfy>
 	<records> records</records>
@@ -37,15 +37,15 @@
 	<employee_setting>Employee</employee_setting>
 	<header_setting>Header</header_setting>
 	<data_setting>Data</data_setting>
-	<summary_setting>Summary</summary_setting>
+	<summary_setting>Statistic</summary_setting>
 	<about_setting>About</about_setting>
 	<ID>Num</ID>
 	<Time>Time</Time>
 	<caller_num>CallerNum</caller_num>
-	<employee_num>Employee</employee_num>
+	<employee_num>EmployeeNum</employee_num>
 	<type>Type</type>
 	<status>Status</status>
-	<isRFID>isRFID</isRFID>
+	<isRFID>RFID</isRFID>
 	<welcome_use>Welcome to use</welcome_use>
 	<user_login>User Login</user_login>
 	<username>UserName:</username>
@@ -61,7 +61,7 @@
 	<end>End date</end>
 	<zone>Call zone</zone>
 	<employee>Employee</employee>
-	<ensure>Ensure</ensure>
+	<ensure>OK</ensure>
 	<export>Export</export>
 	<summary>Summary</summary>
 	<sreach_result>Search Result</sreach_result>
@@ -79,27 +79,27 @@
 	<minimal>Minimal</minimal>
 
 	<company_name>Company</company_name>
-	<com_setting>SerialPort</com_setting>
+	<com_setting>Serial Setting</com_setting>
 	<button_function>Button</button_function>
-	<record_show>Record</record_show>
-	<effective_time>Valid time</effective_time>
+	<record_show>Record Display</record_show>
+	<effective_time>Respond Time</effective_time>
 
 	<SerialPort>Serial Port</SerialPort>
-	<data_bits>Data Bits</data_bits>
+	<data_bits>Data Bit</data_bits>
 	<baud_rate>Baud Rate</baud_rate>
 	<stop_bit>Stop Bit</stop_bit>
 
-	<sort>Sort</sort>
+	<sort>Record Sequence</sort>
 	<Ascending>Ascending</Ascending>
 	<Descending>Descending</Descending>
-	<color>Record Color</color>
+	<color>all Information Color</color>
 	<timeout>overtime</timeout>
 	<setting>Set</setting>
-	<Set_timeout>Set Timeout</Set_timeout>
+	<Set_timeout>Respond Time Setting</Set_timeout>
 
-	<second>Second</second>
-	<minute>Minute</minute>
-	<hour>Hour</hour>
+	<second>S</second>
+	<minute>M</minute>
+	<hour>H</hour>
 
 	<Wireless_calling_system>Wireless calling system</Wireless_calling_system>
 	<set_succe>Set successfully!</set_succe>
@@ -135,7 +135,7 @@
 	<choose_table>choose table</choose_table>
 	<other_name>column name</other_name>
 	<call_message>call massage</call_message>
-	<employ_info>employ info</employ_info>
+	<employ_info>employee info</employ_info>
 	<old_name>old name</old_name>
 	<new_name>new name</new_name>
 	<header_set_succe>Column name update sucess!</header_set_succe>
@@ -194,5 +194,33 @@
 	<want_to_delte_caller>Do you want to delete </want_to_delte_caller>
 	<want_to_delete_zone>Do you want to delete </want_to_delete_zone>
 	<employee_select>Number:{0} Name:{1}</employee_select>
+	<want_delete_employee>Do you want to delete </want_delete_employee>
 
+	<Order>Order</Order>
+	<Call>Call</Call>
+	<CheckOut>CheckOut</CheckOut>
+	<Satisfied>Satisfied</Satisfied>
+	<Dissatisfied>Dissatisfied</Dissatisfied>
+	<other></other>
+	<all>all</all>
+	<batch_update>Batch Update</batch_update>
+	<choose_employee>Choose Employee</choose_employee>
+	<no_employee_coose>There are'tn employees to choose</no_employee_coose>
+	<zone_cannot_batch>The call zone cannot be modified in bulk</zone_cannot_batch>
+	<want_to_delete_choosed>Are you sure to delete all choosed?</want_to_delete_choosed>
+
+	<satisfied_rank>Satisfaction Ranking</satisfied_rank>
+	<dissatisfied_rank>Dissatisfied Ranking</dissatisfied_rank>
+	<finish_rank>Finish Ranking</finish_rank>
+	<unfinish_rank>Unfinish Ranking</unfinish_rank>
+	<overtime_rank>Overtime Ranking</overtime_rank>
+	<overtime_total>Overtime/Total</overtime_total>
+	<satisfied_totla>Satisfy/Total</satisfied_totla>
+	<dissatisfied_total>Dissatisfy/Total</dissatisfied_total>
+	<frequency>times</frequency>
+	<Total>total</Total>
+	<percent>percent</percent>
+	<employee_name>employeeName</employee_name>
+	<Summary_statistics>Summary Statistics</Summary_statistics>
+	<print>Print</print>
 </English>

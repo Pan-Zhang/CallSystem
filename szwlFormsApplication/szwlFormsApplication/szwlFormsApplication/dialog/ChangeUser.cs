@@ -33,11 +33,11 @@ namespace szwlFormsApplication.dialog
 			new UserProgram(admin);
 			if (InitData.users == null)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
 			}
 			else if (username.Text.Equals("Admin")&&admin.id!=1)
 			{
-				MessageBox.Show(GlobalData.GlobalLanguage.admin_forbid);
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.admin_forbid);
 			}
  			else 
 			{
@@ -47,13 +47,13 @@ namespace szwlFormsApplication.dialog
 					{
 						this.DialogResult = DialogResult.OK;
 						InitData.users = InitData.users.Select(u => u.name == admin.name ? admin : u).ToList();
-						MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 						this.Hide();
 					}
 				}
 				else
 				{
-					MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.user_no_exist);
 				}
 			}
 		}
