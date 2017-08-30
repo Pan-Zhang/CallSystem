@@ -20,7 +20,7 @@ namespace szwlFormsApplication.dialog
 			InitializeComponent();
 			changeLanguage();
 			userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
-			userClassComboBox.Items.Add(User.UserClass.normal.ToString());
+			userClassComboBox.Items.Add(User.UserClass.Normal.ToString());
 			userClassComboBox.SelectedIndex = 0;
 		}
 

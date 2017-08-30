@@ -175,7 +175,7 @@ namespace szwlFormsApplication
 			userUpdatebtn.Text = GlobalData.GlobalLanguage.edit_user;
 			userDeletebtn.Text = GlobalData.GlobalLanguage.del_user;
 			userAuhtoritybtn.Text = GlobalData.GlobalLanguage.authority;
-			userUpdatePwbtn.Text = GlobalData.GlobalLanguage.update_pwd;
+			userUpdatePwbtn.Text = GlobalData.GlobalLanguage._password;
 			userclearDatabtn.Text = GlobalData.GlobalLanguage.clear_data;
 		}
 	}

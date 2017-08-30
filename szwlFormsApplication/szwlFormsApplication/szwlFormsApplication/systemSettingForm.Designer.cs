@@ -134,7 +134,7 @@
 			// companyNamelabel
 			// 
 			this.companyNamelabel.AutoSize = true;
-			this.companyNamelabel.Location = new System.Drawing.Point(138, 191);
+			this.companyNamelabel.Location = new System.Drawing.Point(133, 185);
 			this.companyNamelabel.Name = "companyNamelabel";
 			this.companyNamelabel.Size = new System.Drawing.Size(53, 12);
 			this.companyNamelabel.TabIndex = 0;

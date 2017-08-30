@@ -11,7 +11,7 @@
 	<login_error>username or password is wrong！</login_error>
 	<number>Number </number>
 	<nothing>NO</nothing>
-	<name>name:</name>
+	<name>Name:</name>
 	<finish>Cancelled or Finished</finish>
 	<overtime>Overtime</overtime>
 	<waiting>Unfinished</waiting>
@@ -55,7 +55,7 @@
 	<summary_result>Summary Result</summary_result>
 	<total>Total:</total>
 	<zone_search>Region query</zone_search>
-	<employee_search>Staff inquiries</employee_search>
+	<employee_search>Staff query</employee_search>
 	<option>Option</option>
 	<start>Start date</start>
 	<end>End date</end>
@@ -74,7 +74,7 @@
 	<all_user>all user</all_user>
 	<all_record>all record</all_record>
 	<all_header>header</all_header>
-	<ensure_operation>please ensure your operation!</ensure_operation>
+	<ensure_operation>please select and confirm!</ensure_operation>
 	<exist_app>Exit</exist_app>
 	<minimal>Minimal</minimal>
 
@@ -92,7 +92,7 @@
 	<sort>Record Sequence</sort>
 	<Ascending>Ascending</Ascending>
 	<Descending>Descending</Descending>
-	<color>all Information Color</color>
+	<color>Call Information Color</color>
 	<timeout>overtime</timeout>
 	<setting>Set</setting>
 	<Set_timeout>Respond Time Setting</Set_timeout>
@@ -101,7 +101,7 @@
 	<minute>M</minute>
 	<hour>H</hour>
 
-	<Wireless_calling_system>Wireless calling system</Wireless_calling_system>
+	<Wireless_calling_system> Wireless calling system</Wireless_calling_system>
 	<set_succe>Set successfully!</set_succe>
 	<set_fail>Set fail!</set_fail>
 	<user_type>Type</user_type>
@@ -111,33 +111,33 @@
 	<authority>Authority</authority>
 	<update_pwd>Update</update_pwd>
 	<clear_data>Clear</clear_data>
-	<_username>username</_username>
-	<_password>password</_password>
+	<_username>Username</_username>
+	<_password>Password</_password>
 	<del_user>Delete</del_user>
 
 	<caller_zone_setting>Zone setting</caller_zone_setting>
 	<caller_num_setting>Caller setting</caller_num_setting>
 	<call_zone>ZoneName</call_zone>
 	<callAreaAddbtn>Add</callAreaAddbtn>
-	<callAreaUpdatebtn>Update</callAreaUpdatebtn>
+	<callAreaUpdatebtn>Edit</callAreaUpdatebtn>
 	<callAreaDeletebtn>Delete</callAreaDeletebtn>
-	<callAreaBatchUpdatebtn>BatchUpdate</callAreaBatchUpdatebtn>
+	<callAreaBatchUpdatebtn>BatchEdit</callAreaBatchUpdatebtn>
 	<callAreaBatchDelbtn>BatchDel</callAreaBatchDelbtn>
-	<callAreaOKbtn>Ensure</callAreaOKbtn>
+	<callAreaOKbtn>Ok</callAreaOKbtn>
 	<callAreaclearDatabtn>Clear</callAreaclearDatabtn>
 
-	<telephone>telephone</telephone>
-	<remarks>remarks</remarks>
-	<gender>gender</gender>
+	<telephone>Phone</telephone>
+	<remarks>Remarks</remarks>
+	<gender>Gender</gender>
 
 	<rfid_mode>RFID Mode</rfid_mode>
 	<button_mode>Button Mode</button_mode>
-	<choose_table>choose table</choose_table>
-	<other_name>column name</other_name>
-	<call_message>call massage</call_message>
-	<employ_info>employee info</employ_info>
-	<old_name>old name</old_name>
-	<new_name>new name</new_name>
+	<choose_table>Choose Table</choose_table>
+	<other_name>Column Name</other_name>
+	<call_message>Call Massage</call_message>
+	<employ_info>Employee Info</employ_info>
+	<old_name>Old name</old_name>
+	<new_name>New name</new_name>
 	<header_set_succe>Column name update sucess!</header_set_succe>
 	<Caller_number>CallerNum</Caller_number>
 	<Caller_zone>CallerZone</Caller_zone>
@@ -186,7 +186,7 @@
 	<new_pwd>New password</new_pwd>
 
 	<clear_success>Clear successful!</clear_success>
-	<want_to_clear>Do you want to clear all data?</want_to_clear>
+	<want_to_clear>Do you want to delete all data?</want_to_clear>
 	<delete_succe>Delete Successful!</delete_succe>
 	<want_delete_user>Do you want to delete </want_delete_user>
 	<Admin_cannot_delete>Admin can't be deleted!</Admin_cannot_delete>
@@ -220,7 +220,7 @@
 	<frequency>times</frequency>
 	<Total>total</Total>
 	<percent>percent</percent>
-	<employee_name>employeeName</employee_name>
+	<employee_name>EmployeeName</employee_name>
 	<Summary_statistics>Summary Statistics</Summary_statistics>
 	<print>Print</print>
 </English>

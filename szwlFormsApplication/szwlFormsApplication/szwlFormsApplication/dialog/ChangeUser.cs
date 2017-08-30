@@ -21,7 +21,7 @@ namespace szwlFormsApplication.dialog
 		{
 			InitializeComponent();
 			userClassComboBox.Items.Add(User.UserClass.Admin.ToString());
-			userClassComboBox.Items.Add(User.UserClass.normal.ToString());
+			userClassComboBox.Items.Add(User.UserClass.Normal.ToString());
 			changeLanguage();
 		}
 
@@ -82,7 +82,7 @@ namespace szwlFormsApplication.dialog
 
 		private void changeLanguage()
 		{
-			this.Text = GlobalData.GlobalLanguage.change_user;
+			this.Text = GlobalData.GlobalLanguage.edit_user;
 			label1.Text = GlobalData.GlobalLanguage.username;
 			label2.Text = GlobalData.GlobalLanguage.password;
 			label3.Text = GlobalData.GlobalLanguage.type;

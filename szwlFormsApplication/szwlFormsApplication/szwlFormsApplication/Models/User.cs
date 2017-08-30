@@ -20,7 +20,7 @@ namespace szwlFormsApplication.Models
 		public enum UserClass
 		{
 			Admin,
-			normal
+			Normal
 		}
 		public UserClass userClass { get; set; }
 		public List<int> programs { get; set; }
@@ -40,7 +40,7 @@ namespace szwlFormsApplication.Models
 					switch (userclass)
 					{
 						case User.UserClass.Admin: ChangeAppConfig.ChangeConfig(Key, "0_1_2_3_4_5_6_7_8"); break;
-						case User.UserClass.normal: ChangeAppConfig.ChangeConfig(Key, "0_3_4_7_8"); break;
+						case User.UserClass.Normal: ChangeAppConfig.ChangeConfig(Key, "0_3_4_7_8"); break;
 					}
 				}
 				programs = ChangeAppConfig.getValueFromKey(Key).Split('_').Select(p => int.Parse(p)).ToList();

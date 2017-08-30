@@ -208,7 +208,7 @@ namespace szwlFormsApplication
 			menutoolBar.Buttons[7].Text = GlobalData.GlobalLanguage.summary_setting;
 			menutoolBar.Buttons[8].Text = GlobalData.GlobalLanguage.about_setting;
 
-			this.Text = string.Format("{0} " + GlobalData.GlobalLanguage.Wireless_calling_system, ChangeAppConfig.getValueFromKey("CompanyName"));
+			this.Text = string.Format("{0}" + GlobalData.GlobalLanguage.Wireless_calling_system, ChangeAppConfig.getValueFromKey("CompanyName"));
 		}
 
 		public const int WM_DEVICE_CHANGE = 0x219;
@@ -623,7 +623,7 @@ namespace szwlFormsApplication
 				case Models.Type.CALL:
 					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("B")))
 					{
-						type = GlobalData.GlobalLanguage.Order;
+						type = GlobalData.GlobalLanguage.Call;
 					}
 					else
 					{
@@ -634,7 +634,7 @@ namespace szwlFormsApplication
 				case Models.Type.CHECK_OUT:
 					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("C")))
 					{
-						type = GlobalData.GlobalLanguage.Order;
+						type = GlobalData.GlobalLanguage.CheckOut;
 					}
 					else
 					{
@@ -645,7 +645,7 @@ namespace szwlFormsApplication
 				case Models.Type.SATISFIED:
 					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("D")))
 					{
-						type = GlobalData.GlobalLanguage.Order;
+						type = GlobalData.GlobalLanguage.Satisfied;
 					}
 					else
 					{
@@ -656,7 +656,7 @@ namespace szwlFormsApplication
 				case Models.Type.DISSATISFIED:
 					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("E")))
 					{
-						type = GlobalData.GlobalLanguage.Order;
+						type = GlobalData.GlobalLanguage.Dissatisfied;
 					}
 					else
 					{
@@ -667,7 +667,7 @@ namespace szwlFormsApplication
 				default:
 					if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("F")))
 					{
-						type = GlobalData.GlobalLanguage.Order;
+						type = message.type.ToString();
 					}
 					else
 					{
@@ -677,6 +677,5 @@ namespace szwlFormsApplication
 			}
 			return type;
 		}
-
 	}
 }

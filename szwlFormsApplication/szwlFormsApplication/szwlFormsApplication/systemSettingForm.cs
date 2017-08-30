@@ -232,7 +232,7 @@ namespace szwlFormsApplication
 			callInfoColorgroupBox.Text = GlobalData.GlobalLanguage.color;
 			undolabel.Text = GlobalData.GlobalLanguage.waiting;
 			completelabel.Text = GlobalData.GlobalLanguage.finish;
-			timeOutlabel.Text = GlobalData.GlobalLanguage.timeout;
+			timeOutlabel.Text = GlobalData.GlobalLanguage.overtime;
 			undoBtn.Text = GlobalData.GlobalLanguage.setting;
 			timeOutBtn.Text = GlobalData.GlobalLanguage.setting;
 			completeBtn.Text = GlobalData.GlobalLanguage.setting;

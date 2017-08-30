@@ -43,12 +43,6 @@
 			this.label22 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.waitingDataGridView = new System.Windows.Forms.DataGridView();
-			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.callerNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.allDataGridView = new System.Windows.Forms.DataGridView();
 			this.Id2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.time2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +87,12 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.notifyIcon2 = new System.Windows.Forms.NotifyIcon(this.components);
+			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.callerNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.isRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.waiting4.SuspendLayout();
 			this.waiting5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.waitingDataGridView)).BeginInit();
@@ -261,54 +261,6 @@
 			this.waitingDataGridView.Size = new System.Drawing.Size(581, 435);
 			this.waitingDataGridView.TabIndex = 4;
 			// 
-			// Id
-			// 
-			this.Id.DataPropertyName = "Id";
-			this.Id.FillWeight = 54.89587F;
-			this.Id.HeaderText = "Id";
-			this.Id.Name = "Id";
-			this.Id.ReadOnly = true;
-			// 
-			// time
-			// 
-			this.time.DataPropertyName = "time";
-			this.time.FillWeight = 171.457F;
-			this.time.HeaderText = "时间";
-			this.time.Name = "time";
-			this.time.ReadOnly = true;
-			// 
-			// callerNum
-			// 
-			this.callerNum.DataPropertyName = "callerNum";
-			this.callerNum.FillWeight = 85.03464F;
-			this.callerNum.HeaderText = "呼叫器编号";
-			this.callerNum.Name = "callerNum";
-			this.callerNum.ReadOnly = true;
-			// 
-			// employeeNum
-			// 
-			this.employeeNum.DataPropertyName = "employeeNum";
-			this.employeeNum.FillWeight = 88.73542F;
-			this.employeeNum.HeaderText = "服务员编号";
-			this.employeeNum.Name = "employeeNum";
-			this.employeeNum.ReadOnly = true;
-			// 
-			// type
-			// 
-			this.type.DataPropertyName = "showType";
-			this.type.FillWeight = 138.9633F;
-			this.type.HeaderText = "呼叫类型";
-			this.type.Name = "type";
-			this.type.ReadOnly = true;
-			// 
-			// isRFID
-			// 
-			this.isRFID.DataPropertyName = "isRFID";
-			this.isRFID.FillWeight = 60.91371F;
-			this.isRFID.HeaderText = "RFID";
-			this.isRFID.Name = "isRFID";
-			this.isRFID.ReadOnly = true;
-			// 
 			// allDataGridView
 			// 
 			this.allDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -333,7 +285,7 @@
 			// 
 			this.Id2.DataPropertyName = "Id";
 			this.Id2.FillWeight = 77.41113F;
-			this.Id2.HeaderText = "Id";
+			this.Id2.HeaderText = "ID";
 			this.Id2.Name = "Id2";
 			this.Id2.ReadOnly = true;
 			// 
@@ -784,6 +736,54 @@
 			this.notifyIcon2.Text = "notifyIcon2";
 			this.notifyIcon2.Visible = true;
 			this.notifyIcon2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon2_MouseDoubleClick);
+			// 
+			// Id
+			// 
+			this.Id.DataPropertyName = "Id";
+			this.Id.FillWeight = 49.10454F;
+			this.Id.HeaderText = "ID";
+			this.Id.Name = "Id";
+			this.Id.ReadOnly = true;
+			// 
+			// time
+			// 
+			this.time.DataPropertyName = "time";
+			this.time.FillWeight = 153.3689F;
+			this.time.HeaderText = "时间";
+			this.time.Name = "time";
+			this.time.ReadOnly = true;
+			// 
+			// callerNum
+			// 
+			this.callerNum.DataPropertyName = "callerNum";
+			this.callerNum.FillWeight = 102.9998F;
+			this.callerNum.HeaderText = "呼叫器编号";
+			this.callerNum.Name = "callerNum";
+			this.callerNum.ReadOnly = true;
+			// 
+			// employeeNum
+			// 
+			this.employeeNum.DataPropertyName = "employeeNum";
+			this.employeeNum.FillWeight = 115.736F;
+			this.employeeNum.HeaderText = "服务员编号";
+			this.employeeNum.Name = "employeeNum";
+			this.employeeNum.ReadOnly = true;
+			// 
+			// type
+			// 
+			this.type.DataPropertyName = "showType";
+			this.type.FillWeight = 124.3031F;
+			this.type.HeaderText = "呼叫类型";
+			this.type.Name = "type";
+			this.type.ReadOnly = true;
+			// 
+			// isRFID
+			// 
+			this.isRFID.DataPropertyName = "isRFID";
+			this.isRFID.FillWeight = 54.48752F;
+			this.isRFID.HeaderText = "RFID";
+			this.isRFID.Name = "isRFID";
+			this.isRFID.ReadOnly = true;
 			// 
 			// szwlForm
 			// 
