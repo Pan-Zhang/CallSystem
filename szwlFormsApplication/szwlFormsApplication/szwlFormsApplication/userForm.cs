@@ -29,6 +29,7 @@ namespace szwlFormsApplication
 
 		private void userForm_Load(object sender, EventArgs e)
 		{
+			InitData.users = szwlForm.mainForm.dm.selectUser();
 			InitData.AddData(dataGridView1, InitData.users);
 			//this.dataGridView1.AutoGenerateColumns = false;
 			//this.dataGridView1.DataSource = InitData.users;
@@ -140,8 +141,17 @@ namespace szwlFormsApplication
 
 		private void userUpdatePwbtn_Click(object sender, EventArgs e)
 		{
+			User admin = InitData.users[dataGridView1.CurrentRow.Index];
 			UpdatePassForm form = new UpdatePassForm();
-			form.ShowDialog();
+			form.user = admin;
+			DialogResult dr = form.ShowDialog();
+			if(dr == DialogResult.OK)
+			{
+				InitData.users = szwlForm.mainForm.dm.selectUser();
+				this.dataGridView1.AutoGenerateColumns = false;
+				this.dataGridView1.DataSource = InitData.users;
+				this.dataGridView1.Refresh();
+			}
 		}
 
 		private void userclearDatabtn_Click(object sender, EventArgs e)

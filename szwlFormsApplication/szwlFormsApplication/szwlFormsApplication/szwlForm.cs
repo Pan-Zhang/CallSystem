@@ -88,6 +88,7 @@ namespace szwlFormsApplication
 			//string skinpath = ChangeAppConfig.getValueFromKey("packagepath"] + "\\Skin\\SSK皮肤\\MSN\\MSN.ssk";
 			//skinEngine1.SkinFile = skinpath;
 		}
+
 		public void SetTableHeader()
 		{
 			this.waitingDataGridView.Columns[1].HeaderCell.Value = DataMessage.Displaytime();
@@ -103,6 +104,8 @@ namespace szwlFormsApplication
 		}
 		private void szwlForm_Load(object sender, EventArgs e)
 		{
+			this.timer1.Interval = 1000;
+			this.timer1.Start();
 			if (LogOnForm.currentUser == null)
 			{
 				mainForm.Hide();
@@ -134,6 +137,7 @@ namespace szwlFormsApplication
 			newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
 			isStop = false;
 			new Thread(CheckTimeOut).Start();
+			new Thread(checkUnFinish).Start();
 			refresh(0);
 		}
 
@@ -152,6 +156,7 @@ namespace szwlFormsApplication
 							if (DateTime.Compare(message.timeConvert().AddHours(InitData.GetTimeOut()), DateTime.Now) < 0)
 							{
 								message.status = STATUS.OVERTIME;
+								message.isOverTime = true;
 								_server.updateMessTimeOut(message);
 								needRefresh = true;
 							}
@@ -161,6 +166,7 @@ namespace szwlFormsApplication
 							if (DateTime.Compare(message.timeConvert().AddMinutes(InitData.GetTimeOut()), DateTime.Now) < 0)
 							{
 								message.status = STATUS.OVERTIME;
+								message.isOverTime = true;
 								_server.updateMessTimeOut(message);
 								needRefresh = true;
 							}
@@ -170,11 +176,69 @@ namespace szwlFormsApplication
 							if (DateTime.Compare(message.timeConvert().AddSeconds(InitData.GetTimeOut()), DateTime.Now) < 0)
 							{
 								message.status = STATUS.OVERTIME;
+								message.isOverTime = true;
 								_server.updateMessTimeOut(message);
 								needRefresh = true;
 							}
 						}
 						
+					}
+					if (needRefresh)
+					{
+						newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+						if (this.components == null || IsDisposed || !IsHandleCreated)
+						{
+							isStop = true;
+							return;
+						}
+						this.Invoke((EventHandler)(delegate
+						{
+							refresh(0);
+						}));
+					}
+				}
+				Thread.Sleep(10000);
+			}
+		}
+
+		private void checkUnFinish()
+		{
+			while (!isStop)
+			{
+				lock (obj)
+				{
+					bool needRefresh = false;
+					List<DataMessage> overTime_list = messages.Where(m => m.status == STATUS.OVERTIME).ToList();
+					foreach(DataMessage message in overTime_list)
+					{
+						string unit = ChangeAppConfig.getValueFromKey("UnFinishUnit");
+						if (unit.Equals("H") || unit.Equals("时"))
+						{
+							if (DateTime.Compare(message.timeConvert().AddHours(InitData.GetUnFinish()), DateTime.Now) < 0)
+							{
+								message.status = STATUS.UNFINISH;
+								_server.updateMessUnfinish(message);
+								needRefresh = true;
+							}
+						}
+						else if (unit.Equals("M") || unit.Equals("分"))
+						{
+							if (DateTime.Compare(message.timeConvert().AddMinutes(InitData.GetUnFinish()), DateTime.Now) < 0)
+							{
+								message.status = STATUS.UNFINISH;
+								_server.updateMessUnfinish(message);
+								needRefresh = true;
+							}
+						}
+						else
+						{
+							if (DateTime.Compare(message.timeConvert().AddSeconds(InitData.GetUnFinish()), DateTime.Now) < 0)
+							{
+								message.status = STATUS.UNFINISH;
+								_server.updateMessUnfinish(message);
+								needRefresh = true;
+							}
+						}
 					}
 					if (needRefresh)
 					{
@@ -201,12 +265,29 @@ namespace szwlFormsApplication
 			menutoolBar.Buttons[0].Text = GlobalData.GlobalLanguage.login_setting;
 			menutoolBar.Buttons[1].Text = GlobalData.GlobalLanguage.system_setting;
 			menutoolBar.Buttons[2].Text = GlobalData.GlobalLanguage.user_setting;
-			menutoolBar.Buttons[3].Text = GlobalData.GlobalLanguage.caller_setting;
-			menutoolBar.Buttons[4].Text = GlobalData.GlobalLanguage.employee_setting;
+			menutoolBar.Buttons[3].Text = GlobalData.GlobalLanguage.employee_setting;
+			menutoolBar.Buttons[4].Text = GlobalData.GlobalLanguage.caller_setting;
 			menutoolBar.Buttons[5].Text = GlobalData.GlobalLanguage.header_setting;
-			menutoolBar.Buttons[6].Text = GlobalData.GlobalLanguage.data_setting;
-			menutoolBar.Buttons[7].Text = GlobalData.GlobalLanguage.summary_setting;
-			menutoolBar.Buttons[8].Text = GlobalData.GlobalLanguage.about_setting;
+			menutoolBar.Buttons[6].Text = GlobalData.GlobalLanguage.summary_setting;
+			menutoolBar.Buttons[7].Text = GlobalData.GlobalLanguage.data_setting;
+			menutoolBar.Buttons[8].Text = GlobalData.GlobalLanguage.help;
+			menutoolBar.Buttons[9].Text = GlobalData.GlobalLanguage.about_setting;
+
+			menutoolBar.Buttons[0].ToolTipText = GlobalData.GlobalLanguage.login_setting;
+			menutoolBar.Buttons[1].ToolTipText = GlobalData.GlobalLanguage.system_setting;
+			menutoolBar.Buttons[2].ToolTipText = GlobalData.GlobalLanguage.user_setting;
+			menutoolBar.Buttons[3].ToolTipText = GlobalData.GlobalLanguage.employee_setting;
+			menutoolBar.Buttons[4].ToolTipText = GlobalData.GlobalLanguage.caller_setting;
+			menutoolBar.Buttons[5].ToolTipText = GlobalData.GlobalLanguage.header_setting;
+			menutoolBar.Buttons[6].ToolTipText = GlobalData.GlobalLanguage.summary_setting;
+			menutoolBar.Buttons[7].ToolTipText = GlobalData.GlobalLanguage.data_setting;
+			menutoolBar.Buttons[8].ToolTipText = GlobalData.GlobalLanguage.help;
+			menutoolBar.Buttons[9].ToolTipText = GlobalData.GlobalLanguage.about_setting;
+
+
+			this.toolStripStatusLabel1.Text = GlobalData.GlobalLanguage.current_user + LogOnForm.currentUser.name;
+			this.toolStripStatusLabel2.Text = GlobalData.GlobalLanguage.current_com + (InitData.com==null?"":InitData.com.COMID);
+			this.toolStripStatusLabel3.Text = GlobalData.GlobalLanguage.current_time + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
 
 			this.Text = string.Format("{0}" + GlobalData.GlobalLanguage.Wireless_calling_system, ChangeAppConfig.getValueFromKey("CompanyName"));
 		}
@@ -274,6 +355,7 @@ namespace szwlFormsApplication
 				{
 					isStop = true;
 					closeCom();
+					timer1.Stop();
 					Application.Exit();
 				}
 				else if(dr == DialogResult.Yes)
@@ -290,26 +372,6 @@ namespace szwlFormsApplication
 			}
 			base.WndProc(ref m);
 		}
-		private void settings_Click(object sender, EventArgs e)
-		{
-		}
-		private void allDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
-		}
-		private void waiting4_Paint(object sender, PaintEventArgs e)
-		{
-
-		}
-		private void waitingDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
-		}
-
-		private void SzwlForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
-		{
-			Application.Exit();
-		}
 		private void menutoolBar_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
 		{
 
@@ -324,6 +386,7 @@ namespace szwlFormsApplication
 				systemSettingForm systemSettingform = new systemSettingForm();
 				DialogResult dr = systemSettingform.ShowDialog();
 				refresh(0);
+				this.toolStripStatusLabel2.Text = GlobalData.GlobalLanguage.current_com + (InitData.com == null ? "" : InitData.com.COMID);
 			}
 			else if (e.Button.Name == "userbtn")
 			{
@@ -344,6 +407,8 @@ namespace szwlFormsApplication
 			{
 				dataMaintainSettingForm datamaintainsettingform = new dataMaintainSettingForm();
 				datamaintainsettingform.ShowDialog();
+				newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+				refresh(0);
 			}
 			else if (e.Button.Name == "tablesettingsbtn")
 			{
@@ -359,6 +424,10 @@ namespace szwlFormsApplication
 			{
 				aboutForm aboutform = new aboutForm();
 				aboutform.ShowDialog();
+			}
+			else if(e.Button.Name == "help")
+			{
+
 			}
 		}
 		private void openCom()
@@ -437,7 +506,7 @@ namespace szwlFormsApplication
 					{
 						foreach (DataMessage message in messages)
 						{
-							if (message.callerNum == mess.callerNum && message.status == STATUS.WAITING)
+							if (message.callerNum == mess.callerNum && (message.status == STATUS.WAITING || message.status == STATUS.OVERTIME))
 							{
 								message.employeeNum = mess.employeeNum;
 								message.status = STATUS.FINISH;
@@ -451,6 +520,10 @@ namespace szwlFormsApplication
 						if(messages!=null && messages.Count > 0)
 						{
 							mess.Id = messages[0].Id + 1;
+						}
+						else
+						{
+							mess = dm.selectMessLast();
 						}
 						messages.Insert(0, mess);
 						addCol++;//说明有插入数据
@@ -483,17 +556,15 @@ namespace szwlFormsApplication
 			int num = newmsg.Count();
 			if (newmsg.Count() > 5)
 			{
-				InitData.AddData(waitingDataGridView, newmsg.Skip(5).ToList());
-				//this.waitingDataGridView.AutoGenerateColumns = false;
-				//this.waitingDataGridView.DataSource = newmsg.Skip(5).ToList();
-				//this.waitingDataGridView.Refresh();
+				this.waitingDataGridView.AutoGenerateColumns = false;
+				this.waitingDataGridView.DataSource = new BindingList<DataMessage>(newmsg.Skip(5).ToList());
+				this.waitingDataGridView.Refresh();
 			}
 			else
 			{
-				InitData.AddData(waitingDataGridView, newmsg.Skip(5).ToList());
-				//this.waitingDataGridView.AutoGenerateColumns = false;
-				//this.waitingDataGridView.DataSource = newmsg.Skip(5).ToList();
-				//this.waitingDataGridView.Refresh();
+				this.waitingDataGridView.AutoGenerateColumns = false;
+				this.waitingDataGridView.DataSource = new BindingList<DataMessage>(newmsg.Skip(5).ToList());
+				this.waitingDataGridView.Refresh();
 			}
 			this.label1.Text = GlobalData.GlobalLanguage.no_quest;
 			this.label2.Text = GlobalData.GlobalLanguage.no_quest;
@@ -580,8 +651,8 @@ namespace szwlFormsApplication
 			this.allDataGridView.AutoGenerateColumns = false;
 			this.allDataGridView.DataSource = null;
 			this.allDataGridView.DataBindingComplete += dataBindCompleted;
-			this.allDataGridView.DataSource = messages;
-			this.allDataGridView.Refresh();
+			this.allDataGridView.DataSource = new BindingList<DataMessage>(messages);
+			//this.allDataGridView.Refresh();
 		}
 
 		private void dataBindCompleted(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -589,7 +660,7 @@ namespace szwlFormsApplication
 			int i = 0;
 			foreach(DataMessage mess in messages)
 			{ 
-				if(mess.status == STATUS.WAITING)
+				if(mess.status == STATUS.UNFINISH)
 				{
 					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(InitData.timecolor.WaitTime);
 				}
@@ -597,9 +668,13 @@ namespace szwlFormsApplication
 				{
 					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(InitData.timecolor.TimeOutTime);
 				}
-				else
+				else if(mess.status == STATUS.FINISH)
 				{
 					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(InitData.timecolor.FinishedTime);
+				}
+				else
+				{
+					allDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.White;
 				}
 				i++;
 			}
@@ -676,6 +751,75 @@ namespace szwlFormsApplication
 					break;
 			}
 			return type;
+		}
+
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			this.toolStripStatusLabel3.Text = GlobalData.GlobalLanguage.current_time + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+		}
+
+		private void allDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex > -1)
+			{
+				lock (obj)
+				{
+					if (messages == null || messages.Count == 0)
+					{
+						return;
+					}
+					DeleteForm form = new DeleteForm();
+					DialogResult dr = form.ShowDialog();
+					if (dr == DialogResult.Retry)
+					{
+						if (dm.deleteMess(messages[e.RowIndex]))
+						{
+							messages.RemoveAt(e.RowIndex);
+							newmsg = messages.Where(m => m.status == STATUS.WAITING).ToList();
+						}
+					}
+					else if (dr == DialogResult.Ignore)
+					{
+						dm.deleteRecordToday();
+						messages.Clear();
+						newmsg.Clear();
+					}
+					refresh(0);
+				}
+			}
+		}
+
+		private void waitingDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex > -1)
+			{
+				lock (obj)
+				{
+					if (newmsg==null || newmsg.Count == 0)
+					{
+						return;
+					}
+					DeleteForm form = new DeleteForm();
+					DialogResult dr = form.ShowDialog();
+					if (dr == DialogResult.Retry)
+					{
+						DataMessage message = newmsg[e.RowIndex + 5];
+						dm.deleteMess(message);
+						newmsg.Remove(message);
+						messages.Remove(message);
+					}
+					else if (dr == DialogResult.Ignore)
+					{
+						dm.deleteRecordWaitting();
+						foreach (DataMessage mess in newmsg)
+						{
+							messages.Remove(mess);
+						}
+						newmsg.Clear();
+					}
+					refresh(0);
+				}
+			}
 		}
 	}
 }

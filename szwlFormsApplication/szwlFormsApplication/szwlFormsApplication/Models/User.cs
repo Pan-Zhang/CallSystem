@@ -39,8 +39,8 @@ namespace szwlFormsApplication.Models
 				{
 					switch (userclass)
 					{
-						case User.UserClass.Admin: ChangeAppConfig.ChangeConfig(Key, "0_1_2_3_4_5_6_7_8"); break;
-						case User.UserClass.Normal: ChangeAppConfig.ChangeConfig(Key, "0_3_4_7_8"); break;
+						case User.UserClass.Admin: ChangeAppConfig.ChangeConfig(Key, "0_1_2_3_4_5_6_7_8_9"); break;
+						case User.UserClass.Normal: ChangeAppConfig.ChangeConfig(Key, "0_1_3_4_6_8_9"); break;
 					}
 				}
 				programs = ChangeAppConfig.getValueFromKey(Key).Split('_').Select(p => int.Parse(p)).ToList();
@@ -63,13 +63,14 @@ namespace szwlFormsApplication.Models
 			{
 				case 0: return GlobalData.GlobalLanguage.user_login;
 				case 1: return GlobalData.GlobalLanguage.system_setting;
-				case 2: return GlobalData.GlobalLanguage.caller_setting;
-				case 3: return GlobalData.GlobalLanguage.user_setting;
+				case 2: return GlobalData.GlobalLanguage.user_setting;
+				case 3: return GlobalData.GlobalLanguage.caller_setting;
 				case 4: return GlobalData.GlobalLanguage.employee_setting;
 				case 5: return GlobalData.GlobalLanguage.header_setting;
-				case 6: return GlobalData.GlobalLanguage.data_setting;
-				case 7: return GlobalData.GlobalLanguage.summary_setting;
-				case 8: return GlobalData.GlobalLanguage.about_setting;
+				case 6: return GlobalData.GlobalLanguage.summary_setting;
+				case 7: return GlobalData.GlobalLanguage.data_setting;
+				case 8: return GlobalData.GlobalLanguage.help;
+				case 9: return GlobalData.GlobalLanguage.about_setting;
 			default: return null;
 			}
 		}

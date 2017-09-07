@@ -82,12 +82,13 @@
 			this.checkedListBox1.Items.AddRange(new object[] {
             "用户登录",
             "系统设置",
-            "呼叫器设置",
             "用户",
             "员工设置",
+            "呼叫器设置",
             "表头设置",
-            "数据维护",
             "数据统计",
+            "出厂设置",
+            "帮助",
             "关于"});
 			this.checkedListBox1.Location = new System.Drawing.Point(127, 64);
 			this.checkedListBox1.Name = "checkedListBox1";

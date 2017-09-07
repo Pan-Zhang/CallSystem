@@ -18,5 +18,10 @@ namespace szwlFormsApplication.Models
 		public int employeeNum { get; set; }
 		public string callerName { get; set; }
 		public string callerZoneName { get; set; }
+		public string showEmployeeNum
+		{
+			get { if(employeeNum == -1 || employeeNum == 0) return ""; else return employeeNum.ToString(); }
+			set { }
+		}
 	}
 }

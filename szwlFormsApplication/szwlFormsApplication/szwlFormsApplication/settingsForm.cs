@@ -31,6 +31,7 @@ namespace szwlFormsApplication
 
 		private void refreshZone()
 		{
+			InitData.list_zone = szwlForm.mainForm.dm.selectZone();
 			InitData.AddData(callAreadataGridView, InitData.list_zone);
 			//this.callAreadataGridView.AutoGenerateColumns = false;
 			//this.callAreadataGridView.DataSource = InitData.list_zone;
@@ -56,6 +57,7 @@ namespace szwlFormsApplication
 
 		private void refreshCaller()
 		{
+			InitData.list_caller = szwlForm.mainForm.dm.selectCaller();
 			if (InitData.list_caller == null)
 			{
 				return;

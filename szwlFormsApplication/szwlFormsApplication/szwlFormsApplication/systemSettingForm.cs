@@ -103,6 +103,24 @@ namespace szwlFormsApplication
 			{
 				unit_box.SelectedIndex = 2;
 			}
+
+			trackBar1.Value = InitData.GetUnFinish();
+			label13.Text = trackBar1.Value.ToString();
+			trackBar1.Update();
+
+			unit = ChangeAppConfig.getValueFromKey("TimeUnit");
+			if (unit.Equals("S") || unit.Equals("秒"))
+			{
+				comboBox1.SelectedIndex = 0;
+			}
+			else if (unit.Equals("M") || unit.Equals("分"))
+			{
+				comboBox1.SelectedIndex = 1;
+			}
+			else
+			{
+				comboBox1.SelectedIndex = 2;
+			}
 		}
 
 		private void ssOkBtn_Click(object sender, EventArgs e)
@@ -173,7 +191,8 @@ namespace szwlFormsApplication
 			else
 			{
 				InitData.TimeOut = trackBar3.Value;
-				if (InitData.SetTimeOut())
+				InitData.UnFinish = trackBar1.Value;
+				if (InitData.SetTimeOut() && InitData.SetUnFinish())
 				{
 					dialog.MessageBox.Show(GlobalData.GlobalLanguage.set_succe);
 					this.Close();
@@ -230,7 +249,7 @@ namespace szwlFormsApplication
 			ASCradioButton.Text = GlobalData.GlobalLanguage.Ascending;
 			DESradioButton.Text = GlobalData.GlobalLanguage.Descending;
 			callInfoColorgroupBox.Text = GlobalData.GlobalLanguage.color;
-			undolabel.Text = GlobalData.GlobalLanguage.waiting;
+			undolabel.Text = GlobalData.GlobalLanguage.unfinish;
 			completelabel.Text = GlobalData.GlobalLanguage.finish;
 			timeOutlabel.Text = GlobalData.GlobalLanguage.overtime;
 			undoBtn.Text = GlobalData.GlobalLanguage.setting;
@@ -241,6 +260,11 @@ namespace szwlFormsApplication
 			unit_box.Items[0] = GlobalData.GlobalLanguage.second;
 			unit_box.Items[1] = GlobalData.GlobalLanguage.minute;
 			unit_box.Items[2] = GlobalData.GlobalLanguage.hour;
+
+			label5.Text = GlobalData.GlobalLanguage.Set_unfinish;
+			comboBox1.Items[0] = GlobalData.GlobalLanguage.second;
+			comboBox1.Items[1] = GlobalData.GlobalLanguage.minute;
+			comboBox1.Items[2] = GlobalData.GlobalLanguage.hour;
 
 			if (string.IsNullOrEmpty(ChangeAppConfig.getValueFromKey("A")))
 			{
@@ -271,6 +295,17 @@ namespace szwlFormsApplication
 		private void unit_box_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			ChangeAppConfig.ChangeConfig("TimeUnit", unit_box.Text);
+		}
+
+		private void trackBar1_Scroll(object sender, EventArgs e)
+		{
+			string text = trackBar1.Value.ToString();
+			label13.Text = text;
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ChangeAppConfig.ChangeConfig("UnFinishUnit", comboBox1.Text);
 		}
 	}
 }

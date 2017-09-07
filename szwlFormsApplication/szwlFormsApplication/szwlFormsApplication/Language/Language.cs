@@ -217,6 +217,28 @@ namespace szwlFormsApplication.Language
 		public string employee_name { get; set; }
 		public string Summary_statistics { get; set; }
 		public string print { get; set; }
+		public string current_user { get; set; }
+		public string current_com { get; set; }
+		public string current_time { get; set; }
+		public string start_end_time { get; set; }
+		public string change_medication { get; set; }
+		public string emergency_call { get; set; }
+		public string puling_needle { get; set; }
+		public string need_service { get; set; }
+		public string need_water { get; set; }
+		public string want_to_pay { get; set; }
+		public string need_nurses { get; set; }
+		public string low_power { get; set; }
+		public string tamper { get; set; }
+		public string delete_this_line { get; set; }
+		public string delete_all_line { get; set; }
+		public string Set_unfinish { get; set; }
+		public string unfinish { get; set; }
+		public string yes { get; set; }
+		public string no { get; set; }
+		public string add_employee { get; set; }
+		public string help { get; set; }
+		public string old_pwd_wrong { get; set; }
 
 		protected Dictionary<string, string> DicLanguage = new Dictionary<string, string>();
 
@@ -489,6 +511,28 @@ namespace szwlFormsApplication.Language
 			employee_name = DicLanguage["employee_name"];
 			Summary_statistics = DicLanguage["Summary_statistics"];
 			print = DicLanguage["print"];
+			current_user = DicLanguage["current_user"];
+			current_com = DicLanguage["current_com"];
+			current_time = DicLanguage["current_time"];
+			start_end_time = DicLanguage["start_end_time"];
+			change_medication = DicLanguage["change_medication"];
+			emergency_call = DicLanguage["emergency_call"];
+			puling_needle = DicLanguage["puling_needle"];
+			need_service = DicLanguage["need_service"];
+			need_water = DicLanguage["need_water"];
+			want_to_pay = DicLanguage["want_to_pay"];
+			need_nurses = DicLanguage["need_nurses"];
+			low_power = DicLanguage["low_power"];
+			tamper = DicLanguage["tamper"];
+			delete_this_line = DicLanguage["delete_this_line"];
+			delete_all_line = DicLanguage["delete_all_line"];
+			Set_unfinish = DicLanguage["Set_unfinish"];
+			unfinish = DicLanguage["unfinish"];
+			yes = DicLanguage["yes"];
+			no = DicLanguage["no"];
+			add_employee = DicLanguage["add_employee"];
+			help = DicLanguage["help"];
+			old_pwd_wrong = DicLanguage["old_pwd_wrong"];
 		}
 	}
 }

@@ -28,11 +28,20 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(callHistoriesSummaryForm));
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.historyRecordsgroupBox = new System.Windows.Forms.GroupBox();
 			this.historyRecordsdataGridView = new System.Windows.Forms.DataGridView();
 			this.historySummarygroupBox = new System.Windows.Forms.GroupBox();
@@ -93,6 +102,7 @@
 			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.historyRecordsgroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.historyRecordsdataGridView)).BeginInit();
 			this.historySummarygroupBox.SuspendLayout();
@@ -114,6 +124,14 @@
 			// 
 			// historyRecordsdataGridView
 			// 
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.historyRecordsdataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.historyRecordsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.historyRecordsdataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -122,7 +140,8 @@
             this.Column3,
             this.Column4,
             this.Column5,
-            this.Column6});
+            this.Column6,
+            this.Column7});
 			resources.ApplyResources(this.historyRecordsdataGridView, "historyRecordsdataGridView");
 			this.historyRecordsdataGridView.Name = "historyRecordsdataGridView";
 			this.historyRecordsdataGridView.RowTemplate.Height = 23;
@@ -220,6 +239,7 @@
 			// 
 			// statusBox
 			// 
+			this.statusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.statusBox.FormattingEnabled = true;
 			this.statusBox.Items.AddRange(new object[] {
             resources.GetString("statusBox.Items"),
@@ -247,6 +267,7 @@
             resources.GetString("typeBox.AutoCompleteCustomSource12"),
             resources.GetString("typeBox.AutoCompleteCustomSource13"),
             resources.GetString("typeBox.AutoCompleteCustomSource14")});
+			this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.typeBox.FormattingEnabled = true;
 			this.typeBox.Items.AddRange(new object[] {
             resources.GetString("typeBox.Items"),
@@ -270,6 +291,7 @@
 			// 
 			// callArea
 			// 
+			this.callArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.callArea.FormattingEnabled = true;
 			resources.ApplyResources(this.callArea, "callArea");
 			this.callArea.Name = "callArea";
@@ -279,11 +301,13 @@
 			// 
 			resources.ApplyResources(this.date_end, "date_end");
 			this.date_end.Name = "date_end";
+			this.date_end.ValueChanged += new System.EventHandler(this.date_end_ValueChanged);
 			// 
 			// date_start
 			// 
 			resources.ApplyResources(this.date_start, "date_start");
 			this.date_start.Name = "date_start";
+			this.date_start.ValueChanged += new System.EventHandler(this.date_start_ValueChanged);
 			// 
 			// label6
 			// 
@@ -380,6 +404,7 @@
 			// 
 			// comboBox1
 			// 
+			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.Items.AddRange(new object[] {
             resources.GetString("comboBox1.Items"),
@@ -391,6 +416,7 @@
 			// 
 			// worker
 			// 
+			this.worker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.worker.FormattingEnabled = true;
 			resources.ApplyResources(this.worker, "worker");
 			this.worker.Name = "worker";
@@ -400,11 +426,13 @@
 			// 
 			resources.ApplyResources(this.dateTimePicker1, "dateTimePicker1");
 			this.dateTimePicker1.Name = "dateTimePicker1";
+			this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
 			// 
 			// dateTimePicker2
 			// 
 			resources.ApplyResources(this.dateTimePicker2, "dateTimePicker2");
 			this.dateTimePicker2.Name = "dateTimePicker2";
+			this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
 			// 
 			// label7
 			// 
@@ -527,53 +555,85 @@
 			// 
 			resources.ApplyResources(this.dateTimePicker4, "dateTimePicker4");
 			this.dateTimePicker4.Name = "dateTimePicker4";
+			this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker4_ValueChanged);
 			// 
 			// dateTimePicker3
 			// 
 			resources.ApplyResources(this.dateTimePicker3, "dateTimePicker3");
 			this.dateTimePicker3.Name = "dateTimePicker3";
+			this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
 			// 
 			// id
 			// 
 			this.id.DataPropertyName = "Id";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.id.DefaultCellStyle = dataGridViewCellStyle2;
 			resources.ApplyResources(this.id, "id");
 			this.id.Name = "id";
+			this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Column2
 			// 
 			this.Column2.DataPropertyName = "time";
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle3;
 			resources.ApplyResources(this.Column2, "Column2");
 			this.Column2.Name = "Column2";
+			this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Column1
 			// 
 			this.Column1.DataPropertyName = "callerNum";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column1.DefaultCellStyle = dataGridViewCellStyle4;
 			resources.ApplyResources(this.Column1, "Column1");
 			this.Column1.Name = "Column1";
+			this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Column3
 			// 
-			this.Column3.DataPropertyName = "employeeNum";
+			this.Column3.DataPropertyName = "showEmployeeNum";
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column3.DefaultCellStyle = dataGridViewCellStyle5;
 			resources.ApplyResources(this.Column3, "Column3");
 			this.Column3.Name = "Column3";
+			this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Column4
 			// 
 			this.Column4.DataPropertyName = "showType";
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column4.DefaultCellStyle = dataGridViewCellStyle6;
 			resources.ApplyResources(this.Column4, "Column4");
 			this.Column4.Name = "Column4";
+			this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Column5
 			// 
 			this.Column5.DataPropertyName = "status";
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column5.DefaultCellStyle = dataGridViewCellStyle7;
 			resources.ApplyResources(this.Column5, "Column5");
 			this.Column5.Name = "Column5";
+			this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Column6
 			// 
-			this.Column6.DataPropertyName = "isRFID";
+			this.Column6.DataPropertyName = "showRFID";
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column6.DefaultCellStyle = dataGridViewCellStyle8;
 			resources.ApplyResources(this.Column6, "Column6");
 			this.Column6.Name = "Column6";
+			this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// Column7
+			// 
+			this.Column7.DataPropertyName = "showOverTime";
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column7.DefaultCellStyle = dataGridViewCellStyle9;
+			resources.ApplyResources(this.Column7, "Column7");
+			this.Column7.Name = "Column7";
+			this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// callHistoriesSummaryForm
 			// 
@@ -664,5 +724,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
 	}
 }

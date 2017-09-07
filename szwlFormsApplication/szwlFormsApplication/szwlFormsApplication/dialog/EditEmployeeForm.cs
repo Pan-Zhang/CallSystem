@@ -44,6 +44,7 @@ namespace szwlFormsApplication.dialog
 						if (szwlForm.mainForm.dm.updateEmployeeRFID(employee))
 						{
 							InitData.employeeRFID = InitData.employeeRFID.Select(em => em.employeeNum == employee.employeeNum ? employee : em).ToList();
+							this.DialogResult = DialogResult.OK;
 							dialog.MessageBox.Show(GlobalData.GlobalLanguage.update_success);
 							this.Hide();
 						}

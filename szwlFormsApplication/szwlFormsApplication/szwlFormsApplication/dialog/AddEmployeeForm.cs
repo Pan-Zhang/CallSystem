@@ -39,22 +39,45 @@ namespace szwlFormsApplication.dialog
 				{
 					employee.sex = Sex.FEMALE;
 				}
-				
-				if (InitData.employees == null)
-					InitData.employees = new List<Employee>();
-				if (InitData.employees.Any(em=> em.employeeNum == num))
+
+				if (Common.isRFID)
 				{
-					dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_exist);
-					return;
+					if (InitData.employeeRFID == null)
+						InitData.employeeRFID = new List<Employee>();
+					if (InitData.employeeRFID.Any(em => em.employeeNum == num))
+					{
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_exist);
+						return;
+					}
+					else
+					{
+						if (szwlForm.mainForm.dm.insertEmployeeRFID(employee))
+						{
+							InitData.employeeRFID = szwlForm.mainForm.dm.selectEmployeeRFID();
+							this.DialogResult = DialogResult.OK;
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
+							this.Hide();
+						}
+					}
 				}
 				else
 				{
-					if (szwlForm.mainForm.dm.insertEmployee(employee))
+					if (InitData.employees == null)
+						InitData.employees = new List<Employee>();
+					if (InitData.employees.Any(em => em.employeeNum == num))
 					{
-						InitData.employees = szwlForm.mainForm.dm.selectEmployee();
-						this.DialogResult = DialogResult.OK;
-						dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
-						this.Hide();
+						dialog.MessageBox.Show(GlobalData.GlobalLanguage.employee_exist);
+						return;
+					}
+					else
+					{
+						if (szwlForm.mainForm.dm.insertEmployee(employee))
+						{
+							InitData.employees = szwlForm.mainForm.dm.selectEmployee();
+							this.DialogResult = DialogResult.OK;
+							dialog.MessageBox.Show(GlobalData.GlobalLanguage.add_success);
+							this.Hide();
+						}
 					}
 				}
 			}
@@ -86,6 +109,7 @@ namespace szwlFormsApplication.dialog
 			label4.Text = GlobalData.GlobalLanguage.remarks;
 			button1.Text = GlobalData.GlobalLanguage.ensure;
 			button2.Text = GlobalData.GlobalLanguage.cancel;
+			this.Text = GlobalData.GlobalLanguage.add_employee;
 		}
 	}
 }

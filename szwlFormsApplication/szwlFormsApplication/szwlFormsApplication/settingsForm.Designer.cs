@@ -205,7 +205,7 @@
 			// 
 			// user
 			// 
-			this.user.DataPropertyName = "employeeNum";
+			this.user.DataPropertyName = "showEmployeeNum";
 			this.user.HeaderText = "员工";
 			this.user.Name = "user";
 			// 

@@ -66,11 +66,11 @@ namespace szwlFormsApplication
 
 			if (Common.isRFID)
 			{
-				list = InitData.employeeRFID;
+				list = InitData.employeeRFID = szwlForm.mainForm.dm.selectEmployeeRFID();
 			}
 			else
 			{
-				list = InitData.employees;
+				list = InitData.employees = szwlForm.mainForm.dm.selectEmployee();
 			}
 
 			//InitData.AddData(dataGridView1, list);
@@ -89,6 +89,7 @@ namespace szwlFormsApplication
 			}
 			else if (list != null && list.Count > 0)
 			{
+				updateemployee.Enabled = true;
 				deleteemployee.Enabled = true;
 			}
 			else
@@ -97,6 +98,7 @@ namespace szwlFormsApplication
 				deleteemployee.Enabled = false;
 			}
 			this.dataGridView1.AutoGenerateColumns = false;
+			this.dataGridView1.DataSource = null;
 			this.dataGridView1.DataSource = list;
 			this.dataGridView1.Refresh();
 		}
@@ -221,13 +223,11 @@ namespace szwlFormsApplication
 				case 0:
 					Common.isRFID = false;
 					ChangeAppConfig.ChangeConfig("isRFID", "0");
-					addemployee.Enabled = true;
 					break;
 
 				case 1:
 					Common.isRFID = true;
 					ChangeAppConfig.ChangeConfig("isRFID", "1");
-					addemployee.Enabled = false;
 					break;
 			}
 			refresh();

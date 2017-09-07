@@ -74,6 +74,7 @@
 			// 
 			// callerArea
 			// 
+			this.callerArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.callerArea.FormattingEnabled = true;
 			this.callerArea.Location = new System.Drawing.Point(183, 102);
 			this.callerArea.Name = "callerArea";
@@ -82,6 +83,7 @@
 			// 
 			// worker
 			// 
+			this.worker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.worker.FormattingEnabled = true;
 			this.worker.Location = new System.Drawing.Point(183, 163);
 			this.worker.Name = "worker";

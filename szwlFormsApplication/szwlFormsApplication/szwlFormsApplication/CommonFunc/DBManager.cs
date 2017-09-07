@@ -1,6 +1,7 @@
 ﻿using ADOX;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
@@ -249,6 +250,7 @@ namespace szwlFormsApplication.CommonFunc
 				message.Columns.Append("status", DataTypeEnum.adInteger, 9);
 				message.Columns.Append("isRFID", DataTypeEnum.adInteger, 9);
 				message.Columns.Append("longTime", DataTypeEnum.adDouble, 20);
+				message.Columns.Append("isOverTime", DataTypeEnum.adInteger, 2);
 
 				catalog.Tables.Append(message);
 			}
@@ -865,6 +867,8 @@ namespace szwlFormsApplication.CommonFunc
 					int status = (int)dataTable.Rows[i][5];
 					int isRFID = (int)dataTable.Rows[i][6];
 					double longTime = (double)dataTable.Rows[i][7];
+					int isOverTime = (int)dataTable.Rows[i][8];
+					message.isOverTime = isOverTime==0?false:true;
 
 					message.Id = id;
 					message.callerNum = callerNum;
@@ -943,6 +947,10 @@ namespace szwlFormsApplication.CommonFunc
 
 						case 2:
 							message.status = STATUS.OVERTIME;
+							break;
+
+						case 3:
+							message.status = STATUS.UNFINISH;
 							break;
 					}
 					if (isRFID == 0)
@@ -983,6 +991,8 @@ namespace szwlFormsApplication.CommonFunc
 					int status = (int)dataTable.Rows[i][5];
 					int isRFID = (int)dataTable.Rows[i][6];
 					double longTime = (double)dataTable.Rows[i][7];
+					int isOverTime = (int)dataTable.Rows[i][8];
+					message.isOverTime = isOverTime == 0 ? false : true;
 
 					message.Id = id;
 					message.callerNum = callerNum;
@@ -1062,6 +1072,10 @@ namespace szwlFormsApplication.CommonFunc
 						case 2:
 							message.status = STATUS.OVERTIME;
 							break;
+
+						case 3:
+							message.status = STATUS.UNFINISH;
+							break;
 					}
 					if (isRFID == 0)
 					{
@@ -1080,6 +1094,128 @@ namespace szwlFormsApplication.CommonFunc
 			{
 				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
 				return new List<DataMessage>();
+			}
+		}
+
+		public DataMessage selectMessLast()
+		{
+			try
+			{
+				DataTable dataTable = select("select top 1 * from " + TABLE_MESS + " order by Id desc");
+				DataMessage message = new DataMessage();
+				for (int i = 0; i < dataTable.Rows.Count; i++)
+				{
+					int id = (int)dataTable.Rows[i][0];
+					message.time = dataTable.Rows[i][1].ToString();
+					message.time = message.timeConvert().ToString("yyyy-MM-dd HH:mm:ss");
+					string callerNum = dataTable.Rows[i][2].ToString();
+					int waiterNum = (int)dataTable.Rows[i][3];
+					int type = (int)dataTable.Rows[i][4];
+					int status = (int)dataTable.Rows[i][5];
+					int isRFID = (int)dataTable.Rows[i][6];
+					double longTime = (double)dataTable.Rows[i][7];
+					int isOverTime = (int)dataTable.Rows[i][8];
+					message.isOverTime = isOverTime == 0 ? false : true;
+
+					message.Id = id;
+					message.callerNum = callerNum;
+					message.employeeNum = waiterNum;
+					switch (type)
+					{
+						case 0:
+							message.type = Models.Type.CANCEL;
+							break;
+
+						case 1:
+							message.type = Models.Type.ORDER;
+							break;
+
+						case 2:
+							message.type = Models.Type.CALL;
+							break;
+
+						case 3:
+							message.type = Models.Type.CHECK_OUT;
+							break;
+
+						case 4:
+							message.type = Models.Type.CHANGE_MEDICATION;
+							break;
+
+						case 5:
+							message.type = Models.Type.EMERGENCY_CALL;
+							break;
+
+						case 6:
+							message.type = Models.Type.PULING_NEEDLE;
+							break;
+
+						case 7:
+							message.type = Models.Type.NEED_SERVICE;
+							break;
+
+						case 8:
+							message.type = Models.Type.NEED_WATER;
+							break;
+
+						case 9:
+							message.type = Models.Type.WANT_TO_PAY;
+							break;
+
+						case 10:
+							message.type = Models.Type.NEED_NURSES;
+							break;
+
+						case 11:
+							message.type = Models.Type.SATISFIED;
+							break;
+
+						case 12:
+							message.type = Models.Type.DISSATISFIED;
+							break;
+
+						case 13:
+							message.type = Models.Type.LOW_POWER;
+							break;
+
+						case 14:
+							message.type = Models.Type.TAMPER;
+							break;
+					}
+					switch (status)
+					{
+						case 0:
+							message.status = STATUS.WAITING;
+							break;
+
+						case 1:
+							message.status = STATUS.FINISH;
+							break;
+
+						case 2:
+							message.status = STATUS.OVERTIME;
+							break;
+
+						case 3:
+							message.status = STATUS.UNFINISH;
+							break;
+					}
+					if (isRFID == 0)
+					{
+						message.isRFID = false;
+					}
+					else
+					{
+						message.isRFID = true;
+					}
+					message.longTime = longTime;
+				}
+				return message;
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return new DataMessage();
 			}
 		}
 
@@ -1165,13 +1301,17 @@ namespace szwlFormsApplication.CommonFunc
 					case STATUS.OVERTIME:
 						status = 2;
 						break;
+
+					case STATUS.UNFINISH:
+						status = 3;
+						break;
 				}
 				int isRFID = 0;
 				if (message.isRFID)
 				{
 					isRFID = 1;
 				}
-				return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID], [longTime]) values ('" + message.timeConvert() + "', '" + message.callerNum + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "', '" + DateTime.Now.ToFileTime().ToString() + "')");
+				return operateData("insert into " + TABLE_MESS + "([time], [callerNum], [waiterNum], [type], [status], [isRFID], [longTime], [isOverTime]) values ('" + message.timeConvert() + "', '" + message.callerNum + "', '" + message.employeeNum.ToString() + "', '" + type.ToString() + "', '" + status.ToString() + "', '" + isRFID.ToString() + "', '" + DateTime.Now.ToFileTime().ToString() +  "', '0')");
 			}
 			catch (Exception ex)
 			{
@@ -1185,7 +1325,7 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				return operateData("delete from " + TABLE_MESS + " where Id ='" + message.Id + "'");
+				return operateData("delete from " + TABLE_MESS + " where Id =" + message.Id + "");
 			}
 			catch (Exception ex)
 			{
@@ -1213,6 +1353,10 @@ namespace szwlFormsApplication.CommonFunc
 					case STATUS.OVERTIME:
 						status = 2;
 						break;
+
+					case STATUS.UNFINISH:
+						status = 3;
+						break;
 				}
 				int isRFID = 0;
 				if (message.isRFID)
@@ -1220,7 +1364,7 @@ namespace szwlFormsApplication.CommonFunc
 					isRFID = 1;
 				}
 
-				return operateData("update " + TABLE_MESS + " set [time]='" + message.timeConvert() + "', [waiterNum]=" + message.employeeNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]='" + message.callerNum + "' and [status]=0");
+				return operateData("update " + TABLE_MESS + " set [time]='" + message.timeConvert() + "', [waiterNum]=" + message.employeeNum + ", [status]=" + status + ", [isRFID]=" + isRFID + " where [callerNum]='" + message.callerNum + "' and ([status]=0 or [status]=2)");
 			}
 			catch (Exception ex)
 			{
@@ -1248,13 +1392,43 @@ namespace szwlFormsApplication.CommonFunc
 					case STATUS.OVERTIME:
 						status = 2;
 						break;
-				}
-				int isRFID = 0;
-				if (message.isRFID)
-				{
-					isRFID = 1;
-				}
 
+					case STATUS.UNFINISH:
+						status = 3;
+						break;
+				}
+				return operateData("update " + TABLE_MESS + " set [status]=" + status + ", [isOverTime]=1" + " where [callerNum]='" + message.callerNum + "' and [time] ='" + message.timeConvert() + "'");
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
+		}
+
+		public bool updateMessUnfinish(DataMessage message)
+		{
+			try
+			{
+				int status = 0;
+				switch (message.status)
+				{
+					case STATUS.WAITING:
+						status = 0;
+						break;
+
+					case STATUS.FINISH:
+						status = 1;
+						break;
+
+					case STATUS.OVERTIME:
+						status = 2;
+						break;
+
+					case STATUS.UNFINISH:
+						status = 3;
+						break;
+				}
 				return operateData("update " + TABLE_MESS + " set [status]=" + status + " where [callerNum]='" + message.callerNum + "' and [time] ='" + message.timeConvert() + "'");
 			}
 			catch (Exception ex)
@@ -1268,9 +1442,31 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				operateData("delete from " + TABLE_ADMIN + " where Id>0");
+				operateData("delete from " + TABLE_ADMIN + " where Id>1");
 				operateData("delete from " + TABLE_CALLER);
 				operateData("delete from " + TABLE_ZONE);
+				for (int i = 1; i < 6; i++)
+				{
+					Callzone zone = new Callzone();
+					zone.name = "Hall" + i;
+					insertZone(zone);
+				}
+
+				for (int i = 6; i < 101; i++)
+				{
+					Callzone zone = new Callzone();
+					zone.name = "name" + (i - 5);
+					insertZone(zone);
+				}
+
+				for (int i = 1; i < 101; i++)
+				{
+					Caller caller = new Caller();
+					caller.callerNum = i.ToString();
+					caller.callZone = i;
+					caller.employeeNum = -1;
+					insertCaller(caller);
+				}
 				operateData("delete from " + TABLE_EMPLOYEE);
 				operateData("delete from " + TABLE_EMPLOYEE_RFID);
 				return operateData("delete from " + TABLE_MESS);
@@ -1286,7 +1482,16 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				return operateData("delete from " + TABLE_CALLER);
+				operateData("delete from " + TABLE_CALLER);
+				for (int i = 1; i < 101; i++)
+				{
+					Caller caller = new Caller();
+					caller.callerNum = i.ToString();
+					caller.callZone = i;
+					caller.employeeNum = -1;
+					insertCaller(caller);
+				}
+				return true;
 			}
 			catch (Exception ex)
 			{
@@ -1299,7 +1504,21 @@ namespace szwlFormsApplication.CommonFunc
 		{
 			try
 			{
-				return operateData("delete from " + TABLE_ZONE);
+				operateData("delete from " + TABLE_ZONE);
+				for (int i = 1; i < 6; i++)
+				{
+					Callzone zone = new Callzone();
+					zone.name = "Hall" + i;
+					insertZone(zone);
+				}
+
+				for (int i = 6; i < 101; i++)
+				{
+					Callzone zone = new Callzone();
+					zone.name = "name" + (i - 5);
+					insertZone(zone);
+				}
+				return true;
 			}
 			catch (Exception ex)
 			{
@@ -1340,6 +1559,32 @@ namespace szwlFormsApplication.CommonFunc
 			try
 			{
 				return operateData("delete from " + TABLE_MESS);
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
+		}
+
+		public bool deleteRecordToday()
+		{
+			try
+			{
+				return operateData("delete from " + TABLE_MESS + " where longTime>" + DateTime.Now.Date.ToFileTime());
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
+		}
+
+		public bool deleteRecordWaitting()
+		{
+			try
+			{
+				return operateData("delete from " + TABLE_MESS + " where status=0");
 			}
 			catch (Exception ex)
 			{

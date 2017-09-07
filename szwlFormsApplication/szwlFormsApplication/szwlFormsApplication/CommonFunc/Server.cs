@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using szwlFormsApplication.Models;
 using System.Threading;
 using System.Globalization;
+using System.ComponentModel;
 
 namespace szwlFormsApplication.CommonFunc
 {
@@ -414,6 +415,59 @@ namespace szwlFormsApplication.CommonFunc
 					refreshInterface.refresh(message, false);
 				}
 			}
+			else if (bytes[4] == 0x80)//admin取消服务
+			{
+				if (bytes.Length == 10)//普通方式
+				{
+					short s = 0;   //一个16位整形变量，初值为 0000 0000 0000 0000
+					byte b1 = bytes[6];   //一个byte的变量，作为转换后的高8位，假设初值为 0000 0001
+					byte b2 = bytes[7];   //一个byte的变量，作为转换后的低8位，假设初值为 0000 0010
+					s = (short)(s ^ b1);  //将b1赋给s的低8位
+					s = (short)(s << 8);  //s的低8位移动到高8位
+					s = (short)(s ^ b2); //在b2赋给s的低8位
+					int table = (int)s; //几号桌
+					DataMessage message = new DataMessage();
+					message.callerNum = table.ToString();
+					message.isRFID = false;
+					message.type = Models.Type.CANCEL;
+					message.employeeNum = -2;//表示admin取消
+					message.time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+					message.status = STATUS.FINISH;
+					szwlForm.mainForm.dm.updateMess(message);
+
+					//更新通知
+					if (refreshInterface != null)
+					{
+						refreshInterface.refresh(message, false);
+					}
+				}
+				else//字符方式
+				{
+					byte[] stringHex = new byte[len - 1];
+					for (int i = 0; i < len - 1; i++)
+					{
+						stringHex[i] = bytes[6 + i];
+					}
+					string table = UnHex(byteToHexStr(stringHex), "utf-8");
+					int type = bytes[5 + len];//服务类型
+					DataMessage message = new DataMessage();
+					message.callerNum = table;
+					DateTimeFormatInfo datestyle = new CultureInfo("en-US", false).DateTimeFormat;
+					message.time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+					LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Info, message.timeConvert().ToString());
+					message.isRFID = false;
+					message.employeeNum = -2;
+					message.type = Models.Type.CANCEL;
+					message.status = STATUS.FINISH;//收到cancel请求，就认为完成服务
+					szwlForm.mainForm.dm.updateMess(message);
+					//更新通知
+					if (refreshInterface != null)
+					{
+						refreshInterface.refresh(message, false);
+					}
+
+				}
+			}
 		}
 
 		public static string UnHex(string hex, string charset)
@@ -478,6 +532,11 @@ namespace szwlFormsApplication.CommonFunc
 		public bool updateMessTimeOut(DataMessage mess)
 		{
 			return szwlForm.mainForm.dm.updateMessTimeOut(mess);
+		}
+
+		public bool updateMessUnfinish(DataMessage mess)
+		{
+			return szwlForm.mainForm.dm.updateMessUnfinish(mess);
 		}
 	}
 }

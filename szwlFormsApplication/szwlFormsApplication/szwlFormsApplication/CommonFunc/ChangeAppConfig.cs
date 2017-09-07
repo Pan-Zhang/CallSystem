@@ -24,8 +24,9 @@ namespace szwlFormsApplication.CommonFunc
 				//String path = basePath + "App.config";
 				//xDoc.Load(path);
 
-				string basePath = "C:\\Users\\Public\\Documents\\szwlFormsApplication";
-				if (!Directory.Exists(basePath)){
+				string basePath = Common.basePath;
+				if (!Directory.Exists(basePath))
+				{
 					Directory.CreateDirectory(basePath);
 				}
 				string path = basePath + "\\App.config";
@@ -100,7 +101,7 @@ namespace szwlFormsApplication.CommonFunc
 				xNode = xDoc.SelectSingleNode("//appSettings");
 
 				xElem1 = (System.Xml.XmlElement)xNode.SelectSingleNode("//add[@key='" + AppKey + "']");
-				
+
 				if (xElem1 != null)
 				{
 					value = xElem1.GetAttribute("value");
@@ -112,6 +113,7 @@ namespace szwlFormsApplication.CommonFunc
 				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
 			}
 			return value;
+
 		}
 	}
 }

@@ -23,17 +23,29 @@ namespace szwlFormsApplication.dialog
 
 		private void ensure_Click(object sender, EventArgs e)
 		{
-
+			if (!oldpw.Text.Equals(user.pass))
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.old_pwd_wrong);
+			}
+			else
+			{
+				user.pass = newpw.Text;
+				if (szwlForm.mainForm.dm.updateUser(user))
+				{
+					this.DialogResult = DialogResult.OK;
+					this.Close();
+				}
+			}
 		}
 
 		private void cancel_Click(object sender, EventArgs e)
 		{
-
+			this.Close();
 		}
 
 		private void UpdatePassForm_Load(object sender, EventArgs e)
 		{
-
+			
 		}
 
 		private void changeLanguage()

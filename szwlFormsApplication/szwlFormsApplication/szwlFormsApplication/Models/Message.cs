@@ -14,17 +14,70 @@ namespace szwlFormsApplication.Models
 		public int Id { get; set; }
 		public string time { get; set; }
 		public string callerNum { get; set; }
-		public int employeeNum { get; set; }
+		public string showEmployeeNum
+		{
+			get {
+				if (employeeNum == -1 || employeeNum == 0) return "";
+				else if (employeeNum == -2) return "Admin";
+				else
+				{
+					string name = employeeNum.ToString();
+					if (Common.isRFID)
+					{
+						foreach (Employee emp in InitData.employeeRFID)
+						{
+							if (emp.employeeNum == employeeNum)
+							{
+								if (!string.IsNullOrEmpty(emp.name))
+								{
+									name = emp.name;
+								}
+								break;
+							}
+						}
+					}
+					else
+					{
+						foreach (Employee emp in InitData.employees)
+						{
+							if (emp.employeeNum == employeeNum)
+							{
+								if (!string.IsNullOrEmpty(emp.name))
+								{
+									name = emp.name;
+								}
+								break;
+							}
+						}
+					}
+					return name;
+				}
+			}
+			set { }
+		}
 		//呼叫器区域
 		public int callZone { get; set; }
-		public Type type { get; set; }
+		
 		public string showType {
 			get { return getType(); }
 			set { }
 		}
 		public STATUS status { get; set; }
+		public string showRFID
+		{
+			get { return isRFID ? employeeNum.ToString() : ""; }
+			set { }
+		}
+		public bool isOverTime { get; set; }
+		public Type type { get; set; }
 		public bool isRFID { get; set; }
+		public int employeeNum { get; set; }
 		public double longTime { get; set; }
+		public string showOverTime
+		{
+			get { return isOverTime?GlobalData.GlobalLanguage.yes:GlobalData.GlobalLanguage.no; }
+			set { }
+		}
 		public static string DisplaycallerNum()
 		{
 			if (String.IsNullOrWhiteSpace(ChangeAppConfig.getValueFromKey("MessagecallerNumHeader")))
@@ -206,6 +259,7 @@ namespace szwlFormsApplication.Models
 	{
 		WAITING,
 		FINISH,
-		OVERTIME
+		OVERTIME,
+		UNFINISH
 	}
 }

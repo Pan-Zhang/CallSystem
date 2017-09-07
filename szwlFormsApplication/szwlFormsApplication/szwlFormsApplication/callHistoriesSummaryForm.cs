@@ -11,6 +11,7 @@ using szwlFormsApplication.Models;
 using Spire.Xls;
 using System.Drawing.Printing;
 using System.Configuration;
+using System.ComponentModel;
 
 namespace szwlFormsApplication
 {
@@ -241,7 +242,7 @@ namespace szwlFormsApplication
 						int status = 0;
 						switch (mess.status)
 						{
-							case STATUS.WAITING:
+							case STATUS.UNFINISH:
 								status = 1;
 								break;
 
@@ -253,10 +254,19 @@ namespace szwlFormsApplication
 								status = 3;
 								break;
 						}
-
-						if (mess.timeConvert() > start && mess.timeConvert() < end && _status == status)
+						if (_status == 3)
 						{
-							tem_list.Add(mess);
+							if (mess.timeConvert() > start && mess.timeConvert() < end && mess.isOverTime && mess.status!=STATUS.UNFINISH)
+							{
+								tem_list.Add(mess);
+							}
+						}
+						else
+						{
+							if (mess.timeConvert() > start && mess.timeConvert() < end && _status == status)
+							{
+								tem_list.Add(mess);
+							}
 						}
 					}
 				}
@@ -340,7 +350,7 @@ namespace szwlFormsApplication
 						int status = 0;
 						switch (message.status)
 						{
-							case STATUS.WAITING:
+							case STATUS.UNFINISH:
 								status = 1;
 								break;
 
@@ -416,9 +426,19 @@ namespace szwlFormsApplication
 								type = 14;
 								break;
 						}
-						if (message.timeConvert() > start && message.timeConvert() < end && type == (_type - 1) && status == _status)
+						if (_status == 3)
 						{
-							tem_list.Add(message);
+							if (message.timeConvert() > start && message.timeConvert() < end && type == (_type - 1) && message.isOverTime && message.status != STATUS.UNFINISH)
+							{
+								tem_list.Add(message);
+							}
+						}
+						else
+						{
+							if (message.timeConvert() > start && message.timeConvert() < end && type == (_type - 1) && status == _status)
+							{
+								tem_list.Add(message);
+							}
 						}
 					}
 				}
@@ -449,7 +469,7 @@ namespace szwlFormsApplication
 					int status = 0;
 					switch (mess.status)
 					{
-						case STATUS.WAITING:
+						case STATUS.UNFINISH:
 							status = 1;
 							break;
 
@@ -461,10 +481,19 @@ namespace szwlFormsApplication
 							status = 3;
 							break;
 					}
-
-					if (mess.timeConvert() > start && mess.timeConvert() < end && mess.callerNum == callerNum && _status == status)
+					if (_status == 3)
 					{
-						tem_list.Add(mess);
+						if (mess.timeConvert() > start && mess.timeConvert() < end && mess.callerNum == callerNum && mess.isOverTime && mess.status != STATUS.UNFINISH)
+						{
+							tem_list.Add(mess);
+						}
+					}
+					else
+					{
+						if (mess.timeConvert() > start && mess.timeConvert() < end && mess.callerNum == callerNum && _status == status)
+						{
+							tem_list.Add(mess);
+						}
 					}
 				}
 			}
@@ -548,7 +577,7 @@ namespace szwlFormsApplication
 					int status = 0;
 					switch (message.status)
 					{
-						case STATUS.WAITING:
+						case STATUS.UNFINISH:
 							status = 1;
 							break;
 
@@ -624,9 +653,19 @@ namespace szwlFormsApplication
 							type = 14;
 							break;
 					}
-					if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && type == (_type - 1) && status == _status)
+					if (_status == 3)
 					{
-						tem_list.Add(message);
+						if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && type == (_type - 1) && message.isOverTime && message.status != STATUS.UNFINISH)
+						{
+							tem_list.Add(message);
+						}
+					}
+					else
+					{
+						if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && type == (_type - 1) && status == _status)
+						{
+							tem_list.Add(message);
+						}
 					}
 				}
 			}
@@ -690,7 +729,7 @@ namespace szwlFormsApplication
 						int status = 0;
 						switch (message.status)
 						{
-							case STATUS.WAITING:
+							case STATUS.UNFINISH:
 								status = 1;
 								break;
 
@@ -702,9 +741,19 @@ namespace szwlFormsApplication
 								status = 3;
 								break;
 						}
-						if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && status == _status)
+						if(_status == 3)
 						{
-							tem_list.Add(message);
+							if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && message.isOverTime && message.status != STATUS.UNFINISH)
+							{
+								tem_list.Add(message);
+							}
+						}
+						else
+						{
+							if (message.timeConvert() > start && message.timeConvert() < end && message.callerNum.Equals(callerNum) && status == _status)
+							{
+								tem_list.Add(message);
+							}
 						}
 					}
 				}
@@ -722,14 +771,14 @@ namespace szwlFormsApplication
 			int timeover = 0;
 			int unsatisfy = 0;
 			int satisfy = 0;
-			int waiting = 0;
+			int unfinish = 0;
 			foreach (DataMessage mess in tem_list)//生成图表
 			{
-				if (mess.status == STATUS.FINISH && mess.type!=Models.Type.SATISFIED && mess.type!=Models.Type.DISSATISFIED)
+				if (mess.status == STATUS.FINISH && mess.type!=Models.Type.SATISFIED && mess.type!=Models.Type.DISSATISFIED && !mess.isOverTime)
 				{
 					finish++;
 				}
-				if (mess.status == STATUS.OVERTIME)
+				if (mess.isOverTime && mess.status != STATUS.UNFINISH)
 				{
 					timeover++;
 				}
@@ -741,9 +790,9 @@ namespace szwlFormsApplication
 				{
 					satisfy++;
 				}
-				if(mess.status == STATUS.WAITING)
+				if(mess.status == STATUS.UNFINISH)
 				{
-					waiting++;
+					unfinish++;
 				}
 			}
 			
@@ -769,10 +818,10 @@ namespace szwlFormsApplication
 				yData.Add(satisfy);
 				xData.Add(GlobalData.GlobalLanguage.satisfy + "(" + satisfy + ")");
 			}
-			if (waiting > 0)
+			if (unfinish > 0)
 			{
-				yData.Add(waiting);
-				xData.Add(GlobalData.GlobalLanguage.waiting + "(" + waiting + ")");
+				yData.Add(unfinish);
+				xData.Add(GlobalData.GlobalLanguage.unfinish + "(" + unfinish + ")");
 			}
 			chart2.Series[0]["PieLabelStyle"] = "Outside";//将文字移到外侧
 			chart2.Series[0]["PieLineColor"] = "Black";//绘制黑色的连线。
@@ -860,7 +909,7 @@ namespace szwlFormsApplication
 		public void changeLanguage()
 		{
 			this.Text = GlobalData.GlobalLanguage.summary_setting;
-
+			historyRecordsdataGridView.Columns[7].HeaderText = GlobalData.GlobalLanguage.overtime;
 			historySummarygroupBox.Text = GlobalData.GlobalLanguage.summary_result;
 			label8.Text = GlobalData.GlobalLanguage.total;
 			historyRecordsgroupBox.Text = GlobalData.GlobalLanguage.sreach_result;
@@ -902,6 +951,29 @@ namespace szwlFormsApplication
 			button3.Text = GlobalData.GlobalLanguage.ensure;
 			button6.Text = GlobalData.GlobalLanguage.print;
 			button9.Text = GlobalData.GlobalLanguage.print;
+
+			typeBox.Items[0] = GlobalData.GlobalLanguage.all;
+			typeBox.Items[1] = GlobalData.GlobalLanguage.cancel;
+			typeBox.Items[2] = GlobalData.GlobalLanguage.Order;
+			typeBox.Items[3] = GlobalData.GlobalLanguage.Call;
+			typeBox.Items[4] = GlobalData.GlobalLanguage.CheckOut;
+			typeBox.Items[5] = GlobalData.GlobalLanguage.change_medication;
+			typeBox.Items[6] = GlobalData.GlobalLanguage.emergency_call;
+			typeBox.Items[7] = GlobalData.GlobalLanguage.puling_needle;
+			typeBox.Items[8] = GlobalData.GlobalLanguage.need_service;
+			typeBox.Items[9] = GlobalData.GlobalLanguage.need_water;
+			typeBox.Items[10] = GlobalData.GlobalLanguage.want_to_pay;
+			typeBox.Items[11] = GlobalData.GlobalLanguage.need_nurses;
+			typeBox.Items[12] = GlobalData.GlobalLanguage.Satisfied;
+			typeBox.Items[13] = GlobalData.GlobalLanguage.Dissatisfied;
+			typeBox.Items[14] = GlobalData.GlobalLanguage.low_power;
+			typeBox.Items[15] = GlobalData.GlobalLanguage.tamper;
+
+			statusBox.Items[0] = GlobalData.GlobalLanguage.all;
+			statusBox.Items[1] = GlobalData.GlobalLanguage.waiting;
+			statusBox.Items[2] = GlobalData.GlobalLanguage.finish;
+			statusBox.Items[3] = GlobalData.GlobalLanguage.overtime;
+
 		}
 
 		private void button3_Click(object sender, EventArgs e)
@@ -978,7 +1050,7 @@ namespace szwlFormsApplication
 			{
 				foreach (DataMessage mess in list_allmess)
 				{
-					if (mess.status == STATUS.WAITING)
+					if (mess.status == STATUS.UNFINISH)
 					{
 						if (dic.ContainsKey(mess.callerNum))
 						{
@@ -1000,7 +1072,7 @@ namespace szwlFormsApplication
 			{
 				foreach (DataMessage mess in list_allmess)
 				{
-					if (mess.status == STATUS.OVERTIME)
+					if (mess.isOverTime && mess.status != STATUS.UNFINISH)
 					{
 						if (dic.ContainsKey(mess.callerNum))
 						{
@@ -1027,7 +1099,7 @@ namespace szwlFormsApplication
 						Summary value = null;
 						dictionary.TryGetValue(mess.callerNum, out value);
 						value.total++;
-						if (mess.status == STATUS.OVERTIME)
+						if (mess.isOverTime)
 						{
 							value.count++;
 						}
@@ -1075,7 +1147,7 @@ namespace szwlFormsApplication
 								break;
 							}
 						}
-						if(mess.status == STATUS.OVERTIME)
+						if(mess.status == STATUS.OVERTIME && mess.status != STATUS.UNFINISH)
 						{
 							summary.count = 1;
 						}
@@ -1352,6 +1424,60 @@ namespace szwlFormsApplication
 			if (dialog.ShowDialog() == DialogResult.OK)
 			{
 				pd.Print();
+			}
+		}
+
+		private void date_start_ValueChanged(object sender, EventArgs e)
+		{
+			if (date_start.Value.Date > date_end.Value.Date)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.start_end_time);
+				date_start.Value = date_end.Value;
+			}
+		}
+
+		private void date_end_ValueChanged(object sender, EventArgs e)
+		{
+			if (date_start.Value.Date > date_end.Value.Date)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.start_end_time);
+				date_start.Value = date_end.Value;
+			}
+		}
+
+		private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+		{
+			if (dateTimePicker2.Value.Date > dateTimePicker1.Value.Date)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.start_end_time);
+				dateTimePicker2.Value = dateTimePicker1.Value;
+			}
+		}
+
+		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+		{
+			if (dateTimePicker2.Value.Date > dateTimePicker1.Value.Date)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.start_end_time);
+				dateTimePicker2.Value = dateTimePicker1.Value;
+			}
+		}
+
+		private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+		{
+			if (dateTimePicker3.Value.Date > dateTimePicker4.Value.Date)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.start_end_time);
+				dateTimePicker3.Value = dateTimePicker4.Value;
+			}
+		}
+
+		private void dateTimePicker4_ValueChanged(object sender, EventArgs e)
+		{
+			if (dateTimePicker3.Value.Date > dateTimePicker4.Value.Date)
+			{
+				dialog.MessageBox.Show(GlobalData.GlobalLanguage.start_end_time);
+				dateTimePicker3.Value = dateTimePicker4.Value;
 			}
 		}
 	}

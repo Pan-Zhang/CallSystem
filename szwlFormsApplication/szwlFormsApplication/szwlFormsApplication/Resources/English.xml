@@ -36,7 +36,7 @@
 	<caller_setting>Caller</caller_setting>
 	<employee_setting>Employee</employee_setting>
 	<header_setting>Header</header_setting>
-	<data_setting>Data</data_setting>
+	<data_setting>Factory</data_setting>
 	<summary_setting>Statistic</summary_setting>
 	<about_setting>About</about_setting>
 	<ID>Num</ID>
@@ -134,7 +134,7 @@
 	<button_mode>Button Mode</button_mode>
 	<choose_table>Choose Table</choose_table>
 	<other_name>Column Name</other_name>
-	<call_message>Call Massage</call_message>
+	<call_message>Call Message</call_message>
 	<employ_info>Employee Info</employ_info>
 	<old_name>Old name</old_name>
 	<new_name>New name</new_name>
@@ -144,7 +144,7 @@
 
 	<password_wrong>Password wrong!</password_wrong>
 	<user_not_exist>User not exist!</user_not_exist>
-	<Name>name</Name>
+	<Name>Name</Name>
 
 	<zone_null>Zone can't be empty!</zone_null>
 	<zone_had_exist>Region already exists!</zone_had_exist>
@@ -223,4 +223,26 @@
 	<employee_name>EmployeeName</employee_name>
 	<Summary_statistics>Summary Statistics</Summary_statistics>
 	<print>Print</print>
+	<current_user>User:</current_user>
+	<current_com>Port:</current_com>
+	<current_time>Time:</current_time>
+	<start_end_time>starting time should be less than the cut-off time</start_end_time>
+	<change_medication>change medication</change_medication>
+	<emergency_call>emergency call</emergency_call>
+	<puling_needle>puling needle</puling_needle>
+	<need_service>need service</need_service>
+	<need_water>need water</need_water>
+	<want_to_pay>want to pay</want_to_pay>
+	<need_nurses>need nurse</need_nurses>
+	<low_power>low power</low_power>
+	<tamper>tamper</tamper>
+	<delete_this_line>Delete this line</delete_this_line>
+	<delete_all_line>Delete all lines</delete_all_line>
+	<Set_unfinish>Unfinish Time Setting</Set_unfinish>
+	<unfinish>Unfinish</unfinish>
+	<yes>Y</yes>
+	<no>N</no>
+	<add_employee>Add employee</add_employee>
+	<help>Help</help>
+	<old_pwd_wrong>Old password is wrong</old_pwd_wrong>
 </English>

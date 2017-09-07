@@ -14,7 +14,7 @@
 	<name>姓名:</name>
 	<finish>完成</finish>
 	<overtime>超时</overtime>
-	<waiting>等待</waiting>
+	<waiting>未完成</waiting>
 	<satisfy>满意</satisfy>
 	<unsatisfy>不满意</unsatisfy>
 	<records>条记录</records>
@@ -36,7 +36,7 @@
 	<caller_setting>呼叫器设置</caller_setting>
 	<employee_setting>员工设置</employee_setting>
 	<header_setting>表头设置</header_setting>
-	<data_setting>数据维护</data_setting>
+	<data_setting>出厂设置</data_setting>
 	<summary_setting>数据统计</summary_setting>
 	<about_setting>关于</about_setting>
 	<ID>序号</ID>
@@ -222,4 +222,26 @@
 	<employee_name>员工姓名</employee_name>
 	<Summary_statistics>汇总统计</Summary_statistics>
 	<print>打印</print>
+	<current_user>当前用户:</current_user>
+	<current_com>当前端口号:</current_com>
+	<current_time>当前时间:</current_time>
+	<start_end_time>起始时间应该小于截止时间</start_end_time>
+	<change_medication>换药</change_medication>
+	<emergency_call>紧急呼叫</emergency_call>
+	<puling_needle>拔针</puling_needle>
+	<need_service>需要服务</need_service>
+	<need_water>需要水</need_water>
+	<want_to_pay>付款</want_to_pay>
+	<need_nurses>需要护士</need_nurses>
+	<low_power>低功率</low_power>
+	<tamper>篡改</tamper>
+	<delete_this_line>删除该行内容</delete_this_line>
+	<delete_all_line>删除所有行内容</delete_all_line>
+	<Set_unfinish>设置未完成时间</Set_unfinish>
+	<unfinish>未完成</unfinish>
+	<yes>是</yes>
+	<no>否</no>
+	<add_employee>添加员工</add_employee>
+	<help>帮助</help>
+	<old_pwd_wrong>原密码错误</old_pwd_wrong>
 </Chinese>

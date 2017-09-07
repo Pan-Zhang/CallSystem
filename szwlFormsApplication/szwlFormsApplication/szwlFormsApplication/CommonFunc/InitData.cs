@@ -21,6 +21,7 @@ namespace szwlFormsApplication.CommonFunc
 		public static OrderBy orderby = null;
 		public static TimeColor timecolor = null;
 		public static int TimeOut = 5;
+		public static int UnFinish = 20;
 		public static List<User> users = null;
 		public static UserProgram program = null;
 		public static List<Employee> employees = null;
@@ -37,6 +38,7 @@ namespace szwlFormsApplication.CommonFunc
 			orderby = GetOrederBy();
 			timecolor = GetTimeColor();
 			TimeOut = 5;
+			UnFinish = 20;
 			users = szwlForm.mainForm.dm.selectUser();
 			employees = szwlForm.mainForm.dm.selectEmployee();
 			employeeRFID = szwlForm.mainForm.dm.selectEmployeeRFID();
@@ -52,6 +54,7 @@ namespace szwlFormsApplication.CommonFunc
 			orderby = null;
 			timecolor = null;
 			TimeOut = 5;
+			UnFinish = 20;
 			users = null;
 			employees = null;
 			employeeRFID = null;
@@ -235,6 +238,34 @@ namespace szwlFormsApplication.CommonFunc
 			try
 			{
 				ChangeAppConfig.ChangeConfig("TimeOut", TimeOut.ToString());
+				return true;
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return false;
+			}
+		}
+
+		public static int GetUnFinish()
+		{
+			try
+			{
+				UnFinish = ChangeAppConfig.getValueFromKey("UnFinish") == null ? 20 : int.Parse(ChangeAppConfig.getValueFromKey("UnFinish"));
+				return UnFinish;
+			}
+			catch (Exception ex)
+			{
+				LogHelper.LibraryLogger.Instance.WriteLog(LogHelper.LibraryLogger.libLogLevel.Error, ex.ToString());
+				return 5;
+			}
+		}
+		//设置UnFinish信息
+		public static bool SetUnFinish()
+		{
+			try
+			{
+				ChangeAppConfig.ChangeConfig("UnFinish", UnFinish.ToString());
 				return true;
 			}
 			catch (Exception ex)

@@ -45,7 +45,7 @@ namespace szwlFormsApplication.CommonFunc
 				//向"Sheet1"表中插入几条数据,访问Excel的表的时候需要在表名后添加"$"符号,Insert语句可以不指定列名  
 				foreach(DataMessage mess in list)
 				{
-					cmd = new OleDbCommand("Insert Into [Sheet1$] Values('" + mess.Id + "', '" + mess.time.ToString() + "', '"+ mess.callerNum + "', '" + mess.employeeNum +"', '" + mess.getType() + "', '" + mess.status.ToString() + "','" + (mess.isRFID?"true":"false") + "')", conn);//(A,B,C,D,E,F,G)   
+					cmd = new OleDbCommand("Insert Into [Sheet1$] Values('" + mess.Id + "', '" + mess.time.ToString() + "', '"+ mess.callerNum + "', '" + mess.employeeNum +"', '" + mess.getType() + "', '" + mess.status.ToString() + "', '" + (mess.isRFID?"true":"false") + "', '" + (mess.isOverTime?"Y":"N") + "')", conn);//(A,B,C,D,E,F,G)   
 					cmd.ExecuteNonQuery();
 				}
 			}

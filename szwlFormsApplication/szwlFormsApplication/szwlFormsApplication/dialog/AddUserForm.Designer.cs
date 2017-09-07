@@ -40,6 +40,7 @@
 			// 
 			// userClassComboBox
 			// 
+			this.userClassComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.userClassComboBox.FormattingEnabled = true;
 			this.userClassComboBox.Location = new System.Drawing.Point(153, 141);
 			this.userClassComboBox.Name = "userClassComboBox";

@@ -75,7 +75,10 @@ namespace szwlFormsApplication
 						InitData.list_caller.Clear();
 						InitData.list_zone.Clear();
 						InitData.employeeRFID.Clear();
-						InitData.users.Clear();
+						if(InitData.users!=null && InitData.users.Count > 1)
+						{
+							InitData.users.RemoveRange(1, InitData.users.Count);
+						}
 						InitData.employees.Clear();
 						szwlForm.mainForm.messages.Clear();
 						break;
@@ -98,7 +101,10 @@ namespace szwlFormsApplication
 
 					case 4:
 						dm.clearUser();
-						InitData.users.Clear();
+						if (InitData.users != null && InitData.users.Count > 1)
+						{
+							InitData.users.RemoveRange(1, InitData.users.Count);
+						}
 						break;
 
 					case 5:

@@ -32,17 +32,17 @@ namespace szwlFormsApplication
 		private void InitializeComponent()
 		{
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.addemployee = new System.Windows.Forms.Button();
 			this.updateemployee = new System.Windows.Forms.Button();
 			this.deleteemployee = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.clearemployee = new System.Windows.Forms.Button();
 			this.isRFIDBox = new System.Windows.Forms.ComboBox();
-			this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -65,6 +65,36 @@ namespace szwlFormsApplication
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_RowEnter);
+			// 
+			// UserName
+			// 
+			this.UserName.DataPropertyName = "employeeNum";
+			this.UserName.HeaderText = "员工编号";
+			this.UserName.Name = "UserName";
+			// 
+			// name
+			// 
+			this.name.DataPropertyName = "name";
+			this.name.HeaderText = "姓名";
+			this.name.Name = "name";
+			// 
+			// sex
+			// 
+			this.sex.DataPropertyName = "sex";
+			this.sex.HeaderText = "性别";
+			this.sex.Name = "sex";
+			// 
+			// mobile
+			// 
+			this.mobile.DataPropertyName = "phonenum";
+			this.mobile.HeaderText = "电话";
+			this.mobile.Name = "mobile";
+			// 
+			// remark
+			// 
+			this.remark.DataPropertyName = "remarks";
+			this.remark.HeaderText = "备注";
+			this.remark.Name = "remark";
 			// 
 			// addemployee
 			// 
@@ -118,6 +148,7 @@ namespace szwlFormsApplication
 			// 
 			// isRFIDBox
 			// 
+			this.isRFIDBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.isRFIDBox.FormattingEnabled = true;
 			this.isRFIDBox.Items.AddRange(new object[] {
             "按钮模式",
@@ -127,36 +158,6 @@ namespace szwlFormsApplication
 			this.isRFIDBox.Size = new System.Drawing.Size(121, 20);
 			this.isRFIDBox.TabIndex = 6;
 			this.isRFIDBox.SelectedIndexChanged += new System.EventHandler(this.isRFIDBox_SelectedIndexChanged);
-			// 
-			// UserName
-			// 
-			this.UserName.DataPropertyName = "employeeNum";
-			this.UserName.HeaderText = "员工编号";
-			this.UserName.Name = "UserName";
-			// 
-			// name
-			// 
-			this.name.DataPropertyName = "name";
-			this.name.HeaderText = "姓名";
-			this.name.Name = "name";
-			// 
-			// sex
-			// 
-			this.sex.DataPropertyName = "sex";
-			this.sex.HeaderText = "性别";
-			this.sex.Name = "sex";
-			// 
-			// mobile
-			// 
-			this.mobile.DataPropertyName = "phonenum";
-			this.mobile.HeaderText = "电话";
-			this.mobile.Name = "mobile";
-			// 
-			// remark
-			// 
-			this.remark.DataPropertyName = "remarks";
-			this.remark.HeaderText = "备注";
-			this.remark.Name = "remark";
 			// 
 			// employeeSettingsForm
 			// 
