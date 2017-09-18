@@ -127,6 +127,12 @@
   <data name="English" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\English.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="help_ch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help_ch.doc;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="help_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help_en.doc;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Record" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Record.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

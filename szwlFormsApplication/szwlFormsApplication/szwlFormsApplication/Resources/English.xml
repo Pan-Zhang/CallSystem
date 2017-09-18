@@ -245,4 +245,5 @@
 	<add_employee>Add employee</add_employee>
 	<help>Help</help>
 	<old_pwd_wrong>Old password is wrong</old_pwd_wrong>
+	<product_overtime>The permissions have expired. Please contact the developer.</product_overtime>
 </English>

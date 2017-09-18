@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -75,6 +76,22 @@ namespace szwlFormsApplication
 				outputExcelFile.Write(bytes, 0, bytes.Length);
 				outputExcelFile.Close();
 			}
+			path = basePath + "\\help_ch.doc";
+			if (!File.Exists(path))
+			{
+				byte[] bytes = Resources.help_ch;
+				FileStream outputExcelFile = new FileStream(path, FileMode.Create, FileAccess.Write);
+				outputExcelFile.Write(bytes, 0, bytes.Length);
+				outputExcelFile.Close();
+			}
+			path = basePath + "\\help_en.doc";
+			if (!File.Exists(path))
+			{
+				byte[] bytes = Resources.help_en;
+				FileStream outputExcelFile = new FileStream(path, FileMode.Create, FileAccess.Write);
+				outputExcelFile.Write(bytes, 0, bytes.Length);
+				outputExcelFile.Close();
+			}
 			LibraryLogger.Instance.Init(basePath, "szwlFormsApplication", Encoding.Default, LibraryLogger.libLogLevel.Info);
 			InitializeComponent();
 			Common.isRFID = ChangeAppConfig.getValueFromKey("isRFID").Equals("1");
@@ -106,6 +123,17 @@ namespace szwlFormsApplication
 		{
 			this.timer1.Interval = 1000;
 			this.timer1.Start();
+			string dateStr = ChangeAppConfig.getValueFromKey("Permission_overtime");
+			DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
+			dtFormat.ShortDatePattern = "yyyy/MM/dd";
+			DateTime date = Convert.ToDateTime(dateStr, dtFormat);
+			if (DateTime.Now.Date > date)
+			{
+				this.Invoke((EventHandler)(delegate
+				{
+					dialog.MessageBox.Show(GlobalData.GlobalLanguage.product_overtime);
+				}));
+			}
 			if (LogOnForm.currentUser == null)
 			{
 				mainForm.Hide();
@@ -181,7 +209,7 @@ namespace szwlFormsApplication
 								needRefresh = true;
 							}
 						}
-						
+
 					}
 					if (needRefresh)
 					{
@@ -283,6 +311,16 @@ namespace szwlFormsApplication
 			menutoolBar.Buttons[7].ToolTipText = GlobalData.GlobalLanguage.data_setting;
 			menutoolBar.Buttons[8].ToolTipText = GlobalData.GlobalLanguage.help;
 			menutoolBar.Buttons[9].ToolTipText = GlobalData.GlobalLanguage.about_setting;
+
+			if (ChangeAppConfig.getValueFromKey(GlobalData.LANGUAGE).Equals(GlobalData.ENGLISH))
+			{
+				helpProvider1.HelpNamespace = Common.basePath +　"\\help_en.doc";
+			}
+			else
+			{
+				helpProvider1.HelpNamespace = Common.basePath + "\\help_ch.doc";
+			}
+			helpProvider1.SetShowHelp(this, true);
 
 
 			this.toolStripStatusLabel1.Text = GlobalData.GlobalLanguage.current_user + LogOnForm.currentUser.name;
@@ -427,7 +465,14 @@ namespace szwlFormsApplication
 			}
 			else if(e.Button.Name == "help")
 			{
-
+				if (ChangeAppConfig.getValueFromKey(GlobalData.LANGUAGE).Equals(GlobalData.ENGLISH))
+				{
+					System.Diagnostics.Process.Start(Common.basePath + "\\help_en.doc");
+				}
+				else
+				{
+					System.Diagnostics.Process.Start(Common.basePath + "\\help_ch.doc");
+				}
 			}
 		}
 		private void openCom()

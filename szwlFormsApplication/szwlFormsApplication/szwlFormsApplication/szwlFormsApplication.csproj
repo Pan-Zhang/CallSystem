@@ -477,6 +477,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Resources\App.config" />
+    <None Include="Resources\help_ch.doc" />
+    <None Include="Resources\help_en.doc" />
     <None Include="Resources\Record.xls" />
     <None Include="Resources\Record_en.xls" />
     <None Include="Resources\Summary.xls" />

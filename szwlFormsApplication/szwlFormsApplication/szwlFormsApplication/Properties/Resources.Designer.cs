@@ -70,7 +70,7 @@ namespace szwlFormsApplication.Properties {
         ///    &lt;add key=&quot;systemPath&quot; value=&quot;C:\Users\Public\Documents\szwlFormsApplication&quot; /&gt;
         ///    &lt;add key=&quot;LogDirectory&quot; value=&quot;C:\Users\Public\Documents\szwlFormsApplication&quot; /&gt;
         ///    &lt;add key=&quot;tem_file&quot; value=&quot;C:\Users\Public\Documents\szwlFormsApplication\tem&quot; /&gt;
-        ///    &lt;add key=&quot;isRFID&quot; value=&quot;0&quot; /&gt;
+        ///    &lt;add key=&quot;isRFID&quot; value=&quot;1&quot; /&gt;
         ///    &lt;add key=&quot;packagepath&quot; value=&quot;C:\Use [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string App {
@@ -96,8 +96,8 @@ namespace szwlFormsApplication.Properties {
         ///	&lt;name&gt;姓名:&lt;/name&gt;
         ///	&lt;finish&gt;完成&lt;/finish&gt;
         ///	&lt;overtime&gt;超时&lt;/overtime&gt;
-        ///	&lt;waiting&gt;等待&lt;/waiting&gt;
-        ///	&lt;satisfy&gt;满意&lt;/sat [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///	&lt;waiting&gt;未完成&lt;/waiting&gt;
+        ///	&lt;satisfy&gt;满意&lt;/sa [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string Chinese {
             get {
@@ -119,11 +119,31 @@ namespace szwlFormsApplication.Properties {
         ///	&lt;login_error&gt;username or password is wrong！&lt;/login_error&gt;
         ///	&lt;number&gt;Number &lt;/number&gt;
         ///	&lt;nothing&gt;NO&lt;/nothing&gt;
-        ///	&lt;name&gt;name:&lt;/na [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///	&lt;name&gt;Name:&lt;/na [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string English {
             get {
                 return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] help_ch {
+            get {
+                object obj = ResourceManager.GetObject("help_ch", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] help_en {
+            get {
+                object obj = ResourceManager.GetObject("help_en", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

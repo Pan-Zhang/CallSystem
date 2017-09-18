@@ -239,6 +239,7 @@ namespace szwlFormsApplication.Language
 		public string add_employee { get; set; }
 		public string help { get; set; }
 		public string old_pwd_wrong { get; set; }
+		public string product_overtime { get; set; }
 
 		protected Dictionary<string, string> DicLanguage = new Dictionary<string, string>();
 
@@ -533,6 +534,7 @@ namespace szwlFormsApplication.Language
 			add_employee = DicLanguage["add_employee"];
 			help = DicLanguage["help"];
 			old_pwd_wrong = DicLanguage["old_pwd_wrong"];
+			product_overtime = DicLanguage["product_overtime"];
 		}
 	}
 }

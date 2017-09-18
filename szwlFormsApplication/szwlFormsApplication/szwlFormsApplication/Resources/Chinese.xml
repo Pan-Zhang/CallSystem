@@ -244,4 +244,5 @@
 	<add_employee>添加员工</add_employee>
 	<help>帮助</help>
 	<old_pwd_wrong>原密码错误</old_pwd_wrong>
+	<product_overtime>使用权限已到期，请联系开发者</product_overtime>
 </Chinese>

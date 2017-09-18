@@ -29,21 +29,21 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(szwlForm));
 			this.waiting4 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
@@ -119,6 +119,7 @@
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.notifyIcon2 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
 			this.waiting4.SuspendLayout();
 			this.tableLayoutPanel9.SuspendLayout();
 			this.waiting5.SuspendLayout();
@@ -386,14 +387,14 @@
 			// 
 			this.allDataGridView.AllowUserToAddRows = false;
 			this.allDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.allDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle31.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.allDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
 			this.allDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.allDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id2,
@@ -416,8 +417,8 @@
 			// Id2
 			// 
 			this.Id2.DataPropertyName = "Id";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Id2.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Id2.DefaultCellStyle = dataGridViewCellStyle32;
 			this.Id2.FillWeight = 77.41113F;
 			this.Id2.HeaderText = "ID";
 			this.Id2.Name = "Id2";
@@ -427,8 +428,8 @@
 			// time2
 			// 
 			this.time2.DataPropertyName = "time";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.time2.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.time2.DefaultCellStyle = dataGridViewCellStyle33;
 			this.time2.FillWeight = 157.9819F;
 			this.time2.HeaderText = "时间";
 			this.time2.Name = "time2";
@@ -438,8 +439,8 @@
 			// callerNum2
 			// 
 			this.callerNum2.DataPropertyName = "callerNum";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.callerNum2.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.callerNum2.DefaultCellStyle = dataGridViewCellStyle34;
 			this.callerNum2.FillWeight = 138.8631F;
 			this.callerNum2.HeaderText = "呼叫器编号";
 			this.callerNum2.Name = "callerNum2";
@@ -449,8 +450,8 @@
 			// employeeNum2
 			// 
 			this.employeeNum2.DataPropertyName = "showEmployeeNum";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.employeeNum2.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.employeeNum2.DefaultCellStyle = dataGridViewCellStyle35;
 			this.employeeNum2.FillWeight = 117.6222F;
 			this.employeeNum2.HeaderText = "服务员编号";
 			this.employeeNum2.Name = "employeeNum2";
@@ -460,8 +461,8 @@
 			// type2
 			// 
 			this.type2.DataPropertyName = "showType";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.type2.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.type2.DefaultCellStyle = dataGridViewCellStyle36;
 			this.type2.FillWeight = 77.41113F;
 			this.type2.HeaderText = "呼叫类型";
 			this.type2.Name = "type2";
@@ -471,8 +472,8 @@
 			// status2
 			// 
 			this.status2.DataPropertyName = "status";
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.status2.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.status2.DefaultCellStyle = dataGridViewCellStyle37;
 			this.status2.FillWeight = 77.41113F;
 			this.status2.HeaderText = "状态 ";
 			this.status2.Name = "status2";
@@ -482,8 +483,8 @@
 			// isRFID2
 			// 
 			this.isRFID2.DataPropertyName = "showRFID";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.isRFID2.DefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.isRFID2.DefaultCellStyle = dataGridViewCellStyle38;
 			this.isRFID2.FillWeight = 53.2995F;
 			this.isRFID2.HeaderText = "RFID";
 			this.isRFID2.Name = "isRFID2";
@@ -494,14 +495,14 @@
 			// 
 			this.waitingDataGridView.AllowUserToAddRows = false;
 			this.waitingDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.waitingDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle39.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.waitingDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle39;
 			this.waitingDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.waitingDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -522,8 +523,8 @@
 			// Id
 			// 
 			this.Id.DataPropertyName = "Id";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Id.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Id.DefaultCellStyle = dataGridViewCellStyle40;
 			this.Id.FillWeight = 49.10454F;
 			this.Id.HeaderText = "ID";
 			this.Id.Name = "Id";
@@ -533,8 +534,8 @@
 			// time
 			// 
 			this.time.DataPropertyName = "time";
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.time.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.time.DefaultCellStyle = dataGridViewCellStyle41;
 			this.time.FillWeight = 153.3689F;
 			this.time.HeaderText = "时间";
 			this.time.Name = "time";
@@ -544,8 +545,8 @@
 			// callerNum
 			// 
 			this.callerNum.DataPropertyName = "callerNum";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.callerNum.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.callerNum.DefaultCellStyle = dataGridViewCellStyle42;
 			this.callerNum.FillWeight = 102.9998F;
 			this.callerNum.HeaderText = "呼叫器编号";
 			this.callerNum.Name = "callerNum";
@@ -555,8 +556,8 @@
 			// employeeNum
 			// 
 			this.employeeNum.DataPropertyName = "showEmployeeNum";
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.employeeNum.DefaultCellStyle = dataGridViewCellStyle13;
+			dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.employeeNum.DefaultCellStyle = dataGridViewCellStyle43;
 			this.employeeNum.FillWeight = 115.736F;
 			this.employeeNum.HeaderText = "服务员编号";
 			this.employeeNum.Name = "employeeNum";
@@ -566,8 +567,8 @@
 			// type
 			// 
 			this.type.DataPropertyName = "showType";
-			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.type.DefaultCellStyle = dataGridViewCellStyle14;
+			dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.type.DefaultCellStyle = dataGridViewCellStyle44;
 			this.type.FillWeight = 124.3031F;
 			this.type.HeaderText = "呼叫类型";
 			this.type.Name = "type";
@@ -577,8 +578,8 @@
 			// isRFID
 			// 
 			this.isRFID.DataPropertyName = "showRFID";
-			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.isRFID.DefaultCellStyle = dataGridViewCellStyle15;
+			dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.isRFID.DefaultCellStyle = dataGridViewCellStyle45;
 			this.isRFID.FillWeight = 54.48752F;
 			this.isRFID.HeaderText = "RFID";
 			this.isRFID.Name = "isRFID";
@@ -1026,7 +1027,7 @@
 			// notifyIcon2
 			// 
 			this.notifyIcon2.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon2.Icon")));
-			this.notifyIcon2.Text = "notifyIcon2";
+			this.notifyIcon2.Text = "Callsystem";
 			this.notifyIcon2.Visible = true;
 			this.notifyIcon2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon2_MouseDoubleClick);
 			// 
@@ -1036,12 +1037,20 @@
 			this.timer1.Interval = 1000;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
+			// helpProvider1
+			// 
+			this.helpProvider1.HelpNamespace = "C:\\Users\\Public\\Documents\\szwlFormsApplication\\help.html";
+			// 
 			// szwlForm
 			// 
 			this.ClientSize = new System.Drawing.Size(1321, 793);
 			this.Controls.Add(this.tableLayoutPanel1);
+			this.HelpButton = true;
+			this.helpProvider1.SetHelpKeyword(this, "Use");
+			this.helpProvider1.SetHelpString(this, "Help");
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "szwlForm";
+			this.helpProvider1.SetShowHelp(this, true);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "szwlFor无线呼叫系统";
 			this.Load += new System.EventHandler(this.szwlForm_Load);
@@ -1171,6 +1180,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn isRFID;
 		private System.Windows.Forms.ToolBarButton help;
+		private System.Windows.Forms.HelpProvider helpProvider1;
 	}
 }
 
